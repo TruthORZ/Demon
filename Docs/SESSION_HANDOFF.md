@@ -1,12 +1,12 @@
 # Session Handoff
 
 Updated: 2026-10-25 Asia/Shanghai
-已完成：[TASK-001](Tasks/TASK-001-project-foundation.md) 文档初始化；当前发布：[TASK-003](Tasks/TASK-003-github-initial-push.md)；后续制作：[TASK-002](Tasks/TASK-002-playable-slice.md)，状态planned。
+已完成：[TASK-001](Tasks/TASK-001-project-foundation.md) 文档初始化、[TASK-003](Tasks/TASK-003-github-initial-push.md) GitHub初始发布；后续制作：[TASK-002](Tasks/TASK-002-playable-slice.md)，状态planned。
 
 ## 工程与工作状态
 
 - 根目录与Unity项目：`D:\Unity\Projects\Demon`。
-- Git：用户已授权初始化并push；分支main，origin为`https://github.com/TruthORZ/Demon.git`。HEAD需用`git rev-parse HEAD`现场读取，提交不嵌入其自身SHA。
+- Git：main跟踪origin/main，origin为`https://github.com/TruthORZ/Demon.git`。基线`dd14cf209f47bd5cf02a620984673e7a7f1558a7`已推送并核对一致；本交接随后随文档提交发布。当前HEAD用`git rev-parse HEAD`现场读取，不把本提交自身SHA嵌入文档。
 - 现有模板资源保留。初次目录检查原70个文件SHA256一致，详见TASK-001；当前发布新增忽略/属性文件、TASK-003并更新相关文档，不改Unity资源。
 - 当前请求为push并说明下一步，不是游戏实施授权。TASK-002保持planned。
 
@@ -26,7 +26,9 @@ Updated: 2026-10-25 Asia/Shanghai
 
 ## 验证与阻碍
 
-初次文档静态检查通过，详细数量为当时快照见TASK-001；当前Git发布检查见TASK-003。没有Unity MCP连接，未确认活动Build Profile或Editor Console。`Temp/UnityLockfile`存在，不足以认定Editor当前运行，不启动竞争实例。Unity导入、编译、Play Mode与构建均未运行。
+Git首次推送与远端提交核对通过，缓存没有进入提交，新增文档与规则空白检查通过。Unity原模板566处行尾空格保留，首次全量检查失败已记录，未修改资产或检查规则掩盖它。详细记录见TASK-003。
+
+没有Unity MCP连接，未确认活动Build Profile或Editor Console。`Temp/UnityLockfile`存在，不足以认定Editor当前运行，不启动竞争实例。Unity导入、编译、Play Mode与构建均未运行。
 
 游戏实施前需要确认展示平台与样例相关的少量交互细节；其他设计问题见GAME_SPEC，不在交接重复维护。Git方案已由用户明确，网络操作可能需要沙箱外联网权限；不以此更改remote或强制push。
 

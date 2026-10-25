@@ -1,6 +1,6 @@
 # TASK-003 初始化Git并推送GitHub
 
-Status: in progress
+Status: done
 Updated: 2026-10-25 Asia/Shanghai
 
 ## 目标与范围
@@ -28,10 +28,16 @@ Updated: 2026-10-25 Asia/Shanghai
 
 已初始化main与origin，并选择性暂存79个文件，其中23个meta；Library、Temp、Logs、UserSettings及生成工程文件没有进入暂存区。
 
-全量`git diff --cached --check`在首次导入模板时返回2，发现Unity原文件的行尾空格，涉及序列化空字段、模板脚本与布局。保留这些原始内容，不修改检查规则或清理无关Unity资产。文档原有4处Markdown双空格换行已去除，新增/修改内容另作检查。待提交、推送与远端验证。
+全量`git diff --cached --check`在首次导入模板时返回2，保留566处Unity原文件行尾空格警告，涉及序列化空字段、模板脚本与布局。不修改检查规则或清理无关Unity资产。文档原有4处Markdown双空格换行已去除；`git diff --cached --check -- .gitignore .gitattributes .vsconfig AGENTS.md Docs`通过。
+
+初始基线提交：`dd14cf209f47bd5cf02a620984673e7a7f1558a7`，79个文件。`git push -u origin main`成功，随后`git ls-remote origin refs/heads/main`与本地HEAD逐字符一致，main已跟踪origin/main，当时工作区无未提交内容。
+
+本记录与交接完成后再随一个文档提交推送；该提交的自身SHA不写入提交内。最终远端匹配检查在会话工具结果中确认，恢复工作时仍重新读取HEAD与远端。
+
+验证状态：忽略范围、元数据清单、作者新增内容空白检查、首次push及远端一致性均passed；首次全量空白检查为基线failed并已记录。未执行Unity导入、编译、Play Mode或构建。
 
 Unity运行测试不属于版本发布的验证，本次不声称已执行。
 
 ## 下一步
 
-推送并核对main，然后更新工程档案与交接，说明接下来执行TASK-002的最小样例。
+用户开始制作后执行TASK-002；先检查Editor导入/Console和实际展示平台，再建立最小可玩样例。Git基线已建立，不重复初始化，不因后续制作而默认自动提交。
