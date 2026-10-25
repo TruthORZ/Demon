@@ -1,0 +1,33 @@
+* text=auto
+
+# Keep source and Unity serialized assets consistent across machines.
+*.cs text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.inputactions text eol=lf
+*.meta text eol=lf
+*.unity text eol=lf
+*.prefab text eol=lf
+*.asset text eol=lf
+*.mat text eol=lf
+*.anim text eol=lf
+*.controller text eol=lf
+*.shader text eol=lf
+*.shadergraph text eol=lf
+*.uxml text eol=lf
+*.uss text eol=lf
+
+# Binary source assets stay binary; no Git LFS dependency is added.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.psd binary
+*.fbx binary
+*.blend binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.mp4 binary
+*.pdf binary
+*.docx binary
