@@ -5,7 +5,7 @@ namespace Demon.Slice.Domain
 {
     // Value 5 is reserved for the retired time rune. Preserve serialized values of SEAL/BOX/LAKE.
     public enum RuneKind { None = 0, Nine = 1, GreaterEqual = 2, Day = 3, Exchange = 4,
-        Seal = 6, Box = 7, Lake = 8, Open = 9 }
+        Seal = 6, Box = 7, Lake = 8, Open = 9, On = 10, Enter = 11, Demon = 12, Region = 13, Ring = 14, Chime = 15 }
 
     public static class AttributeOperations
     {

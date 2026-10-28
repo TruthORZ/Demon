@@ -24,6 +24,9 @@ namespace Demon.Slice.Editor
         static double nextPoll;
         static SmokeRun smoke;
         static NineDaySmokeRun nineSmoke;
+        static ListeningSmokeRun listeningSmoke;
+        static CipherSmokeRun cipherSmoke;
+        static BeamSmokeRun beamSmoke;
         static TestRunnerApi testApi;
         [Serializable] sealed class Request { public string id; public string operation; }
         [Serializable] sealed class Report
@@ -45,6 +48,9 @@ namespace Demon.Slice.Editor
         {
             if (smoke != null) { smoke.Tick(); return; }
             if (nineSmoke != null) { nineSmoke.Tick(); return; }
+            if (listeningSmoke != null) { listeningSmoke.Tick(); return; }
+            if (cipherSmoke != null) { cipherSmoke.Tick(); return; }
+            if (beamSmoke != null) { beamSmoke.Tick(); return; }
             if (EditorApplication.timeSinceStartup < nextPoll || EditorApplication.isCompiling || EditorApplication.isUpdating) return;
             nextPoll = EditorApplication.timeSinceStartup + .5;
             if (!File.Exists(RequestPath)) return;
@@ -73,6 +79,33 @@ namespace Demon.Slice.Editor
                     case "nine-validate": OpenNine(); Finish(request, true, NineDayAuthoring.Validate()); break;
                     case "nine-repair": OpenNine(); Finish(request, true, NineDayAuthoring.RepairSettings()); break;
                     case "nine-build": Finish(request, true, NineDayAuthoring.Build()); break;
+                    case "beam-records": Finish(request, true, BeamAuthoring.SyncMotionRecord()); break;
+                    case "beam-view": Finish(request, true, BeamAuthoring.RepairView()); break;
+                    case "beam-create": Finish(request, true, BeamAuthoring.Create()); break;
+                    case "beam-validate": BeamAuthoring.OpenQuick(); Finish(request, true, BeamAuthoring.Validate()); break;
+                    case "beam-build": Finish(request, true, BeamAuthoring.Build()); break;
+                    case "beam-smoke":
+                    case "beam-tuning":
+                    case "beam-early":
+                        if (request.operation == "beam-early") BeamAuthoring.OpenEarly(); else BeamAuthoring.OpenQuick();
+                        if (request.operation == "beam-tuning") BeamAuthoring.BeginTuning();
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "cipher-create": Finish(request, true, CipherAuthoring.Create()); break;
+                    case "cipher-validate": CipherAuthoring.OpenQuick(); Finish(request, true, CipherAuthoring.Validate()); break;
+                    case "cipher-build": Finish(request, true, CipherAuthoring.Build()); break;
+                    case "cipher-smoke":
+                    case "cipher-tuning":
+                        CipherAuthoring.OpenQuick(); if (request.operation == "cipher-tuning") CipherAuthoring.BeginTuning();
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "listening-readability": Finish(request, true, ListeningAuthoring.RepairReadability()); break;
+                    case "listening-create": Finish(request, true, ListeningAuthoring.Create()); break;
+                    case "listening-validate": ListeningAuthoring.OpenQuick(); Finish(request, true, ListeningAuthoring.Validate()); break;
+                    case "listening-build": Finish(request, true, ListeningAuthoring.Build()); break;
+                    case "listening-smoke":
+                    case "listening-tuning":
+                        ListeningAuthoring.OpenQuick();
+                        if (request.operation == "listening-tuning") ListeningAuthoring.BeginTuning();
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
                     case "finale-migrate": Finish(request, true, FinaleAuthoring.Migrate()); break;
                     case "finale-validate": OpenNine(); Finish(request, true, FinaleAuthoring.Validate()); break;
                     case "finale-sightline": Finish(request, true, FinaleAuthoring.RepairClockSightline()); break;
@@ -155,7 +188,13 @@ namespace Demon.Slice.Editor
                 {
                     SessionState.EraseString(ActiveSmokeKey);
                     var request = JsonUtility.FromJson<Request>(json);
-                    if (request.operation.StartsWith("nine-"))
+                    if (request.operation.StartsWith("beam-"))
+                        beamSmoke = new BeamSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("cipher-"))
+                        cipherSmoke = new CipherSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("listening-"))
+                        listeningSmoke = new ListeningSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("nine-"))
                         nineSmoke = new NineDaySmokeRun(request.operation, (success, message) => Finish(request, success, message));
                     else smoke = new SmokeRun(request);
                     Application.runInBackground = true;
@@ -164,7 +203,10 @@ namespace Demon.Slice.Editor
             }
             if (state == PlayModeStateChange.EnteredEditMode)
             {
-                smoke = null; nineSmoke = null; RestoreTuningProbe();
+                beamSmoke?.Cleanup(); beamSmoke = null; BeamAuthoring.RestoreTuning();
+                cipherSmoke?.Cleanup(); cipherSmoke = null; CipherAuthoring.RestoreTuning();
+                listeningSmoke?.Cleanup(); listeningSmoke = null;
+                smoke = null; nineSmoke = null; RestoreTuningProbe(); ListeningAuthoring.RestoreTuning();
                 if (SessionState.GetBool("Demon.Finale.Restore", false))
                 {
                     var finale = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>().Finale;

@@ -14,6 +14,15 @@ namespace Demon.Slice
         [SerializeField] Transform endingView;
         [SerializeField] NineDayFlow campaign;
         [SerializeField] SliceFinaleSequence finale;
+        [SerializeField] ListeningTool listeningTool;
+        [SerializeField] CipherBox cipherBox;
+        [SerializeField] BeamTether tether;
+        public BeamTether Tether => tether;
+        public void ConfigureTether(BeamTether beam) => tether = beam;
+        public CipherBox Cipher => cipherBox;
+        public void ConfigureCipher(CipherBox box) => cipherBox = box;
+        public ListeningTool Listening => listeningTool;
+        public void ConfigureListening(ListeningTool tool) => listeningTool = tool;
         public NineDayFlow Campaign => campaign;
         public SliceFinaleSequence Finale => finale;
         public string ReadingText { get; private set; }
@@ -54,6 +63,9 @@ namespace Demon.Slice
             Session.Changed += OnStateChanged;
             initialized = true;
             if (campaign) campaign.Initialize(this);
+            if (listeningTool) listeningTool.Initialize(this);
+            if (cipherBox) cipherBox.Initialize(this);
+            if (tether) tether.Initialize(this);
             if (finale) finale.Initialize(this, presentation);
             OnStateChanged();
         }

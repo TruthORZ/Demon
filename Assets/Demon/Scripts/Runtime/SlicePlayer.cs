@@ -7,7 +7,7 @@ namespace Demon.Slice
     [RequireComponent(typeof(CharacterController))]
     public sealed class SlicePlayer : MonoBehaviour
     {
-        enum ViewMode { Explore, Tablet, Reading, Returning, Sequence, Ending }
+        enum ViewMode { Explore, Tablet, Reading, Returning, Sequence, Ending, Lock, Inspect }
         [SerializeField] Camera viewCamera;
         [SerializeField] InputActionAsset inputActions;
         CharacterController body;
@@ -20,9 +20,13 @@ namespace Demon.Slice
         ViewMode mode;
         float pitch, verticalSpeed;
         SliceTablet activeTablet;
+        CipherBox activeLock;
+        public bool InspectingLock => mode == ViewMode.Lock;
+        public bool CanUseTools => mode == ViewMode.Explore && Cursor.lockState == CursorLockMode.Locked;
         readonly RaycastHit[] interactionHits = new RaycastHit[32];
         public Camera ViewCamera => viewCamera;
         public bool InspectingTablet => mode == ViewMode.Tablet;
+        public SliceTablet ActiveTablet => activeTablet;
         public bool Reading => mode == ViewMode.Reading;
         public string FocusPrompt { get; private set; } = "";
 
@@ -68,12 +72,16 @@ namespace Demon.Slice
                 if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
                     ExitCloseView();
                 if (mode == ViewMode.Tablet && keyboard != null && keyboard.enterKey.wasPressedThisFrame)
-                    world.TryCompile();
-                if (mode == ViewMode.Tablet && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+                    activeTablet.TryCompile();
+                if (mode == ViewMode.Lock && keyboard != null && keyboard.enterKey.wasPressedThisFrame) activeLock.TryConfirm();
+                if ((mode == ViewMode.Tablet || mode == ViewMode.Lock) && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
                 {
                     Ray ray = viewCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
                     if (TryInteractionHit(ray, 20, out var hit))
-                        activeTablet.Click(hit.collider);
+                    {
+                        if (mode == ViewMode.Tablet) activeTablet.Click(hit.collider);
+                        else activeLock.Click(hit.collider);
+                    }
                 }
             }
         }
@@ -131,6 +139,8 @@ namespace Demon.Slice
             BeginView(anchor, ViewMode.Tablet);
         }
 
+        public void EnterLockView(CipherBox box, Transform anchor) { activeLock = box; BeginView(anchor, ViewMode.Lock); }
+        public void EnterInspectionView(Transform anchor) => BeginView(anchor, ViewMode.Inspect);
         public void EnterReadingView(Transform anchor) => BeginView(anchor, ViewMode.Reading);
         public void EnterSequenceView(Transform anchor) => BeginView(anchor, ViewMode.Sequence);
         public void EnterEndingView(Transform anchor) => BeginView(anchor, ViewMode.Ending);
@@ -154,7 +164,7 @@ namespace Demon.Slice
             if (mode == ViewMode.Reading && world.OnReadingClosed()) return;
             mode = ViewMode.Returning;
             closeAnchor = null;
-            activeTablet = null;
+            activeTablet = null; activeLock = null;
             LockCursor(true);
         }
 

@@ -15,8 +15,13 @@ namespace Demon.Slice.Domain
             foreach (int day in days) if (day < 1) throw new ArgumentOutOfRangeException(nameof(discoveryDays));
             found = new bool[days.Length];
         }
-        public bool Available(int index, int day) => day >= days[index];
+        public bool Available(int index, int day) => found[index] || day >= days[index];
         public bool Found(int index) => found[index];
+        public bool Acquire(int index)
+        {
+            if (found[index]) return false;
+            found[index] = true; FoundCount++; return true;
+        }
         public bool Discover(int index, int day)
         {
             if (!Available(index, day) || found[index]) return false;

@@ -6,6 +6,7 @@ namespace Demon.Slice
     public sealed class SliceTablet : SliceInteractable
     {
         [SerializeField] Transform closeView;
+        [SerializeField] ListeningTool listeningTool;
         [SerializeField] SliceRuneSlot[] slots;
         [SerializeField] SliceRuneTrayItem[] tray;
         [SerializeField] Renderer[] lines;
@@ -15,6 +16,9 @@ namespace Demon.Slice
         bool bound;
         public override string Prompt => board != null && board.Frozen ? "查看已固化石板" : "查看并补全石板";
         public Transform CloseView => closeView;
+        public RuneBoardModel Board => board;
+        public void ConfigureListening(ListeningTool owner) => listeningTool = owner;
+        public bool TryCompile() => listeningTool ? listeningTool.TryCompile() : world.TryCompile();
 
         public void Configure(Transform anchor, SliceRuneSlot[] authoredSlots, SliceRuneTrayItem[] authoredTray,
             Renderer[] authoredLines, Material frozen)
@@ -25,7 +29,7 @@ namespace Demon.Slice
             if (!closeView || slots == null || slots.Length != 9)
                 throw new System.InvalidOperationException("Tablet requires an anchor and nine saved slots.");
             world = controller;
-            board = world.Session.Board;
+            board = listeningTool ? listeningTool.Board : world.Session.Board;
             Bind(); Refresh();
         }
 
@@ -34,7 +38,7 @@ namespace Demon.Slice
         void OnDisable() { if (board != null && bound) board.Changed -= Refresh; bound = false; }
         public override void Use(SlicePlayer player)
         {
-            if (world.BeginFinalInteraction()) player.EnterTabletView(this, closeView);
+            if (listeningTool ? listeningTool.BeginInteraction() : world.BeginFinalInteraction()) player.EnterTabletView(this, closeView);
         }
 
         public void Click(Collider target)
@@ -66,6 +70,12 @@ namespace Demon.Slice
                 case RuneKind.Box: return "BOX";
                 case RuneKind.Lake: return "LAKE";
                 case RuneKind.Open: return "OPEN";
+                case RuneKind.On: return "ON";
+                case RuneKind.Enter: return "ENTER";
+                case RuneKind.Demon: return "DEMON";
+                case RuneKind.Region: return "REGION";
+                case RuneKind.Ring: return "RING";
+                case RuneKind.Chime: return "CHIME";
                 default: return "·";
             }
         }

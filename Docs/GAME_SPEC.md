@@ -1,7 +1,7 @@
 # Demon 游戏设计规范
 
 Updated: 2026-10-28 Asia/Shanghai
-状态：已确认设计基线。本轮取消+1，采用自然跨日循环与午夜挂钟结局。实际完成程度见[ARCHITECTURE](ARCHITECTURE.md)，当前实施见[TASK-005](Tasks/TASK-005-no-plus-one-finale.md)。
+状态：已确认设计基线。本轮取消+1，采用自然跨日循环与午夜挂钟结局。实际完成程度见[ARCHITECTURE](ARCHITECTURE.md)，午夜结局见[TASK-005](Tasks/TASK-005-no-plus-one-finale.md)，T05监听切片见[TASK-006](Tasks/TASK-006-listening-tool.md)，箱子A与轮盘见[TASK-007](Tasks/TASK-007-bearing-cipher.md)，T06光束见[TASK-008](Tasks/TASK-008-beam-tether.md)。
 
 ## 1 定位与制作约束
 

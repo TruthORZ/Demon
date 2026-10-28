@@ -48,7 +48,7 @@ namespace Demon.Slice
         void RefreshDay()
         {
             currentDay = world.Session.Clock.Day;
-            for (int i = 0; i < 6; i++) fixedTablets[i].gameObject.SetActive(Progress.Available(i, currentDay));
+            for (int i = 0; i < 6; i++) fixedTablets[i].gameObject.SetActive(!(i == 5 && world.Cipher) && Progress.Available(i, currentDay));
             finalTablet.SetActive(FinalAvailable);
             if (!world.Session.Descended) world.SetMessage(definition.Days[Mathf.Clamp(currentDay - 1, 0, 8)].Objective);
         }
@@ -63,12 +63,18 @@ namespace Demon.Slice
         public string Title => definition.Days[Mathf.Clamp(currentDay - 1, 0, 8)].Title;
         public void ReadTablet(int index, Transform view)
         {
-            if (!Progress.Available(index, world.Session.Clock.Day) || world.Session.Descended) return;
+            if (!Progress.Available(index, world.Session.Clock.Day) || world.Session.Descended || (index == 5 && world.Cipher && !world.Cipher.Acquired)) return;
             Progress.Discover(index, world.Session.Clock.Day);
             var tablet = definition.Tablets[index];
             string node = tablet.DateNodeDay > 0 ? "日期节点：D" + tablet.DateNodeDay + " 00:00（" +
-                (world.Session.Clock.Day >= tablet.DateNodeDay ? "已到达" : "尚未到达") + "）" : "工具机制记录（当前灰盒尚未接入工具操作）";
+                (world.Session.Clock.Day >= tablet.DateNodeDay ? "已到达" : "尚未到达") + "）" : "工具机制记录";
             world.ReadDocument(tablet.Title + "\n" + node + "\n\n" + tablet.Record + "\n\nEsc 放下石板记录。", view);
+        }
+        public void AcquireExchangeTablet(Transform view)
+        {
+            if (!world.Cipher || !world.Cipher.Acquired || world.Session.Descended) return;
+            Progress.Acquire(5);
+            ReadTablet(5, view);
         }
         void OnDestroy() { if (world && world.Session != null) world.Session.Clock.Midnight -= OnMidnight; }
     }

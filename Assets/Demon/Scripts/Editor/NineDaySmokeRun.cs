@@ -67,12 +67,19 @@ namespace Demon.Slice.Editor
                     }
                     var tablets = UnityEngine.Object.FindObjectsByType<NineDayTablet>(FindObjectsInactive.Include);
                     foreach (var tablet in tablets)
-                        Require(tablet.gameObject.activeSelf == flow.Progress.Available(tablet.Index, day), "Tablet discovery gate mismatch.");
+                        Require(tablet.gameObject.activeSelf == (!(tablet.Index == 5 && world.Cipher) && flow.Progress.Available(tablet.Index, day)), "Tablet discovery gate mismatch.");
                     if (day < 8)
                     {
                         var tablet = tablets.Single(t => t.Index == day - 2);
-                        tablet.Use(world.Player); tablet.Use(world.Player);
-                        Require(world.Player.Reading && !world.HasReadBox && flow.Progress.FoundCount == day - 1,
+                        if (day == 7 && world.Cipher)
+                        {
+                            var box = world.Cipher; var code = box.Wheel.ReadCode();
+                            for (int i = 0; i < 3; i++) while (box.Model.At(i) != code[i]) box.Model.Cycle(i);
+                            Require(box.TryConfirm(), "Box A could not unlock at D7.");
+                            box.Use(world.Player); box.Use(world.Player);
+                        }
+                        else { tablet.Use(world.Player); tablet.Use(world.Player); }
+                        Require((day == 6 && world.Listening ? world.Player.InspectingTablet : world.Player.Reading) && !world.HasReadBox && flow.Progress.FoundCount == day - 1,
                             "Fixed-tablet reading/discovery leaked into box state or duplicated count.");
                         if (day == 2 || day == 7) Capture("day" + day + "-record");
                         stage = 3; stageTime = now;
