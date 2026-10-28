@@ -1,0 +1,6 @@
+{
+  "name": "Demon.Slice",
+  "rootNamespace": "Demon.Slice",
+  "references": ["Demon.Slice.Domain", "Unity.InputSystem", "UnityEngine.UI"],
+  "autoReferenced": true
+}

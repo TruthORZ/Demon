@@ -1,0 +1,6 @@
+{
+  "name": "Demon.Slice.Tests",
+  "references": ["Demon.Slice.Domain"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

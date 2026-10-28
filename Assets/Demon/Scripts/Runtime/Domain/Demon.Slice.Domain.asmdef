@@ -1,0 +1,7 @@
+{
+  "name": "Demon.Slice.Domain",
+  "rootNamespace": "Demon.Slice.Domain",
+  "references": [],
+  "autoReferenced": true,
+  "noEngineReferences": true
+}

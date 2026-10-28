@@ -1,11 +1,17 @@
 # TASK-002 首个可玩样例与三周实施路线
 
-Status: planned
+Status: awaiting verification
 Updated: 2026-10-25 Asia/Shanghai
 
 ## 目标与授权边界
 
-实施方案已经记录，尚未开始编写游戏或改动Unity资产。用户本轮授权建立目录文档并制定计划；本任务需要后续制作指令才能转为in progress。
+用户已确认Windows并明确要求开始，用简单图形建立石板、箱子、湖岸雪地；授权实施本任务的首个灰盒可玩样例，不扩展到完整九天或正式美术，不自动提交/push。
+
+本轮基线：HEAD为7638ece33d2c2bd2e1d936de09c9cc62acd64955，跟踪main/origin/main；已有未跟踪Assets/Demon.meta及各预留目录meta，是Editor导入产生的前置内容，保留原GUID。无已跟踪人工作业差异。Unity 6000.6.0f1的本项目Editor已打开，不启动竞争实例。
+
+当前没有Unity MCP。采用项目内显式菜单工具与一次性请求文件，让现有Editor创建资产；请求限定操作、目标目录与执行次数，消费后删除，拒绝覆盖已有场景。不是Play Mode自动建图或无条件初始化重生成。若Editor不导入，保留菜单供用户手动执行并如实标记验证缺口。
+
+样例暂定E交互、鼠标选取/放置、Enter确认固化、Esc退出；初始布局、中文揭示文本和简易实体为可编辑占位，不把这些选择升级为正式谜题设计。选择已装uGUI与Input System，近景采用场景机位锚点，不添加依赖。先实现可测试的纯C#规则，再通过保存的场景接入。
 
 首个样例只做一个能走动的简单空间、一张石板、一个箱子、一个湖封印状态和最小结局。用D8晚间到D9零点验证核心因果，不先制作九套场景、通用语言或大量惊吓。完整设计见 [GAME_SPEC.md](../GAME_SPEC.md)；当前工程证据见 [ARCHITECTURE.md](../ARCHITECTURE.md)。
 
@@ -96,4 +102,41 @@ Updated: 2026-10-25 Asia/Shanghai
 
 ## 进度与下一步
 
-实施、Unity编译、Play Mode、测试和构建均未开始。下一步取得制作指令后，先检查Editor和Git状态，确定样例占位边界与交互细节，再执行第一阶段。不要直接按整份三周路线一次生成全部游戏。
+2026-10-25实施检查点：
+
+- 已由现有Editor创建保存DemonSlice场景、三个预制体、配置、材质和uGUI源对象；没有Play Mode运行时建图。
+- Unity原生编译已生成Domain、Runtime、Editor、Tests四个项目程序集；EditMode规则14项通过。
+- 首次正常路线真实Play Mode通过，帧从1推进到11522，D9零点、两次交换和终局停止正确；没有把仅进入Play当作通过。
+- 画面检查发现OS字体经fontsettings保存后没有显示中文/符文。补充SliceFontBinding，在Windows运行时解析Inspector中定义的系统字体名称并绑定已保存的文本对象；字体修复待Editor再次刷新和复验。未复制Windows字体二进制到项目。
+- 重要失败：使用6000.6旧objectReferenceInstanceIDValue导致预编译错误，已改EntityId接口；全源码本机预编译通过，实际Unity随后编译通过。背景Editor未导入字体修复前，一次fonts请求被旧程序集拒绝，日志中的Unsupported bounded authoring operation是该次工具失败，不是规则测试失败。为后续增加显式refresh操作，仍然只消费请求，不自动轮询重建资源。
+- 官方CLI存在，但项目没有com.unity.pipeline，status/recompile不能连接；未擅自安装Pipeline或升级CLI，没有启动第二个Editor。首次用户切回Editor后创建成功；字体修复需要再次导入，已向用户请求Assets/Refresh。
+
+后续实测检查点：
+
+- `Temp/DemonSliceReports/tests-001.json`及XML：真实Unity EditMode 14 passed / 0 failed / 0 skipped；Domain无后续修改。
+- 字体修复已刷新生效，截图确认中文、符文和终局文字显示。`normal-002.json`：正常路线再次通过，帧1到10927，D9零点、两次交换、实体与湖状态、终局停时正确。record截图是在退出记录后的画面，尚不能证明阅读页完整布局。
+- `sleep-001.json`：不修复时睡到D9通过，交换0次，原本开放的湖触发终局。
+- 输入失败调查：后台输入受焦点路由干扰，测试改用临时虚拟键鼠并在结束恢复InputSettings，不改项目输入配置。进一步发现近景镜头射线被玩家自身CharacterController挡住，已修复SlicePlayer交互查询，忽略自身子树并选择最近目标。
+- `input-004.json`：真实Input System动作和物理射线链通过：W移动、E近景、保存的机位、六次点选补全三个符文、Enter只触发一次交换。这是自动输入验证，Esc/R真人操作及手感仍需试玩。
+- 新源码/asmdef行尾检查、git diff --check通过，37个新增源资产都有meta。没有Packages改动、没有提交或push。
+- Windows构建build-001在现有Editor调用，当前停在预处理后，尚无完成报告和exe。Performance Testing包创建Assets/Resources的两个PerformanceTestRun*.json；PC_RPAsset预筛选字段与URPProjectSettings被Unity更新。先保留运行中的状态，结束后检查临时输出，不还原人工作业。
+- 可恢复的smoke-editability已补充源码：临时保存日长、近景机位和日光强度修改，在Play检查，退出后恢复原值。尚未导入/运行，需等构建结束刷新，不将源码当验证结果。
+- computer-use窗口检查因本机sandbox helper setup refresh错误未能启动；已请用户查看Unity是否有弹窗或构建进度。未绕过安全设置或终止Editor。
+
+最终检查点（以上等待状态已解除）：
+
+- 构建等待原因是Unity保存对话框，用户点击Save后继续。`build-001.json`：Windows64成功，173882355字节，入口`Builds/Windows/DemonSlice.exe`。首次URP着色器编译耗时较长，未切换管线或弱化检查。独立exe人工运行未做，不把构建成功当独立运行验收。
+- Performance Testing构建后自动清理了Assets/Resources及两个JSON，Input System临时preloadedAssets也恢复。Unity保存持久化了DefaultVolumeProfile、PC_RPAsset、UniversalRenderPipelineGlobalSettings、GraphicsSettings/URPProjectSettings的版本字段与缓存，以及UnityConnectSettings.m_Enabled；保留用户保存结果，不擅自改回。
+- 最新Editor工具已由Unity实际编译。`tuning-001.json`通过：保存日长720秒、近景机位偏移和日光.37后，Play Mode确实采用新值；退出日志DEMON_SLICE_TUNING_RESTORED，资产日长恢复1440、日光1.15、近景x恢复.45。随后正常路线再次加载这些已恢复资产。
+- `normal-003.json`再次通过：帧1到11653，D9零点两次交换；tablet/record/ending截图已检查，近景与阅读页文字完整且无裁切。该次还验证了近景退出返回、记录关闭与终局机位过渡。
+- `validate-002.json`用于最后保存场景重载检查，结果见报告。后续Editor工具变更不影响已生成Windows玩家代码。
+
+当前剩余验收：请用户亲自试玩整体手感、Esc退出/R重开和Windows独立运行；尚未将这些标为passed。首个灰盒实现已可交付试玩，任务暂为awaiting verification；下一阶段是根据反馈调整提示、机位和节奏，再扩展九天内容。不自动提交/push。
+
+## 开箱空引用修复（2026-10-25）
+
+- 用户实际按E开箱报NullReferenceException，日志定位SliceBox.Use第10行。先前normal测试直接调用SliceSceneController.ReadBox，绕过了箱子组件，旧检查结果不能证明开箱入口正常。
+- 原因：SaveAsPrefabAssetAndConnect之后调用box.Configure，未记录Prefab实例属性覆盖，world连接在保存重载后丢失。修正生成器记录PrefabInstancePropertyModifications，并通过repair-box显式修复现有实例world字段；不重建场景或修改预制体/其他几何。
+- 场景检查增加Box/Bed的world必须绑定当前Composition；过去只检查非零但失效的引用，会漏掉本应必填的空字段。
+- box-repair-001通过保存、重新打开和引用检查。box-input-002通过W/E、六次符文点击、Enter、低头对准箱子后E阅读与Esc退出。一次输入测试失败是测试未低头，射线从矮箱上方通过；修正模拟鼠标观察后通过，没有更改玩家交互距离或箱子几何迁就测试。
+- normal检查已改为调用SliceBox.Use。box-normal-001完整路线通过，帧1到12109，D9零点两次交换并停止；box-build-001修复版Windows64构建成功（173882355字节），已覆盖原Builds/Windows输出。Unity实际编译及git diff --check通过。规则Domain没有改动，不重复14项纯规则测试。保留现有人工作业，未提交或push。
