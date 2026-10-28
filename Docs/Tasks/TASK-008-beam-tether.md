@@ -11,7 +11,7 @@ Updated: 2026-10-28 Asia/Shanghai
 - 已实现：部分稳定不足不交换，中断清零；满足后只交换一次，持续照住不按帧反复交换。雪痕停止、同一叶片转；松键/转向/超距/真实遮挡/近景/阅读/禁用/睡眠终局均释放并再次交换恢复。重复Release不泄漏。
 - 新增纯C#StableBeamMotion，复用AttributeOperations容量检查；MOTION与SEAL/实体/日期分开。BeamTether显式连接区域、叶片、灯/线/模型/观察点；Player仅暴露CanUseTools，HUD新增可选状态Text，无精确目标坐标。
 - ListeningTrailProxy可选接Tether控制运动；未配置的旧D6沿原T05路径。T05继续只监听位置进入，冻结/停留不重复响；冻结时节点等待也暂停，复位沿已有路径继续，不重置到起点。
-- 默认BeamDefinition：D3、16m距离、0.85m识别半径、1s稳定、26度Spot、14灯强、100度/秒叶片。射线检查真实遮挡并忽略自身/目标视觉子物体，区域允许偏离准星一定范围，不要求单像素点。
+- 初始验证BeamDefinition：D3、16m距离、0.85m识别半径、1s稳定、26度Spot、14灯强、100度/秒叶片。射线检查真实遮挡并忽略自身/目标视觉子物体，区域允许偏离准星一定范围，不要求单像素点。
 - 叶片旋转归MOTION表现，风向标根位置及342密码不变。T01记录/D3提示通过beam-records同步为当前观察内容，日期不变；未将剧情/其他能力写成已完成。
 - 九天源场景新增Beam_Authored、T06_AimRegion/雪痕底层/锁定灯、玩家相机下T06_Flashlight、保存的BeamStatus。新DemonBeam从D7 10:00开始，仍需真实解A取得，无自动装备。独立BeamSettings，共享BeamDefinition/NineDayDefinition；主场景/快速场景布局分别保存。
 - 基线main@a37036c，保护全部T05/密码未提交成果与UnityConnectSettings既有差异。Temp/Task008Baseline完整备份Demon/Docs/BuildSettings/meta哈希。未提交/push、未安装包/改管线/输入或启动第二Editor。
@@ -44,3 +44,5 @@ BeamDefinition调距离/识别范围/稳定时长/灯/叶片速度；Beam_Author
 2026-10-28用户明确授权push；本次一并发布TASK-006/007/008的Assets/Demon源资源/meta与Docs。发布前HEAD为a37036cd166d246270040bf7f843c9a6c221daa0，远端main预检与其一致，暂存区原先为空。保留本地UnityConnectSettings服务启用差异，不提交缓存/备份/Windows构建。发布后SHA与远端核对结果见本轮交付回执，恢复时以git log -1确认，不在提交内记录其自身SHA。
 
 暂存检查发现15个新入库meta的空字段尾空格；仅清理空白，逐个校验GUID及全部非空白内容一致。该格式整理发生在功能验证后，不改变资源含义；此前meta哈希零变更结果对应功能验证时点。发布继续排除UnityConnectSettings及缓存/构建。
+
+用户随后明确确认发布到https://github.com/TruthORZ/Demon.git的main，包含全部已提交功能及最新BeamDefinition参数10m/1m/0.5s。追加提交仅含参数与文档；ProjectSettings两项本地差异继续排除。此前自动审批阻塞已由明确确认解决，仍按普通push及远端SHA核对执行。现有Windows构建对应先前验证参数，本次未重建或重新声称新参数的Play结果。

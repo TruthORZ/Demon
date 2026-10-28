@@ -186,7 +186,7 @@ TASK-007 Windows构建：cipher-build-001密码版与cipher-nine-build-001九天
 
 `BeamTether`引用保存的BeamDefinition、T06_AimRegion、雪痕可见根、同一风向标叶片、手电Light/LineRenderer/几何、锁定区域灯与ObservationPoint。玩家只能在Explore且鼠标已捕获时用右键；取得状态来自真正CipherBox.Acquired，无D7装备门槛。射线从视角向目标中心检查真实遮挡，忽略自身和目标视觉子物体；沿视线偏移在RegionRadius内并且在Range内才累计稳定，不要求精准单像素点。松键、转向、遮挡、超距、近景/阅读/演出与禁用都会复位。
 
-BeamDefinition默认RangeMetres=16、RegionRadiusMetres=0.85、StableSeconds=1、SpotAngle=26、LightIntensity=14、叶片100度/秒，可在Inspector调节。手电/蓝色辅助线与目标发光仍为灰盒表现，可替换保存资产；不创建运行时静态UI或地图。右下BeamStatus为保存的uGUI，只显示装备/稳定/锁定说明，不显示目标坐标；关闭组件、阅读或结局时隐藏。
+BeamDefinition当前RangeMetres=10、RegionRadiusMetres=1、StableSeconds=0.5（用户确认发布参数；此前运行/构建验证采用16/0.85/1）、SpotAngle=26、LightIntensity=14、叶片100度/秒，可在Inspector调节。手电/蓝色辅助线与目标发光仍为灰盒表现，可替换保存资产；不创建运行时静态UI或地图。右下BeamStatus为保存的uGUI，只显示装备/稳定/锁定说明，不显示目标坐标；关闭组件、阅读或结局时隐藏。
 
 为遵守D3才有恶魔运动，当前组合读同一世界时钟与DemonMotionDay=3：D3前风向标转，雪痕根不可见/不移动；D3起风向标停、代理沿保存路线移动。日期边界独立于是否取得T06/启用T05。它是T01运动后果的小型状态接点，不是通用石板调度器或完整T01剧情。提前D1取得T06可照明，但没有可辨认恶魔区域，不会创造D3前运动；D3即可牵制，不要求等D7。
 

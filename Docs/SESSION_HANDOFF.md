@@ -2,7 +2,7 @@
 Updated: 2026-10-28 Asia/Shanghai
 Latest completed task: [TASK-008 T06稳定光束牵制](Tasks/TASK-008-beam-tether.md)。用户确认[TASK-007密码切片](Tasks/TASK-007-bearing-cipher.md)测试通过。
 Repository/Unity project: D:\Unity\Projects\Demon
-Branch: main；本次发布前HEAD为a37036cd166d246270040bf7f843c9a6c221daa0。用户于2026-10-28明确授权提交并push这几轮T05/密码/T06成果；发布后的准确HEAD以git log -1及远端main核对结果为准。
+Branch: main；功能提交44ba0cb851d9a015f27608039b82af1664238615已在本地创建。用户已明确确认将T05/密码/T06源代码、资源、文档及最新10m/1m/0.5s参数推送到https://github.com/TruthORZ/Demon.git的main；本轮追加参数与交接提交，最终HEAD以git log -1及远端核对为准。
 
 ## Current state
 九天主场景已接T06：真实箱子A取得后，探索持鼠标右键照可辨认雪痕区域，默认16m/0.85m半径/1秒稳定；满足后交换MOTION一次，代理停、同一风向标叶片转。松键/转向/遮挡/超距/近景/阅读/禁用/睡眠结局均复位，不按帧反复交换。风铃继续观察区域进入，不因静止重复报警。
@@ -33,3 +33,8 @@ MOTION与SEAL/实体/日期独立；风向标根位置不变，密码342不变�
 3. 下一步优先实际追逐/打断→T07夜间争夺/取回补全→D5声音交换/D7光转移永夜→完整D1至D8场地、搜寻和线索/日常→整段九天真人与独立exe回归。此为约5个灰盒阶段的建议拆分，不是已实现功能或工期承诺。
 
 工具：无Unity MCP；沿现有Editor白名单Temp/DemonSliceAuthoring.request.json（beam-create/view/records/validate/smoke/tuning/early/build），不打断已有Play、不启动第二Editor。默认shell沙箱启动失败，require_escalated项目内操作可用；只筛必要日志，不输出原始进程命令行。
+
+## Git publication
+此前推送因具体目的地/载荷确认不足被自动审批在执行前拒绝，未上传；用户现已明确确认仓库URL、main及全部上传范围，此阻塞已解决。本轮正常推送，不强推、不改远端地址。
+当前BeamDefinition为10m距离、1m识别半径、0.5s稳定时间，按用户确认纳入追加提交。48项规则和既有Play/Windows报告对应此前验证参数16m/0.85m/1s（另验证过6m/1.1m/0.4s），本次仅参数/文档发布与静态/暂存检查，不冒充新参数已重建Windows。
+继续排除ProjectSettings.asset的本地InputSystem预加载差异、UnityConnectSettings服务启用差异，以及Builds/Temp/Logs/Library。发布完成后用git ls-remote核对远端，准确结果见本轮交付回执。

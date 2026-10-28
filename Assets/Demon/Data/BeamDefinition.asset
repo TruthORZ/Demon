@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BeamDefinition
   m_EditorClassIdentifier: Demon.Slice::Demon.Slice.BeamDefinition
   DemonMotionDay: 3
-  RangeMetres: 16
-  RegionRadiusMetres: 0.85
-  StableSeconds: 1
+  RangeMetres: 10
+  RegionRadiusMetres: 1
+  StableSeconds: 0.5
   SpotAngleDegrees: 26
   LightIntensity: 14
   BeamColor: {r: 0.72, g: 0.9, b: 1, a: 1}
