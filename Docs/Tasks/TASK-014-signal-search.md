@@ -20,7 +20,7 @@ Updated: 2026-10-30 Asia/Shanghai
 - 本轮前git diff --check通过，Unity6000.6.0f1/URP17.6.0/Input1.20/uGUI2.6/Navigation2.0.14由本地版本与锁文件核实。
 
 ## Next action
-实现/自动验证/Windows构建已完成，具体结果见下方最终检查点。下一步在DemonSignalSearch从D5开始真人试玩；独立exe真人试玩不与自动构建混淆。
+实现/自动验证/Windows构建已完成，具体结果见下方最终检查点。用户已确认当前阶段，下一步对齐D7–D8；独立exe真人试玩仍未执行，不与自动构建混淆。
 
 ### Authoring checkpoint
 - signal-create001首次原生导航检查失败：候选T05位于x14/z-14.5，原东边界与板体分隔了北侧站位。定向signal-finish仅接受这个已知初次布局，把原板改到(12,1.2,-12)、Y90朝西，路线终点(9.8,.04,-12)。CopySerialized更新本轮原生导航并保留其GUID，保存重载全部路径通过；旧边界/旧导航不改。
@@ -47,6 +47,7 @@ Updated: 2026-10-30 Asia/Shanghai
 ## Human editability and remaining acceptance
 Unity当前打开Assets/Demon/Scenes/DemonSignalSearch.unity，非Play，无pending。点击▶从D5 08:00开始：E检查电台、Esc放下，沿湖岸找T04；回睡袋到D6，从营地南侧通路入林，向东沿“旧监听站”牌到原T05。E近看，鼠标把RING放中心、CHIME放下中，Enter启用。先在木墙北侧看移动雪痕经过，再绕到南侧听高低音；可自由返营/直接睡觉。没有剧情传送、强制教学完成或新敌人波次。
 文案改Data/ExplorationDefinition，日期/原文改NineDayDefinition；布局在SignalSearch_Authored，低高铃/各音源/半径仍在原ListeningChime和AudioSource Inspector，广播替换仍由WorldAttributeConsequences统一配置。Route/Visible/Hidden为编辑与验证参考，不会移动玩家。改碰撞/地面后重Bake本轮SignalSearchNavigation；旧快速场景独立保存，不自动同步。
-自动及保存可编辑性检查完成，待用户实际D5–D6走行/高低音定位和节奏体验；正式音频/美术、完整九天真人体验与D7–D8新探索仍未做。当前下一步是用户试玩反馈，不把自动播放/音源isPlaying等同真人音频验收。
+自动及保存可编辑性检查完成，用户2026-10-30确认没问题并授权发布，当前阶段关闭。正式音频/美术、完整九天真人体验与D7–D8新探索仍未做；不把自动播放/音源isPlaying等同独立的真人音频实验。
 ## User acceptance and Git authorization
 2026-10-30用户回复“没问题 push到git吧”，确认当前阶段并明确授权提交/推送本批已验收改动。当前实现验收关闭；不扩大为未执行的独立exe真人试玩或完整九天体验。后续D7–D8新探索仍需对齐。发布范围为TASK-009至014、T07对象双顺序及必要资产/文档；排除原有两处ProjectSettings本地差异、Builds/Temp/Logs与缓存。
+发布结果：实现提交6492337a317d533d6056260a9f2ca00275da7cc2已正常推送GitHub TruthORZ/Demon的main，远端refs/heads/main核对一致。146个目标文件入库，缓存/构建/测试证据和两处既有ProjectSettings本地差异未入库；交接说明随后单独提交。

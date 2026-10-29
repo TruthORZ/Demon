@@ -2,7 +2,7 @@
 Updated: 2026-10-30 Asia/Shanghai
 Active task: [TASK-014 D5–D6声音与风铃搜寻](Tasks/TASK-014-signal-search.md)，实现/自动验证/Windows构建完成，用户于2026-10-30确认没问题并授权Git发布。TASK-013用户已授权推进，文字实际确认完整；不把推进授权当成独立exe完整试玩记录。
 Repository/Unity project: D:\Unity\Projects\Demon
-Branch and HEAD: main@90ad3c2c04261e00ea0599bfda09df3a3123d753；147个工作树条目（本轮前137个），保留TASK-009至013等本地内容，无commit/push。原ProjectSettings空preloadedAssets与UnityConnectSettings差异保留。
+实现交付提交: 6492337a317d533d6056260a9f2ca00275da7cc2，main分支已推送origin/main并用ls-remote核对一致。本交接说明随后单独提交，最新含文档HEAD请用git log -1核对。TASK-009至014及T07双顺序共146个目标文件已提交；工作树只保留原ProjectSettings空preloadedAssets与UnityConnectSettings两处本地差异。
 
 ## Current state
 用户批准D5静电电台→循湖中原广播找湖岸T04；D6沿林径找原T05，补全后看雪痕触铃，再绕木墙听高低音。可直接睡觉，无强制任务/伤害/新追逐波次。
@@ -22,7 +22,7 @@ Branch and HEAD: main@90ad3c2c04261e00ea0599bfda09df3a3123d753；147个工作树
 ## Resume here
 1. 打开Assets/Demon/Scenes/DemonSignalSearch.unity，▶从D5 08:00开始。E看电台/湖岸T04，Esc放下；睡袋到D6，背湖沿南侧通路入林向东找“旧监听站”与T05。E近看，RING放中心、CHIME放下中，Enter启用；木墙北侧看雪痕，绕南侧听高低音。仍可跳过搜寻直接睡。
 2. 提示在ExplorationDefinition，日程/原文NineDayDefinition，场地/原板/两铃/墙/标牌在SignalSearch_Authored。Route/Visible/Hidden只是布局/验证参考，不驱动玩家或NPC。改障碍后Bake本轮SignalSearchNavigation，保留旧练习资产。
-3. D5–D6阶段已由用户确认，下一步对齐D7–D8。D7–D8具体新探索尚未对齐，正式音频/美术、全九天真人体验、存档/暂停/设置范围仍有未决，本批Git已获明确授权，正进行发布；不含构建/临时证据和两处原本本地设置。
+3. D5–D6阶段已由用户确认，下一步对齐D7–D8。D7–D8具体新探索尚未对齐，正式音频/美术、全九天真人体验、存档/暂停/设置范围仍有未决，本批实现已发布Git；构建/临时证据和两处原本本地设置均未纳入。
 
 ## Evidence and tools
 恢复基线Logs/DemonCheckpoints/task014-baseline-20261029-2207包含本轮前Demon/Docs/ProjectSettings/EditorBuildSettings；先前TASK-013恢复基线仍保留。报告/XML/PNG/审计/RunTask014Checks.ps1和AuditTask014.ps1在Logs/DemonChecks/Task014，均被Git忽略。不要依赖Unity重启会清理的Temp作为唯一证据。
