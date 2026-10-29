@@ -1,40 +1,30 @@
 # Session Handoff
-Updated: 2026-10-28 Asia/Shanghai
-Latest completed task: [TASK-008 T06稳定光束牵制](Tasks/TASK-008-beam-tether.md)。用户确认[TASK-007密码切片](Tasks/TASK-007-bearing-cipher.md)测试通过。
+Updated: 2026-10-30 Asia/Shanghai
+Active task: [TASK-014 D5–D6声音与风铃搜寻](Tasks/TASK-014-signal-search.md)，实现/自动验证/Windows构建完成，用户于2026-10-30确认没问题并授权Git发布。TASK-013用户已授权推进，文字实际确认完整；不把推进授权当成独立exe完整试玩记录。
 Repository/Unity project: D:\Unity\Projects\Demon
-Branch: main；功能提交44ba0cb851d9a015f27608039b82af1664238615已在本地创建。用户已明确确认将T05/密码/T06源代码、资源、文档及最新10m/1m/0.5s参数推送到https://github.com/TruthORZ/Demon.git的main；本轮追加参数与交接提交，最终HEAD以git log -1及远端核对为准。
+Branch and HEAD: main@90ad3c2c04261e00ea0599bfda09df3a3123d753；147个工作树条目（本轮前137个），保留TASK-009至013等本地内容，无commit/push。原ProjectSettings空preloadedAssets与UnityConnectSettings差异保留。
 
 ## Current state
-九天主场景已接T06：真实箱子A取得后，探索持鼠标右键照可辨认雪痕区域，默认16m/0.85m半径/1秒稳定；满足后交换MOTION一次，代理停、同一风向标叶片转。松键/转向/遮挡/超距/近景/阅读/禁用/睡眠结局均复位，不按帧反复交换。风铃继续观察区域进入，不因静止重复报警。
+用户批准D5静电电台→循湖中原广播找湖岸T04；D6沿林径找原T05，补全后看雪痕触铃，再绕木墙听高低音。可直接睡觉，无强制任务/伤害/新追逐波次。
+主DemonNineDay与新DemonSignalSearch保存SignalSearch_Authored：原T04(4.5,1.2,4.6)/Y0，原T05(12,1.2,-12)/Y90朝西；原板身份/子板/托盘/日期引用保持。原低铃(3.4,.15,-14.3)、高铃(9.5,.15,-14)、原墙(8,1.35,-15.7)，原监测目标仍是Chase唯一Agent。低铃按实际西侧绕行路径设置，能在木墙遮挡时触发。声音/光/封印/补全规则保持。可选D5/D6提示扩展ExplorationFlow/Definition/HUD至D6，旧Quick边界保持。详细结构/可调位置见[ARCHITECTURE第15节](ARCHITECTURE.md)。
+新原生SignalSearchNavigation主/Quick共享，旧9个Quick和5份Nav无改动。新SignalSearchSettings从D5 08:00，步速3.3，无预给工具/发现。T04去掉制作备注但未发明实体函数，签名/来源仍按GAME_SPEC未决。
 
-D3日期接点由同一Clock驱动：之前风向标转、雪痕不可见，D3起叶片停、代理沿保存路线移动。T06可D1提前取得并照明，D3即可牵制，没有D7硬锁。仅是当前代理和风向标运动接点；非完整T01剧情/通用解释器，声音/完整光/永夜/真正追逐/T07争夺未做。
-
-新DemonBeam快速场景从D7 10:00开始，仍需342解箱后E取T06、Esc放下。走到湖岸蓝色观察点，转向雪痕按住右键。观察点现(-1,0.04,3.3)，已避旧挂钟；新增区域底层压低，露出原脚印。手电/蓝线/发光均是保存的可替换灰盒表现。
-
-## Important constraints
-设计以GAME_SPEC为准；实现与调参见ARCHITECTURE第9节。BeamDefinition控制距离/区域/稳定时间/灯参数/叶片速度；场景Beam_Authored与玩家相机下T06_Flashlight保存布局和表现。目标区域在Listening_Authored/SnowDisturbance_Target下。Player仅暴露CanUseTools；ListeningTrailProxy可选接Tether，旧D6未配置时沿原T05路径。
-
-MOTION与SEAL/实体/日期独立；风向标根位置不变，密码342不变。原D8/D6/D1密码快速源场景保留，未同步最新完整主场景，仅作独立回归用途；新D7/主场景布局各自保存。作者工具已有输出拒绝重跑Create，后续手调或限范围操作，不重建地图。
-
-保留之前所有未提交成果及UnityConnectSettings服务启用差异；本轮基线Temp/Task008Baseline含Demon/Docs/BuildSettings/meta哈希。2026-10-28用户现已明确授权本次Git发布，后续仍不默认自动提交/push。九天原1020对象ID无丢失、旧meta变更0、无缺meta。
-
-## Verification and blockers
-- Unity编译；beam-tests-001：48 passed/0 failed/0 skipped。
-- beam-smoke-001/002：实际右键/鼠标稳定锁定、部分照射不交换、代理停/叶片转、风铃静止去重、转向/超距/木墙/近景/禁用/松键/睡眠复位，共14次MOTION交换。无B/湖/日期/T07/密码副作用。002修正画面已看。
-- beam-tuning-001：保存6m/1.1m/0.4s后完整Play采用，退出DEMON_BEAM_TUNING_RESTORED，恢复16m/0.85m/1s。
-- beam-early-001：主场景D1真实A取得、无D3前运动/锁定；D3可见/运动切换、实际右键在D7前牵制通过。
-- beam-cipher-regression-001实际密码/轮盘/W/E/早取得/去重通过；beam-listening-regression-001原D6输入/监听/音源/遮挡回归通过。
-- beam-records-001已同步T01/D3观察文字；beam-nine-normal-001完整九天至午夜回归通过。beam-nine-skip-001全睡眠、beam-old-input-001旧D8输入回归通过；beam-build-001光束Windows版成功174076962字节。beam-nine-build-001九天Windows版成功174076978字节；beam-validate-final-001重载保存引用通过；git diff --check、旧GUID/对象/三个快速场景/BuildSettings完整性通过。Editor最终为DemonBeam、非Play，无待处理请求。
-- 未做独立exe或完整九天真人试玩；自动化不能证明瞄准手感/恐怖节奏。
+## Verification
+- final001-tests：78 passed/0 failed/0 skipped。
+- check001-boundary：自然D4→D5原声音转移/静电/T04，D6原T05开放，无发现前置/提前LIGHT/自动监听。
+- chime002-smoke/late/tuning/skip全部通过：真实WASD/E/Esc与鼠标错误/正确补全；完整D5–D6往返86.74223m、8次原近身；D6不读T04也能启用并监听49.07915m；真实Agent分别触发可见和ListeningOccluder遮挡的原生空间音源；零发现可睡到D9；保存2.8/提示前缀采用后恢复D5 08:00/3.3/原提示。
+- 新地图first-search/old-search分别复用D1–D2与D3–D4真实输入fixture通过（77.98295m/71.14587m），并非只测旧场景。final001-nine-normal/nine-skip/smoke-input回归通过。
+- final001 Windows64 Development：SignalSearch 174286453字节、NineDay 174286449字节，Builds/WindowsSignalSearch和WindowsNineDay；两份_Data中运行程序集一致并包含新接口。未真人独立exe试玩，保留匹配整个目录。
+- final002-signal-validate在构建/设置恢复/空白清理后保存重载通过，当前Unity为DemonSignalSearch、非Play，无pending。
+- final-audit：旧1842个主ID零丢失，当前1903；旧meta/GUID/9个Quick/5个Native Nav无变化，缺meta零，设置/BuildSettings与本轮基线完全一致。全量旧Demon仅7个预期文件变化；Native Nav精确binary，git diff --check=0。原字体/其他素材无变更。
+- PNG已查看T04全文、T05完整布局、可见原雪痕和木墙遮挡；未进行真人耳机定位/节奏/独立版验收。
 
 ## Resume here
-1. 本次Git发布范围为Assets/Demon及Docs，排除UnityConnectSettings本地启用差异和Builds/Temp/Logs/Library；48项规则及本轮实际输入/回归/构建结果保留在任务记录。光束手感及完整独立试玩仍需人工验收。
-2. 用户测试入口Assets/Demon/Scenes/DemonBeam.unity；解A342后再E取得、Esc，湖岸蓝点按住右键追随雪痕，松开/转向/绕墙验证恢复。
-3. 下一步优先实际追逐/打断→T07夜间争夺/取回补全→D5声音交换/D7光转移永夜→完整D1至D8场地、搜寻和线索/日常→整段九天真人与独立exe回归。此为约5个灰盒阶段的建议拆分，不是已实现功能或工期承诺。
+1. 打开Assets/Demon/Scenes/DemonSignalSearch.unity，▶从D5 08:00开始。E看电台/湖岸T04，Esc放下；睡袋到D6，背湖沿南侧通路入林向东找“旧监听站”与T05。E近看，RING放中心、CHIME放下中，Enter启用；木墙北侧看雪痕，绕南侧听高低音。仍可跳过搜寻直接睡。
+2. 提示在ExplorationDefinition，日程/原文NineDayDefinition，场地/原板/两铃/墙/标牌在SignalSearch_Authored。Route/Visible/Hidden只是布局/验证参考，不驱动玩家或NPC。改障碍后Bake本轮SignalSearchNavigation，保留旧练习资产。
+3. D5–D6阶段已由用户确认，下一步对齐D7–D8。D7–D8具体新探索尚未对齐，正式音频/美术、全九天真人体验、存档/暂停/设置范围仍有未决，本批Git已获明确授权，正进行发布；不含构建/临时证据和两处原本本地设置。
 
-工具：无Unity MCP；沿现有Editor白名单Temp/DemonSliceAuthoring.request.json（beam-create/view/records/validate/smoke/tuning/early/build），不打断已有Play、不启动第二Editor。默认shell沙箱启动失败，require_escalated项目内操作可用；只筛必要日志，不输出原始进程命令行。
-
-## Git publication
-此前推送因具体目的地/载荷确认不足被自动审批在执行前拒绝，未上传；用户现已明确确认仓库URL、main及全部上传范围，此阻塞已解决。本轮正常推送，不强推、不改远端地址。
-当前BeamDefinition为10m距离、1m识别半径、0.5s稳定时间，按用户确认纳入追加提交。48项规则和既有Play/Windows报告对应此前验证参数16m/0.85m/1s（另验证过6m/1.1m/0.4s），本次仅参数/文档发布与静态/暂存检查，不冒充新参数已重建Windows。
-继续排除ProjectSettings.asset的本地InputSystem预加载差异、UnityConnectSettings服务启用差异，以及Builds/Temp/Logs/Library。发布完成后用git ls-remote核对远端，准确结果见本轮交付回执。
+## Evidence and tools
+恢复基线Logs/DemonCheckpoints/task014-baseline-20261029-2207包含本轮前Demon/Docs/ProjectSettings/EditorBuildSettings；先前TASK-013恢复基线仍保留。报告/XML/PNG/审计/RunTask014Checks.ps1和AuditTask014.ps1在Logs/DemonChecks/Task014，均被Git忽略。不要依赖Unity重启会清理的Temp作为唯一证据。
+无Unity MCP；固定Temp/DemonSliceAuthoring.request.json，一次一请求，报告Temp/DemonSliceReports。先检查pending/Play，编译回执不等于编译完成，不在Smoke Play时改Assets脚本，不开第二Editor或清Library。当前Shell require_escalated可用，本轮无需用户手动刷新。
+signal-create/validate/smoke/boundary/late/skip/tuning/build；first-search/old-search在新Quick做早期回归。create拒绝既有输出；finish/settings/low-chime仅修复已知初次状态，拒绝覆盖其他手动定制。当前所有probe已恢复。旧investigation/exploration等操作仍保留，见各任务；其旧快速场景独立，不是最新主地图。

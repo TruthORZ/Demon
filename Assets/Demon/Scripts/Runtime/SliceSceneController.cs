@@ -17,6 +17,19 @@ namespace Demon.Slice
         [SerializeField] ListeningTool listeningTool;
         [SerializeField] CipherBox cipherBox;
         [SerializeField] BeamTether tether;
+        [SerializeField] ChaseController chase;
+        [SerializeField] FinalTabletRetrieval retrieval;
+        [SerializeField] WorldAttributeConsequences consequences;
+        [SerializeField] ExplorationFlow exploration;
+        public ExplorationFlow Exploration => exploration;
+        public void ConfigureExploration(ExplorationFlow flow) => exploration = flow;
+        public WorldAttributeConsequences Consequences => consequences;
+        public SlicePresentation Presentation => presentation;
+        public void ConfigureConsequences(WorldAttributeConsequences effects) => consequences = effects;
+        public FinalTabletRetrieval Retrieval => retrieval;
+        public void ConfigureRetrieval(FinalTabletRetrieval owner) => retrieval = owner;
+        public ChaseController Chase => chase;
+        public void ConfigureChase(ChaseController controller) => chase = controller;
         public BeamTether Tether => tether;
         public void ConfigureTether(BeamTether beam) => tether = beam;
         public CipherBox Cipher => cipherBox;
@@ -66,7 +79,11 @@ namespace Demon.Slice
             if (listeningTool) listeningTool.Initialize(this);
             if (cipherBox) cipherBox.Initialize(this);
             if (tether) tether.Initialize(this);
+            if (consequences) consequences.Initialize(this);
+            if (chase) chase.Initialize(this);
             if (finale) finale.Initialize(this, presentation);
+            if (retrieval) retrieval.Initialize(this);
+            if (exploration) exploration.Initialize(this);
             OnStateChanged();
         }
 
@@ -86,6 +103,8 @@ namespace Demon.Slice
             if (Session == null || Session.Descended) return false;
             if (campaign && !campaign.FinalAvailable)
             { SetMessage("最后一块石板会在第八天夜间出现。"); return false; }
+            if (retrieval && !retrieval.ReadyToReconstruct)
+            { SetMessage("先取得T07，并带回工具棚放置。"); return false; }
             if (finale) finale.ReserveTime();
             return true;
         }

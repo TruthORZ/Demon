@@ -120,7 +120,8 @@ namespace Demon.Slice
             hourHand.localRotation = Quaternion.Euler(0, 0, -(float)(minute % 720) / 2);
             minuteHand.localRotation = Quaternion.Euler(0, 0, -(float)(minute % 60) * 6);
             secondHand.localRotation = Quaternion.Euler(0, 0, -(float)(minute % 1) * 360);
-            lakeOpenGlow.SetActive(world.Session.LakeSeal == 0 && world.Session.Clock.Day >= 7);
+            bool lightReady = world.Consequences && world.Consequences.Rule != null ? world.Consequences.Rule.DemonLight == 1 : world.Session.Clock.Day >= 7;
+            lakeOpenGlow.SetActive(world.Session.LakeSeal == 0 && lightReady);
             tabletPulse.intensity = phase == Phase.MidnightHold || phase == Phase.Box ?
                 tabletPulseIntensity * (.65f + .35f * Mathf.Sin(elapsed * 16)) : 0;
         }

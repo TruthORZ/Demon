@@ -122,22 +122,52 @@ namespace Demon.Slice.Tests
             }
         }
 
-        [Test] public void WrongOrReversedLayoutDoesNotFreezeOrChangeWorld()
+        [TestCase(false)] [TestCase(true)]
+        public void BothBoxLakeOrdersFreezeOnceAndRepeatAtMidnight(bool reversed)
         {
             var initial = Target();
-            initial[7] = RuneKind.Lake;
-            initial[8] = RuneKind.Box;
+            if (reversed) { initial[7] = RuneKind.Lake; initial[8] = RuneKind.Box; }
+            var board = new RuneBoardModel(initial, Target(), Array.Empty<RuneKind>());
+            using (var session = new SliceSession(8, 960, 9, board))
+            {
+                Assert.That(session.TryCompile(), Is.True);
+                Assert.That(session.TryCompile(), Is.False);
+                Assert.That(board.CompiledAt(7), Is.EqualTo(initial[7]));
+                Assert.That(board.CompiledAt(8), Is.EqualTo(initial[8]));
+                Assert.That((session.BoxSeal, session.LakeSeal, session.ExchangeCount), Is.EqualTo((0, 1, 1)));
+                session.Clock.AdvanceTo(session.Clock.NextMidnight);
+                Assert.That((session.BoxSeal, session.LakeSeal, session.ExchangeCount), Is.EqualTo((1, 0, 2)));
+                Assert.That(session.Descended, Is.True);
+            }
+        }
+
+        [TestCase(RuneKind.Box, RuneKind.Box)] [TestCase(RuneKind.Lake, RuneKind.Lake)]
+        [TestCase(RuneKind.None, RuneKind.Lake)] [TestCase(RuneKind.Box, RuneKind.None)]
+        [TestCase(RuneKind.Open, RuneKind.Lake)]
+        public void InvalidObjectPairDoesNotFreezeOrExchange(RuneKind first, RuneKind second)
+        {
+            var initial = Target(); initial[7] = first; initial[8] = second;
             var board = new RuneBoardModel(initial, Target(), Array.Empty<RuneKind>());
             using (var session = new SliceSession(8, 960, 9, board))
             {
                 Assert.That(session.TryCompile(), Is.False);
                 Assert.That(board.Frozen, Is.False);
-                Assert.That((session.BoxSeal, session.LakeSeal), Is.EqualTo((1, 0)));
-                board.ClickSlot(7);
-                board.ClickSlot(8);
-                board.ClickSlot(7);
-                Assert.That(session.TryCompile(), Is.True);
+                Assert.That((session.BoxSeal, session.LakeSeal, session.ExchangeCount), Is.EqualTo((1, 0, 0)));
             }
+        }
+
+        [TestCase(0, RuneKind.Day)] [TestCase(4, RuneKind.Open)] [TestCase(6, RuneKind.None)]
+        public void ReversingObjectsDoesNotRelaxOtherSlots(int slot, RuneKind wrong)
+        {
+            var initial = Target(); initial[7] = RuneKind.Lake; initial[8] = RuneKind.Box; initial[slot] = wrong;
+            Assert.That(new RuneBoardModel(initial, Target(), Array.Empty<RuneKind>()).TryFreeze(), Is.False);
+        }
+
+        [Test] public void OtherProgramsDoNotGainUnorderedOperandMatching()
+        {
+            var target = Target(); target[4] = RuneKind.Ring;
+            var initial = (RuneKind[])target.Clone(); initial[7] = RuneKind.Lake; initial[8] = RuneKind.Box;
+            Assert.That(new RuneBoardModel(initial, target, Array.Empty<RuneKind>()).MatchesTarget(), Is.False);
         }
 
         [Test] public void SlotAndTrayOperationsConserveFiniteRunes()

@@ -37,7 +37,7 @@ namespace Demon.Slice.Editor
                 "右侧出现T04，T02日期节点已到。阅读内容为流程占位，具体能力尚未接入。",
                 "右侧出现T05监测工具记录。此阶段只登记发现，正式工具条件与效果待设计。",
                 "右侧出现T06交换工具记录，T03日期节点已到。可以继续睡觉，不强制读完石板。",
-                "正前方出现T07。补全铭文，或直接睡到第九天；中心EXCHANGE、下中BOX、下右LAKE。",
+                "正前方出现T07。补全铭文，或直接睡到第九天；中心EXCHANGE，第8/9槽放BOX与LAKE且顺序不限。",
                 "第九天。" };
             for (int i = 0; i < 9; i++) definition.Days[i] = new DayPlan { Title = titles[i], Objective = objectives[i], WakeHour = 8 };
             string[] records = {

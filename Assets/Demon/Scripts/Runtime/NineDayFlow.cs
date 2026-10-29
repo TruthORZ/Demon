@@ -42,14 +42,16 @@ namespace Demon.Slice
         {
             if (!world) return;
             EvaluateFirstNight();
-            if (finalTablet.activeSelf != FinalAvailable) finalTablet.SetActive(FinalAvailable);
+            RefreshFinalTablet();
         }
+        public void RefreshFinalTablet()
+        { bool visible = FinalAvailable && (!world.Retrieval || world.Retrieval.ReadyToReconstruct); if (finalTablet.activeSelf != visible) finalTablet.SetActive(visible); }
         void OnMidnight(int day) { RefreshDay(); EvaluateFirstNight(); }
         void RefreshDay()
         {
             currentDay = world.Session.Clock.Day;
             for (int i = 0; i < 6; i++) fixedTablets[i].gameObject.SetActive(!(i == 5 && world.Cipher) && Progress.Available(i, currentDay));
-            finalTablet.SetActive(FinalAvailable);
+            RefreshFinalTablet();
             if (!world.Session.Descended) world.SetMessage(definition.Days[Mathf.Clamp(currentDay - 1, 0, 8)].Objective);
         }
         void EvaluateFirstNight()

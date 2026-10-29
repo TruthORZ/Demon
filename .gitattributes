@@ -31,3 +31,14 @@
 *.mp4 binary
 *.pdf binary
 *.docx binary
+
+# Unity NavMeshData is native binary even with Force Text serialization.
+Assets/Demon/Data/ChaseNavigation.asset binary
+Assets/Demon/Data/ChasePracticeNavigation.asset binary
+
+Assets/Demon/Data/RetrievalNavigation.asset binary
+
+Assets/Demon/Data/ExplorationNavigation.asset binary
+
+Assets/Demon/Data/InvestigationNavigation.asset binary
+Assets/Demon/Data/SignalSearchNavigation.asset binary

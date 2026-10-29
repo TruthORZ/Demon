@@ -27,6 +27,12 @@ namespace Demon.Slice.Editor
         static ListeningSmokeRun listeningSmoke;
         static CipherSmokeRun cipherSmoke;
         static BeamSmokeRun beamSmoke;
+        static ChaseSmokeRun chaseSmoke;
+        static FinalTabletSmokeRun retrievalSmoke;
+        static ConsequencesSmokeRun consequencesSmoke;
+        static ExplorationSmokeRun explorationSmoke;
+        static InvestigationSmokeRun investigationSmoke;
+        static SignalSearchSmokeRun signalSmoke;
         static TestRunnerApi testApi;
         [Serializable] sealed class Request { public string id; public string operation; }
         [Serializable] sealed class Report
@@ -51,6 +57,12 @@ namespace Demon.Slice.Editor
             if (listeningSmoke != null) { listeningSmoke.Tick(); return; }
             if (cipherSmoke != null) { cipherSmoke.Tick(); return; }
             if (beamSmoke != null) { beamSmoke.Tick(); return; }
+            if (chaseSmoke != null) { chaseSmoke.Tick(); return; }
+            if (retrievalSmoke != null) { retrievalSmoke.Tick(); return; }
+            if (consequencesSmoke != null) { consequencesSmoke.Tick(); return; }
+            if (explorationSmoke != null) { explorationSmoke.Tick(); return; }
+            if (investigationSmoke != null) { investigationSmoke.Tick(); return; }
+            if (signalSmoke != null) { signalSmoke.Tick(); return; }
             if (EditorApplication.timeSinceStartup < nextPoll || EditorApplication.isCompiling || EditorApplication.isUpdating) return;
             nextPoll = EditorApplication.timeSinceStartup + .5;
             if (!File.Exists(RequestPath)) return;
@@ -79,6 +91,78 @@ namespace Demon.Slice.Editor
                     case "nine-validate": OpenNine(); Finish(request, true, NineDayAuthoring.Validate()); break;
                     case "nine-repair": OpenNine(); Finish(request, true, NineDayAuthoring.RepairSettings()); break;
                     case "nine-build": Finish(request, true, NineDayAuthoring.Build()); break;
+                    case "retrieval-smoke":
+                    case "retrieval-late":
+                    case "retrieval-sleep":
+                    case "retrieval-tuning":
+                        FinalTabletAuthoring.OpenQuick(); if (request.operation == "retrieval-tuning") FinalTabletAuthoring.BeginTuning();
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "consequences-smoke":
+                    case "consequences-skip":
+                    case "consequences-late":
+                    case "consequences-tuning":
+                        ConsequencesAuthoring.OpenQuick(); if (request.operation == "consequences-late" || request.operation == "consequences-tuning") ConsequencesAuthoring.BeginProbe(request.operation == "consequences-late", request.operation == "consequences-tuning");
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "exploration-smoke":
+                    case "exploration-skip":
+                    case "exploration-late":
+                    case "exploration-tuning":
+                        ExplorationAuthoring.OpenQuick(); if(request.operation == "exploration-late" || request.operation == "exploration-tuning") ExplorationAuthoring.BeginProbe(request.operation == "exploration-late", request.operation == "exploration-tuning");
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "signal-smoke":
+                    case "signal-boundary":
+                    case "signal-skip":
+                    case "signal-late":
+                    case "signal-tuning":
+                    case "signal-old-search":
+                    case "signal-first-search":
+                        SignalSearchAuthoring.OpenQuick();
+                        if (request.operation != "signal-smoke" && request.operation != "signal-skip") SignalSearchAuthoring.BeginProbe(request.operation);
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "signal-create": Finish(request, true, SignalSearchAuthoring.Create()); break;
+                    case "signal-finish": Finish(request, true, SignalSearchAuthoring.FinishLayout()); break;
+                    case "signal-settings": Finish(request, true, SignalSearchAuthoring.RepairSettings()); break;
+                    case "signal-low-chime": Finish(request, true, SignalSearchAuthoring.AlignLowChime()); break;
+                    case "signal-validate": SignalSearchAuthoring.OpenQuick(); Finish(request, true, SignalSearchAuthoring.Validate()); break;
+                    case "signal-build": Finish(request, true, SignalSearchAuthoring.Build()); break;
+                    case "investigation-review":
+                    case "investigation-smoke":
+                    case "investigation-boundary":
+                    case "investigation-skip":
+                    case "investigation-late":
+                    case "investigation-tuning":
+                        InvestigationAuthoring.OpenQuick();
+                        if (request.operation == "investigation-boundary" || request.operation == "investigation-late" || request.operation == "investigation-tuning" || request.operation == "investigation-review") InvestigationAuthoring.BeginProbe(request.operation);
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "investigation-create": Finish(request, true, InvestigationAuthoring.Create()); break;
+                    case "investigation-records": Finish(request, true, InvestigationAuthoring.PolishRecords()); break;
+                    case "investigation-ritual-view": Finish(request, true, InvestigationAuthoring.RepairRitualView()); break;
+                    case "investigation-chase-hint": Finish(request, true, InvestigationAuthoring.AlignChaseHint()); break;
+                    case "investigation-validate": InvestigationAuthoring.OpenQuick(); Finish(request, true, InvestigationAuthoring.Validate()); break;
+                    case "investigation-build": Finish(request, true, InvestigationAuthoring.Build()); break;
+                    case "exploration-create": Finish(request, true, ExplorationAuthoring.Create()); break;
+                    case "exploration-snow-collision": Finish(request, true, ExplorationAuthoring.RepairSnowCollision()); break;
+                    case "exploration-radio-approach": Finish(request, true, ExplorationAuthoring.RepairRadioApproach()); break;
+                    case "exploration-validate": ExplorationAuthoring.OpenQuick(); Finish(request, true, ExplorationAuthoring.Validate()); break;
+                    case "exploration-build": Finish(request, true, ExplorationAuthoring.Build()); break;
+                    case "consequences-solar-view": Finish(request, true, ConsequencesAuthoring.AlignSolarView()); break;
+                    case "consequences-create": Finish(request, true, ConsequencesAuthoring.Create()); break;
+                    case "consequences-validate": ConsequencesAuthoring.OpenQuick(); Finish(request, true, ConsequencesAuthoring.Validate()); break;
+                    case "consequences-build": Finish(request, true, ConsequencesAuthoring.Build()); break;
+                    case "t07-order-wording": Finish(request, true, FinalTabletAuthoring.UpdateOperandWording()); break;
+                    case "retrieval-view": Finish(request, true, FinalTabletAuthoring.RepairView()); break;
+                    case "retrieval-lighting": Finish(request, true, FinalTabletAuthoring.AlignLighting()); break;
+                    case "retrieval-repair": Finish(request, true, FinalTabletAuthoring.RepairQuickSettings()); break;
+                    case "retrieval-create": Finish(request, true, FinalTabletAuthoring.Create()); break;
+                    case "retrieval-validate": FinalTabletAuthoring.OpenQuick(); Finish(request, true, FinalTabletAuthoring.Validate()); break;
+                    case "retrieval-build": Finish(request, true, FinalTabletAuthoring.Build()); break;
+                    case "chase-create": Finish(request, true, ChaseAuthoring.Create()); break;
+                    case "chase-validate": ChaseAuthoring.OpenQuick(); Finish(request, true, ChaseAuthoring.Validate()); break;
+                    case "chase-build": Finish(request, true, ChaseAuthoring.Build()); break;
+                    case "chase-smoke":
+                    case "chase-tuning":
+                        ChaseAuthoring.OpenQuick(); if (request.operation == "chase-tuning") ChaseAuthoring.BeginTuning();
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
                     case "beam-records": Finish(request, true, BeamAuthoring.SyncMotionRecord()); break;
                     case "beam-view": Finish(request, true, BeamAuthoring.RepairView()); break;
                     case "beam-create": Finish(request, true, BeamAuthoring.Create()); break;
@@ -188,7 +272,23 @@ namespace Demon.Slice.Editor
                 {
                     SessionState.EraseString(ActiveSmokeKey);
                     var request = JsonUtility.FromJson<Request>(json);
-                    if (request.operation.StartsWith("beam-"))
+                    if (request.operation == "signal-old-search")
+                        investigationSmoke = new InvestigationSmokeRun("investigation-smoke", (success, message) => Finish(request, success, message));
+                    else if (request.operation == "signal-first-search")
+                        explorationSmoke = new ExplorationSmokeRun("exploration-smoke", (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("signal-"))
+                        signalSmoke = new SignalSearchSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("investigation-"))
+                        investigationSmoke = new InvestigationSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("exploration-"))
+                        explorationSmoke = new ExplorationSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("consequences-"))
+                        consequencesSmoke = new ConsequencesSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("retrieval-"))
+                        retrievalSmoke = new FinalTabletSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("chase-"))
+                        chaseSmoke = new ChaseSmokeRun(request.operation, (success, message) => Finish(request, success, message));
+                    else if (request.operation.StartsWith("beam-"))
                         beamSmoke = new BeamSmokeRun(request.operation, (success, message) => Finish(request, success, message));
                     else if (request.operation.StartsWith("cipher-"))
                         cipherSmoke = new CipherSmokeRun(request.operation, (success, message) => Finish(request, success, message));
@@ -203,6 +303,12 @@ namespace Demon.Slice.Editor
             }
             if (state == PlayModeStateChange.EnteredEditMode)
             {
+                signalSmoke?.Cleanup(); signalSmoke = null; SignalSearchAuthoring.RestoreProbe();
+                investigationSmoke?.Cleanup(); investigationSmoke = null; InvestigationAuthoring.RestoreProbe();
+                explorationSmoke?.Cleanup(); explorationSmoke = null; ExplorationAuthoring.RestoreProbe();
+                consequencesSmoke?.Cleanup(); consequencesSmoke = null; ConsequencesAuthoring.RestoreProbe();
+                retrievalSmoke?.Cleanup(); retrievalSmoke = null; FinalTabletAuthoring.RestoreTuning();
+                chaseSmoke?.Cleanup(); chaseSmoke = null; ChaseAuthoring.RestoreTuning();
                 beamSmoke?.Cleanup(); beamSmoke = null; BeamAuthoring.RestoreTuning();
                 cipherSmoke?.Cleanup(); cipherSmoke = null; CipherAuthoring.RestoreTuning();
                 listeningSmoke?.Cleanup(); listeningSmoke = null;

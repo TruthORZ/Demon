@@ -7,7 +7,7 @@ namespace Demon.Slice
     [RequireComponent(typeof(CharacterController))]
     public sealed class SlicePlayer : MonoBehaviour
     {
-        enum ViewMode { Explore, Tablet, Reading, Returning, Sequence, Ending, Lock, Inspect }
+        enum ViewMode { Explore, Tablet, Reading, Returning, Sequence, Ending, Lock, Inspect, Pickup }
         [SerializeField] Camera viewCamera;
         [SerializeField] InputActionAsset inputActions;
         CharacterController body;
@@ -21,6 +21,9 @@ namespace Demon.Slice
         float pitch, verticalSpeed;
         SliceTablet activeTablet;
         CipherBox activeLock;
+        ThreatPickup activePickup;
+        public ThreatPickup CurrentPickup => activePickup;
+        public bool IsPickingUp => mode == ViewMode.Pickup;
         public bool InspectingLock => mode == ViewMode.Lock;
         public bool CanUseTools => mode == ViewMode.Explore && Cursor.lockState == CursorLockMode.Locked;
         readonly RaycastHit[] interactionHits = new RaycastHit[32];
@@ -71,6 +74,7 @@ namespace Demon.Slice
                 BlendCloseView();
                 if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
                     ExitCloseView();
+                if (mode == ViewMode.Pickup) { activePickup.TickHeld(interact.IsPressed(), Time.deltaTime); return; }
                 if (mode == ViewMode.Tablet && keyboard != null && keyboard.enterKey.wasPressedThisFrame)
                     activeTablet.TryCompile();
                 if (mode == ViewMode.Lock && keyboard != null && keyboard.enterKey.wasPressedThisFrame) activeLock.TryConfirm();
@@ -139,6 +143,12 @@ namespace Demon.Slice
             BeginView(anchor, ViewMode.Tablet);
         }
 
+        public void EnterPickupView(ThreatPickup pickup, Transform anchor) { activePickup = pickup; BeginView(anchor, ViewMode.Pickup); }
+        public bool InterruptPickup()
+        {
+            if (mode != ViewMode.Pickup || !activePickup) return false;
+            bool cancelled = activePickup.Cancel(true); ExitCloseView(); return cancelled;
+        }
         public void EnterLockView(CipherBox box, Transform anchor) { activeLock = box; BeginView(anchor, ViewMode.Lock); }
         public void EnterInspectionView(Transform anchor) => BeginView(anchor, ViewMode.Inspect);
         public void EnterReadingView(Transform anchor) => BeginView(anchor, ViewMode.Reading);
@@ -153,6 +163,7 @@ namespace Demon.Slice
                 homePosition = viewCamera.transform.localPosition;
                 homeRotation = viewCamera.transform.localRotation;
             }
+            if (mode == ViewMode.Pickup && next != ViewMode.Pickup) { activePickup.Cancel(false); activePickup = null; }
             closeAnchor = anchor;
             mode = next;
             LockCursor(false);
@@ -162,6 +173,7 @@ namespace Demon.Slice
         {
             if (mode == ViewMode.Ending || mode == ViewMode.Sequence || mode == ViewMode.Explore) return;
             if (mode == ViewMode.Reading && world.OnReadingClosed()) return;
+            if (mode == ViewMode.Pickup) { activePickup.Cancel(false); activePickup = null; }
             mode = ViewMode.Returning;
             closeAnchor = null;
             activeTablet = null; activeLock = null;
@@ -188,7 +200,7 @@ namespace Demon.Slice
         { Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None; Cursor.visible = !locked; }
 
         void OnEnable() { if (actions) actions.FindActionMap("Player", true).Enable(); }
-        void OnDisable() { if (actions) actions.Disable(); LockCursor(false); }
+        void OnDisable() { if (mode == ViewMode.Pickup) ExitCloseView(); if (actions) actions.Disable(); LockCursor(false); }
         void OnDestroy() { if (actions) { actions.Disable(); Destroy(actions); } }
     }
 }

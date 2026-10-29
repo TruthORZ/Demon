@@ -42,7 +42,7 @@ namespace Demon.Slice.Editor
                     {
                         session.OpenLake();
                         session.Clock.AdvanceTo(8 * 1440 - .01);
-                        Require(world.BeginFinalInteraction(), "Very-late interaction failed.");
+                        PrepareRetrieval(); Require(world.BeginFinalInteraction(), "Very-late interaction failed.");
                         stage = 31; stageTime = now; return;
                     }
                     session.Clock.AdvanceTo(flow.Definition.FirstNightOpeningHour * 60 - .1);
@@ -160,7 +160,7 @@ namespace Demon.Slice.Editor
                 }
                 else if (stage == 31 && now - stageTime > .5)
                 {
-                    Require(world.Tablet.gameObject.activeSelf, "T07 did not appear at night.");
+                    PrepareRetrieval(); Require(world.Tablet.gameObject.activeSelf, "T07 did not become editable after pickup and placement.");
                     world.Tablet.Use(world.Player);
                     Require(world.Finale.TimeReserved, "First T07 interaction did not reserve puzzle time.");
                     if (operation == "nine-sleep-reserved")
@@ -187,6 +187,14 @@ namespace Demon.Slice.Editor
                 }
             }
             catch (Exception exception) { Complete(false, exception.ToString()); }
+        }
+        void PrepareRetrieval()
+        {
+            if (!world.Retrieval || world.Retrieval.Progress.Placed) return;
+            world.Retrieval.RefreshPresentation(); var pickup = world.Retrieval.Pickup;
+            Require(pickup.gameObject.activeSelf && !world.Tablet.gameObject.activeSelf && !world.TryCompile(), "T07 pickup/placement gate missing.");
+            pickup.Use(world.Player); pickup.TickHeld(true, pickup.HoldSeconds + .01f);
+            Require(world.Retrieval.Progress.Acquired && world.Retrieval.Place(world.Player), "T07 fixture acquisition/placement failed.");
         }
         void Complete(bool success, string message)
         {

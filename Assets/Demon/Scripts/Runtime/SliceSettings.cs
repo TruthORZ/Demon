@@ -38,7 +38,7 @@ namespace Demon.Slice
 
         [Header("Chinese placeholder text - replace with final authored content")]
         [TextArea(3, 6)] public string Instructions = "WASD 移动　鼠标观察　Shift 奔跑\n靠近石板或箱子按 E　靠近睡袋按 E 跳到次日\n石板近景：鼠标点选符文和槽位　Enter 确认　Esc 退出";
-        [TextArea(6, 12)] public string BoxText = "【箱内记录】\n\nIF满足条件后只执行一次，随后结束。\nWHILE沿返回线路重新等待，每个符合日期的日子执行一次。\n\n从湖的槽位回到DAY的那条线，并不是裂痕。\n今天的交换已经结束，下一轮会在午夜到来。\n\n交换是双向的。再交换一次，封闭就会回到箱子，湖将重新开启。\n熔断后，程序留在石板内部，取下符文也无法撤销。\n\n第九天，它将获得实体。\n\nEsc 放下记录。";
+        [TextArea(6, 12)] public string BoxText = "【箱内记录】\n\nIF满足条件后只执行一次，随后结束。\nWHILE沿返回线路重新等待，每个符合日期的日子执行一次。\n\n从末端参数槽回到DAY的那条线，并不是裂痕。\n今天的交换已经结束，下一轮会在午夜到来。\n\n交换是双向的。再交换一次，封闭就会回到箱子，湖将重新开启。\n熔断后，程序留在石板内部，取下符文也无法撤销。\n\n第九天，它将获得实体。\n\nEsc 放下记录。";
         [TextArea(3, 6)] public string EndingText = "第九天\n\n湖中封印开启。\n这一次，站在湖边的东西拥有了实体。\n\n灰盒样例结束　按 R 重新开始";
     }
 }

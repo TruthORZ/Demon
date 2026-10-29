@@ -1,6 +1,6 @@
 # Demon 当前工程档案
 
-Updated: 2026-10-28 Asia/Shanghai
+Updated: 2026-10-29 Asia/Shanghai
 本文件记录已观察或已创建的工程结构，不把建议组件写成已有架构。玩法以 [GAME_SPEC.md](GAME_SPEC.md) 为准；拟实施模块和选择理由见 [TASK-002](Tasks/TASK-002-playable-slice.md)。
 
 ## 1 已观察的工程配置
@@ -32,8 +32,8 @@ Updated: 2026-10-28 Asia/Shanghai
 | Input System | 1.20.0 | 已配置为输入后端 |
 | Timeline | 6.6.0 | 已安装，当前样例采用少量显式状态过渡，无Timeline资产 |
 | uGUI | 2.6.0 | 样例使用保存于场景的Canvas/Text/Panel，运行时只绑定数据与切换状态 |
-| Test Framework | 1.8.0 | 项目EditMode程序集Demon.Slice.Tests，当前48项规则用例 |
-| AI Navigation | 2.0.14 | 已安装，无项目导航或追逐实现 |
+| Test Framework | 1.8.0 | 项目EditMode程序集Demon.Slice.Tests，当前78项规则用例 |
+| AI Navigation | 2.0.14 | NavMeshSurface保存导航，主场景及DemonChase由NavMeshAgent追逐，见第10节 |
 | Visual Scripting | 1.9.12 | 已安装，尚未用于玩法 |
 
 没有安装或移除包，没有切换管线或输入。新项目原先没有玩法UI，首个样例选已装uGUI，便于团队编辑提示与阅读面板。Cinemachine未列入manifest，镜头过渡使用场景Transform锚点，不新增摄像机依赖。
@@ -85,13 +85,13 @@ Box和SleepPoint交互组件的world字段绑定同一场景Composition；Box是
 
 日长、起始日时、醒来时刻、移动速度、交互距离、布局和文本在对应SliceSettings/NineDaySettings中调整。旧ReadingGraceSeconds/AccelerationSeconds/AccelerationCurve已移除。近景机位在Tablet/CloseView，箱子机位在Box/ReadView，终局机位在Environment/EndingView。午夜演出的时间窗口、过渡、倒计时、音效与引用在SliceComposition/SliceFinaleSequence中调整；挂钟/机位/灯光在Finale_Authored。UI布局仍在SliceHUD下编辑。
 
-程序固化在RuneBoardModel中保留不可变快照；表面符文可移除，快照不变。GameClock按经过的零点顺序通知，SliceSession以日期集合避免重复交换，固化立即执行一轮但不改变时间，下一零点才执行下一轮，终局停止Clock、不继续D10。构造参数可指定初始湖封闭及最早重构日期。RuneKind明确保留SEAL=6、BOX=7、LAKE=8等既有序列化数值，已退役时间符文的值5不再分配。未实现通用IF/ON解释器，运动已有第9节的D3状态接点；前三块完整程序/剧情、声音与完整光能力未接入。
+程序固化在RuneBoardModel中保留不可变快照；表面符文可移除，快照不变。GameClock按经过的零点顺序通知，SliceSession以日期集合避免重复交换，固化立即执行一轮但不改变时间，下一零点才执行下一轮，终局停止Clock、不继续D10。构造参数可指定初始湖封闭及最早重构日期。RuneKind明确保留SEAL=6、BOX=7、LAKE=8等既有序列化数值，已退役时间符文的值5不再分配。未实现通用IF/ON解释器，运动已有第9节的D3状态接点；前三块尚无通用程序解释器/完整剧情；D3运动已有接点，D5声音/D7失光与永夜见第12节。
 
 九天场景在同一Composition上增加NineDayFlow，引用NineDayDefinition、六个NineDayTablet及T07根对象；SliceSceneController显式配置该可选组件，未配置时沿用旧D8行为。NineDayFlow管理发现可用性、阅读计数、每日提示及醒来表，DiscoveryProgress为纯C#会话状态。普通阅读经ReadDocument进入同一阅读视角/面板，不设置HasReadBox。HUD阅读时隐藏日程提示，避免盖住正文。
 
 NineDaySettings起始D1 08:00、日长1440真实秒、湖初始封闭；NineDayDefinition拥有T07开放日（8）及FinalTabletHour（22:00），Flow按日期与时刻判断可用，控制器拒绝早间编译。D1夜晚开封暂定22:00，可调且没有邪教徒/暴风雪演出。自然经过该时刻由Flow评估，睡眠跳过时在跨日检查中补上状态；没有通用任意时刻事件调度器。醒来表仍均暂定08:00，每日可调。
 
-FixedTablets_Authored保留六块石板身份与发现入口，按D2至D7开放；T05已转接独立可补全石板；九天源场景T06旧陈列入口停用，由箱子A取得，其余四块仍只读。T07在D8指定夜间开放，可不读前六块直接重构或睡到D9。记录已同步运动/声音/光顺序及T05监听、T06光束机制，但前三块完整设施/演出和追逐仍未实现；T05补全/风铃见第7节，箱子A/轮盘与T06取得见第8节，光束牵制见第9节。原D6独立风铃场景保留旧陈列，用于单独监听测试，不是最新完整九天内容。T04由预定实体状态代替，没有确定其来源。没有正式九天关卡、存档或追逐。
+FixedTablets_Authored保留六块石板身份与发现入口，按D2至D7开放；T05已转接独立可补全石板；九天源场景T06旧陈列入口停用，由箱子A取得，其余四块仍只读。主场景T07在D8指定夜间出现在湖岸，需取得并回棚放置后重构；不要求先读前六块，仍可直接睡到D9（见第11节）。记录已同步运动/声音/光顺序及T05监听、T06光束机制，但前三块完整设施/演出仍未实现；T05补全/风铃见第7节，箱子A/轮盘与T06取得见第8节，光束牵制见第9节。原D6独立风铃场景保留旧陈列，用于单独监听测试，不是最新完整九天内容。T04由预定实体状态代替，没有确定其来源。已有灰盒导航追逐（第10节），没有正式九天关卡或存档。
 
 SliceFinaleSequence负责保留窗口与镜头表现，依赖独立的纯C# FinaleTimeWindow和显式World/Presentation连接。第一次T07交互即预约窗口，普通帧推进最多到午夜前一游戏分钟；很晚才操作时取当前时刻，绝不倒退。关闭真正的箱内记录后向前对齐保留时刻，短暂停留→挂钟6秒倒计时→D9状态变化/猛合箱盖与湖光→短暂箱子机位→EndingView。普通石板阅读不会触发结局。主动睡眠释放窗口，不进入这段导演流程。
 
@@ -135,7 +135,7 @@ smoke-editability已实际编译运行：保存日长、机位和日光修改，
 
 Editor运行入口：双击DemonSlice场景，进入Play；点击Game视图捕获鼠标，WASD移动、Shift奔跑、E交互、近景鼠标点选、Enter确认、Esc退出，结局R重开。箱子和睡袋需靠近并对准。占位交互和预置不是正式谜题定稿。
 
-九天入口：双击DemonNineDay。相同键鼠操作；左侧睡袋推进天数，右侧T01至T05按天出现，D6的T05可补全；T06改由箱子A取得，允许D7前解箱，D8 22:00正前方开放T07。NineDayDefinition的Days编辑提示/醒来，Tablets编辑日期/文本，FinalTabletHour编辑夜间时段；NineDaySettings编辑日长、移动等。固定石板机位在FixedTablets_Authored。快速结局入口为DemonSlice，现从D8 22:00启动，使用同一无+1演出。修改源场景/配置在退出Play后仍保留，不在运行时生成地图。
+九天入口：双击DemonNineDay。相同键鼠操作；左侧睡袋推进天数，T01至T05按日期在洞内、林间、仪式遗址、湖岸和旧监听站出现（见第13–15节），D6的T05可补全；T06改由箱子A取得，允许D7前解箱，D8 22:00正前方开放T07。NineDayDefinition的Days编辑提示/醒来，Tablets编辑日期/文本，FinalTabletHour编辑夜间时段；NineDaySettings编辑日长、移动等。固定石板机位在FixedTablets_Authored。快速结局入口为DemonSlice，现从D8 22:00启动，使用同一无+1演出。修改源场景/配置在退出Play后仍保留，不在运行时生成地图。
 
 TASK-004检查：19项EditMode、nine-skip-001、nine-normal-001、旧场景nine-old-input-001均通过。nine-tuning-001保存D2醒来时刻10:00后验证运行采用，且固定石板机位被尊重；退出恢复08:00，已核对资产和恢复日志。九天构建输出为Builds/WindowsNineDay/DemonNineDay.exe，最终报告与剩余人工试玩见[TASK-004](Tasks/TASK-004-nine-day-flow.md)。
 
@@ -152,9 +152,9 @@ T05保留`NineDayTablet`的index=4和NineDayFlow发现门槛；其`T05_Editable`
 
 `ListeningChime`明确引用监测目标Transform、音源、音效、悬挂几何。纯C#`RegionEntryLatch`只在区域外→内触发；停留去重、离开复位。开启/重新启用时采样占位基线，不凭空报警。范围是以组件Transform为中心的世界空间球体（米），选中可看Gizmo；默认半径1.55。AudioSource位于悬挂风铃处，spatialBlend=1、Linear衰减1至16米、Doppler=0；不根据玩家到目标距离调整响度，不显示精确目标坐标。低/高音WAV为合成占位。
 
-`Listening_Authored`包含A/B风铃、`ListeningOccluder`木墙、保存的观察机位、`SnowDisturbance_Target`与`ProxyRoute_Editable`。`ListeningTrailProxy`仅在T05启用后以默认2米/秒和1.5秒节点停留沿保存路线移动雪痕，不是恶魔追逐。目标位置属代理运行时驱动，路线和视觉初始布局由场景编辑；监听器可将monitoredTarget改接真正恶魔，不依赖路线脚本。测试区位于既有雪地内，没有修改旧边界/地图生成机制。
+旧D6快速场景的`Listening_Authored`包含A/B风铃、`ListeningOccluder`木墙、保存的观察机位、`SnowDisturbance_Target`与`ProxyRoute_Editable`。`ListeningTrailProxy`仅在T05启用后以默认2米/秒和1.5秒节点停留沿保存路线移动雪痕，不是恶魔追逐。目标位置属代理运行时驱动，路线和视觉初始布局由场景编辑；监听器可将monitoredTarget改接真正恶魔，不依赖路线脚本。测试区位于既有雪地内，没有修改旧边界/地图生成机制。
 
-九天源场景D6入口仍在右后排T05。快速场景`Assets/Demon/Scenes/DemonListening.unity`从D6 10:00开始，使用独立`ListeningSettings.asset`（日长/移动等）、共享`ListeningDefinition.asset`（T05布局/文字）与NineDayDefinition（发现门槛/日程）。快速场景为独立保存的测试布局，修改布局时需明确当前场景；不是Prefab自动同步副本。原D8场景未改，BuildSettings首场景仍是九天。
+九天源场景D6入口现为第15节林间原T05；右后排位置只属于旧快速测试布局。快速场景`Assets/Demon/Scenes/DemonListening.unity`从D6 10:00开始，使用独立`ListeningSettings.asset`（日长/移动等）、共享`ListeningDefinition.asset`（T05布局/文字）与NineDayDefinition（发现门槛/日程）。快速场景为独立保存的测试布局，修改布局时需明确当前场景；不是Prefab自动同步副本。原D8场景未改，BuildSettings首场景仍是九天。
 
 截图发现默认TextMesh字体穿透实体；仅九天与D6场景给`SliceFontBinding.worldTextMaterial`赋`WorldFontDepth.mat`，对应URP字体Shader采用ZTest LEqual。运行时克隆字体材质并同步动态字库纹理、销毁时释放，保留原D8字体默认路径。两个场景的已有uGUI文字增加保存的Outline，提升白色雪地上的可读性。
 
@@ -167,7 +167,7 @@ TASK-006新增构建：listening-build-001（D6）173986298字节，输出Builds
 
 `SliceSceneController.cipherBox`显式连接场景`CipherBox`，在NineDayFlow初始化后初始化锁。`CipherWheel`引用`CipherDefinition.asset`、电台/太阳方位占位/风向标根Transform、十个保存数字标签和观察机位。位置转换到轮盘局部轴，忽略高度，以局部+Z固定北标为0，顺时针每36度一个扇区，按最近扇区取数字。`BearingCipher`纯C#验证有限非零水平位移和0至9各一次排列。数字标签在Initialize按数据刷新（数字归配置所有，不以手改TextMesh文字改密码）。默认数字排列4,7,2,9,1,6,8,0,5,3，电台/太阳/风向标在9/0/2扇区，灰盒答案342；实际答案从保存布局计算，不使用日期或固定答案常量。
 
-风向标引用固定位置根对象，不引用`RotatingBlade_OrientationIsNotCode`叶片朝向；太阳是固定方位的几何视觉占位，不表示太阳光能力或永夜实现；电台也未实现声音交换。地标和轮盘都在`Cipher_Authored`中可编辑，若移动地标、旋转轮盘北标或改数字配置，下次运行按对应布局计算。轮盘本体不是交互旋转机关，固定北标与其数字一同保存。
+风向标引用固定位置根对象，不引用`RotatingBlade_OrientationIsNotCode`叶片朝向；旧独立DemonCipher仅有固定方位太阳/电台几何占位；最新主/取回/属性快速场景已接第12节声音交换、太阳失光与永夜。地标和轮盘都在`Cipher_Authored`中可编辑，若移动地标、旋转轮盘北标或改数字配置，下次运行按对应布局计算。轮盘本体不是交互旋转机关，固定北标与其数字一同保存。
 
 `ThreeDigitLock`持有独立三位输入/不可变答案副本/Unlocked/Acquired，错误可重试，数字9循环回0，开锁/取得各一次。`CipherBox`持有模型、保存的三枚`CipherDigit`按钮、LockView/ReadView、LidPivot和箱内T06视觉。实际鼠标点数、Enter尝试；Esc只退出近景保留输入；正确后机械箱盖打开，再靠近按E取T06。后续E重复阅读去重。模型不访问世界时钟、RuneBoard或B/湖状态。HUD封印提示明确写箱子B，避免A解开后的状态歧义。
 
@@ -188,7 +188,7 @@ TASK-007 Windows构建：cipher-build-001密码版与cipher-nine-build-001九天
 
 BeamDefinition当前RangeMetres=10、RegionRadiusMetres=1、StableSeconds=0.5（用户确认发布参数；此前运行/构建验证采用16/0.85/1）、SpotAngle=26、LightIntensity=14、叶片100度/秒，可在Inspector调节。手电/蓝色辅助线与目标发光仍为灰盒表现，可替换保存资产；不创建运行时静态UI或地图。右下BeamStatus为保存的uGUI，只显示装备/稳定/锁定说明，不显示目标坐标；关闭组件、阅读或结局时隐藏。
 
-为遵守D3才有恶魔运动，当前组合读同一世界时钟与DemonMotionDay=3：D3前风向标转，雪痕根不可见/不移动；D3起风向标停、代理沿保存路线移动。日期边界独立于是否取得T06/启用T05。它是T01运动后果的小型状态接点，不是通用石板调度器或完整T01剧情。提前D1取得T06可照明，但没有可辨认恶魔区域，不会创造D3前运动；D3即可牵制，不要求等D7。
+为遵守D3才有恶魔运动，当前组合读同一世界时钟与DemonMotionDay=3：D3前风向标转，雪痕根不可见/不移动；D3起风向标停，独立DemonBeam代理沿保存路线移动；主场景现由第10节NavMeshAgent跟随玩家。日期边界独立于是否取得T06/启用T05。它是T01运动后果的小型状态接点，不是通用石板调度器或完整T01剧情。提前D1取得T06可照明，但没有可辨认恶魔区域，不会创造D3前运动；D3即可牵制，不要求等D7。
 
 ListeningTrailProxy可选引用Tether：配置后由ProxyCanTravel/DemonCanMove控制路径，冻结时不消耗节点停留计时，失锁后继续既有路径；未配置的旧D6场景保持T05启用后移动的独立测试路径。T05只观察目标位置，不参与牵制/交换，不因目标停留重复响。叶片是唯一旋转属性，风向标根位置及密码答案保持。
 
@@ -197,3 +197,76 @@ ListeningTrailProxy可选引用Tether：配置后由ProxyCanTravel/DemonCanMove�
 固定Editor请求新增beam-create/view/validate/smoke/tuning/early/build。Create拒绝已有输出/标记；view仅修正本轮观察点/区域底层，不动旧钟/密码。beam-tests-001为48项规则通过；beam-smoke-001实际右键、部分/稳定照射、演员停止/叶片转动、T05静止去重、转向/超距/木墙/近景/禁用/松键/睡眠复位（14次MOTION交换）通过。beam-tuning-001保存6m/1.1m/0.4s，运行采用后恢复16m/0.85m/1s。最终早期边界、截图、回归与构建见[TASK-008](Tasks/TASK-008-beam-tether.md)。
 
 TASK-008 Windows构建：beam-build-001光束版174076962字节、beam-nine-build-001九天版174076978字节，分别输出Builds/WindowsBeam和Builds/WindowsNineDay。密码/T05/九天正常/全睡眠/旧D8输入均回归通过；早期取得与D3能力边界已通过真实右键验证，真人手感及完整独立试玩仍待验收。
+
+## 10 导航追逐与拾取（TASK-009）
+
+主场景DemonNineDay和独立DemonChase通过SliceSceneController.chase显式组合ChaseController。使用已装AI Navigation 2.0.14的NavMeshSurface（Editor程序集引用Unity.AI.Navigation）及引擎NavMeshAgent；运行时不烘焙导航，不使用自建寻路。Chase_Authored保存PhysicsColliders/Volume范围、0.08m voxel与四个RetreatPoints_Editable；Data/ChaseNavigation.asset、ChasePracticeNavigation.asset为Unity原生二进制导航数据，.gitattributes精确声明binary，不能按文本改写。
+
+旧ListeningTrailProxy仍保留在Listening_Authored但在新两个场景禁用；NavMeshAgent是雪痕唯一移动者。旧DemonListening/DemonBeam等独立场景仍由旧固定路线验证，不自动同步主场景。Tether继续拥有MOTION和日期，Chase只读取ProxyCanTravel/DemonCanMove；D3前休眠、D3后追逐，冻结时isStopped并清速度，叶片转动仍由原Tether控制。T05继续观察同一Target的位置/区域进入；空间雪脚步是环境踏雪占位音，不是D5前主动说话。
+
+ChaseController每0.25s把玩家实际位置投影到保存NavMesh并重规划；物理视线排除墙后打断。ClosePassGate只拥有距离/冷却/次数；D9实体和LakeSeal关闭均停止追逐。追近调用Player.InterruptPickup，只取消当前尝试，再选远离玩家且完整可达的保存退开点；退开未完成前不再次追逐，冷却未结束则等待。ChaseDefinition.asset当前可调速度3.6m/s、加速度16m/s²、转向540度/s、追近1.6m、冷却4s、退开最小3.5m、目标投影1m、脚步间隔0.45s及反馈文字；无生命值、伤害或玩家传送。大范围改动障碍/地板/日期显示物需在对应场景Chase_Authored的NavMeshSurface重新Bake并检查数据引用；原始烘焙保守包含晚期T07占位碰撞，避免出现后穿行。
+
+DemonChase从D7 10:00开始，ChasePractice_Authored只含练习碎片、保存的拾取近景和独立绕障墙。ThreatPickup使用纯规则PickupAttempt；按住E计时，松开/Esc/物品或玩家禁用/被追近则取消未完成尝试，已完成状态不变，成功事件只派发一次。成功先退出近景再触发序列化UnityEvent，便于后续内容接线；本轮没有正式物品栏或T07事件绑定。Player新增Pickup近景模式，工具停用；SliceHud复用保存的focusText显示百分比。拾取holdSeconds默认1.2s、closeView、itemVisual、itemName及完成事件均在练习物组件Inspector编辑。该独立练习场景保留原A/T07单板流程；主场景正式T07已在第11节接入，玩法意图仍归GAME_SPEC。
+
+创建工具ChaseAuthoring拒绝覆盖已有输出；chase-create/validate/smoke/tuning/build沿固定白名单请求，报告与截图在Temp/DemonSliceReports。53项规则、默认/保存调参真实输入、绕障/动态跟随/打断重试/清理、旧工具/九天回归、Windows64两版构建与保存引用重载均通过；详细证据和失败修复见[TASK-009](Tasks/TASK-009-chase-pickup.md)。真人及独立exe试玩仍待验收。
+
+## 11 T07正式取得与回棚（TASK-010）
+
+SliceSceneController.retrieval显式组合FinalTabletRetrieval、湖岸ThreatPickup、棚内FinalTabletDock与原SliceTablet。FinalTabletProgress只持有本次游戏Acquired/Placed；拾取进度仍由PickupAttempt负责，SEAL/时钟/符文快照仍归原规则。
+
+ThreatPickup新增单一局部BindAttempt开始策略/完成回调，由Retrieval.Initialize绑定、OnDestroy清理。开始策略检查FinalAvailable/未取得，并调用现有Finale.ReserveTime；松开、Esc或被追近不会释放窗口，重试与步行/拼图/阅读继续受原LimitNaturalTime限制。主动Sleep仍经ReleaseForSleep放弃，不锁住D8。普通练习拾取未绑定策略，保持TASK-009行为。
+
+NineDayFlow仍唯一拥有原板的显示写入；FinalAvailable只表示日期满足，RefreshFinalTablet在配置Retrieval时还要求Placed。Retrieval负责湖岸拾取及空台可见性，取得后只携带；E交互FinalTabletDock才Place、显示原板并进入原近景。SliceSceneController.BeginFinalInteraction/TryCompile拒绝未取得或仅携带时的重构，因此正确目标也不能绕过实际取得/放置。未配置Retrieval的旧独立场景保持原单板测试流程。
+
+主场景新增T07Retrieval_Authored/LakeT07_HoldE、ShedPlacementDock。原T07板保留原组件/槽/线路/prefab及GUID，位置改为工具棚西侧(-5.3,1.5,1)，Y旋转90度、缩放0.6；拾取点(8.4,0,4.2)。两端视觉/碰撞/近景/时长/反馈可编辑，ThreatPickup默认1.2s，HUD新增保存的右上T07Status。T07状态提示字符串在Retrieval组件编辑。
+
+NavMeshSurface按新布局重烘焙到Data/RetrievalNavigation.asset，主场景与同布局DemonRetrieval共享该原生二进制数据；旧Chase导航资产不改。快速场景独立RetrievalSettings从D8 21:54开始，仍需正常解A342/取得T06和补T05，不自动给予工具。作者工具拒绝覆盖已有输出，特殊repair只补丢失的快速settings引用；固定请求retrieval-create/repair/validate/smoke/late/sleep/tuning/build。实际结果和已知失败见[TASK-010](Tasks/TASK-010-final-tablet-retrieval.md)。
+
+TASK-010机位修正：原板CloseView本地x=-0.45、z=-2.4，朝向板内(.45,-.08,0)；避原箱A/棚柱遮挡，几何与导航不因机位变化重建。原TabletMidnightPulse已作为板的子物体保存，本地(0,0,-.5)，原Light引用/参数保留并随人工移动石板。
+四项RuneTray Label及TrayTitle本地x=1.9，保持面板/Collider/地图原位置，完整文字位于棚柱左侧；真实点击按可见文字位置验证命中原面板。56项规则、正式拾取/带回/全部符文盘真实输入、晚到/被打断重试/主动睡眠/保存调参、旧工具与九天回归、两版Windows64构建通过。最终截图已检查；用户试玩与完整九天/独立exe验收仍开放。
+
+2026-10-29 T07对象顺序：RuneBoardModel.MatchesTarget仅在目标中心为EXCHANGE、第8/9槽目标对象对为BOX/LAKE时接受两种对象顺序，其余7槽严格对照模板。CompiledAt保存玩家实际排列，SliceSession仍按原状态执行一次SEAL交换及D9再交换。规则不适用于T05/非EXCHANGE目标。箱内记录改称末端参数槽，线路仍是9→3，不将第9槽固定称为湖；Inspector中的原目标模板可保留BOX/LAKE，无需改场景或布局。
+
+## 12 D5声音交换与D7太阳失光（TASK-011）
+
+SliceSceneController.consequences显式组合WorldAttributeConsequences，初始化在Tether之后、Finale之前。纯ScheduledWorldAttributes只持RADIO/DEMON的SOUND与SUN/DEMON的LIGHT值和两次单日程序账本；日期读取NineDayDefinition.Tablets[1/2].DateNodeDay（5/7），不复制日期表。Initialize按当前Day追赶，Clock.Midnight按日推进，重复同日不再EXCHANGE/TRANSFER；没有Rune解析器、第二时钟或发现门槛，不触碰SEAL/MOTION/实体。
+
+组件从Initialize订阅Clock，到OnDestroy解绑；禁用只停止音频呈现，日期账本仍属于该场游戏，开启后不重执行属性。D5前广播在Cipher_Authored/Radio_FixedPosition的Broadcast_TransferredContent，Static_DeviceEnvironment从D1起持续极低底噪。D5后广播在Consequences_Authored/DemonBroadcast_Lake（0,0.85,9），电台只余静电；源为原生3D/Linear/无多普勒的loop AudioSource。广播clip在WorldAttributeConsequences统一替换一次，Initialize镜像到两端；音量/距离/空间化由各AudioSource Inspector拥有，运行不覆盖。广播迁移保留播放采样位置，停用/封湖后恢复沿用采样；终局停止所有源。MOTION冻结不停止湖中声音，湖封闭只遮蔽恶魔呈现，不撤销SOUND值。
+
+SlicePresentation仍唯一写Directional Sun、Fog、Ambient与相机背景。新增保存的sunriseHour=6/sunsetHour=18控制正常日夜及预期日出；D7后读取SunLight=0，太阳intensity=0且Fog/Ambient保持Night参数，日期/钟表仍向前走。原太阳参照根不动（密码342保留），原SolarReferenceDisk使用薄盘厚度0.03、正常暖黄/失光黑色独立Unlit材质；新LineRenderer白边在局部(0,4.2,-0.025)，64个保存顶点，不生成实际照明。太阳/射线/白边仅在正常预期日出至日落时段显示；D7后无日光，黑心白边是灰盒参照，尚非最终天空美术。
+
+SliceFinaleSequence仍唯一控制原LakeOpenGlow：有Consequences时读DemonLight=1，无该组件的旧测试场景仍保留D7日期路径。湖关闭隐藏已有光，D9开湖复亮，和原箱盖/挂钟/实体顺序兼容。光束锁定蓝色辅助反馈不是LIGHT属性。
+
+主DemonNineDay与DemonRetrieval已加入上述接线；新DemonConsequences使用独立ConsequencesSettings从D4 23:50、箱A附近开始，可自然等到D5或睡到次日，再睡到D7观察永夜。旧DemonSlice/Listening/Cipher/Beam/Chase源场景不改。音频PrototypeRadioBroadcast（4秒原创无词短旋律）/PrototypeRadioStatic（2秒设备底噪）是可替换WAV；NormalSolar/EmptySolar/SolarRim为独立材质，未改共享Paper。没有Collider/导航变更。
+
+原生作者工具ConsequencesAuthoring拒绝覆盖已有输出；consequences-create/solar-view/validate/smoke/skip/late/tuning/build沿固定请求白名单。solar-view仅定向校正本轮参照盘和白边，避免球面前后错位，不在运行时生成外观。保存volume、替换clip、日出时刻的probe自动恢复；证据、原生输出RMS、截图与回归详见[TASK-011](Tasks/TASK-011-sound-light-consequences.md)。
+
+## 13 D1–D2可选观察与山洞（TASK-012）
+
+SliceSceneController.exploration显式组合ExplorationFlow，初始化在Campaign/Tether/Consequences之后。FirstDayInspectionLog仅持D1三站去重计数；其他日期观察不补记D1，不读写时钟/SEAL/发现进度。StationObservation复用原SliceInteractable的物理E和ReadDocument近景，生成当时日期/时刻及设施状态的文本快照，Esc沿原相机路径返回。文本/提示由Data/ExplorationDefinition.asset编辑，三个观察点/近景/站位均保存为显式引用。SliceHud新explorationStatus只在D1–D2显示，使用保存的uGUI Text。
+
+主DemonNineDay及新DemonExploration保存Exploration_Authored：南侧x1..5通路、雪林地面x[-6,17]/z[-28,-10]、林木、山洞约(10,0,-23)、小脚印、路线节点、观察点和机位。原SouthBoundary根与Collider ID保留，Collider左段改中心/尺寸，新增右段；不移动密码设施根，不改342。原T01移动到洞内(10,1.2,-24.6)/Y180，身份与发现日仍由NineDayFlow唯一控制；D1可进入空洞，D2原板与小人类脚印出现，D3恶魔雪痕沿原Tether日程。脚印是保存的几何，不在运行生成地图。树、洞口、灯与刻痕均为可替换灰盒内容。原12个扁平SnowBank的SphereCollider因最大轴缩放阻挡电台射线，主/探索场景保留原组件并禁用，新增使用原球mesh的静态MeshCollider，使碰撞贴合可见椭球；外形和根位置不变。
+
+新Data/ExplorationNavigation.asset为原生二进制烘焙数据，.gitattributes精确binary。主/探索场景Surface Volume中心(2,1,-11)、大小(30,8,34)，烘焙完整营地↔洞路径；原三份导航资产及七个旧快速源场景保持，不自动同步新地图。移动障碍或扩大地面后须在对应场景NavMeshSurface重新Bake并验证，运行时不重烘焙。
+
+DemonExploration从D1 08:00开始，使用独立ExplorationSettings；完整九天入口与BuildSettings保持。固定请求exploration-create/validate/smoke/skip/late/tuning/build，Create拒绝已有输出，probe恢复起始日/时、步速及观察文本。保存引用/重载、78规则、真实三站/洞内T01重复阅读与75m往返、D3原生追逐进洞、跳过/晚起/保存调参和旧流程回归、Windows64探索/主流程构建均已通过。用户体验尚待确认，具体报告与截图以[TASK-012](Tasks/TASK-012-first-days-exploration.md)为准。
+## 14 D3–D4林间与洞外探索（TASK-013）
+
+复用ExplorationFlow/ExplorationDefinition的可选扩展：largeTrail、forestRoute/ritualRoute、原secondTablet/thirdTablet和四条D3/D4搜寻/已发现提示。配置任一扩展引用就必须完整接线，Initialize明确验证；旧DemonExploration无扩展引用，仍只显示D1–D2。HUD沿用已保存ExplorationStatus，D3按T02发现、D4按T03发现切换文案，无D5–D6扩展的旧快速场景在D5退场；当前主场景延长至第15节。大遗留痕迹仅按原Tether.MotionReady/D3显示，表示已留下的路线，不控制或模拟当前威胁。Clock.Midnight更新日期呈现，Session.Changed负责终局隐藏两类遗留痕迹；OnDestroy对称解绑。NineDayFlow继续唯一拥有石板日期显示/发现，不要求检查风向标或发现前块石板。
+
+主DemonNineDay与新DemonInvestigation保存Investigation_Authored。原T02移至ForestTabletSite_Editable的(-2.5,1.2,-20.5)，原T03移至山洞西侧外部OutsideCaveRitual_Editable的(3.4,1.2,-24.1)，均Y180、保留原对象和ReadView引用。大遗留脚印、林间路牌、两条路线、石柱/无发光刻痕均为保存灰盒。路牌从北侧看时向西岔路为右箭头。T03站位(4.8,0.04,-21.7)、原ReadView(4.9,1.55,-21.4)朝原板，避开树冠；树、原板、营地设施根不因机位改变。
+
+新Data/InvestigationNavigation.asset为Unity原生二进制，精确binary声明；Surface范围沿用原(2,1,-11)/(30,8,34)，保守包含晚期显示碰撞。旧四份导航和八个快速源场景不覆盖。完整D1入口不变，独立InvestigationSettings从D3 08:00开始，不预给工具或发现。Chase沿用原Agent/近身/退开/冷却，无新波次/伤害；仅ChaseDefinition近身提示改成前期也适用的行动文案。T02/T03记录保留程序/日期，移除制作占位备注；音画仍为灰盒资源。
+
+InvestigationAuthoring固定请求investigation-create/validate/smoke/boundary/skip/late/tuning/build，Create拒绝已有输出；定向ritual-view/records/chase-hint仅用于本轮已知目标。investigation-review是有界的真人阅读预览：D4自动步行到T03并打开记录，结束后恢复起始设置，不是产品传送/新流程。Route节点是布局/步行验证参考，不控制玩家或追逐；脚印是独立保存的可编辑几何。78规则、实际两日输入/旧流程/调参/跳日和Windows快速/主流程构建已通过，用户实际确认T03文字完整；全段玩家节奏与独立exe仍待验收。字体排查试验已撤回，最终沿原FontBinding。具体证据见[TASK-013](Tasks/TASK-013-middle-days-investigation.md)。
+## 15 D5湖岸T04与D6林间风铃（TASK-014）
+
+当前DemonNineDay及DemonSignalSearch在原ExplorationFlow/Definition上接可选D5–D6引用：fourthTablet/fifthTablet、lakeRoute/listeningRoute、visibleListeningPoint/hiddenListeningPoint。任一引用存在就要求整组完整且有D3–D4扩展；错误接线明确报错。ShowStatus延长至D6，D5按T04发现切换提示，D6按未发现/已发现未启用/监听已启用切换，D7退场。旧快速场景未配置新字段，仍保持原显示边界。没有新增任务完成条件、资源或阻止睡觉。
+
+SignalSearch_Authored保存原T04于湖岸(4.5,1.2,4.6)/Y0、原T05于林径东侧(12,1.2,-12)/Y90朝西；T05_Editable的原板/槽/托盘/近景整体随父对象移动，不重建身份。湖岸路线终点(4.5,.04,2.5)，监听路线终点(9.8,.04,-12)。路线/Visible/Hidden节点仅用于编辑布局与走行验证，不驱动玩家或敌人；实际场地、指示牌、铃架和墙均为保存GameObject。T04去除制作备注，实体函数签名/来源仍属GAME_SPEC未决项，不增加新函数或取消D9节点。
+
+原ListeningTool/ListeningChime继续唯一拥有T05固化/进入报警；原两只铃及空间AudioSource移到ForestListeningSite_Editable，低音(3.4,.15,-14.3)、高音(9.5,.15,-14)，原半径1.55m、音色/音量/衰减保持。原ListeningOccluder木墙在(8,1.35,-15.7)，旧观察锚点保留，实际步行可见点(9.5,.04,-15)、墙后点(8,.04,-17)。监测目标仍是Chase原NavMeshAgent；原ListeningTrailProxy保持禁用，没有测试路线驱动敌人或额外波次。低音位置根据实际西侧绕墙路径调整，使进入事件在玩家视线被木墙遮挡时触发。D5湖中广播/电台静电继续由WorldAttributeConsequences拥有，音源/素材不变。
+
+Data/SignalSearchNavigation.asset为新的原生二进制保存数据，显式binary；当前主/新快速场景共用。Native NavMeshSurface保守包含按日开放板体和T07碰撞，完整路径覆盖T01–T05、T07岸边与返营。原九个快速场景和五份导航不改；移动场地碰撞后应在本场景对应Surface重Bake本轮导航，不在运行生成。SignalSearchSettings从D5 08:00开始、步速3.3，无预给工具/发现；日期/原文NineDayDefinition，五条搜寻状态文案ExplorationDefinition，布局SignalSearch_Authored均可在Inspector修改并保存。
+
+定向SignalSearchAuthoring使用原生Editor APIs，Create拒绝既有输出。固定请求signal-create/validate/smoke/boundary/late/skip/tuning/build；first-search/old-search在新地图分别复用D1–D2、D3–D4真实输入fixture。初次布局/空配置恢复和低音铃路径调整为有严格前置的定向操作，不是自动覆盖手工资产。Probe备份日期/时刻/步速/提示并在退出恢复。实际证据与历史失败见[TASK-014](Tasks/TASK-014-signal-search.md)，最终验证状态以任务记录为准。

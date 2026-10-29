@@ -132,10 +132,16 @@ namespace Demon.Slice.Domain
 
         public bool MatchesTarget()
         {
+            // T07 exchanges the two operands symmetrically; all other authored slots stay exact.
+            bool unorderedObjects = target[4] == RuneKind.Exchange && IsBoxLakePair(target[7], target[8]);
             for (int i = 0; i < slots.Length; i++)
-                if (slots[i] != target[i]) return false;
-            return true;
+                if (!(unorderedObjects && i >= 7) && slots[i] != target[i]) return false;
+            return !unorderedObjects || IsBoxLakePair(slots[7], slots[8]);
         }
+
+        static bool IsBoxLakePair(RuneKind first, RuneKind second) =>
+            (first == RuneKind.Box && second == RuneKind.Lake) ||
+            (first == RuneKind.Lake && second == RuneKind.Box);
 
         public bool TryFreeze()
         {

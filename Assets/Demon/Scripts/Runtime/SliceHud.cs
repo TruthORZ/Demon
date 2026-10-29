@@ -15,6 +15,10 @@ namespace Demon.Slice
         [SerializeField] GameObject endingPanel;
         [SerializeField] Text endingText;
         [SerializeField] Text toolStatus;
+        [SerializeField] Text finalTabletStatus;
+        [SerializeField] Text explorationStatus;
+        public void ConfigureExplorationStatus(Text text) => explorationStatus = text;
+        public void ConfigureFinalTabletStatus(Text text) => finalTabletStatus = text;
         public void ConfigureToolStatus(Text text) => toolStatus = text;
         SliceSceneController world;
         string lastClock;
@@ -44,7 +48,7 @@ namespace Demon.Slice
             if (lastClock != clock) { clockText.text = clock; lastClock = clock; }
             messageText.text = world.Message;
             messageText.gameObject.SetActive(!world.Player.Reading && !directing);
-            focusText.text = world.Player.FocusPrompt;
+            focusText.text = world.Player.IsPickingUp ? $"按住 E 拾取　{world.Player.CurrentPickup.Attempt.Progress:P0}　Esc 放下" : world.Player.FocusPrompt;
             heldText.text = world.Player.InspectingTablet ?
                 $"手中符文：{SliceTablet.RuneLabel(world.Player.ActiveTablet.Board.Held)}\n点击符文盘取符文，点击槽位交换。Enter 确认，Esc 退出。" : "";
             readingPanel.SetActive(world.Player.Reading && !session.Descended);
@@ -55,6 +59,10 @@ namespace Demon.Slice
                 toolStatus.gameObject.SetActive(world.Tether && world.Tether.isActiveAndEnabled && world.Tether.Equipped && !world.Player.Reading && !directing && !session.Descended);
                 toolStatus.text = world.Tether ? world.Tether.Status : "";
             }
+            if (explorationStatus)
+            { bool show = world.Exploration && world.Exploration.ShowStatus && !world.Player.Reading && !directing; explorationStatus.gameObject.SetActive(show); if (show) explorationStatus.text = world.Exploration.Status; }
+            if (finalTabletStatus)
+            { bool show = world.Retrieval && world.Retrieval.Available && !world.Player.Reading && !directing; finalTabletStatus.gameObject.SetActive(show); if (show) finalTabletStatus.text = world.Retrieval.Status; }
             helpText.gameObject.SetActive(!world.Player.Reading && !session.Descended && !(world.Finale && world.Finale.IsDirecting));
         }
     }
