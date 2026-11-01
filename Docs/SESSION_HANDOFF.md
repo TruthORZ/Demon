@@ -1,5 +1,5 @@
 # Latest local handoff: GitHub setup (2026-11-01)
-User designated D:/MyProject/Demon as the persistent working repository. main and Git LFS are initialized; remote is git@github.com:TruthORZ/Demon.git (public). Existing origin/main history at 213cfd7 is preserved through a merge; upload is in progress. See [upload task](Tasks/DEMON-GITHUB-20261101.md). Statements below that this directory has no .git describe the historical state before this initialization.
+User designated D:/MyProject/Demon as the persistent working repository. main and Git LFS are initialized; remote is git@github.com:TruthORZ/Demon.git (public). Existing origin/main history at 213cfd7 is preserved through a merge; upload completed and main tracks origin/main. Upload checkpoint f78f7ae matches the remote; approximately 3.90 GB of LFS resources uploaded successfully. This completion note is a later documentation-only commit; use git log -1 for the current HEAD. See [upload task](Tasks/DEMON-GITHUB-20261101.md). Statements below that this directory has no .git describe the historical state before this initialization.
 
 ---
 # 最新本地交接：Snow环境场景（2026-11-01）
