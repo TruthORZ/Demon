@@ -3,21 +3,21 @@ using Demon.Slice.Domain;
 using UnityEngine;
 namespace Demon.Slice
 {
-    public sealed class CipherWheel : SliceInteractable
+    public sealed class CipherWheel : Interactable
     {
         [SerializeField] CipherDefinition definition;
         [Tooltip("Order: radio, fixed sun reference, wind-vane root position (not the rotating blade).")]
         [SerializeField] Transform[] landmarks;
         [SerializeField] Transform closeView;
         [SerializeField] TextMesh[] digitLabels;
-        SliceSceneController world;
+        GameSceneController world;
         public CipherDefinition Definition => definition;
         public Transform CloseView => closeView;
         public Transform[] Landmarks => (Transform[])landmarks.Clone();
         public override string Prompt => "查看固定方位数字轮盘";
         public void Configure(CipherDefinition data, Transform[] objects, Transform view, TextMesh[] labels)
         { definition = data; landmarks = objects; closeView = view; digitLabels = labels; }
-        public void Initialize(SliceSceneController controller)
+        public void Initialize(GameSceneController controller)
         {
             if (!definition || landmarks == null || landmarks.Length != 3 || !closeView || digitLabels == null || digitLabels.Length != 10)
                 throw new InvalidOperationException("Cipher wheel requires saved definition, three fixed landmarks, ten labels and view.");
@@ -41,7 +41,7 @@ namespace Demon.Slice
             }
             return code;
         }
-        public override void Use(SlicePlayer player)
+        public override void Use(PlayerController player)
         {
             if (!world || world.Session.Descended) return;
             world.SetMessage(definition.WheelInstructions); player.EnterInspectionView(closeView);

@@ -3,7 +3,7 @@ using Demon.Slice.Domain;
 using UnityEngine;
 namespace Demon.Slice
 {
-    public sealed class CipherBox : SliceInteractable
+    public sealed class CipherBox : Interactable, ICloseViewInteraction
     {
         [SerializeField] CipherWheel wheel;
         [SerializeField] Transform closeView;
@@ -13,7 +13,7 @@ namespace Demon.Slice
         [SerializeField] Vector3 openLidEuler = new Vector3(105, 0, 0);
         [SerializeField, Min(.05f)] float lidBlendSeconds = .65f;
         [SerializeField] GameObject tabletVisual;
-        SliceSceneController world;
+        GameSceneController world;
         ThreeDigitLock model;
         Quaternion restingLid;
         public CipherWheel Wheel => wheel;
@@ -23,7 +23,7 @@ namespace Demon.Slice
         public override string Prompt => model == null || !model.Unlocked ? "查看箱子 A 密码锁" : Acquired ? "查看已取得的 T06" : "取出箱内 T06";
         public void Configure(CipherWheel compass, Transform view, Transform reading, CipherDigit[] buttons, Transform lid, GameObject tablet)
         { wheel = compass; closeView = view; recordView = reading; digits = buttons; lidPivot = lid; tabletVisual = tablet; }
-        public void Initialize(SliceSceneController controller)
+        public void Initialize(GameSceneController controller)
         {
             if (!wheel || !closeView || !recordView || digits == null || digits.Length != 3 || !lidPivot || !tabletVisual)
                 throw new InvalidOperationException("Box A requires its saved wheel, three digits, views, lid and tablet.");
@@ -31,7 +31,7 @@ namespace Demon.Slice
             foreach (var digit in digits) if (!digit || !digit.Label) throw new InvalidOperationException("Missing saved lock digit.");
             RefreshDigits();
         }
-        public override void Use(SlicePlayer player)
+        public override void Use(PlayerController player)
         {
             if (!world || world.Session.Descended) return;
             if (model.Unlocked)
@@ -48,6 +48,7 @@ namespace Demon.Slice
             if (digit && Array.IndexOf(digits, digit) >= 0) { model.Cycle(digit.Index); RefreshDigits(); }
         }
         void RefreshDigits() { foreach (var digit in digits) digit.Label.text = model.At(digit.Index).ToString(); }
+        bool ICloseViewInteraction.Confirm() => TryConfirm();
         public bool TryConfirm()
         {
             if (!world || world.Session.Descended) return false;

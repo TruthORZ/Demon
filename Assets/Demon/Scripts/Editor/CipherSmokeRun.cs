@@ -7,12 +7,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 namespace Demon.Slice.Editor
 {
-    public sealed class CipherSmokeRun
+    public sealed class CipherSmokeRun : ISmokeRun
     {
         readonly string operation;
         readonly Action<bool, string> finish;
         readonly double started = EditorApplication.timeSinceStartup;
-        SliceSceneController world;
+        GameSceneController world;
         CipherBox box;
         Keyboard keyboard; Mouse mouse;
         InputSettings.BackgroundBehavior oldBackground;
@@ -32,7 +32,7 @@ namespace Demon.Slice.Editor
             {
                 double now = Time.timeAsDouble;
                 if (EditorApplication.timeSinceStartup - started > 100) throw new TimeoutException("Cipher smoke timed out at stage " + stage);
-                if (!world) world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                if (!world) world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (!world || world.Session == null || !world.Cipher || world.Cipher.Model == null) return;
                 box = world.Cipher;
                 if (stage == 0)

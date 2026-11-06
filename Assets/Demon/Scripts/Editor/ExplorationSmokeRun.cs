@@ -9,11 +9,11 @@ using UnityEngine.InputSystem.LowLevel;
 namespace Demon.Slice.Editor
 {
     // Drives the existing Input Actions and CharacterController; navigation only supplies walking corners.
-    public sealed class ExplorationSmokeRun
+    public sealed class ExplorationSmokeRun : ISmokeRun
     {
         readonly string operation; readonly Action<bool,string> finish;
         readonly double started=EditorApplication.timeSinceStartup;
-        SliceSceneController world; ExplorationFlow flow; Keyboard keyboard; Mouse mouse;
+        GameSceneController world; ExplorationFlow flow; Keyboard keyboard; Mouse mouse;
         InputSettings.BackgroundBehavior oldBackground; InputSettings.EditorInputBehaviorInPlayMode oldInput;
         bool oldRun,finished; int stage,observation,trailIndex,corner,t01Reads,lastFrame=-1; double since,lastSteer,walkStarted;
         Vector3[] corners; Vector3 startPosition; float walked; Vector3 previous;
@@ -26,7 +26,7 @@ namespace Demon.Slice.Editor
             try
             {
                 if(EditorApplication.timeSinceStartup-started>240)throw new TimeoutException("Exploration stage "+stage+", position "+(world?world.Player.transform.position.ToString():"missing"));
-                if(!world)world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                if(!world)world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if(world&&!world.enabled)throw new InvalidOperationException("World disabled; inspect initialization error.");
                 if(!world||world.Session==null||!world.Exploration||world.Exploration.Log==null)return;
                 if(lastFrame==Time.frameCount)return;lastFrame=Time.frameCount;
@@ -46,7 +46,7 @@ namespace Demon.Slice.Editor
                 else if(stage==2&&now-since>.3){Capture("observation-approach-"+observation);Keys(Key.E);Next(3,now);}
                 else if(stage==3&&now-since>.3)
                 {
-                    Keys();var site=flow.Observations[observation/2];Require(world.Player.Reading,"E observation failed: "+site.Site+", prompt="+world.Player.FocusPrompt+", position="+world.Player.transform.position+", camera="+world.Player.ViewCamera.transform.position+" forward="+world.Player.ViewCamera.transform.forward+", target="+site.AimTarget.position+", hits="+string.Join(";",Physics.RaycastAll(world.Player.ViewCamera.transform.position,world.Player.ViewCamera.transform.forward,world.Settings.InteractionMetres).OrderBy(h=>h.distance).Select(h=>h.collider.name+":"+h.distance+":"+h.collider.GetComponentInParent<SliceInteractable>())));
+                    Keys();var site=flow.Observations[observation/2];Require(world.Player.Reading,"E observation failed: "+site.Site+", prompt="+world.Player.FocusPrompt+", position="+world.Player.transform.position+", camera="+world.Player.ViewCamera.transform.position+" forward="+world.Player.ViewCamera.transform.forward+", target="+site.AimTarget.position+", hits="+string.Join(";",Physics.RaycastAll(world.Player.ViewCamera.transform.position,world.Player.ViewCamera.transform.forward,world.Settings.InteractionMetres).OrderBy(h=>h.distance).Select(h=>h.collider.name+":"+h.distance+":"+h.collider.GetComponentInParent<Interactable>())));
                     Require(flow.Log.Count==(Late?0:observation/2+1)&&world.Session.Clock.Day==(Late?2:1)&&world.Session.ExchangeCount==0,"Duplicate/day/SEAL record failed.");
                     string expected=site.Site==Domain.ObservationSite.Radio?flow.Definition.Radio.Normal:site.Site==Domain.ObservationSite.WindVane?flow.Definition.WindVane.Normal:flow.Definition.Lake.Normal;
                     Require(world.ReadingText.Contains(expected)&&world.ReadingText.Contains("观察时刻：D"+(Late?2:1)),"Saved text/time snapshot missing.");Next(4,now);

@@ -1,0 +1,4742 @@
+{
+  "types": [
+    {
+      "name": "AGGlobalSettings",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSettings.cs",
+      "line": 8,
+      "ns": "ANGRYMESH.NaturePack",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "AGGlobalSnowGrass",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowGrass.cs",
+      "line": 9,
+      "ns": "ANGRYMESH.NaturePack",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "AGGlobalSnowHeight",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowHeight.cs",
+      "line": 9,
+      "ns": "ANGRYMESH.NaturePack",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "AGGlobalSnowProps",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowProps.cs",
+      "line": 9,
+      "ns": "ANGRYMESH.NaturePack",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "AGGlobalSnowTree",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowTree.cs",
+      "line": 9,
+      "ns": "ANGRYMESH.NaturePack",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "AGGlobalWind",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalWind.cs",
+      "line": 9,
+      "ns": "ANGRYMESH.NaturePack",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "AttributeOperations",
+      "kind": "Class",
+      "isStatic": true,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs",
+      "line": 10,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "BeamDefinition",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/BeamDefinition.cs",
+      "line": 4,
+      "ns": "Demon.Slice",
+      "baseType": "ScriptableObject"
+    },
+    {
+      "name": "BeamTether",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "BearingCipher",
+      "kind": "Class",
+      "isStatic": true,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/BearingCipher.cs",
+      "line": 4,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "ChaseController",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ChaseController.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "ChaseDefinition",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ChaseDefinition.cs",
+      "line": 4,
+      "ns": "Demon.Slice",
+      "baseType": "ScriptableObject"
+    },
+    {
+      "name": "CipherBox",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "CipherDefinition",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/CipherDefinition.cs",
+      "line": 5,
+      "ns": "Demon.Slice",
+      "baseType": "ScriptableObject"
+    },
+    {
+      "name": "CipherDigit",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/CipherDigit.cs",
+      "line": 4,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "CipherWheel",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "ClosePassGate",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/PursuitRules.cs",
+      "line": 4,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "DayPlan",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/NineDayDefinition.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "Object"
+    },
+    {
+      "name": "DiscoveryProgress",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/DiscoveryProgress.cs",
+      "line": 5,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "ExplorationDefinition",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs",
+      "line": 13,
+      "ns": "Demon.Slice",
+      "baseType": "ScriptableObject"
+    },
+    {
+      "name": "ExplorationFlow",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "ExplorationGuidance",
+      "kind": "Class",
+      "isStatic": true,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+      "line": 34,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "ExplorationGuideRule",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+      "line": 17,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "ExplorationGuideState",
+      "kind": "Struct",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+      "line": 28,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "ValueType"
+    },
+    {
+      "name": "FinaleSequence",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+      "line": 9,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "FinaleTimeWindow",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/FinaleTimeWindow.cs",
+      "line": 7,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "FinalTabletDock",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/FinalTabletDock.cs",
+      "line": 4,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "FinalTabletProgress",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/FinalTabletProgress.cs",
+      "line": 4,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "FinalTabletRetrieval",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "FirstDayInspectionLog",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/FirstDayInspectionLog.cs",
+      "line": 5,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "FixedTabletPlan",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/NineDayDefinition.cs",
+      "line": 12,
+      "ns": "Demon.Slice",
+      "baseType": "Object"
+    },
+    {
+      "name": "GameClock",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs",
+      "line": 35,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "GameHud",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "GameSceneController",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+      "line": 8,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "GameSession",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs",
+      "line": 157,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "GameSettings",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/GameSettings.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "ScriptableObject"
+    },
+    {
+      "name": "ICloseViewInteraction",
+      "kind": "Interface",
+      "isStatic": false,
+      "isAbstract": true,
+      "path": "Assets/Demon/Scripts/Runtime/SceneContracts.cs",
+      "line": 36,
+      "ns": "Demon.Slice",
+      "baseType": null
+    },
+    {
+      "name": "IHudState",
+      "kind": "Interface",
+      "isStatic": false,
+      "isAbstract": true,
+      "path": "Assets/Demon/Scripts/Runtime/SceneContracts.cs",
+      "line": 21,
+      "ns": "Demon.Slice",
+      "baseType": null
+    },
+    {
+      "name": "Interactable",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": true,
+      "path": "Assets/Demon/Scripts/Runtime/Interactable.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "IPlayerSession",
+      "kind": "Interface",
+      "isStatic": false,
+      "isAbstract": true,
+      "path": "Assets/Demon/Scripts/Runtime/SceneContracts.cs",
+      "line": 13,
+      "ns": "Demon.Slice",
+      "baseType": null
+    },
+    {
+      "name": "ISceneFeedback",
+      "kind": "Interface",
+      "isStatic": false,
+      "isAbstract": true,
+      "path": "Assets/Demon/Scripts/Runtime/SceneContracts.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": null
+    },
+    {
+      "name": "ITabletProgram",
+      "kind": "Interface",
+      "isStatic": false,
+      "isAbstract": true,
+      "path": "Assets/Demon/Scripts/Runtime/SceneContracts.cs",
+      "line": 28,
+      "ns": "Demon.Slice",
+      "baseType": null
+    },
+    {
+      "name": "LC_Door",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/ImportAsset/LogCabin/Source/Scripts/LC_Door.cs",
+      "line": 4,
+      "ns": "<global namespace>",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "ListeningChime",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ListeningChime.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "ListeningDefinition",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ListeningDefinition.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "ScriptableObject"
+    },
+    {
+      "name": "ListeningTool",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "ListeningTrailProxy",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "NineDayDefinition",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/NineDayDefinition.cs",
+      "line": 19,
+      "ns": "Demon.Slice",
+      "baseType": "ScriptableObject"
+    },
+    {
+      "name": "NineDayFlow",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "NineDayTablet",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/NineDayTablet.cs",
+      "line": 5,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "ObservationText",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "Object"
+    },
+    {
+      "name": "PickupAttempt",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/PursuitRules.cs",
+      "line": 28,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "PlayerController",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+      "line": 8,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "PreparationRecord",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/PreparationRecord.cs",
+      "line": 9,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "RecordBox",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/RecordBox.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "RegionEntryLatch",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/RegionEntryLatch.cs",
+      "line": 4,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "RuneBoardModel",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs",
+      "line": 72,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "RuneSlot",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/RuneSlot.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "RuneTablet",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "RuneTrayItem",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/RuneTrayItem.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "SceneFontBinding",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/SceneFontBinding.cs",
+      "line": 9,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "ScheduledWorldAttributes",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/ScheduledWorldAttributes.cs",
+      "line": 4,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "SleepPoint",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/SleepPoint.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "StableBeamMotion",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/StableBeamMotion.cs",
+      "line": 5,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "StationObservation",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/StationObservation.cs",
+      "line": 5,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "ThreatPickup",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+      "line": 7,
+      "ns": "Demon.Slice",
+      "baseType": "Interactable"
+    },
+    {
+      "name": "ThreeDigitLock",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/Domain/BearingCipher.cs",
+      "line": 25,
+      "ns": "Demon.Slice.Domain",
+      "baseType": "Object"
+    },
+    {
+      "name": "WorldAttributeConsequences",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    },
+    {
+      "name": "WorldPresentation",
+      "kind": "Class",
+      "isStatic": false,
+      "isAbstract": false,
+      "path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+      "line": 6,
+      "ns": "Demon.Slice",
+      "baseType": "MonoBehaviour"
+    }
+  ],
+  "edges": [
+    {
+      "From": "AGGlobalSettings",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSettings.cs",
+          "Line": 8,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "AGGlobalSnowGrass",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowGrass.cs",
+          "Line": 9,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "AGGlobalSnowHeight",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowHeight.cs",
+          "Line": 9,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "AGGlobalSnowProps",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowProps.cs",
+          "Line": 9,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "AGGlobalSnowTree",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowTree.cs",
+          "Line": 9,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "AGGlobalWind",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalWind.cs",
+          "Line": 9,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "BeamDefinition",
+      "To": "ScriptableObject",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamDefinition.cs",
+          "Line": 4,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "BeamTether",
+      "To": "BeamDefinition",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+          "Line": 9,
+          "Detail": "field definition"
+        }
+      ]
+    },
+    {
+      "From": "BeamTether",
+      "To": "CipherBox",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+          "Line": 21,
+          "Detail": "field cipher"
+        }
+      ]
+    },
+    {
+      "From": "BeamTether",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+          "Line": 30,
+          "Detail": "session.Clock.Day"
+        }
+      ]
+    },
+    {
+      "From": "BeamTether",
+      "To": "GameSession",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+          "Line": 19,
+          "Detail": "field session"
+        }
+      ]
+    },
+    {
+      "From": "BeamTether",
+      "To": "ListeningTool",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+          "Line": 51,
+          "Detail": "ListeningTool listener"
+        }
+      ]
+    },
+    {
+      "From": "BeamTether",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "BeamTether",
+      "To": "PlayerController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+          "Line": 20,
+          "Detail": "field player"
+        }
+      ]
+    },
+    {
+      "From": "BeamTether",
+      "To": "StableBeamMotion",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/BeamTether.cs",
+          "Line": 24,
+          "Detail": "stored property Rule"
+        }
+      ]
+    },
+    {
+      "From": "ChaseController",
+      "To": "BeamTether",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ChaseController.cs",
+          "Line": 19,
+          "Detail": "field tether"
+        }
+      ]
+    },
+    {
+      "From": "ChaseController",
+      "To": "ChaseDefinition",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ChaseController.cs",
+          "Line": 10,
+          "Detail": "field definition"
+        }
+      ]
+    },
+    {
+      "From": "ChaseController",
+      "To": "ClosePassGate",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ChaseController.cs",
+          "Line": 23,
+          "Detail": "stored property Gate"
+        }
+      ]
+    },
+    {
+      "From": "ChaseController",
+      "To": "GameSession",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ChaseController.cs",
+          "Line": 17,
+          "Detail": "field session"
+        }
+      ]
+    },
+    {
+      "From": "ChaseController",
+      "To": "ISceneFeedback",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ChaseController.cs",
+          "Line": 20,
+          "Detail": "field feedback"
+        }
+      ]
+    },
+    {
+      "From": "ChaseController",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ChaseController.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ChaseController",
+      "To": "PlayerController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ChaseController.cs",
+          "Line": 18,
+          "Detail": "field player"
+        }
+      ]
+    },
+    {
+      "From": "ChaseDefinition",
+      "To": "ScriptableObject",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ChaseDefinition.cs",
+          "Line": 4,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "CipherDefinition",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 43,
+          "Detail": "wheel.Definition.LockInstructions"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 55,
+          "Detail": "wheel.Definition.UnlockedText"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 56,
+          "Detail": "wheel.Definition.UnlockedText"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "CipherDigit",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 11,
+          "Detail": "field digits"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "CipherWheel",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 8,
+          "Detail": "field wheel"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 16,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 36,
+          "Detail": "world.Session.Descended"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 54,
+          "Detail": "world.Session.Descended"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "ICloseViewInteraction",
+      "Kind": "realisation",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 6,
+          "Detail": "implements interface"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "NineDayFlow",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 40,
+          "Detail": "world.Campaign.AcquireExchangeTablet"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 34,
+          "Detail": "PlayerController player"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 43,
+          "Detail": "player.EnterLockView"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 56,
+          "Detail": "world.Player.ExitCloseView"
+        }
+      ]
+    },
+    {
+      "From": "CipherBox",
+      "To": "ThreeDigitLock",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherBox.cs",
+          "Line": 17,
+          "Detail": "field model"
+        }
+      ]
+    },
+    {
+      "From": "CipherDefinition",
+      "To": "ScriptableObject",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherDefinition.cs",
+          "Line": 5,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "CipherDigit",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherDigit.cs",
+          "Line": 4,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "CipherWheel",
+      "To": "BearingCipher",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 24,
+          "Detail": "BearingCipher.ValidateDigits"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 34,
+          "Detail": "BearingCipher.ValidateDigits"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 40,
+          "Detail": "BearingCipher.Sector"
+        }
+      ]
+    },
+    {
+      "From": "CipherWheel",
+      "To": "CipherDefinition",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 8,
+          "Detail": "field definition"
+        }
+      ]
+    },
+    {
+      "From": "CipherWheel",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 13,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "CipherWheel",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 46,
+          "Detail": "world.Session.Descended"
+        }
+      ]
+    },
+    {
+      "From": "CipherWheel",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "CipherWheel",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 44,
+          "Detail": "PlayerController player"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/CipherWheel.cs",
+          "Line": 47,
+          "Detail": "player.EnterInspectionView"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationDefinition",
+      "To": "ExplorationGuidance",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs",
+          "Line": 17,
+          "Detail": "ExplorationGuidance.DefaultRules"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationDefinition",
+      "To": "ExplorationGuideRule",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs",
+          "Line": 16,
+          "Detail": "field GuideRules"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationDefinition",
+      "To": "ObservationText",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs",
+          "Line": 48,
+          "Detail": "field Radio"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs",
+          "Line": 49,
+          "Detail": "field WindVane"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs",
+          "Line": 50,
+          "Detail": "field Lake"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationDefinition",
+      "To": "ScriptableObject",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs",
+          "Line": 13,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "BeamTether",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 34,
+          "Detail": "field tether"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "CipherBox",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 35,
+          "Detail": "field cipher"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "DiscoveryProgress",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 72,
+          "Detail": "campaign.Progress.Found"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 73,
+          "Detail": "campaign.Progress.Found"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "ExplorationDefinition",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 8,
+          "Detail": "field definition"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "ExplorationGuidance",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 69,
+          "Detail": "ExplorationGuidance.Select"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 118,
+          "Detail": "ExplorationGuidance.Validate"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "ExplorationGuideState",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 69,
+          "Detail": "new ExplorationGuideState"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 71,
+          "Detail": "Day = session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 71,
+          "Detail": "HasPreparation = HasFinalPreparation"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 72,
+          "Detail": "FirstFound = campaign.Progress.Found(0)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 72,
+          "Detail": "SecondFound = campaign.Progress.Found(1)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 73,
+          "Detail": "ThirdFound = campaign.Progress.Found(2)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 73,
+          "Detail": "FourthFound = campaign.Progress.Found(3)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 73,
+          "Detail": "FifthFound = campaign.Progress.Found(4)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 74,
+          "Detail": "ListeningActive = listening && listening.Active"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 74,
+          "Detail": "SolarRead = solarRead"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 74,
+          "Detail": "HandoverRead = handoverRead"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 75,
+          "Detail": "ToolAcquired = cipher && cipher.Acquired"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 75,
+          "Detail": "BeamLocked = tether.Rule.Locked"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 75,
+          "Detail": "BeamReleased = sawBeamRelease"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "FinalTabletRetrieval",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 37,
+          "Detail": "field retrieval"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "FirstDayInspectionLog",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 40,
+          "Detail": "stored property Log"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "FixedTabletPlan",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 127,
+          "Detail": "campaign.Definition.Tablets[0].DiscoveryDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 132,
+          "Detail": "campaign.Definition.Tablets[2].DateNodeDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 147,
+          "Detail": "campaign.Definition.Tablets[2].DateNodeDay"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 67,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 68,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 71,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 120,
+          "Detail": "session.Clock.Midnight"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 127,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 132,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 133,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 138,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 147,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 149,
+          "Detail": "session.Clock.MinuteOfDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 150,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 166,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 167,
+          "Detail": "session.Clock.MinuteOfDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 168,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 174,
+          "Detail": "session.Clock.Midnight"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "GameSession",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 31,
+          "Detail": "field session"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "ISceneFeedback",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 38,
+          "Detail": "field feedback"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "ListeningTool",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 36,
+          "Detail": "field listening"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "NineDayDefinition",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 76,
+          "Detail": "campaign.Definition.FinalTabletHour"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 127,
+          "Detail": "campaign.Definition.Tablets"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 132,
+          "Detail": "campaign.Definition.Tablets"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 147,
+          "Detail": "campaign.Definition.Tablets"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "NineDayFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 32,
+          "Detail": "field campaign"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "NineDayTablet",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 12,
+          "Detail": "field firstTablet"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 18,
+          "Detail": "field secondTablet"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 19,
+          "Detail": "field thirdTablet"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 20,
+          "Detail": "field fourthTablet"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 22,
+          "Detail": "field fifthTablet"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "ObservationText",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 156,
+          "Detail": "ObservationText text"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 160,
+          "Detail": "text.Normal"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 160,
+          "Detail": "text.Changed"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 162,
+          "Detail": "text.Special"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 162,
+          "Detail": "text.Changed"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 162,
+          "Detail": "text.Normal"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 164,
+          "Detail": "text.Normal"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 164,
+          "Detail": "text.Special"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 164,
+          "Detail": "text.Changed"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 168,
+          "Detail": "text.Title"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "PreparationRecord",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 27,
+          "Detail": "field solarRecord"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 29,
+          "Detail": "field handoverRecord"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "ScheduledWorldAttributes",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 160,
+          "Detail": "consequences.Rule.RadioSound"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 164,
+          "Detail": "consequences.Rule.DemonLight"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "StableBeamMotion",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 75,
+          "Detail": "tether.Rule.Locked"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 140,
+          "Detail": "tether.Rule.Locked"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 162,
+          "Detail": "tether.Rule.Locked"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "StationObservation",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 9,
+          "Detail": "field observations"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationFlow",
+      "To": "WorldAttributeConsequences",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs",
+          "Line": 33,
+          "Detail": "field consequences"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationGuidance",
+      "To": "ExplorationGuideRule",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 36,
+          "Detail": "<ExplorationGuideRule>"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 41,
+          "Detail": "var rule = rules[i]"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 42,
+          "Detail": "rule.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 42,
+          "Detail": "rule.RequiresPreparation"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 42,
+          "Detail": "rule.Condition"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 43,
+          "Detail": "rule.Key"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 47,
+          "Detail": "<ExplorationGuideRule>"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 51,
+          "Detail": "foreach (var rule in rules)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 53,
+          "Detail": "rule.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 53,
+          "Detail": "rule.Key"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 53,
+          "Detail": "rule.Condition"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 55,
+          "Detail": "rule.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 55,
+          "Detail": "rule.RequiresPreparation"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 55,
+          "Detail": "rule.Condition"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 79,
+          "Detail": "ExplorationGuideRule[]"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 81,
+          "Detail": "new ExplorationGuideRule(1, ExplorationGuideCondition.Always, ExplorationGuideKey.Day1)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 82,
+          "Detail": "new ExplorationGuideRule(2, ExplorationGuideCondition.FirstFound, ExplorationGuideKey.Found)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 83,
+          "Detail": "new ExplorationGuideRule(2, ExplorationGuideCondition.Always, ExplorationGuideKey.Day2)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 84,
+          "Detail": "new ExplorationGuideRule(3, ExplorationGuideCondition.SecondFound, ExplorationGuideKey.Day3Found)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 85,
+          "Detail": "new ExplorationGuideRule(3, ExplorationGuideCondition.Always, ExplorationGuideKey.Day3)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 86,
+          "Detail": "new ExplorationGuideRule(4, ExplorationGuideCondition.ThirdFound, ExplorationGuideKey.Day4Found)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 87,
+          "Detail": "new ExplorationGuideRule(4, ExplorationGuideCondition.Always, ExplorationGuideKey.Day4)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 88,
+          "Detail": "new ExplorationGuideRule(5, ExplorationGuideCondition.FourthFound, ExplorationGuideKey.Day5Found)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 89,
+          "Detail": "new ExplorationGuideRule(5, ExplorationGuideCondition.Always, ExplorationGuideKey.Day5)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 90,
+          "Detail": "new ExplorationGuideRule(7, ExplorationGuideCondition.SolarUnread, ExplorationGuideKey.Day7, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 91,
+          "Detail": "new ExplorationGuideRule(7, ExplorationGuideCondition.ToolMissing, ExplorationGuideKey.Day7Cipher, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 92,
+          "Detail": "new ExplorationGuideRule(7, ExplorationGuideCondition.BeamLocked, ExplorationGuideKey.Day7Locked, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 93,
+          "Detail": "new ExplorationGuideRule(7, ExplorationGuideCondition.BeamReleased, ExplorationGuideKey.Day7Ready, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 94,
+          "Detail": "new ExplorationGuideRule(7, ExplorationGuideCondition.Always, ExplorationGuideKey.Day7Beam, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 95,
+          "Detail": "new ExplorationGuideRule(8, ExplorationGuideCondition.HandoverUnread, ExplorationGuideKey.Day8, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 96,
+          "Detail": "new ExplorationGuideRule(8, ExplorationGuideCondition.ToolMissing, ExplorationGuideKey.Day8Tool, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 97,
+          "Detail": "new ExplorationGuideRule(8, ExplorationGuideCondition.ListeningInactive, ExplorationGuideKey.Day8Listening, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 98,
+          "Detail": "new ExplorationGuideRule(8, ExplorationGuideCondition.Always, ExplorationGuideKey.Day8Ready, true)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 99,
+          "Detail": "new ExplorationGuideRule(0, ExplorationGuideCondition.ListeningActive, ExplorationGuideKey.Day6Active)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 100,
+          "Detail": "new ExplorationGuideRule(0, ExplorationGuideCondition.FifthFound, ExplorationGuideKey.Day6Found)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 101,
+          "Detail": "new ExplorationGuideRule(0, ExplorationGuideCondition.Always, ExplorationGuideKey.Day6)"
+        }
+      ]
+    },
+    {
+      "From": "ExplorationGuidance",
+      "To": "ExplorationGuideState",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 36,
+          "Detail": "ExplorationGuideState state"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 42,
+          "Detail": "state.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 42,
+          "Detail": "state.HasPreparation"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 59,
+          "Detail": "ExplorationGuideState s"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 64,
+          "Detail": "s.FirstFound"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 65,
+          "Detail": "s.SecondFound"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 66,
+          "Detail": "s.ThirdFound"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 67,
+          "Detail": "s.FourthFound"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 68,
+          "Detail": "s.FifthFound"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 69,
+          "Detail": "s.ListeningActive"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 70,
+          "Detail": "s.SolarRead"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 71,
+          "Detail": "s.HandoverRead"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 72,
+          "Detail": "s.ToolAcquired"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 73,
+          "Detail": "s.BeamLocked"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 74,
+          "Detail": "s.BeamReleased"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs",
+          "Line": 75,
+          "Detail": "s.ListeningActive"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "FinaleTimeWindow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 33,
+          "Detail": "field window"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 57,
+          "Detail": "GameClock.MinutesPerDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 63,
+          "Detail": "world.Session.Clock.AbsoluteMinutes"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 66,
+          "Detail": "world.Session.Clock.AbsoluteMinutes"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 72,
+          "Detail": "world.Session.Clock.AdvanceTo"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 72,
+          "Detail": "world.Session.Clock.AbsoluteMinutes"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 88,
+          "Detail": "world.Session.Clock.AbsoluteMinutes"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 94,
+          "Detail": "world.Session.Clock.AdvanceTo"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 94,
+          "Detail": "world.Session.Clock.AbsoluteMinutes"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 121,
+          "Detail": "world.Session.Clock.MinuteOfDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 125,
+          "Detail": "world.Session.Clock.Day"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 31,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 63,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 66,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 71,
+          "Detail": "world.Session.Descended"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 72,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 88,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 94,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 98,
+          "Detail": "world.Session.Descended"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 121,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 125,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 126,
+          "Detail": "world.Session.LakeSeal"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "GameSettings",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 57,
+          "Detail": "world.Settings.FinalDay"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 9,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 74,
+          "Detail": "world.Player.EnterSequenceView"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 89,
+          "Detail": "world.Player.EnterSequenceView"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 108,
+          "Detail": "world.Player.EnterSequenceView"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "ScheduledWorldAttributes",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 125,
+          "Detail": "world.Consequences.Rule.DemonLight"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "WorldAttributeConsequences",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 125,
+          "Detail": "world.Consequences.Rule"
+        }
+      ]
+    },
+    {
+      "From": "FinaleSequence",
+      "To": "WorldPresentation",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinaleSequence.cs",
+          "Line": 32,
+          "Detail": "field presentation"
+        }
+      ]
+    },
+    {
+      "From": "FinaleTimeWindow",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/FinaleTimeWindow.cs",
+          "Line": 17,
+          "Detail": "GameClock.MinutesPerDay"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletDock",
+      "To": "FinalTabletProgress",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletDock.cs",
+          "Line": 9,
+          "Detail": "retrieval.Progress.Acquired"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletDock",
+      "To": "FinalTabletRetrieval",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletDock.cs",
+          "Line": 6,
+          "Detail": "field retrieval"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletDock",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletDock.cs",
+          "Line": 4,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletDock",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletDock.cs",
+          "Line": 10,
+          "Detail": "PlayerController player"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "FinaleSequence",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 42,
+          "Detail": "world.Finale.ReserveTime"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 43,
+          "Detail": "world.Finale.TimeReserved"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "FinalTabletProgress",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 16,
+          "Detail": "stored property Progress"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 14,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 19,
+          "Detail": "world.Session.Descended"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 20,
+          "Detail": "world.Session.Board"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "NineDayFlow",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 19,
+          "Detail": "world.Campaign.FinalAvailable"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 37,
+          "Detail": "world.Campaign.RefreshFinalTablet"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 50,
+          "Detail": "PlayerController player"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "RuneBoardModel",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 20,
+          "Detail": "world.Session.Board.Frozen"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "RuneTablet",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 54,
+          "Detail": "world.Tablet.Use"
+        }
+      ]
+    },
+    {
+      "From": "FinalTabletRetrieval",
+      "To": "ThreatPickup",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs",
+          "Line": 8,
+          "Detail": "field pickup"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "BeamTether",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 30,
+          "Detail": "field tether"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "DiscoveryProgress",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 55,
+          "Detail": "campaign.Progress.FoundCount"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "ExplorationFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 32,
+          "Detail": "field exploration"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "FinaleSequence",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 29,
+          "Detail": "field finale"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "FinalTabletRetrieval",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 31,
+          "Detail": "field retrieval"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 52,
+          "Detail": "session.Clock.MinuteOfDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 53,
+          "Detail": "session.Clock.Day"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "GameSession",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 26,
+          "Detail": "field session"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "GameSettings",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 39,
+          "Detail": "GameSettings settings"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 42,
+          "Detail": "settings.Instructions"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 43,
+          "Detail": "settings.BoxText"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 44,
+          "Detail": "settings.EndingText"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "IHudState",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 25,
+          "Detail": "field state"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "NineDayFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 28,
+          "Detail": "field campaign"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "PickupAttempt",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 59,
+          "Detail": "player.CurrentPickup.Attempt.Progress"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "PlayerController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 27,
+          "Detail": "field player"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "RuneBoardModel",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 61,
+          "Detail": "player.ActiveTablet.Board.Held"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "RuneTablet",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 61,
+          "Detail": "RuneTablet.RuneLabel"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 61,
+          "Detail": "player.ActiveTablet.Board"
+        }
+      ]
+    },
+    {
+      "From": "GameHud",
+      "To": "ThreatPickup",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameHud.cs",
+          "Line": 59,
+          "Detail": "player.CurrentPickup.Attempt"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "BeamDefinition",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 85,
+          "Detail": "tether.Definition.DemonMotionDay"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "BeamTether",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 21,
+          "Detail": "field tether"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "ChaseController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 22,
+          "Detail": "field chase"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "CipherBox",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 20,
+          "Detail": "field cipherBox"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "ExplorationFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 25,
+          "Detail": "field exploration"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "FinaleSequence",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 18,
+          "Detail": "field finale"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "FinalTabletRetrieval",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 23,
+          "Detail": "field retrieval"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 100,
+          "Detail": "Session.Clock.AbsoluteMinutes"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 100,
+          "Detail": "GameClock.MinutesPerDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 102,
+          "Detail": "Session.Clock.AdvanceTo"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 164,
+          "Detail": "Session.Clock.Day"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "GameHud",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 15,
+          "Detail": "field hud"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "GameSession",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 48,
+          "Detail": "stored property Session"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "GameSettings",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 11,
+          "Detail": "field settings"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "IHudState",
+      "Kind": "realisation",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 8,
+          "Detail": "implements interface"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "IPlayerSession",
+      "Kind": "realisation",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 8,
+          "Detail": "implements interface"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "ISceneFeedback",
+      "Kind": "realisation",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 8,
+          "Detail": "implements interface"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "ITabletProgram",
+      "Kind": "realisation",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 8,
+          "Detail": "implements interface"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "ListeningTool",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 19,
+          "Detail": "field listeningTool"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 8,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "NineDayDefinition",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 75,
+          "Detail": "campaign.Definition.FinalTabletDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 85,
+          "Detail": "campaign.Definition.MotionDay"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "NineDayFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 17,
+          "Detail": "field campaign"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "PlayerController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 12,
+          "Detail": "field player"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "RuneBoardModel",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 49,
+          "Detail": "RuneBoardModel ITabletProgram.Board => Session.Board;"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 73,
+          "Detail": "var board = new RuneBoardModel(settings.Initial, settings.Target, settings.LooseRunes)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 73,
+          "Detail": "new RuneBoardModel(settings.Initial, settings.Target, settings.LooseRunes)"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 130,
+          "Detail": "Session.Board.Frozen"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "RuneTablet",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 13,
+          "Detail": "field tablet"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "WorldAttributeConsequences",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 24,
+          "Detail": "field consequences"
+        }
+      ]
+    },
+    {
+      "From": "GameSceneController",
+      "To": "WorldPresentation",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSceneController.cs",
+          "Line": 14,
+          "Detail": "field presentation"
+        }
+      ]
+    },
+    {
+      "From": "GameSession",
+      "To": "AttributeOperations",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs",
+          "Line": 219,
+          "Detail": "AttributeOperations.TryExchange"
+        }
+      ]
+    },
+    {
+      "From": "GameSession",
+      "To": "GameClock",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs",
+          "Line": 163,
+          "Detail": "stored property Clock"
+        }
+      ]
+    },
+    {
+      "From": "GameSession",
+      "To": "IDisposable",
+      "Kind": "realisation",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs",
+          "Line": 157,
+          "Detail": "implements interface"
+        }
+      ]
+    },
+    {
+      "From": "GameSession",
+      "To": "RuneBoardModel",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs",
+          "Line": 164,
+          "Detail": "stored property Board"
+        }
+      ]
+    },
+    {
+      "From": "GameSettings",
+      "To": "ScriptableObject",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/GameSettings.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "Interactable",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Interactable.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "Interactable",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Interactable.cs",
+          "Line": 10,
+          "Detail": "PlayerController player"
+        }
+      ]
+    },
+    {
+      "From": "IPlayerSession",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/SceneContracts.cs",
+          "Line": 15,
+          "Detail": "GameSession Session { get; }"
+        }
+      ]
+    },
+    {
+      "From": "IPlayerSession",
+      "To": "GameSettings",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/SceneContracts.cs",
+          "Line": 16,
+          "Detail": "GameSettings Settings { get; }"
+        }
+      ]
+    },
+    {
+      "From": "ITabletProgram",
+      "To": "RuneBoardModel",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/SceneContracts.cs",
+          "Line": 30,
+          "Detail": "RuneBoardModel Board { get; }"
+        }
+      ]
+    },
+    {
+      "From": "LC_Door",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/ImportAsset/LogCabin/Source/Scripts/LC_Door.cs",
+          "Line": 4,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ListeningChime",
+      "To": "GameSession",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningChime.cs",
+          "Line": 19,
+          "Detail": "field session"
+        }
+      ]
+    },
+    {
+      "From": "ListeningChime",
+      "To": "ListeningTool",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningChime.cs",
+          "Line": 18,
+          "Detail": "field tool"
+        }
+      ]
+    },
+    {
+      "From": "ListeningChime",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningChime.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ListeningChime",
+      "To": "RegionEntryLatch",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningChime.cs",
+          "Line": 17,
+          "Detail": "field entry"
+        }
+      ]
+    },
+    {
+      "From": "ListeningDefinition",
+      "To": "ScriptableObject",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningDefinition.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "DiscoveryProgress",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 42,
+          "Detail": "flow.Progress.Available"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 44,
+          "Detail": "flow.Progress.Discover"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 42,
+          "Detail": "session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 44,
+          "Detail": "session.Clock.Day"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "GameSession",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 12,
+          "Detail": "field session"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "ISceneFeedback",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 15,
+          "Detail": "field feedback"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "ITabletProgram",
+      "Kind": "realisation",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 7,
+          "Detail": "implements interface"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "ListeningChime",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 11,
+          "Detail": "field chimes"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "ListeningDefinition",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 9,
+          "Detail": "field definition"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "NineDayFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 13,
+          "Detail": "field campaign"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "PlayerController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 14,
+          "Detail": "field player"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "RuneBoardModel",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 16,
+          "Detail": "stored property Board"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTool",
+      "To": "RuneTablet",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTool.cs",
+          "Line": 10,
+          "Detail": "field tablet"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTrailProxy",
+      "To": "BeamTether",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs",
+          "Line": 15,
+          "Detail": "field tether"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTrailProxy",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs",
+          "Line": 13,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTrailProxy",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs",
+          "Line": 31,
+          "Detail": "world.Session.Descended"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTrailProxy",
+      "To": "ListeningTool",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs",
+          "Line": 14,
+          "Detail": "field tool"
+        }
+      ]
+    },
+    {
+      "From": "ListeningTrailProxy",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "NineDayDefinition",
+      "To": "DayPlan",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayDefinition.cs",
+          "Line": 32,
+          "Detail": "field Days"
+        }
+      ]
+    },
+    {
+      "From": "NineDayDefinition",
+      "To": "FixedTabletPlan",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayDefinition.cs",
+          "Line": 33,
+          "Detail": "field Tablets"
+        }
+      ]
+    },
+    {
+      "From": "NineDayDefinition",
+      "To": "ScriptableObject",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayDefinition.cs",
+          "Line": 19,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "CipherBox",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 68,
+          "Detail": "world.Cipher.Acquired"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 77,
+          "Detail": "world.Cipher.Acquired"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "DayPlan",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 34,
+          "Detail": "foreach (var day in definition.Days) if (day == null) throw new InvalidOperationException(\"Missing day plan.\");"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 55,
+          "Detail": "definition.Days[Mathf.Clamp(currentDay - 1, 0, 8)].Objective"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 64,
+          "Detail": "definition.Days[Mathf.Clamp(day - 1, 0, 8)].WakeHour"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 65,
+          "Detail": "definition.Days[Mathf.Clamp(currentDay - 1, 0, 8)].Title"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "DiscoveryProgress",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 15,
+          "Detail": "stored property Progress"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "FinalTabletRetrieval",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 48,
+          "Detail": "world.Retrieval.ReadyToReconstruct"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "FixedTabletPlan",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 32,
+          "Detail": "definition.Tablets[i].DiscoveryDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 70,
+          "Detail": "var tablet = definition.Tablets[index]"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 71,
+          "Detail": "tablet.DateNodeDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 72,
+          "Detail": "tablet.DateNodeDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 73,
+          "Detail": "tablet.Title"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 73,
+          "Detail": "tablet.Record"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 17,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 18,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 18,
+          "Detail": "world.Session.Clock.MinuteOfDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 37,
+          "Detail": "world.Session.Clock.Midnight"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 52,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 59,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 59,
+          "Detail": "world.Session.Clock.MinuteOfDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 62,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 68,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 69,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 72,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 81,
+          "Detail": "world.Session.Clock.Midnight"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 12,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 17,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 18,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 37,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 52,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 55,
+          "Detail": "world.Session.Descended"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 59,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 61,
+          "Detail": "world.Session.OpenLake"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 62,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 68,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 68,
+          "Detail": "world.Session.Descended"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 69,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 72,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 77,
+          "Detail": "world.Session.Descended"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 81,
+          "Detail": "world.Session.Clock"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "NineDayDefinition",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 9,
+          "Detail": "field definition"
+        }
+      ]
+    },
+    {
+      "From": "NineDayFlow",
+      "To": "NineDayTablet",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayFlow.cs",
+          "Line": 10,
+          "Detail": "field fixedTablets"
+        }
+      ]
+    },
+    {
+      "From": "NineDayTablet",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayTablet.cs",
+          "Line": 5,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "NineDayTablet",
+      "To": "NineDayFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayTablet.cs",
+          "Line": 7,
+          "Detail": "field flow"
+        }
+      ]
+    },
+    {
+      "From": "NineDayTablet",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayTablet.cs",
+          "Line": 16,
+          "Detail": "PlayerController player"
+        }
+      ]
+    },
+    {
+      "From": "NineDayTablet",
+      "To": "RuneTablet",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/NineDayTablet.cs",
+          "Line": 10,
+          "Detail": "field editableTablet"
+        }
+      ]
+    },
+    {
+      "From": "PlayerController",
+      "To": "CipherBox",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 28,
+          "Detail": "activeInteraction is CipherBox"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 147,
+          "Detail": "CipherBox box"
+        }
+      ]
+    },
+    {
+      "From": "PlayerController",
+      "To": "GameSettings",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 96,
+          "Detail": "world.Settings.MouseSensitivity"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 101,
+          "Detail": "world.Settings.SprintMetresPerSecond"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 101,
+          "Detail": "world.Settings.WalkMetresPerSecond"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 108,
+          "Detail": "world.Settings.InteractionMetres"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 190,
+          "Detail": "world.Settings.CameraBlendSeconds"
+        }
+      ]
+    },
+    {
+      "From": "PlayerController",
+      "To": "ICloseViewInteraction",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 24,
+          "Detail": "field activeInteraction"
+        }
+      ]
+    },
+    {
+      "From": "PlayerController",
+      "To": "Interactable",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 110,
+          "Detail": "var target = hit.collider.GetComponentInParent<Interactable>()"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 110,
+          "Detail": "<Interactable>"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 113,
+          "Detail": "target.Prompt"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 115,
+          "Detail": "target.Use"
+        }
+      ]
+    },
+    {
+      "From": "PlayerController",
+      "To": "IPlayerSession",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 16,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "PlayerController",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 8,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "PlayerController",
+      "To": "RuneTablet",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 32,
+          "Detail": "activeInteraction is RuneTablet"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 33,
+          "Detail": "public RuneTablet ActiveTablet => activeInteraction as RuneTablet;"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 33,
+          "Detail": "activeInteraction as RuneTablet"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 136,
+          "Detail": "RuneTablet tablet"
+        }
+      ]
+    },
+    {
+      "From": "PlayerController",
+      "To": "ThreatPickup",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PlayerController.cs",
+          "Line": 25,
+          "Detail": "field activePickup"
+        }
+      ]
+    },
+    {
+      "From": "PreparationRecord",
+      "To": "ExplorationFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PreparationRecord.cs",
+          "Line": 11,
+          "Detail": "field owner"
+        }
+      ]
+    },
+    {
+      "From": "PreparationRecord",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PreparationRecord.cs",
+          "Line": 9,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "PreparationRecord",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/PreparationRecord.cs",
+          "Line": 25,
+          "Detail": "PlayerController player"
+        }
+      ]
+    },
+    {
+      "From": "RecordBox",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RecordBox.cs",
+          "Line": 9,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "RecordBox",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RecordBox.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "RecordBox",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RecordBox.cs",
+          "Line": 12,
+          "Detail": "PlayerController player"
+        }
+      ]
+    },
+    {
+      "From": "RuneSlot",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneSlot.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "RuneTablet",
+      "To": "ICloseViewInteraction",
+      "Kind": "realisation",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 7,
+          "Detail": "implements interface"
+        }
+      ]
+    },
+    {
+      "From": "RuneTablet",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "RuneTablet",
+      "To": "ITabletProgram",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 16,
+          "Detail": "field program"
+        }
+      ]
+    },
+    {
+      "From": "RuneTablet",
+      "To": "ListeningTool",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 11,
+          "Detail": "field listeningTool"
+        }
+      ]
+    },
+    {
+      "From": "RuneTablet",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 42,
+          "Detail": "PlayerController player"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 44,
+          "Detail": "player.EnterTabletView"
+        }
+      ]
+    },
+    {
+      "From": "RuneTablet",
+      "To": "RuneBoardModel",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 17,
+          "Detail": "field board"
+        }
+      ]
+    },
+    {
+      "From": "RuneTablet",
+      "To": "RuneSlot",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 12,
+          "Detail": "field slots"
+        }
+      ]
+    },
+    {
+      "From": "RuneTablet",
+      "To": "RuneTrayItem",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTablet.cs",
+          "Line": 13,
+          "Detail": "field tray"
+        }
+      ]
+    },
+    {
+      "From": "RuneTrayItem",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/RuneTrayItem.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "SceneFontBinding",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/SceneFontBinding.cs",
+          "Line": 9,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ScheduledWorldAttributes",
+      "To": "AttributeOperations",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ScheduledWorldAttributes.cs",
+          "Line": 24,
+          "Detail": "AttributeOperations.TryExchange"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/ScheduledWorldAttributes.cs",
+          "Line": 29,
+          "Detail": "AttributeOperations.TryTransfer"
+        }
+      ]
+    },
+    {
+      "From": "SleepPoint",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/SleepPoint.cs",
+          "Line": 9,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "SleepPoint",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/SleepPoint.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "SleepPoint",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/SleepPoint.cs",
+          "Line": 12,
+          "Detail": "PlayerController player"
+        }
+      ]
+    },
+    {
+      "From": "StableBeamMotion",
+      "To": "AttributeOperations",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/Domain/StableBeamMotion.cs",
+          "Line": 36,
+          "Detail": "AttributeOperations.TryExchange"
+        }
+      ]
+    },
+    {
+      "From": "StationObservation",
+      "To": "ExplorationFlow",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/StationObservation.cs",
+          "Line": 7,
+          "Detail": "field owner"
+        }
+      ]
+    },
+    {
+      "From": "StationObservation",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/StationObservation.cs",
+          "Line": 5,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "StationObservation",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/StationObservation.cs",
+          "Line": 20,
+          "Detail": "PlayerController player"
+        }
+      ]
+    },
+    {
+      "From": "ThreatPickup",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 9,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "ThreatPickup",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 34,
+          "Detail": "world.Session.Descended"
+        }
+      ]
+    },
+    {
+      "From": "ThreatPickup",
+      "To": "Interactable",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 7,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "ThreatPickup",
+      "To": "PickupAttempt",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 20,
+          "Detail": "stored property Attempt"
+        }
+      ]
+    },
+    {
+      "From": "ThreatPickup",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 32,
+          "Detail": "PlayerController player"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 37,
+          "Detail": "player.EnterPickupView"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 45,
+          "Detail": "world.Player.ExitCloseView"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 49,
+          "Detail": "world.Player.ExitCloseView"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 54,
+          "Detail": "world.Player.CurrentPickup"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/ThreatPickup.cs",
+          "Line": 54,
+          "Detail": "world.Player.ExitCloseView"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "FixedTabletPlan",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 42,
+          "Detail": "plan[1].DateNodeDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 42,
+          "Detail": "plan[2].DateNodeDay"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 45,
+          "Detail": "world.Session.Clock.Midnight"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 46,
+          "Detail": "world.Session.Clock.Day"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 73,
+          "Detail": "world.Session.Clock.Midnight"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 21,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 45,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 46,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 60,
+          "Detail": "world.Session.LakeSeal"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 73,
+          "Detail": "world.Session.Clock"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "NineDayDefinition",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 41,
+          "Detail": "world.Campaign.Definition.Tablets"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "NineDayFlow",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 41,
+          "Detail": "world.Campaign.Definition"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "ScheduledWorldAttributes",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 23,
+          "Detail": "stored property Rule"
+        }
+      ]
+    },
+    {
+      "From": "WorldAttributeConsequences",
+      "To": "WorldPresentation",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs",
+          "Line": 53,
+          "Detail": "world.Presentation.ExpectedSunAboveHorizon"
+        }
+      ]
+    },
+    {
+      "From": "WorldPresentation",
+      "To": "GameClock",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 22,
+          "Detail": "world.Session.Clock.MinuteOfDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 23,
+          "Detail": "world.Session.Clock.MinuteOfDay"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 58,
+          "Detail": "world.Session.Clock.MinuteOfDay"
+        }
+      ]
+    },
+    {
+      "From": "WorldPresentation",
+      "To": "GameSceneController",
+      "Kind": "association",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 24,
+          "Detail": "field world"
+        }
+      ]
+    },
+    {
+      "From": "WorldPresentation",
+      "To": "GameSession",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 22,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 23,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 56,
+          "Detail": "world.Session.BoxSeal"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 58,
+          "Detail": "world.Session.Clock"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 70,
+          "Detail": "world.Session.LakeSeal"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 71,
+          "Detail": "world.Session.BoxSeal"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 72,
+          "Detail": "world.Session.Descended"
+        }
+      ]
+    },
+    {
+      "From": "WorldPresentation",
+      "To": "GameSettings",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 60,
+          "Detail": "var settings = world.Settings"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 61,
+          "Detail": "settings.NightSunIntensity"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 61,
+          "Detail": "settings.DaySunIntensity"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 63,
+          "Detail": "settings.NightAmbient"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 63,
+          "Detail": "settings.DayAmbient"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 64,
+          "Detail": "settings.NightFog"
+        },
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 64,
+          "Detail": "settings.DayFog"
+        }
+      ]
+    },
+    {
+      "From": "WorldPresentation",
+      "To": "MonoBehaviour",
+      "Kind": "inheritance",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 6,
+          "Detail": "base type"
+        }
+      ]
+    },
+    {
+      "From": "WorldPresentation",
+      "To": "PlayerController",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 65,
+          "Detail": "world.Player.ViewCamera"
+        }
+      ]
+    },
+    {
+      "From": "WorldPresentation",
+      "To": "ScheduledWorldAttributes",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 21,
+          "Detail": "world.Consequences.Rule.SunLight"
+        }
+      ]
+    },
+    {
+      "From": "WorldPresentation",
+      "To": "WorldAttributeConsequences",
+      "Kind": "dependency",
+      "Evidence": [
+        {
+          "Path": "Assets/Demon/Scripts/Runtime/WorldPresentation.cs",
+          "Line": 21,
+          "Detail": "world.Consequences.Rule"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "snapshotDate": "2026-11-05 Asia/Shanghai",
+  "sourceSHA256": {
+    "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSettings.cs": "f1a7c9783938b51d28545944237ea35d1c4485d89599f829f18a11d2e49f53ce",
+    "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowGrass.cs": "c84f291f8ada491190e9db57c0a2ed680d5102a208e69c459d883319e1cd1726",
+    "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowHeight.cs": "8b86e6c2b380a30ef9e92935b089e0fffa17b212c6fe00388e82e07857c4731f",
+    "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowProps.cs": "894f69b74d705087fc7cfb92698769d258a12f20aafda8ec7a4ccbdb956d050c",
+    "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowTree.cs": "86742cc6ae59bda17e6f623c39ec4e145459b3483a7bf22195a4547b838b4fbf",
+    "Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalWind.cs": "afc9c418f6f2a914c9648dfb50866f2befbb608ba2c43d3d02d7e17a9fe144cb",
+    "Assets/Demon/Scripts/Runtime/Domain/GameRules.cs": "88488a0dc79924741b7ab3570f76c2bf11dc89c2429b18a8da05439abf77c29f",
+    "Assets/Demon/Scripts/Runtime/BeamDefinition.cs": "70042128498d326c7667ec14b096c77f5db83fd72e245c11475762bef0064cab",
+    "Assets/Demon/Scripts/Runtime/BeamTether.cs": "93ae0e60ecd9d555ad366fa19c3aa06b10a5cc3e8ed809cc70a6c2b65dc07f0b",
+    "Assets/Demon/Scripts/Runtime/Domain/BearingCipher.cs": "b71b6cc5ced0c92fcfaae33a3760c0adb59fb15a3175a33fb149c4bd52e83b0c",
+    "Assets/Demon/Scripts/Runtime/ChaseController.cs": "9cc18d2d166170b8e6f4c14f11c40d6070e0153f20a5424591c9912b99aa9e5c",
+    "Assets/Demon/Scripts/Runtime/ChaseDefinition.cs": "6e26780adf1bdc61cd95019dac9fd1f2f8383245d0a0d6c290095d7d8c380a21",
+    "Assets/Demon/Scripts/Runtime/CipherBox.cs": "518f492d90b484e37e8e16991567c3992baa5ec9e42217bee8093569a7cb7738",
+    "Assets/Demon/Scripts/Runtime/CipherDefinition.cs": "85819ebdf421854e5e228d91c9b3389bb855b5026da29041592e4cabe87ff727",
+    "Assets/Demon/Scripts/Runtime/CipherDigit.cs": "50a49a4d182f55a218fbee8ceb34244d2fbb15bced6cba90b5f0614ad621aab3",
+    "Assets/Demon/Scripts/Runtime/CipherWheel.cs": "0e86b304b9b7d488b01754fb572d1eedb35cb4456e03d4dc829d5b624fbcd683",
+    "Assets/Demon/Scripts/Runtime/Domain/PursuitRules.cs": "810fc2a43652a6cc347c43c661e2bdc19f6697df91329c8830aacf86d841799b",
+    "Assets/Demon/Scripts/Runtime/NineDayDefinition.cs": "f4b7a34920bb6d3a5c06ebcabc4b8c4f25bab0c356f88980d7e48240da63cfc1",
+    "Assets/Demon/Scripts/Runtime/Domain/DiscoveryProgress.cs": "b176b9dc5e81b12efe1a56238ad162bf1cf202b1a7fe68dd2d97b7497f675da3",
+    "Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs": "ccf912c1beb232de85bf233cc078b8d9627b44fd37fe8d6353c030610f105f4e",
+    "Assets/Demon/Scripts/Runtime/ExplorationFlow.cs": "e6a1dbf76731a011d4b8e7b1fdbac2b9ba6179ff3e6e12e9b36af9978e0799f8",
+    "Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs": "36c0eeae51df9e98d4d374a999a848ff6e4a23da58a7f9c14a47183ccc018b00",
+    "Assets/Demon/Scripts/Runtime/FinaleSequence.cs": "defdb9968176abf664c65e4d22c32ae3d4c915988ea4da4bd0db87c968a6dd5b",
+    "Assets/Demon/Scripts/Runtime/Domain/FinaleTimeWindow.cs": "bdb9b45ef672fc6c4eeee982cd973dcbd8d36edcbd6c8f02de4d05eac74319af",
+    "Assets/Demon/Scripts/Runtime/FinalTabletDock.cs": "f1dcefe6f0280d60db029d50346a540ffe263a3f4929d04584a2f20d2f70686a",
+    "Assets/Demon/Scripts/Runtime/Domain/FinalTabletProgress.cs": "4dade21970f7773ce7c081a4f6ed814743314ac7d824b156b7779b0d16c12737",
+    "Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs": "db344a2336f2c2ad88c3d5122a8e8a859c7ab25810f28bf42acddbfdfde14fb5",
+    "Assets/Demon/Scripts/Runtime/Domain/FirstDayInspectionLog.cs": "762685dd7f20efbc4d4b07fbce3003998d1890941b6376f90f20eabd087e9153",
+    "Assets/Demon/Scripts/Runtime/GameHud.cs": "559bb848755930e8e04162a58f97dbae75806e5057d0b6fc4b342ac8ad6ff4d1",
+    "Assets/Demon/Scripts/Runtime/GameSceneController.cs": "775f887bd78b9485ec3ce5a56724ecb95074f618eb1b27f47e507b68fe122c84",
+    "Assets/Demon/Scripts/Runtime/GameSettings.cs": "e832d9c6af55b5c57a034e272909436e42d2f976678a88e8b6bc995d4fbb030c",
+    "Assets/Demon/Scripts/Runtime/SceneContracts.cs": "0e7e1db300942e8fd9b42d8a70e6f6062ab32576d79dd6f4b64798017722ca29",
+    "Assets/Demon/Scripts/Runtime/Interactable.cs": "3d97afb083d4d31d2914e2f73d27092182a7d3fad553f698fcb2f84b37db487a",
+    "Assets/ImportAsset/LogCabin/Source/Scripts/LC_Door.cs": "4cc6639c6cabf777374183eea90da12aaaba25e4be80d569a14c3dd158cd3f70",
+    "Assets/Demon/Scripts/Runtime/ListeningChime.cs": "e318f8834f4ae7990cd486c4dbf23e36564458c6fc0587c3afd8075a3e9f467e",
+    "Assets/Demon/Scripts/Runtime/ListeningDefinition.cs": "9cce415345207576a0c9262481f281845dcd279742fa780d7b8f6baccc679c06",
+    "Assets/Demon/Scripts/Runtime/ListeningTool.cs": "f5fd23b3c23e0ba949d5f6a2e2c7cdc42227d8f4545554df5dd7a2f3bf3ded2c",
+    "Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs": "8826fcaeab95cd591f5c12150fe6acdd23e012502cd71b500e7acc39f04a416e",
+    "Assets/Demon/Scripts/Runtime/NineDayFlow.cs": "3a8302dd3ea165c1a667f96a8ac526662f79173ac4b9fe37bc3033b22911791b",
+    "Assets/Demon/Scripts/Runtime/NineDayTablet.cs": "17277ebb2b4e7a05adedec4d1f4543cc7234b91001c055bf02191e6c91dee951",
+    "Assets/Demon/Scripts/Runtime/PlayerController.cs": "5eb4421cbbb5a6339d890e7843cd90d5c88eeefdd07372b6fa4f88b2252f2ee4",
+    "Assets/Demon/Scripts/Runtime/PreparationRecord.cs": "960455317d0404715b2ed5867bba505646b07126e635239dce1774bd776f215f",
+    "Assets/Demon/Scripts/Runtime/RecordBox.cs": "603559976c6dd6fdd7059d63e4e5824b271c1bd1d494269df7da7051cfc48901",
+    "Assets/Demon/Scripts/Runtime/Domain/RegionEntryLatch.cs": "0446f8e71fef68d26fb282f447f1c7c7216b547d0011e9b00dcd2e3c69d123bd",
+    "Assets/Demon/Scripts/Runtime/RuneSlot.cs": "888371efa97d1a10a28e1c5aaace0e612bdd2dd6d227e406671cb34629dd975d",
+    "Assets/Demon/Scripts/Runtime/RuneTablet.cs": "608f62ed1e28f8cda79715998497d721449c9b769a7dd4a419e15ba587c1072c",
+    "Assets/Demon/Scripts/Runtime/RuneTrayItem.cs": "92f47fee344499ecca4ede3182558e10622b5bdd4055eb5be9174350e34dc815",
+    "Assets/Demon/Scripts/Runtime/SceneFontBinding.cs": "a3dc535c35eab40cf5678f799cb47db5e2a756209622d6ccf061cc5949195588",
+    "Assets/Demon/Scripts/Runtime/Domain/ScheduledWorldAttributes.cs": "b181d2f0f4ff662dfe6957a7943c83c989af77dc45a38a189c49e3db42a2f272",
+    "Assets/Demon/Scripts/Runtime/SleepPoint.cs": "fe3483ebadfbd0d35e8c6716d2a4aebc1c5615c72a0f1413e3d3086fc4579fba",
+    "Assets/Demon/Scripts/Runtime/Domain/StableBeamMotion.cs": "e22221eca9e3d47761dd085c5f3d1cf4eda77d1ba9188899a4650a18ffc60d76",
+    "Assets/Demon/Scripts/Runtime/StationObservation.cs": "30312e9f2398de5a4570a73888265bddb3e9008ebd805b1616f52f9d8b112d75",
+    "Assets/Demon/Scripts/Runtime/ThreatPickup.cs": "a1b1ea57e7d24ac87919bd0c0311218263a300e80fe561f352501d80bc91b77b",
+    "Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs": "14bc772e507e749bd7690fec0166781de44a265a1825aa1ab6c5bf578fd306bc",
+    "Assets/Demon/Scripts/Runtime/WorldPresentation.cs": "7f344038fd5879c4d9aa39eaccdc2eb7a0340c2b8683304edf007966afc8c209"
+  }
+}

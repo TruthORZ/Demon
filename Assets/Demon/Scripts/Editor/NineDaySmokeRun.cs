@@ -8,12 +8,12 @@ using UnityEngine;
 namespace Demon.Slice.Editor
 {
     // Input/geometry regressions remain in smoke-input; this checks the actual nine-day component composition.
-    public sealed class NineDaySmokeRun
+    public sealed class NineDaySmokeRun : ISmokeRun
     {
         readonly string operation;
         readonly Action<bool, string> finish;
         readonly double started = EditorApplication.timeSinceStartup;
-        SliceSceneController world;
+        GameSceneController world;
         int stage;
         double stageTime;
         bool finished;
@@ -26,12 +26,13 @@ namespace Demon.Slice.Editor
             {
                 double now = EditorApplication.timeSinceStartup;
                 if (now - started > 130) throw new TimeoutException("Nine-day smoke timed out.");
-                if (!world) world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                if (!world) world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (!world || world.Session == null || world.Campaign.Progress == null) return;
                 var session = world.Session;
                 var flow = world.Campaign;
                 if (stage == 0)
                 {
+                    if (world.Tether) Require(world.Tether.MotionDay == flow.Definition.MotionDay, "Campaign motion date has multiple sources.");
                     Require(session.Clock.Day == 1 && session.LakeSeal == 1, "D1 must start with the lake sealed.");
                     if (operation == "nine-finale-tuning")
                         Require(Math.Abs(world.Finale.ClockCountdownSeconds - 3.5f) < .001f, "Saved countdown tuning was ignored.");
@@ -126,7 +127,7 @@ namespace Demon.Slice.Editor
                 else if (stage == 7 && now - stageTime > 3)
                 {
                     Require(world.EndingPresented, "Finale did not release the ending view.");
-                    var lid = UnityEngine.Object.FindAnyObjectByType<SlicePresentation>().LidPivot;
+                    var lid = UnityEngine.Object.FindAnyObjectByType<WorldPresentation>().LidPivot;
                     Require(Quaternion.Angle(lid.localRotation, Quaternion.identity) < .1f, "Box did not close at midnight.");
                     Capture("ending"); Complete(true, "No+1: D8 night gate, reserved puzzle/long reading, authored clock camera, two exchanges, box slam, lake glow and delayed ending passed: " + operation);
                 }
@@ -181,7 +182,7 @@ namespace Demon.Slice.Editor
                     double before = session.Clock.AbsoluteMinutes;
                     Require(world.TryCompile() && session.ExchangeCount == 1 && session.LakeSeal == 1, "D8 reconstruction failed.");
                     Require(session.Clock.AbsoluteMinutes == before, "Solidifying advanced time.");
-                    UnityEngine.Object.FindAnyObjectByType<SliceBox>().Use(world.Player);
+                    UnityEngine.Object.FindAnyObjectByType<RecordBox>().Use(world.Player);
                     Require(world.HasReadBox && world.Player.Reading, "Real box component failed after migration.");
                     stage = 4; stageTime = now;
                 }
@@ -196,6 +197,7 @@ namespace Demon.Slice.Editor
             pickup.Use(world.Player); pickup.TickHeld(true, pickup.HoldSeconds + .01f);
             Require(world.Retrieval.Progress.Acquired && world.Retrieval.Place(world.Player), "T07 fixture acquisition/placement failed.");
         }
+        public void Cleanup() { } // No synthetic devices or temporary state are owned by this scenario.
         void Complete(bool success, string message)
         {
             finish(success, message); finished = true;

@@ -18,7 +18,7 @@ namespace Demon.Slice
         [SerializeField] Material emptySolarMaterial;
         [SerializeField] GameObject whiteRim;
         [SerializeField] GameObject[] solarRays;
-        SliceSceneController world;
+        GameSceneController world;
         int parkedSample;
         public ScheduledWorldAttributes Rule { get; private set; }
         public AudioSource RadioBroadcast => radioBroadcast;
@@ -30,7 +30,7 @@ namespace Demon.Slice
         public void Configure(AudioClip broadcast, AudioClip noise, AudioSource radio, AudioSource hiss, AudioSource demon,
             Renderer disk, Material normal, Material empty, GameObject rim, GameObject[] rays)
         { broadcastClip = broadcast; staticClip = noise; radioBroadcast = radio; radioStatic = hiss; demonBroadcast = demon; solarDisk = disk; normalSolarMaterial = normal; emptySolarMaterial = empty; whiteRim = rim; solarRays = rays; }
-        public void Initialize(SliceSceneController controller)
+        public void Initialize(GameSceneController controller)
         {
             if (!controller.Campaign || !broadcastClip || !staticClip || !radioBroadcast || !radioStatic || !demonBroadcast || !solarDisk || !normalSolarMaterial || !emptySolarMaterial || !whiteRim || solarRays == null || solarRays.Length != 8)
                 throw new InvalidOperationException("Scheduled attributes require saved broadcast/static emitters and solar reference assets.");

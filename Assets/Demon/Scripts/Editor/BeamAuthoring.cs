@@ -24,7 +24,7 @@ namespace Demon.Slice.Editor
             Editable();
             if (File.Exists(ScenePath) || File.Exists(DataPath) || File.Exists(SettingsPath)) throw new InvalidOperationException("Beam outputs exist; preserve and edit saved content.");
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world.Cipher || !world.Listening || world.Tether || GameObject.Find("Beam_Authored")) throw new InvalidOperationException("Unexpected existing beam/composition state.");
             var proxy = UnityEngine.Object.FindAnyObjectByType<ListeningTrailProxy>();
             var vane = GameObject.Find("Cipher_Authored/WindVane_FixedPosition/RotatingBlade_OrientationIsNotCode").transform;
@@ -51,19 +51,19 @@ namespace Demon.Slice.Editor
             var sign = new GameObject("ObservationSign").AddComponent<TextMesh>(); sign.transform.SetParent(root, false); sign.transform.position = new Vector3(-1, 1.1f, 4); sign.text = "观察点\n转向雪痕，按住右键"; sign.font = font; sign.fontSize = 64; sign.characterSize = .018f; sign.anchor = TextAnchor.MiddleCenter; sign.alignment = TextAlignment.Center;
             var tether = world.gameObject.AddComponent<BeamTether>(); tether.Configure(AssetDatabase.LoadAssetAtPath<BeamDefinition>(DataPath), aim, proxy.Target.gameObject, vane, lamp, line, body.gameObject, glow, observer); world.ConfigureTether(tether); proxy.ConfigureTether(tether);
             EditorUtility.SetDirty(world); EditorUtility.SetDirty(proxy); EditorUtility.SetDirty(tether);
-            var hud = UnityEngine.Object.FindAnyObjectByType<SliceHud>();
+            var hud = UnityEngine.Object.FindAnyObjectByType<GameHud>();
             var status = new GameObject("BeamStatus", typeof(RectTransform)).AddComponent<Text>(); status.transform.SetParent(hud.transform, false); status.font = font; status.fontSize = 24; status.color = new Color(.9f, .97f, 1); status.alignment = TextAnchor.LowerRight; status.raycastTarget = false;
             var rect = status.rectTransform; rect.anchorMin = rect.anchorMax = new Vector2(1, 0); rect.pivot = new Vector2(1, 0); rect.anchoredPosition = new Vector2(-30, 165); rect.sizeDelta = new Vector2(620, 110);
             var outline = status.gameObject.AddComponent<Outline>(); outline.effectColor = new Color(.02f, .03f, .04f, 1); outline.effectDistance = new Vector2(1.5f, -1.5f); hud.ConfigureToolStatus(status); EditorUtility.SetDirty(hud);
-            var binding = hud.GetComponent<SliceFontBinding>(); binding.Configure(font, binding.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
+            var binding = hud.GetComponent<SceneFontBinding>(); binding.Configure(font, binding.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
             var plans = world.Campaign.Definition;
             plans.Tablets[5].Record = "【T06 · 已固化运动交换工具】\n稳定光束锁定雪痕区域时，交换恶魔与风向标的运动；失锁再交换一次复位。\n脚印停止时风向标转动；移开光束后恢复。\n\n按住鼠标右键照住雪痕，保持到稳定。转身、遮挡、超距或进入近景会失锁。\n湖岸观察点能同时观察雪痕与风向标。风铃负责区域预警，光束争取行动时间。";
             plans.Days[6].Objective = "按三个固定地标的方位解开A，取出T06。回到湖岸观察点，按住右键稳定照住雪痕，观察运动交换与失锁恢复。"; EditorUtility.SetDirty(plans);
             Save(); SyncMotionRecord();
             var settings = UnityEngine.Object.Instantiate(world.Settings); settings.name = "BeamSettings"; settings.StartDay = 7; settings.StartHour = 10; settings.InitialLakeSealed = false; AssetDatabase.CreateAsset(settings, SettingsPath); AssetDatabase.SaveAssets();
             if (!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not save beam quick scene.");
-            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath); serialized.ApplyModifiedProperties();
+            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath); serialized.ApplyModifiedProperties();
             var actor = world.Player.GetComponent<CharacterController>(); actor.enabled = false; world.Player.transform.SetPositionAndRotation(new Vector3(-8, .04f, -3.5f), Quaternion.identity); actor.enabled = true; PrefabUtility.RecordPrefabInstancePropertyModifications(world.Player.transform);
             Save(); EditorSceneManager.OpenScene(ScenePath); return Validate();
         }
@@ -80,7 +80,7 @@ namespace Demon.Slice.Editor
             foreach (var path in new[] { NineDayAuthoring.ScenePath, ScenePath })
             {
                 EditorSceneManager.OpenScene(path);
-                var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (!world.Tether) throw new InvalidOperationException("Preserving scene without authored T06.");
                 var observer = world.Tether.ObservationPoint; observer.position = new Vector3(-1, .04f, 3.3f); observer.LookAt(new Vector3(2, .04f, -7));
                 var root = GameObject.Find("Beam_Authored").transform;
@@ -104,7 +104,7 @@ namespace Demon.Slice.Editor
         }
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Tether || !world.Tether.Definition || !world.Tether.AimRegion || !world.Tether.VaneBlade || !world.Tether.ObservationPoint) throw new InvalidOperationException("Incomplete saved beam composition.");
             var proxy = UnityEngine.Object.FindAnyObjectByType<ListeningTrailProxy>();
             if (!proxy || new SerializedObject(proxy).FindProperty("tether").objectReferenceValue != world.Tether) throw new InvalidOperationException("Proxy lost its explicit motion owner.");
@@ -114,7 +114,7 @@ namespace Demon.Slice.Editor
         const string Tune = "Demon.Beam.Restore";
         public static void BeginTuning()
         {
-            var data = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>().Tether.Definition;
+            var data = UnityEngine.Object.FindAnyObjectByType<GameSceneController>().Tether.Definition;
             SessionState.SetFloat(Tune + "range", data.RangeMetres); SessionState.SetFloat(Tune + "radius", data.RegionRadiusMetres); SessionState.SetFloat(Tune + "stable", data.StableSeconds); SessionState.SetBool(Tune, true);
             data.RangeMetres = 6; data.RegionRadiusMetres = 1.1f; data.StableSeconds = .4f; EditorUtility.SetDirty(data); AssetDatabase.SaveAssets();
         }

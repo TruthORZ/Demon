@@ -8,12 +8,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 namespace Demon.Slice.Editor
 {
-    public sealed class BeamSmokeRun
+    public sealed class BeamSmokeRun : ISmokeRun
     {
         readonly string operation;
         readonly Action<bool, string> finish;
         readonly double started = EditorApplication.timeSinceStartup;
-        SliceSceneController world;
+        GameSceneController world;
         BeamTether beam;
         ListeningTrailProxy proxy;
         Keyboard keyboard; Mouse mouse;
@@ -34,7 +34,7 @@ namespace Demon.Slice.Editor
             {
                 double now = Time.timeAsDouble;
                 if (EditorApplication.timeSinceStartup - started > 160) throw new TimeoutException("Beam smoke timed out at stage " + stage);
-                if (!world) world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                if (!world) world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (!world || world.Session == null || !world.Tether || world.Tether.Rule == null) return;
                 beam = world.Tether;
                 if (stage == 0)

@@ -9,13 +9,13 @@ using UnityEngine.InputSystem.LowLevel;
 using Demon.Slice.Domain;
 namespace Demon.Slice.Editor
 {
-    public sealed class ConsequencesSmokeRun
+    public sealed class ConsequencesSmokeRun : ISmokeRun
     {
         readonly string operation;
         readonly Action<bool, string> finish;
         readonly double started = EditorApplication.timeSinceStartup;
         readonly float[] samples = new float[512];
-        SliceSceneController world;
+        GameSceneController world;
         WorldAttributeConsequences effects;
         Keyboard keyboard; Mouse mouse;
         InputSettings.BackgroundBehavior oldBackground;
@@ -33,7 +33,7 @@ namespace Demon.Slice.Editor
             try
             {
                 if (EditorApplication.timeSinceStartup - started > 160) throw new TimeoutException("Attribute smoke timed out at " + stage);
-                if (!world) world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                if (!world) world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (world && !world.enabled) throw new InvalidOperationException("World disabled; inspect saved references.");
                 if (!world || world.Session == null || !world.Consequences || world.Consequences.Rule == null) return;
                 effects = world.Consequences; var rule = effects.Rule; double now = Time.timeAsDouble;

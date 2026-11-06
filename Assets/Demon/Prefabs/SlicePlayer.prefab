@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c41b4dc5656d9be4ebf2e55e03a94a05, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SlicePlayer
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.PlayerController
   viewCamera: {fileID: 5221217284363472357}
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &7581489449026885887

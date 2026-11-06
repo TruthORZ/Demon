@@ -24,7 +24,19 @@ namespace Demon.Slice
         [SerializeField] Transform[] listeningRoute;
         [SerializeField] Transform visibleListeningPoint;
         [SerializeField] Transform hiddenListeningPoint;
-        SliceSceneController world;
+        [Header("Optional D7–D8 authored extension")]
+        [SerializeField] PreparationRecord solarRecord;
+        [SerializeField] PreparationRecord handoverRecord;
+        [SerializeField] Transform practicePoint;
+        GameSession session;
+        NineDayFlow campaign;
+        WorldAttributeConsequences consequences;
+        BeamTether tether;
+        CipherBox cipher;
+        ListeningTool listening;
+        FinalTabletRetrieval retrieval;
+        ISceneFeedback feedback;
+        bool solarRead, handoverRead, sawBeamLock, sawBeamRelease;
         public FirstDayInspectionLog Log { get; private set; }
         public ExplorationDefinition Definition => definition;
         public StationObservation[] Observations => (StationObservation[])observations.Clone();
@@ -45,29 +57,34 @@ namespace Demon.Slice
         public Transform[] ListeningRoute => listeningRoute == null ? Array.Empty<Transform>() : (Transform[])listeningRoute.Clone();
         public Transform VisibleListeningPoint => visibleListeningPoint;
         public Transform HiddenListeningPoint => hiddenListeningPoint;
-        public bool ShowStatus => world && !world.Session.Descended && world.Session.Clock.Day <= (HasSignalSearch ? 6 : HasInvestigation ? 4 : 2);
-        public string Status
+        public bool HasFinalPreparation => handoverRecord;
+        public PreparationRecord SolarRecord => solarRecord;
+        public PreparationRecord HandoverRecord => handoverRecord;
+        public Transform PracticePoint => practicePoint;
+        public bool SolarRead => solarRead;
+        public bool HandoverRead => handoverRead;
+        public bool PracticedBeam => sawBeamRelease;
+        public bool ShowStatus => session != null && !session.Descended && session.Clock.Day <= (HasFinalPreparation ? 8 : HasSignalSearch ? 6 : HasInvestigation ? 4 : 2)
+            && !(HasFinalPreparation && session.Clock.Day == 8 && retrieval.Available);
+        public string Status => definition.GuideText(ExplorationGuidance.Select(definition.GuideRules, new ExplorationGuideState
         {
-            get
-            {
-                int day = world.Session.Clock.Day;
-                if (day == 1) return definition.Day1Guide + "\n已记录 " + Log.Count + "/3";
-                if (day == 2) return world.Campaign.Progress.Found(0) ? definition.FoundGuide : definition.Day2Guide;
-                if (day == 3) return world.Campaign.Progress.Found(1) ? definition.Day3FoundGuide : definition.Day3Guide;
-                if (day == 4) return world.Campaign.Progress.Found(2) ? definition.Day4FoundGuide : definition.Day4Guide;
-                if (day == 5) return world.Campaign.Progress.Found(3) ? definition.Day5FoundGuide : definition.Day5Guide;
-                return world.Listening.Active ? definition.Day6ActiveGuide : world.Campaign.Progress.Found(4) ? definition.Day6FoundGuide : definition.Day6Guide;
-            }
-        }
+            Day = session.Clock.Day, HasPreparation = HasFinalPreparation,
+            FirstFound = campaign.Progress.Found(0), SecondFound = campaign.Progress.Found(1),
+            ThirdFound = campaign.Progress.Found(2), FourthFound = campaign.Progress.Found(3), FifthFound = campaign.Progress.Found(4),
+            ListeningActive = listening && listening.Active, SolarRead = solarRead, HandoverRead = handoverRead,
+            ToolAcquired = cipher && cipher.Acquired, BeamLocked = tether.Rule.Locked, BeamReleased = sawBeamRelease
+        }), Log.Count, campaign.Definition.FinalTabletHour);
         public void ConfigureInvestigation(GameObject oldTracks, Transform[] forest, Transform[] ritual, NineDayTablet second, NineDayTablet third)
         { largeTrail = oldTracks; forestRoute = forest; ritualRoute = ritual; secondTablet = second; thirdTablet = third; }
         public void ConfigureSignalSearch(NineDayTablet fourth, NineDayTablet fifth, Transform[] lake, Transform[] listening, Transform visible, Transform hidden)
         { fourthTablet = fourth; fifthTablet = fifth; lakeRoute = lake; listeningRoute = listening; visibleListeningPoint = visible; hiddenListeningPoint = hidden; }
+        public void ConfigureFinalPreparation(PreparationRecord solar, PreparationRecord handover, Transform practice)
+        { solarRecord = solar; handoverRecord = handover; practicePoint = practice; }
         public void Configure(ExplorationDefinition data, StationObservation[] points, GameObject trail, Transform[] route, NineDayTablet tablet, Transform home)
         { definition = data; observations = points; humanTrail = trail; trailWaypoints = route; firstTablet = tablet; returnPoint = home; }
-        public void Initialize(SliceSceneController controller)
+        public void Initialize(GameSession rules, NineDayFlow schedule, WorldAttributeConsequences effects, BeamTether motion, CipherBox tool, ListeningTool listener, FinalTabletRetrieval item, ISceneFeedback messages)
         {
-            if (!definition || !humanTrail || observations == null || observations.Length != 3 || trailWaypoints == null || trailWaypoints.Length < 2 || !firstTablet || firstTablet.Index != 0 || !returnPoint || !controller.Campaign || !controller.Consequences || !controller.Tether)
+            if (!definition || !humanTrail || observations == null || observations.Length != 3 || trailWaypoints == null || trailWaypoints.Length < 2 || !firstTablet || firstTablet.Index != 0 || !returnPoint || !schedule || !effects || !motion || rules == null || messages == null)
                 throw new InvalidOperationException("Exploration requires saved observations, trail/route, original T01 and return point.");
             var sites = new bool[3]; foreach (var point in observations)
             { if (!point || point.Owner != this || !point.CloseView || !point.AimTarget || !point.Approach || (int)point.Site < 0 || (int)point.Site >= sites.Length || sites[(int)point.Site]) throw new InvalidOperationException("Invalid observation composition."); sites[(int)point.Site] = true; }
@@ -83,47 +100,79 @@ namespace Demon.Slice
             bool anySignal = fourthTablet || fifthTablet || visibleListeningPoint || hiddenListeningPoint || (lakeRoute != null && lakeRoute.Length > 0) || (listeningRoute != null && listeningRoute.Length > 0);
             if (anySignal)
             {
-                if (!HasInvestigation || !controller.Listening || !fourthTablet || fourthTablet.Index != 3 || !fifthTablet || fifthTablet.Index != 4 || !visibleListeningPoint || !hiddenListeningPoint || lakeRoute == null || lakeRoute.Length < 2 || listeningRoute == null || listeningRoute.Length < 2)
+                if (!HasInvestigation || !listener || !fourthTablet || fourthTablet.Index != 3 || !fifthTablet || fifthTablet.Index != 4 || !visibleListeningPoint || !hiddenListeningPoint || lakeRoute == null || lakeRoute.Length < 2 || listeningRoute == null || listeningRoute.Length < 2)
                     throw new InvalidOperationException("D5–D6 search requires original T04/T05, complete saved routes and listening points.");
                 foreach (var node in lakeRoute) if (!node) throw new InvalidOperationException("Missing lakeside route node.");
                 foreach (var node in listeningRoute) if (!node) throw new InvalidOperationException("Missing listening route node.");
             }
-            world = controller;
+            if (solarRecord || handoverRecord || practicePoint)
+            {
+                if (!HasSignalSearch || !tool || !item || !solarRecord || !handoverRecord || !practicePoint ||
+                    solarRecord.Kind != PreparationRecordKind.Solar || handoverRecord.Kind != PreparationRecordKind.Handover)
+                    throw new InvalidOperationException("D7–D8 requires complete saved solar/handover records, practice point and existing tools/retrieval.");
+                foreach (var record in new[] { solarRecord, handoverRecord })
+                    if (record.Owner != this || !record.CloseView || !record.AimTarget || !record.Approach)
+                        throw new InvalidOperationException("Preparation record requires explicit owner, close view, aim and approach.");
+            }
+            session = rules; campaign = schedule; consequences = effects; tether = motion; cipher = tool; listening = listener; retrieval = item; feedback = messages;
+            ExplorationGuidance.Validate(definition.GuideRules);
             Log = new FirstDayInspectionLog();
-            world.Session.Clock.Midnight += RefreshDate;
-            world.Session.Changed += RefreshTrails;
+            session.Clock.Midnight += RefreshDate;
+            session.Changed += RefreshTrails;
             RefreshTrails();
         }
         void RefreshDate(int day) => RefreshTrails();
         void RefreshTrails()
         {
-            humanTrail.SetActive(world.Session.Clock.Day >= world.Campaign.Definition.Tablets[0].DiscoveryDay && !world.Session.Descended);
+            humanTrail.SetActive(session.Clock.Day >= campaign.Definition.Tablets[0].DiscoveryDay && !session.Descended);
             // Residual marks are dated evidence, not the moving threat or a second movement controller.
-            if (largeTrail) largeTrail.SetActive(world.Tether.MotionReady && !world.Session.Descended);
+            if (largeTrail) largeTrail.SetActive(tether.MotionReady && !session.Descended);
+            if (HasFinalPreparation)
+            {
+                solarRecord.gameObject.SetActive(!session.Descended && session.Clock.Day >= campaign.Definition.Tablets[2].DateNodeDay);
+                handoverRecord.gameObject.SetActive(!session.Descended && session.Clock.Day >= 8);
+            }
+        }
+        void Update()
+        {
+            if (session == null || !HasFinalPreparation || session.Descended || session.Clock.Day < 7) return;
+            // This is a presentation memory, never a prerequisite for tools, sleep or retrieval.
+            if (tether.Rule.Locked) sawBeamLock = true;
+            else if (sawBeamLock) sawBeamRelease = true;
+        }
+        public void ReadPreparation(PreparationRecord record)
+        {
+            if (session == null || !HasFinalPreparation || session.Descended) return;
+            bool solar = record == solarRecord;
+            if ((!solar && record != handoverRecord) || session.Clock.Day < (solar ? campaign.Definition.Tablets[2].DateNodeDay : 8)) return;
+            if (solar) solarRead = true; else handoverRead = true;
+            int minute = (int)session.Clock.MinuteOfDay;
+            feedback.ReadDocument((solar ? definition.SolarRecord : definition.HandoverRecord) + "\n\n记录时刻：D" + session.Clock.Day + " " +
+                (minute / 60).ToString("00") + ":" + (minute % 60).ToString("00") + "\nEsc 放下记录。", record.CloseView);
         }
         public void Observe(StationObservation point)
         {
-            if (!world || world.Session.Descended) return;
+            if (session == null || session.Descended) return;
             var site = point.Site; ObservationText text; string record;
             switch (site)
             {
                 case ObservationSite.Radio:
-                    text = definition.Radio; record = world.Consequences.Rule.RadioSound == 1 ? text.Normal : text.Changed; break;
+                    text = definition.Radio; record = consequences.Rule.RadioSound == 1 ? text.Normal : text.Changed; break;
                 case ObservationSite.WindVane:
-                    text = definition.WindVane; record = world.Tether.Rule.Locked ? text.Special : world.Tether.MotionReady ? text.Changed : text.Normal; break;
+                    text = definition.WindVane; record = tether.Rule.Locked ? text.Special : tether.MotionReady ? text.Changed : text.Normal; break;
                 default:
-                    text = definition.Lake; record = world.Session.LakeSeal == 1 ? text.Normal : world.Consequences.Rule.DemonLight == 1 ? text.Special : text.Changed; break;
+                    text = definition.Lake; record = session.LakeSeal == 1 ? text.Normal : consequences.Rule.DemonLight == 1 ? text.Special : text.Changed; break;
             }
-            Log.Record(world.Session.Clock.Day, site);
-            int minute = (int)world.Session.Clock.MinuteOfDay;
-            world.ReadDocument(text.Title + "\n观察时刻：D" + world.Session.Clock.Day + " " + (minute / 60).ToString("00") + ":" + (minute % 60).ToString("00") + "\n\n" + record + "\n\nEsc 放下记录。", point.CloseView);
-            world.SetMessage("观察已记录。日常检查为可选内容，可以自由睡到次日。");
+            Log.Record(session.Clock.Day, site);
+            int minute = (int)session.Clock.MinuteOfDay;
+            feedback.ReadDocument(text.Title + "\n观察时刻：D" + session.Clock.Day + " " + (minute / 60).ToString("00") + ":" + (minute % 60).ToString("00") + "\n\n" + record + "\n\nEsc 放下记录。", point.CloseView);
+            feedback.SetMessage("观察已记录。日常检查为可选内容，可以自由睡到次日。");
         }
         void OnDestroy()
         {
-            if (!world || world.Session == null) return;
-            world.Session.Clock.Midnight -= RefreshDate;
-            world.Session.Changed -= RefreshTrails;
+            if (session == null || session == null) return;
+            session.Clock.Midnight -= RefreshDate;
+            session.Changed -= RefreshTrails;
         }
     }
 }

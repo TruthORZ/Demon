@@ -16,7 +16,7 @@ namespace Demon.Slice
         [SerializeField, Range(0, 45)] float swingDegrees = 14;
         readonly RegionEntryLatch entry = new RegionEntryLatch();
         ListeningTool tool;
-        SliceSceneController world;
+        GameSession session;
         Quaternion restingRotation;
         float swingRemaining;
         public int RingCount { get; private set; }
@@ -26,15 +26,15 @@ namespace Demon.Slice
         public bool TargetInside => monitoredTarget && (monitoredTarget.position - transform.position).sqrMagnitude <= radiusMetres * radiusMetres;
         public void Configure(Transform target, float radius, AudioSource audio, AudioClip clip, Transform visual)
         { monitoredTarget = target; radiusMetres = radius; source = audio; enterClip = clip; hangingVisual = visual; }
-        public void Initialize(ListeningTool owner, SliceSceneController controller)
+        public void Initialize(ListeningTool owner, GameSession rules)
         {
             if (!monitoredTarget || !source || !enterClip || !hangingVisual)
                 throw new InvalidOperationException("Chime requires an explicit target, audio clip/source and hanging visual.");
-            tool = owner; world = controller; restingRotation = hangingVisual.localRotation;
+            tool = owner; session = rules; restingRotation = hangingVisual.localRotation;
             SetListening(tool.Active);
         }
         public void SetListening(bool enabled) => entry.SetEnabled(enabled && isActiveAndEnabled, TargetInside);
-        void OnEnable() { if (tool) SetListening(tool.Active && !world.Session.Descended); }
+        void OnEnable() { if (tool) SetListening(tool.Active && !session.Descended); }
         void OnDisable()
         {
             entry.SetEnabled(false, false); swingRemaining = 0;
@@ -44,7 +44,7 @@ namespace Demon.Slice
         void Update()
         {
             if (!tool) return;
-            SetListening(tool.Active && !world.Session.Descended);
+            SetListening(tool.Active && !session.Descended);
             if (entry.Sample(TargetInside))
             {
                 RingCount++; source.PlayOneShot(enterClip); swingRemaining = swingSeconds;

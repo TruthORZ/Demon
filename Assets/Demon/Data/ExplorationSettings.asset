@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff04ebeda21a46140b7d33627f6ffd9d, type: 3}
   m_Name: ExplorationSettings
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceSettings
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.GameSettings
   RealSecondsPerDay: 1440
   StartDay: 1
   StartHour: 8

@@ -24,7 +24,7 @@ namespace Demon.Slice.Editor
             if (File.Exists(ScenePath) || File.Exists(DefinitionPath) || File.Exists(QuickSettingsPath))
                 throw new InvalidOperationException("Listening outputs already exist; edit saved assets instead of regenerating.");
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (world.Listening || GameObject.Find("Listening_Authored")) throw new InvalidOperationException("Existing listening content must be preserved.");
             var fixedTablet = UnityEngine.Object.FindObjectsByType<NineDayTablet>(FindObjectsInactive.Include).Single(t => t.Index == 4);
             if (!fixedTablet.transform.Find("FixedStone") || !fixedTablet.transform.Find("TabletLabel")) throw new InvalidOperationException("Unexpected T05 structure.");
@@ -80,25 +80,25 @@ namespace Demon.Slice.Editor
             var settings = UnityEngine.Object.Instantiate(world.Settings); settings.name = "ListeningSettings"; settings.StartDay = 6; settings.StartHour = 10; settings.InitialLakeSealed = false;
             AssetDatabase.CreateAsset(settings, QuickSettingsPath); AssetDatabase.SaveAssets();
             if (!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not create the D6 test scene.");
-            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(QuickSettingsPath); serialized.ApplyModifiedProperties();
+            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(QuickSettingsPath); serialized.ApplyModifiedProperties();
             var body = world.Player.GetComponent<CharacterController>(); body.enabled = false;
             world.Player.transform.position = new Vector3(7.1f, .04f, -6.1f); world.Player.transform.rotation = Quaternion.identity; body.enabled = true;
             PrefabUtility.RecordPrefabInstancePropertyModifications(world.Player.transform);
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene()); EditorSceneManager.SaveScene(SceneManager.GetActiveScene()); AssetDatabase.SaveAssets();
             EditorSceneManager.OpenScene(ScenePath); return Validate();
         }
-        static SliceTablet Board(Transform root, ListeningDefinition data)
+        static RuneTablet Board(Transform root, ListeningDefinition data)
         {
-            var tablet = root.gameObject.AddComponent<SliceTablet>();
+            var tablet = root.gameObject.AddComponent<RuneTablet>();
             Primitive("Slab", root, new Vector3(0, 0, .15f), new Vector3(2.85f, 2.85f, .3f), stone);
-            var slots = new SliceRuneSlot[9]; var positions = new Vector3[9];
+            var slots = new RuneSlot[9]; var positions = new Vector3[9];
             for (int i = 0; i < 9; i++)
             {
                 positions[i] = new Vector3((i % 3 - 1) * .86f, (1 - i / 3) * .86f, -.04f);
                 var go = Primitive("Slot_" + (i + 1), root, positions[i], new Vector3(.66f, .035f, .66f), metal, true, PrimitiveType.Cylinder); go.transform.localRotation = Quaternion.Euler(90, 0, 0);
-                slots[i] = go.AddComponent<SliceRuneSlot>(); slots[i].Index = i;
-                slots[i].Label = Label("Rune_" + i, root, positions[i] + Vector3.back * .075f, SliceTablet.RuneLabel(data.Initial[i]), .014f);
+                slots[i] = go.AddComponent<RuneSlot>(); slots[i].Index = i;
+                slots[i].Label = Label("Rune_" + i, root, positions[i] + Vector3.back * .075f, RuneTablet.RuneLabel(data.Initial[i]), .014f);
                 if (i == 3 || i == 5 || i == 8) { go.SetActive(false); slots[i].Label.gameObject.SetActive(false); }
             }
             int[] order = { 0, 1, 2, 4, 6, 7 }; var lines = new Renderer[5];
@@ -108,20 +108,20 @@ namespace Demon.Slice.Editor
                 var go = Primitive("FixedLine_" + i, root, (a + b) / 2 + Vector3.forward * .014f, new Vector3(.035f, Vector3.Distance(a, b), .025f), line, false);
                 go.transform.localRotation = Quaternion.FromToRotation(Vector3.up, b - a); lines[i] = go.GetComponent<Renderer>();
             }
-            var tray = new SliceRuneTrayItem[data.LooseRunes.Length];
+            var tray = new RuneTrayItem[data.LooseRunes.Length];
             for (int i = 0; i < tray.Length; i++)
             {
                 Vector3 pos = new Vector3(2.18f, .95f - i * .72f, -.04f);
                 var go = Primitive("Tray_" + data.LooseRunes[i], root, pos, new Vector3(1.12f, .48f, .16f), metal);
-                tray[i] = go.AddComponent<SliceRuneTrayItem>(); tray[i].Rune = data.LooseRunes[i];
-                tray[i].Label = Label("TrayLabel_" + i, root, pos + Vector3.back * .1f, SliceTablet.RuneLabel(tray[i].Rune) + " 1", .014f);
+                tray[i] = go.AddComponent<RuneTrayItem>(); tray[i].Rune = data.LooseRunes[i];
+                tray[i].Label = Label("TrayLabel_" + i, root, pos + Vector3.back * .1f, RuneTablet.RuneLabel(tray[i].Rune) + " 1", .014f);
             }
             var view = new GameObject("CloseView").transform; view.SetParent(root, false); view.localPosition = new Vector3(.45f, .2f, -4.1f); view.LookAt(root.TransformPoint(new Vector3(.45f, .05f, 0)));
             tablet.Configure(view, slots, tray, lines, frozen); return tablet;
         }
-        static void BindFonts(SliceSceneController world)
+        static void BindFonts(GameSceneController world)
         {
-            var binding = UnityEngine.Object.FindAnyObjectByType<SliceHud>().GetComponent<SliceFontBinding>();
+            var binding = UnityEngine.Object.FindAnyObjectByType<GameHud>().GetComponent<SceneFontBinding>();
             binding.Configure(font, binding.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
         }
         static Material Mat(string name) => AssetDatabase.LoadAssetAtPath<Material>("Assets/Demon/Art/Materials/" + name + ".mat");
@@ -150,7 +150,7 @@ namespace Demon.Slice.Editor
         const string TuningKey = "Demon.Listening.Restore";
         public static void BeginTuning()
         {
-            var tool = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>().Listening;
+            var tool = UnityEngine.Object.FindAnyObjectByType<GameSceneController>().Listening;
             var proxy = UnityEngine.Object.FindAnyObjectByType<ListeningTrailProxy>();
             SessionState.SetFloat(TuningKey + "radius", tool.Chimes[0].RadiusMetres);
             SessionState.SetFloat(TuningKey + "speed", proxy.MetresPerSecond);
@@ -163,7 +163,7 @@ namespace Demon.Slice.Editor
         public static void RestoreTuning()
         {
             if (!SessionState.GetBool(TuningKey, false)) return;
-            var tool = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>().Listening;
+            var tool = UnityEngine.Object.FindAnyObjectByType<GameSceneController>().Listening;
             SetFloat(tool.Chimes[0], "radiusMetres", SessionState.GetFloat(TuningKey + "radius", 1.55f));
             SetFloat(UnityEngine.Object.FindAnyObjectByType<ListeningTrailProxy>(), "metresPerSecond", SessionState.GetFloat(TuningKey + "speed", 2));
             tool.Tablet.CloseView.localPosition = SessionState.GetVector3(TuningKey + "view", Vector3.zero);
@@ -188,10 +188,10 @@ namespace Demon.Slice.Editor
             foreach (var path in new[] { NineDayAuthoring.ScenePath, ScenePath })
             {
                 EditorSceneManager.OpenScene(path);
-                var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (!world.Listening) throw new InvalidOperationException("Preserving scene without listening content.");
-                var hud = UnityEngine.Object.FindAnyObjectByType<SliceHud>();
-                hud.GetComponent<SliceFontBinding>().ConfigureWorldMaterial(material); EditorUtility.SetDirty(hud.GetComponent<SliceFontBinding>());
+                var hud = UnityEngine.Object.FindAnyObjectByType<GameHud>();
+                hud.GetComponent<SceneFontBinding>().ConfigureWorldMaterial(material); EditorUtility.SetDirty(hud.GetComponent<SceneFontBinding>());
                 foreach (var text in hud.GetComponentsInChildren<Text>(true))
                 {
                     var outline = text.GetComponent<Outline>(); if (!outline) outline = text.gameObject.AddComponent<Outline>();
@@ -208,10 +208,10 @@ namespace Demon.Slice.Editor
         }
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Listening || !world.Listening.Definition || !world.Listening.Tablet) throw new InvalidOperationException("Missing saved listening composition.");
             if (world.Listening.Chimes.Length != 2 || world.Listening.Chimes.Any(c => !c || !c.MonitoredTarget || !c.Source || c.Source.spatialBlend != 1)) throw new InvalidOperationException("Invalid spatial chime references.");
-            if (world.Listening.Tablet.GetComponentsInChildren<SliceRuneSlot>(true).Length != 9) throw new InvalidOperationException("T05 must preserve nine authored slots.");
+            if (world.Listening.Tablet.GetComponentsInChildren<RuneSlot>(true).Length != 9) throw new InvalidOperationException("T05 must preserve nine authored slots.");
             if (new SerializedObject(world.Listening.Tablet).FindProperty("listeningTool").objectReferenceValue != world.Listening) throw new InvalidOperationException("T05 board ownership missing.");
             if (world.Tablet == world.Listening.Tablet || world.Settings.Target[4] != RuneKind.Exchange) throw new InvalidOperationException("T07 was replaced by T05.");
             if (SceneManager.GetActiveScene().path == ScenePath && (world.Settings.StartDay != 6 || world.Settings.StartHour != 10)) throw new InvalidOperationException("Quick-scene settings were not persisted.");

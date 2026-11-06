@@ -10,7 +10,7 @@ namespace Demon.Slice
         [SerializeField] Transform[] waypoints;
         [SerializeField, Min(.1f)] float metresPerSecond = 2;
         [SerializeField, Min(0)] float pauseSeconds = 1.5f;
-        [SerializeField] SliceSceneController world;
+        [SerializeField] GameSceneController world;
         [SerializeField] ListeningTool tool;
         [SerializeField] BeamTether tether;
         public void ConfigureTether(BeamTether beam) => tether = beam;
@@ -18,7 +18,7 @@ namespace Demon.Slice
         float remaining;
         public Transform Target => target;
         public float MetresPerSecond => metresPerSecond;
-        public void Configure(Transform actor, Transform[] path, SliceSceneController controller, ListeningTool listener)
+        public void Configure(Transform actor, Transform[] path, GameSceneController controller, ListeningTool listener)
         { target = actor; waypoints = path; world = controller; tool = listener; }
         void Start()
         {

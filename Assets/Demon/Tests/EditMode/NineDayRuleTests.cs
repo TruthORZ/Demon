@@ -47,11 +47,11 @@ namespace Demon.Slice.Tests
             Assert.That(session.Descended, Is.True);
             Assert.That((session.Clock.Day, session.Clock.MinuteOfDay), Is.EqualTo((9, 0d)));
         }
-        static SliceSession Session()
+        static GameSession Session()
         {
             var target = new[] { RuneKind.Nine, RuneKind.GreaterEqual, RuneKind.Day, RuneKind.None,
                 RuneKind.Exchange, RuneKind.None, RuneKind.Seal, RuneKind.Box, RuneKind.Lake };
-            return new SliceSession(1, 480, 9, new RuneBoardModel(target, target, Array.Empty<RuneKind>()), true, 8);
+            return new GameSession(1, 480, 9, new RuneBoardModel(target, target, Array.Empty<RuneKind>()), true, 8);
         }
     }
 }

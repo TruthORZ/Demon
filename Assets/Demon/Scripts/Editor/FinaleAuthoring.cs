@@ -13,7 +13,7 @@ namespace Demon.Slice.Editor
     public static class FinaleAuthoring
     {
         const string Marker = "Finale_Authored";
-        static readonly string[] Scenes = { DemonSliceAuthoring.ScenePath, NineDayAuthoring.ScenePath };
+        static readonly string[] Scenes = { PrototypeSceneAuthoring.ScenePath, NineDayAuthoring.ScenePath };
 
         [MenuItem("Demon/Nine Days/Migrate To Midnight Finale")]
         public static string Migrate()
@@ -23,7 +23,7 @@ namespace Demon.Slice.Editor
             foreach (string path in Scenes)
             {
                 EditorSceneManager.OpenScene(path);
-                var existing = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                var existing = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (!existing || !existing.Settings || !existing.Tablet)
                     throw new InvalidOperationException("Missing existing composition: " + path);
                 if (existing.Finale || GameObject.Find(Marker))
@@ -37,7 +37,7 @@ namespace Demon.Slice.Editor
             foreach (string path in Scenes)
             {
                 EditorSceneManager.OpenScene(path);
-                Upgrade(UnityEngine.Object.FindAnyObjectByType<SliceSceneController>());
+                Upgrade(UnityEngine.Object.FindAnyObjectByType<GameSceneController>());
                 EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
                 EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
                 AssetDatabase.SaveAssets();
@@ -48,19 +48,19 @@ namespace Demon.Slice.Editor
             return "Migrated both saved scenes/settings; direct return line, authored clock/views, placeholder sounds and D8 night gate reloaded and verified.";
         }
 
-        static void Upgrade(SliceSceneController world)
+        static void Upgrade(GameSceneController world)
         {
             var data = world.Settings;
             data.Target[5] = RuneKind.None; data.Initial[5] = RuneKind.None;
             data.LooseRunes = data.LooseRunes.Where(r => (int)r != 5).ToArray();
-            var defaults = ScriptableObject.CreateInstance<SliceSettings>();
+            var defaults = ScriptableObject.CreateInstance<GameSettings>();
             data.BoxText = defaults.BoxText;
             UnityEngine.Object.DestroyImmediate(defaults);
             if (!world.Campaign) data.StartHour = 22; // D8 quick scene previews the new night route.
             EditorUtility.SetDirty(data);
 
             Transform tablet = world.Tablet.transform;
-            var slots = world.Tablet.GetComponentsInChildren<SliceRuneSlot>(true);
+            var slots = world.Tablet.GetComponentsInChildren<RuneSlot>(true);
             var unused = slots.Single(s => s.Index == 5);
             unused.gameObject.SetActive(false); unused.Label.gameObject.SetActive(false);
             Record(unused.gameObject); Record(unused.Label.gameObject);
@@ -71,7 +71,7 @@ namespace Demon.Slice.Editor
             direct.localScale = new Vector3(.035f, Vector3.Distance(a, b), .025f);
             direct.localRotation = Quaternion.FromToRotation(Vector3.up, b - a); Record(direct);
             tablet.Find("FixedLine_7").gameObject.SetActive(false); Record(tablet.Find("FixedLine_7").gameObject);
-            foreach (var slot in slots) { slot.Label.text = SliceTablet.RuneLabel(data.Initial[slot.Index]); Record(slot.Label); }
+            foreach (var slot in slots) { slot.Label.text = RuneTablet.RuneLabel(data.Initial[slot.Index]); Record(slot.Label); }
 
             var root = new GameObject(Marker).transform;
             var faceRoot = new GameObject("WallClock").transform;
@@ -111,15 +111,15 @@ namespace Demon.Slice.Editor
             pulse.transform.SetParent(root, false); pulse.transform.position = tablet.position + Vector3.back * .5f;
             pulse.type = LightType.Point; pulse.color = new Color(1, .45f, .12f); pulse.range = 5; pulse.intensity = 0;
             var audio = root.gameObject.AddComponent<AudioSource>(); audio.playOnAwake = false; audio.spatialBlend = 0; audio.volume = .6f;
-            var sequence = Undo.AddComponent<SliceFinaleSequence>(world.gameObject);
+            var sequence = Undo.AddComponent<FinaleSequence>(world.gameObject);
             sequence.Configure(view, hours, minutes, seconds, glow, pulse, audio,
                 AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Demon/Audio/PrototypeClockTick.wav"),
                 AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Demon/Audio/PrototypeBoxSlam.wav"));
             world.ConfigureFinale(sequence); EditorUtility.SetDirty(world); EditorUtility.SetDirty(sequence);
-            var hud = UnityEngine.Object.FindAnyObjectByType<SliceHud>();
-            hud.GetComponent<SliceFontBinding>().Configure(font, hud.GetComponentsInChildren<Text>(true),
+            var hud = UnityEngine.Object.FindAnyObjectByType<GameHud>();
+            hud.GetComponent<SceneFontBinding>().Configure(font, hud.GetComponentsInChildren<Text>(true),
                 UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include));
-            EditorUtility.SetDirty(hud.GetComponent<SliceFontBinding>());
+            EditorUtility.SetDirty(hud.GetComponent<SceneFontBinding>());
             if (world.Campaign) UpgradeSchedule(world.Campaign.Definition);
         }
 
@@ -151,12 +151,12 @@ namespace Demon.Slice.Editor
 
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Finale || world.Finale.ClockView == null || world.Settings.Target[5] != RuneKind.None ||
                 world.Settings.Initial[5] != RuneKind.None || world.Settings.BoxText.Contains("+1"))
                 throw new InvalidOperationException("Missing finale or legacy time rune/text remains.");
             if (world.Tablet.transform.Find("FixedLine_7").gameObject.activeSelf ||
-                world.Tablet.GetComponentsInChildren<SliceRuneSlot>(true).Single(s => s.Index == 5).gameObject.activeSelf)
+                world.Tablet.GetComponentsInChildren<RuneSlot>(true).Single(s => s.Index == 5).gameObject.activeSelf)
                 throw new InvalidOperationException("Legacy return/unused slot still visible.");
             foreach (var component in UnityEngine.Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include))
             {
@@ -175,7 +175,7 @@ namespace Demon.Slice.Editor
             foreach (string path in Scenes)
             {
                 EditorSceneManager.OpenScene(path);
-                var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 Validate();
                 var root = GameObject.Find(Marker).transform;
                 Transform clock = root.Find("WallClock");

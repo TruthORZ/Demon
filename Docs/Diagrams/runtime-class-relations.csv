@@ -1,0 +1,242 @@
+﻿起点类型,终点类型,关系,首个源码位置,依据,依据数量
+AGGlobalSettings,MonoBehaviour,Inheritance 继承,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSettings.cs:8,base type,1
+AGGlobalSnowGrass,MonoBehaviour,Inheritance 继承,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowGrass.cs:9,base type,1
+AGGlobalSnowHeight,MonoBehaviour,Inheritance 继承,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowHeight.cs:9,base type,1
+AGGlobalSnowProps,MonoBehaviour,Inheritance 继承,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowProps.cs:9,base type,1
+AGGlobalSnowTree,MonoBehaviour,Inheritance 继承,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowTree.cs:9,base type,1
+AGGlobalWind,MonoBehaviour,Inheritance 继承,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalWind.cs:9,base type,1
+BeamDefinition,ScriptableObject,Inheritance 继承,Assets/Demon/Scripts/Runtime/BeamDefinition.cs:4,base type,1
+BeamTether,BeamDefinition,Association 关联,Assets/Demon/Scripts/Runtime/BeamTether.cs:9,field definition,1
+BeamTether,CipherBox,Association 关联,Assets/Demon/Scripts/Runtime/BeamTether.cs:21,field cipher,1
+BeamTether,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/BeamTether.cs:30,session.Clock.Day,1
+BeamTether,GameSession,Association 关联,Assets/Demon/Scripts/Runtime/BeamTether.cs:19,field session,1
+BeamTether,ListeningTool,Dependency 依赖,Assets/Demon/Scripts/Runtime/BeamTether.cs:51,ListeningTool listener,1
+BeamTether,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/BeamTether.cs:7,base type,1
+BeamTether,PlayerController,Association 关联,Assets/Demon/Scripts/Runtime/BeamTether.cs:20,field player,1
+BeamTether,StableBeamMotion,Association 关联,Assets/Demon/Scripts/Runtime/BeamTether.cs:24,stored property Rule,1
+ChaseController,BeamTether,Association 关联,Assets/Demon/Scripts/Runtime/ChaseController.cs:19,field tether,1
+ChaseController,ChaseDefinition,Association 关联,Assets/Demon/Scripts/Runtime/ChaseController.cs:10,field definition,1
+ChaseController,ClosePassGate,Association 关联,Assets/Demon/Scripts/Runtime/ChaseController.cs:23,stored property Gate,1
+ChaseController,GameSession,Association 关联,Assets/Demon/Scripts/Runtime/ChaseController.cs:17,field session,1
+ChaseController,ISceneFeedback,Association 关联,Assets/Demon/Scripts/Runtime/ChaseController.cs:20,field feedback,1
+ChaseController,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/ChaseController.cs:7,base type,1
+ChaseController,PlayerController,Association 关联,Assets/Demon/Scripts/Runtime/ChaseController.cs:18,field player,1
+ChaseDefinition,ScriptableObject,Inheritance 继承,Assets/Demon/Scripts/Runtime/ChaseDefinition.cs:4,base type,1
+CipherBox,CipherDefinition,Dependency 依赖,Assets/Demon/Scripts/Runtime/CipherBox.cs:43,wheel.Definition.LockInstructions,3
+CipherBox,CipherDigit,Association 关联,Assets/Demon/Scripts/Runtime/CipherBox.cs:11,field digits,1
+CipherBox,CipherWheel,Association 关联,Assets/Demon/Scripts/Runtime/CipherBox.cs:8,field wheel,1
+CipherBox,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/CipherBox.cs:16,field world,1
+CipherBox,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/CipherBox.cs:36,world.Session.Descended,2
+CipherBox,ICloseViewInteraction,Realisation 实现,Assets/Demon/Scripts/Runtime/CipherBox.cs:6,implements interface,1
+CipherBox,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/CipherBox.cs:6,base type,1
+CipherBox,NineDayFlow,Dependency 依赖,Assets/Demon/Scripts/Runtime/CipherBox.cs:40,world.Campaign.AcquireExchangeTablet,1
+CipherBox,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/CipherBox.cs:34,PlayerController player,3
+CipherBox,ThreeDigitLock,Association 关联,Assets/Demon/Scripts/Runtime/CipherBox.cs:17,field model,1
+CipherDefinition,ScriptableObject,Inheritance 继承,Assets/Demon/Scripts/Runtime/CipherDefinition.cs:5,base type,1
+CipherDigit,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/CipherDigit.cs:4,base type,1
+CipherWheel,BearingCipher,Dependency 依赖,Assets/Demon/Scripts/Runtime/CipherWheel.cs:24,BearingCipher.ValidateDigits,3
+CipherWheel,CipherDefinition,Association 关联,Assets/Demon/Scripts/Runtime/CipherWheel.cs:8,field definition,1
+CipherWheel,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/CipherWheel.cs:13,field world,1
+CipherWheel,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/CipherWheel.cs:46,world.Session.Descended,1
+CipherWheel,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/CipherWheel.cs:6,base type,1
+CipherWheel,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/CipherWheel.cs:44,PlayerController player,2
+ExplorationDefinition,ExplorationGuidance,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs:17,ExplorationGuidance.DefaultRules,1
+ExplorationDefinition,ExplorationGuideRule,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs:16,field GuideRules,1
+ExplorationDefinition,ObservationText,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs:48,field Radio,3
+ExplorationDefinition,ScriptableObject,Inheritance 继承,Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs:13,base type,1
+ExplorationFlow,BeamTether,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:34,field tether,1
+ExplorationFlow,CipherBox,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:35,field cipher,1
+ExplorationFlow,DiscoveryProgress,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:72,campaign.Progress.Found,2
+ExplorationFlow,ExplorationDefinition,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:8,field definition,1
+ExplorationFlow,ExplorationGuidance,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:69,ExplorationGuidance.Select,2
+ExplorationFlow,ExplorationGuideState,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:69,new ExplorationGuideState,14
+ExplorationFlow,FinalTabletRetrieval,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:37,field retrieval,1
+ExplorationFlow,FirstDayInspectionLog,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:40,stored property Log,1
+ExplorationFlow,FixedTabletPlan,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:127,campaign.Definition.Tablets[0].DiscoveryDay,3
+ExplorationFlow,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:67,session.Clock.Day,15
+ExplorationFlow,GameSession,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:31,field session,1
+ExplorationFlow,ISceneFeedback,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:38,field feedback,1
+ExplorationFlow,ListeningTool,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:36,field listening,1
+ExplorationFlow,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:6,base type,1
+ExplorationFlow,NineDayDefinition,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:76,campaign.Definition.FinalTabletHour,4
+ExplorationFlow,NineDayFlow,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:32,field campaign,1
+ExplorationFlow,NineDayTablet,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:12,field firstTablet,5
+ExplorationFlow,ObservationText,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:156,ObservationText text,10
+ExplorationFlow,PreparationRecord,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:27,field solarRecord,2
+ExplorationFlow,ScheduledWorldAttributes,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:160,consequences.Rule.RadioSound,2
+ExplorationFlow,StableBeamMotion,Dependency 依赖,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:75,tether.Rule.Locked,3
+ExplorationFlow,StationObservation,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:9,field observations,1
+ExplorationFlow,WorldAttributeConsequences,Association 关联,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:33,field consequences,1
+ExplorationGuidance,ExplorationGuideRule,Dependency 依赖,Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs:36,<ExplorationGuideRule>,36
+ExplorationGuidance,ExplorationGuideState,Dependency 依赖,Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs:36,ExplorationGuideState state,16
+FinaleSequence,FinaleTimeWindow,Association 关联,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:33,field window,1
+FinaleSequence,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:57,GameClock.MinutesPerDay,10
+FinaleSequence,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:31,field world,1
+FinaleSequence,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:63,world.Session.Clock,10
+FinaleSequence,GameSettings,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:57,world.Settings.FinalDay,1
+FinaleSequence,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:9,base type,1
+FinaleSequence,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:74,world.Player.EnterSequenceView,3
+FinaleSequence,ScheduledWorldAttributes,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:125,world.Consequences.Rule.DemonLight,1
+FinaleSequence,WorldAttributeConsequences,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:125,world.Consequences.Rule,1
+FinaleSequence,WorldPresentation,Association 关联,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:32,field presentation,1
+FinaleTimeWindow,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/Domain/FinaleTimeWindow.cs:17,GameClock.MinutesPerDay,1
+FinalTabletDock,FinalTabletProgress,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinalTabletDock.cs:9,retrieval.Progress.Acquired,1
+FinalTabletDock,FinalTabletRetrieval,Association 关联,Assets/Demon/Scripts/Runtime/FinalTabletDock.cs:6,field retrieval,1
+FinalTabletDock,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/FinalTabletDock.cs:4,base type,1
+FinalTabletDock,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinalTabletDock.cs:10,PlayerController player,1
+FinalTabletRetrieval,FinaleSequence,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:42,world.Finale.ReserveTime,2
+FinalTabletRetrieval,FinalTabletProgress,Association 关联,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:16,stored property Progress,1
+FinalTabletRetrieval,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:14,field world,1
+FinalTabletRetrieval,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:19,world.Session.Descended,2
+FinalTabletRetrieval,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:6,base type,1
+FinalTabletRetrieval,NineDayFlow,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:19,world.Campaign.FinalAvailable,2
+FinalTabletRetrieval,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:50,PlayerController player,1
+FinalTabletRetrieval,RuneBoardModel,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:20,world.Session.Board.Frozen,1
+FinalTabletRetrieval,RuneTablet,Dependency 依赖,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:54,world.Tablet.Use,1
+FinalTabletRetrieval,ThreatPickup,Association 关联,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:8,field pickup,1
+GameHud,BeamTether,Association 关联,Assets/Demon/Scripts/Runtime/GameHud.cs:30,field tether,1
+GameHud,DiscoveryProgress,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameHud.cs:55,campaign.Progress.FoundCount,1
+GameHud,ExplorationFlow,Association 关联,Assets/Demon/Scripts/Runtime/GameHud.cs:32,field exploration,1
+GameHud,FinaleSequence,Association 关联,Assets/Demon/Scripts/Runtime/GameHud.cs:29,field finale,1
+GameHud,FinalTabletRetrieval,Association 关联,Assets/Demon/Scripts/Runtime/GameHud.cs:31,field retrieval,1
+GameHud,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameHud.cs:52,session.Clock.MinuteOfDay,2
+GameHud,GameSession,Association 关联,Assets/Demon/Scripts/Runtime/GameHud.cs:26,field session,1
+GameHud,GameSettings,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameHud.cs:39,GameSettings settings,4
+GameHud,IHudState,Association 关联,Assets/Demon/Scripts/Runtime/GameHud.cs:25,field state,1
+GameHud,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/GameHud.cs:7,base type,1
+GameHud,NineDayFlow,Association 关联,Assets/Demon/Scripts/Runtime/GameHud.cs:28,field campaign,1
+GameHud,PickupAttempt,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameHud.cs:59,player.CurrentPickup.Attempt.Progress,1
+GameHud,PlayerController,Association 关联,Assets/Demon/Scripts/Runtime/GameHud.cs:27,field player,1
+GameHud,RuneBoardModel,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameHud.cs:61,player.ActiveTablet.Board.Held,1
+GameHud,RuneTablet,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameHud.cs:61,RuneTablet.RuneLabel,2
+GameHud,ThreatPickup,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameHud.cs:59,player.CurrentPickup.Attempt,1
+GameSceneController,BeamDefinition,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameSceneController.cs:85,tether.Definition.DemonMotionDay,1
+GameSceneController,BeamTether,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:21,field tether,1
+GameSceneController,ChaseController,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:22,field chase,1
+GameSceneController,CipherBox,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:20,field cipherBox,1
+GameSceneController,ExplorationFlow,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:25,field exploration,1
+GameSceneController,FinaleSequence,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:18,field finale,1
+GameSceneController,FinalTabletRetrieval,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:23,field retrieval,1
+GameSceneController,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameSceneController.cs:100,Session.Clock.AbsoluteMinutes,4
+GameSceneController,GameHud,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:15,field hud,1
+GameSceneController,GameSession,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:48,stored property Session,1
+GameSceneController,GameSettings,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:11,field settings,1
+GameSceneController,IHudState,Realisation 实现,Assets/Demon/Scripts/Runtime/GameSceneController.cs:8,implements interface,1
+GameSceneController,IPlayerSession,Realisation 实现,Assets/Demon/Scripts/Runtime/GameSceneController.cs:8,implements interface,1
+GameSceneController,ISceneFeedback,Realisation 实现,Assets/Demon/Scripts/Runtime/GameSceneController.cs:8,implements interface,1
+GameSceneController,ITabletProgram,Realisation 实现,Assets/Demon/Scripts/Runtime/GameSceneController.cs:8,implements interface,1
+GameSceneController,ListeningTool,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:19,field listeningTool,1
+GameSceneController,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/GameSceneController.cs:8,base type,1
+GameSceneController,NineDayDefinition,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameSceneController.cs:75,campaign.Definition.FinalTabletDay,2
+GameSceneController,NineDayFlow,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:17,field campaign,1
+GameSceneController,PlayerController,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:12,field player,1
+GameSceneController,RuneBoardModel,Dependency 依赖,Assets/Demon/Scripts/Runtime/GameSceneController.cs:49,RuneBoardModel ITabletProgram.Board => Session.Board;,4
+GameSceneController,RuneTablet,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:13,field tablet,1
+GameSceneController,WorldAttributeConsequences,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:24,field consequences,1
+GameSceneController,WorldPresentation,Association 关联,Assets/Demon/Scripts/Runtime/GameSceneController.cs:14,field presentation,1
+GameSession,AttributeOperations,Dependency 依赖,Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:219,AttributeOperations.TryExchange,1
+GameSession,GameClock,Association 关联,Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:163,stored property Clock,1
+GameSession,IDisposable,Realisation 实现,Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:157,implements interface,1
+GameSession,RuneBoardModel,Association 关联,Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:164,stored property Board,1
+GameSettings,ScriptableObject,Inheritance 继承,Assets/Demon/Scripts/Runtime/GameSettings.cs:7,base type,1
+Interactable,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/Interactable.cs:6,base type,1
+Interactable,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/Interactable.cs:10,PlayerController player,1
+IPlayerSession,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/SceneContracts.cs:15,GameSession Session { get; },1
+IPlayerSession,GameSettings,Dependency 依赖,Assets/Demon/Scripts/Runtime/SceneContracts.cs:16,GameSettings Settings { get; },1
+ITabletProgram,RuneBoardModel,Dependency 依赖,Assets/Demon/Scripts/Runtime/SceneContracts.cs:30,RuneBoardModel Board { get; },1
+LC_Door,MonoBehaviour,Inheritance 继承,Assets/ImportAsset/LogCabin/Source/Scripts/LC_Door.cs:4,base type,1
+ListeningChime,GameSession,Association 关联,Assets/Demon/Scripts/Runtime/ListeningChime.cs:19,field session,1
+ListeningChime,ListeningTool,Association 关联,Assets/Demon/Scripts/Runtime/ListeningChime.cs:18,field tool,1
+ListeningChime,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/ListeningChime.cs:7,base type,1
+ListeningChime,RegionEntryLatch,Association 关联,Assets/Demon/Scripts/Runtime/ListeningChime.cs:17,field entry,1
+ListeningDefinition,ScriptableObject,Inheritance 继承,Assets/Demon/Scripts/Runtime/ListeningDefinition.cs:6,base type,1
+ListeningTool,DiscoveryProgress,Dependency 依赖,Assets/Demon/Scripts/Runtime/ListeningTool.cs:42,flow.Progress.Available,2
+ListeningTool,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/ListeningTool.cs:42,session.Clock.Day,2
+ListeningTool,GameSession,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTool.cs:12,field session,1
+ListeningTool,ISceneFeedback,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTool.cs:15,field feedback,1
+ListeningTool,ITabletProgram,Realisation 实现,Assets/Demon/Scripts/Runtime/ListeningTool.cs:7,implements interface,1
+ListeningTool,ListeningChime,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTool.cs:11,field chimes,1
+ListeningTool,ListeningDefinition,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTool.cs:9,field definition,1
+ListeningTool,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/ListeningTool.cs:7,base type,1
+ListeningTool,NineDayFlow,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTool.cs:13,field campaign,1
+ListeningTool,PlayerController,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTool.cs:14,field player,1
+ListeningTool,RuneBoardModel,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTool.cs:16,stored property Board,1
+ListeningTool,RuneTablet,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTool.cs:10,field tablet,1
+ListeningTrailProxy,BeamTether,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs:15,field tether,1
+ListeningTrailProxy,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs:13,field world,1
+ListeningTrailProxy,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs:31,world.Session.Descended,1
+ListeningTrailProxy,ListeningTool,Association 关联,Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs:14,field tool,1
+ListeningTrailProxy,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs:7,base type,1
+NineDayDefinition,DayPlan,Association 关联,Assets/Demon/Scripts/Runtime/NineDayDefinition.cs:32,field Days,1
+NineDayDefinition,FixedTabletPlan,Association 关联,Assets/Demon/Scripts/Runtime/NineDayDefinition.cs:33,field Tablets,1
+NineDayDefinition,ScriptableObject,Inheritance 继承,Assets/Demon/Scripts/Runtime/NineDayDefinition.cs:19,base type,1
+NineDayFlow,CipherBox,Dependency 依赖,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:68,world.Cipher.Acquired,2
+NineDayFlow,DayPlan,Dependency 依赖,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:34,"foreach (var day in definition.Days) if (day == null) throw new InvalidOperationException(""Missing day plan."");",4
+NineDayFlow,DiscoveryProgress,Association 关联,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:15,stored property Progress,1
+NineDayFlow,FinalTabletRetrieval,Dependency 依赖,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:48,world.Retrieval.ReadyToReconstruct,1
+NineDayFlow,FixedTabletPlan,Dependency 依赖,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:32,definition.Tablets[i].DiscoveryDay,6
+NineDayFlow,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:17,world.Session.Clock.Day,12
+NineDayFlow,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:12,field world,1
+NineDayFlow,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:17,world.Session.Clock,14
+NineDayFlow,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:7,base type,1
+NineDayFlow,NineDayDefinition,Association 关联,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:9,field definition,1
+NineDayFlow,NineDayTablet,Association 关联,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:10,field fixedTablets,1
+NineDayTablet,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/NineDayTablet.cs:5,base type,1
+NineDayTablet,NineDayFlow,Association 关联,Assets/Demon/Scripts/Runtime/NineDayTablet.cs:7,field flow,1
+NineDayTablet,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/NineDayTablet.cs:16,PlayerController player,1
+NineDayTablet,RuneTablet,Association 关联,Assets/Demon/Scripts/Runtime/NineDayTablet.cs:10,field editableTablet,1
+PlayerController,CipherBox,Dependency 依赖,Assets/Demon/Scripts/Runtime/PlayerController.cs:28,activeInteraction is CipherBox,2
+PlayerController,GameSettings,Dependency 依赖,Assets/Demon/Scripts/Runtime/PlayerController.cs:96,world.Settings.MouseSensitivity,5
+PlayerController,ICloseViewInteraction,Association 关联,Assets/Demon/Scripts/Runtime/PlayerController.cs:24,field activeInteraction,1
+PlayerController,Interactable,Dependency 依赖,Assets/Demon/Scripts/Runtime/PlayerController.cs:110,var target = hit.collider.GetComponentInParent<Interactable>(),4
+PlayerController,IPlayerSession,Association 关联,Assets/Demon/Scripts/Runtime/PlayerController.cs:16,field world,1
+PlayerController,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/PlayerController.cs:8,base type,1
+PlayerController,RuneTablet,Dependency 依赖,Assets/Demon/Scripts/Runtime/PlayerController.cs:32,activeInteraction is RuneTablet,4
+PlayerController,ThreatPickup,Association 关联,Assets/Demon/Scripts/Runtime/PlayerController.cs:25,field activePickup,1
+PreparationRecord,ExplorationFlow,Association 关联,Assets/Demon/Scripts/Runtime/PreparationRecord.cs:11,field owner,1
+PreparationRecord,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/PreparationRecord.cs:9,base type,1
+PreparationRecord,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/PreparationRecord.cs:25,PlayerController player,1
+RecordBox,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/RecordBox.cs:9,field world,1
+RecordBox,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/RecordBox.cs:6,base type,1
+RecordBox,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/RecordBox.cs:12,PlayerController player,1
+RuneSlot,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/RuneSlot.cs:6,base type,1
+RuneTablet,ICloseViewInteraction,Realisation 实现,Assets/Demon/Scripts/Runtime/RuneTablet.cs:7,implements interface,1
+RuneTablet,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/RuneTablet.cs:7,base type,1
+RuneTablet,ITabletProgram,Association 关联,Assets/Demon/Scripts/Runtime/RuneTablet.cs:16,field program,1
+RuneTablet,ListeningTool,Association 关联,Assets/Demon/Scripts/Runtime/RuneTablet.cs:11,field listeningTool,1
+RuneTablet,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/RuneTablet.cs:42,PlayerController player,2
+RuneTablet,RuneBoardModel,Association 关联,Assets/Demon/Scripts/Runtime/RuneTablet.cs:17,field board,1
+RuneTablet,RuneSlot,Association 关联,Assets/Demon/Scripts/Runtime/RuneTablet.cs:12,field slots,1
+RuneTablet,RuneTrayItem,Association 关联,Assets/Demon/Scripts/Runtime/RuneTablet.cs:13,field tray,1
+RuneTrayItem,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/RuneTrayItem.cs:7,base type,1
+SceneFontBinding,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/SceneFontBinding.cs:9,base type,1
+ScheduledWorldAttributes,AttributeOperations,Dependency 依赖,Assets/Demon/Scripts/Runtime/Domain/ScheduledWorldAttributes.cs:24,AttributeOperations.TryExchange,2
+SleepPoint,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/SleepPoint.cs:9,field world,1
+SleepPoint,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/SleepPoint.cs:6,base type,1
+SleepPoint,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/SleepPoint.cs:12,PlayerController player,1
+StableBeamMotion,AttributeOperations,Dependency 依赖,Assets/Demon/Scripts/Runtime/Domain/StableBeamMotion.cs:36,AttributeOperations.TryExchange,1
+StationObservation,ExplorationFlow,Association 关联,Assets/Demon/Scripts/Runtime/StationObservation.cs:7,field owner,1
+StationObservation,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/StationObservation.cs:5,base type,1
+StationObservation,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/StationObservation.cs:20,PlayerController player,1
+ThreatPickup,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/ThreatPickup.cs:9,field world,1
+ThreatPickup,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/ThreatPickup.cs:34,world.Session.Descended,1
+ThreatPickup,Interactable,Inheritance 继承,Assets/Demon/Scripts/Runtime/ThreatPickup.cs:7,base type,1
+ThreatPickup,PickupAttempt,Association 关联,Assets/Demon/Scripts/Runtime/ThreatPickup.cs:20,stored property Attempt,1
+ThreatPickup,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/ThreatPickup.cs:32,PlayerController player,6
+WorldAttributeConsequences,FixedTabletPlan,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:42,plan[1].DateNodeDay,2
+WorldAttributeConsequences,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:45,world.Session.Clock.Midnight,3
+WorldAttributeConsequences,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:21,field world,1
+WorldAttributeConsequences,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:45,world.Session.Clock,4
+WorldAttributeConsequences,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:6,base type,1
+WorldAttributeConsequences,NineDayDefinition,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:41,world.Campaign.Definition.Tablets,1
+WorldAttributeConsequences,NineDayFlow,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:41,world.Campaign.Definition,1
+WorldAttributeConsequences,ScheduledWorldAttributes,Association 关联,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:23,stored property Rule,1
+WorldAttributeConsequences,WorldPresentation,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:53,world.Presentation.ExpectedSunAboveHorizon,1
+WorldPresentation,GameClock,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:22,world.Session.Clock.MinuteOfDay,3
+WorldPresentation,GameSceneController,Association 关联,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:24,field world,1
+WorldPresentation,GameSession,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:22,world.Session.Clock,7
+WorldPresentation,GameSettings,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:60,var settings = world.Settings,7
+WorldPresentation,MonoBehaviour,Inheritance 继承,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:6,base type,1
+WorldPresentation,PlayerController,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:65,world.Player.ViewCamera,1
+WorldPresentation,ScheduledWorldAttributes,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:21,world.Consequences.Rule.SunLight,1
+WorldPresentation,WorldAttributeConsequences,Dependency 依赖,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:21,world.Consequences.Rule,1

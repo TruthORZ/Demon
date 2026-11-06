@@ -5,6 +5,7 @@ namespace Demon.Slice
     public sealed class BeamDefinition : ScriptableObject
     {
         [Header("World MOTION boundary (T01); acquisition itself has no D7 gate")]
+        [Tooltip("Standalone fallback only. Campaign scenes use NineDayDefinition / T01 / DateNodeDay.")]
         [Range(1, 9)] public int DemonMotionDay = 3;
         [Header("Aiming and stable hold")]
         [Min(.1f)] public float RangeMetres = 16;

@@ -30,7 +30,7 @@ namespace Demon.Slice.Editor
             foreach (string path in new[] { ScenePath, SettingsPath, NavigationPath, TraceMaterialPath })
                 if (File.Exists(path)) throw new InvalidOperationException("Preserving existing investigation output: " + path);
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Exploration || world.Exploration.HasInvestigation || GameObject.Find("Investigation_Authored"))
                 throw new InvalidOperationException("Expected the accepted D1–D2 main composition without D3–D4 extension.");
             AlignChaseHint(); PolishRecords();
@@ -98,8 +98,8 @@ namespace Demon.Slice.Editor
             plan.Days[2].Objective = "风向标已经停转。沿南侧林径向西分出的大雪痕寻找T02；正在移动的雪雾仍会接近。";
             plan.Days[3].Objective = "调查山洞西侧外面的旧仪式遗址，寻找T03，核对下一条日期预告。可随时返营或睡觉。";
             EditorUtility.SetDirty(plan); EditorUtility.SetDirty(world.Exploration.Definition);
-            var hud = UnityEngine.Object.FindAnyObjectByType<SliceHud>();
-            var binding = hud.GetComponent<SliceFontBinding>();
+            var hud = UnityEngine.Object.FindAnyObjectByType<GameHud>();
+            var binding = hud.GetComponent<SceneFontBinding>();
             binding.Configure(font, hud.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include));
             EditorUtility.SetDirty(binding);
             var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
@@ -114,8 +114,8 @@ namespace Demon.Slice.Editor
             var quick = UnityEngine.Object.Instantiate(world.Settings); quick.name = "InvestigationSettings";
             quick.StartDay = 3; quick.StartHour = 8; AssetDatabase.CreateAsset(quick, SettingsPath); AssetDatabase.SaveAssets();
             if (!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not save investigation quick scene.");
-            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath); serialized.ApplyModifiedProperties();
+            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath); serialized.ApplyModifiedProperties();
             Save(); EditorSceneManager.OpenScene(ScenePath); return Validate();
         }
         static void MoveTablet(NineDayTablet tablet, Transform parent, Vector3 position)
@@ -149,7 +149,7 @@ namespace Demon.Slice.Editor
             Editable();
             foreach (string path in new[] { NineDayAuthoring.ScenePath, ScenePath })
             {
-                EditorSceneManager.OpenScene(path); var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                EditorSceneManager.OpenScene(path); var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 var flow = world.Exploration; ConfigureRitualView(flow.ThirdTablet);
                 var fork = GameObject.Find("Investigation_Authored/ForestForkMarker/ForkName").GetComponent<TextMesh>();
                 if (fork.text != "林间旧迹 ←" && fork.text != "林间旧迹 →") throw new InvalidOperationException("Preserving manually customized fork sign.");
@@ -182,7 +182,7 @@ namespace Demon.Slice.Editor
         public static void OpenQuick() { Editable(); EditorSceneManager.OpenScene(ScenePath); }
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
             if (!world || !world.Exploration || !world.Exploration.HasInvestigation || !world.Chase || !surface || AssetDatabase.GetAssetPath(surface.navMeshData) != NavigationPath)
                 throw new InvalidOperationException("Missing saved D3–D4 composition/navigation.");
             var flow = world.Exploration;
@@ -202,7 +202,7 @@ namespace Demon.Slice.Editor
             if (SessionState.GetBool(Probe, false)) throw new InvalidOperationException("Restore the previous investigation probe first.");
             if (operation == "investigation-review")
                 foreach (string marker in new[] { "Temp/DemonReadingReview.ready", "Temp/DemonReadingReview.stop" }) if (File.Exists(marker)) File.Delete(marker);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             SessionState.SetBool(Probe, true); SessionState.SetInt(Probe + "day", world.Settings.StartDay); SessionState.SetFloat(Probe + "hour", world.Settings.StartHour); SessionState.SetFloat(Probe + "speed", world.Settings.WalkMetresPerSecond); SessionState.SetString(Probe + "guide", world.Exploration.Definition.Day3Guide);
             if (operation == "investigation-late" || operation == "investigation-review") world.Settings.StartDay = 4;
             if (operation == "investigation-boundary") { world.Settings.StartDay = 2; world.Settings.StartHour = 23.99f; }
@@ -212,7 +212,7 @@ namespace Demon.Slice.Editor
         public static void RestoreProbe()
         {
             if (!SessionState.GetBool(Probe, false)) return;
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             world.Settings.StartDay = SessionState.GetInt(Probe + "day", 3); world.Settings.StartHour = SessionState.GetFloat(Probe + "hour", 8); world.Settings.WalkMetresPerSecond = SessionState.GetFloat(Probe + "speed", 3.3f); world.Exploration.Definition.Day3Guide = SessionState.GetString(Probe + "guide", world.Exploration.Definition.Day3Guide);
             EditorUtility.SetDirty(world.Settings); EditorUtility.SetDirty(world.Exploration.Definition); Save(); SessionState.SetBool(Probe, false); Debug.Log("DEMON_INVESTIGATION_PROBE_RESTORED");
         }

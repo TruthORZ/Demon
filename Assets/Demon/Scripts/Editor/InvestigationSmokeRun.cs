@@ -10,12 +10,12 @@ using UnityEngine.InputSystem.LowLevel;
 namespace Demon.Slice.Editor
 {
     // Physical keyboard/mouse movement through saved routes. The production chase remains enabled.
-    public sealed class InvestigationSmokeRun
+    public sealed class InvestigationSmokeRun : ISmokeRun
     {
         readonly string operation;
         readonly Action<bool, string> finish;
         readonly double started = EditorApplication.timeSinceStartup;
-        SliceSceneController world;
+        GameSceneController world;
         ExplorationFlow flow;
         Keyboard keyboard; Mouse mouse;
         InputSettings.BackgroundBehavior oldBackground;
@@ -37,7 +37,7 @@ namespace Demon.Slice.Editor
             try
             {
                 if (EditorApplication.timeSinceStartup - started > (operation == "investigation-review" ? 600 : 210)) throw new TimeoutException("Investigation stage " + stage);
-                if (!world) world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                if (!world) world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (!world || world.Session == null || !world.Exploration || world.Exploration.Log == null) return;
                 if (lastFrame == Time.frameCount) return; lastFrame = Time.frameCount;
                 flow = world.Exploration; double now = Time.timeAsDouble;
@@ -124,7 +124,7 @@ namespace Demon.Slice.Editor
                 {
                     Keys(); Require(world.Player.Reading && world.Campaign.Progress.Found(readingTablet.Index) && world.Campaign.Progress.FoundCount == expectedFound, "Physical tablet read/repeat failed: T" + (readingTablet.Index + 1) + ", prompt=" + world.Player.FocusPrompt + ", position=" + world.Player.transform.position);
                     Require(world.ReadingText.Contains(readingTablet.Index == 1 ? "D5 00:00" : "D7 00:00"), "Original date record changed.");
-                    var overlay = UnityEngine.Object.FindAnyObjectByType<SliceHud>().GetComponentsInChildren<UnityEngine.UI.Text>(true).Single(t => t.name == "RecordText");
+                    var overlay = UnityEngine.Object.FindAnyObjectByType<GameHud>().GetComponentsInChildren<UnityEngine.UI.Text>(true).Single(t => t.name == "RecordText");
                     Debug.Log("INVESTIGATION_FONT_DIAGNOSTIC shader=" + overlay.materialForRendering.shader.name + ", default=" + overlay.defaultMaterial.shader.name + ", canvas=" + overlay.canvas.renderMode + ", texture=" + overlay.mainTexture.width + "x" + overlay.mainTexture.height + ", font=" + overlay.font.name + ", size=" + overlay.fontSize + ", chars=" + overlay.cachedTextGenerator.characterCount + ", vertices=" + overlay.cachedTextGenerator.vertexCount + ", culled=" + overlay.canvasRenderer.cull);
  Next(52, now);
                 }

@@ -14,7 +14,10 @@ namespace Demon.Slice
         [SerializeField] AudioClip footstepClip;
         readonly RaycastHit[] hits = new RaycastHit[64];
         NavMeshPath candidatePath;
-        SliceSceneController world;
+        GameSession session;
+        PlayerController player;
+        BeamTether tether;
+        ISceneFeedback feedback;
         float replanAt, stepAt, missingNavSeconds;
         bool retreating;
         public ClosePassGate Gate { get; private set; }
@@ -24,21 +27,21 @@ namespace Demon.Slice
         public bool HasNavigation => agent && agent.isActiveAndEnabled && agent.isOnNavMesh;
         public void Configure(ChaseDefinition data, NavMeshAgent actor, Transform[] points, AudioSource audio, AudioClip clip)
         { definition = data; agent = actor; retreatPoints = points; footstepSource = audio; footstepClip = clip; }
-        public void Initialize(SliceSceneController controller)
+        public void Initialize(GameSession rules, PlayerController actor, BeamTether motion, ISceneFeedback messages)
         {
-            if (!definition || !agent || retreatPoints == null || retreatPoints.Length < 2 || !footstepSource || !footstepClip || !controller.Tether)
+            if (!definition || !agent || retreatPoints == null || retreatPoints.Length < 2 || !footstepSource || !footstepClip || !motion || !actor || rules == null || messages == null)
                 throw new InvalidOperationException("Chase requires saved settings, agent, retreat points, footsteps and T06 motion owner.");
             foreach (var point in retreatPoints) if (!point) throw new InvalidOperationException("Missing retreat point.");
             candidatePath = new NavMeshPath(); // Native navigation objects require the main-thread initialization phase.
-            world = controller; Gate = new ClosePassGate(definition.ClosePassMetres, definition.ClosePassCooldownSeconds);
+            session = rules; player = actor; tether = motion; feedback = messages; Gate = new ClosePassGate(definition.ClosePassMetres, definition.ClosePassCooldownSeconds);
             agent.speed = definition.MetresPerSecond; agent.acceleration = definition.AccelerationMetresPerSecondSquared; agent.angularSpeed = definition.AngularDegreesPerSecond;
         }
         void Update()
         {
             if (Gate == null) return;
             Gate.Advance(Time.deltaTime);
-            if (world.Session.Descended) { Phase = ChasePhase.Ended; Stop(); return; }
-            if (!world.Tether.ProxyCanTravel || world.Session.LakeSeal != 0) { Phase = ChasePhase.Dormant; Stop(); return; }
+            if (session.Descended) { Phase = ChasePhase.Ended; Stop(); return; }
+            if (!tether.ProxyCanTravel || session.LakeSeal != 0) { Phase = ChasePhase.Dormant; Stop(); return; }
             if (!agent.isActiveAndEnabled) return; // T06/date presentation enables the authored target root.
             if (!agent.isOnNavMesh)
             {
@@ -51,13 +54,13 @@ namespace Demon.Slice
                 }
             }
             missingNavSeconds = 0;
-            if (!world.Tether.DemonCanMove) { Phase = ChasePhase.Frozen; Stop(); return; }
+            if (!tether.DemonCanMove) { Phase = ChasePhase.Frozen; Stop(); return; }
             agent.isStopped = false;
-            float distance = Vector3.Distance(agent.transform.position, world.Player.transform.position);
+            float distance = Vector3.Distance(agent.transform.position, player.transform.position);
             if (Gate.TryPass(distance, HasSightToPlayer(), true))
             {
-                bool interrupted = world.Player.InterruptPickup();
-                world.SetMessage(interrupted ? definition.InterruptedMessage : definition.NearPassMessage);
+                bool interrupted = player.InterruptPickup();
+                feedback.SetMessage(interrupted ? definition.InterruptedMessage : definition.NearPassMessage);
                 retreating = ChooseRetreat(); replanAt = 0;
             }
             if (retreating)
@@ -73,7 +76,7 @@ namespace Demon.Slice
                 if (Time.time >= replanAt)
                 {
                     replanAt = Time.time + definition.ReplanSeconds;
-                    if (NavMesh.SamplePosition(world.Player.transform.position, out var goal, definition.TargetProjectionMetres, agent.areaMask)) agent.SetDestination(goal.position);
+                    if (NavMesh.SamplePosition(player.transform.position, out var goal, definition.TargetProjectionMetres, agent.areaMask)) agent.SetDestination(goal.position);
                     else Stop();
                 }
             }
@@ -85,7 +88,7 @@ namespace Demon.Slice
             Vector3 best = default; float score = -1;
             foreach (var point in retreatPoints)
             {
-                float distance = Vector3.Distance(point.position, world.Player.transform.position);
+                float distance = Vector3.Distance(point.position, player.transform.position);
                 if (distance < definition.RetreatMinimumMetres || distance <= score || !NavMesh.SamplePosition(point.position, out var goal, 1, agent.areaMask)) continue;
                 if (!agent.CalculatePath(goal.position, candidatePath) || candidatePath.status != NavMeshPathStatus.PathComplete) continue;
                 best = goal.position; score = distance;
@@ -96,12 +99,12 @@ namespace Demon.Slice
         public bool HasSightToPlayer()
         {
             Vector3 origin = agent.transform.position + Vector3.up * .65f;
-            Vector3 offset = world.Player.transform.position + Vector3.up * .9f - origin;
+            Vector3 offset = player.transform.position + Vector3.up * .9f - origin;
             int count = Physics.RaycastNonAlloc(origin, offset.normalized, hits, offset.magnitude, ~0, QueryTriggerInteraction.Ignore);
             for (int i = 0; i < count; i++)
             {
                 var collider = hits[i].collider;
-                if (collider.transform.IsChildOf(world.Player.transform) || collider.transform.IsChildOf(agent.transform)) continue;
+                if (collider.transform.IsChildOf(player.transform) || collider.transform.IsChildOf(agent.transform)) continue;
                 if (hits[i].distance < offset.magnitude - .02f) return false;
             }
             return true;

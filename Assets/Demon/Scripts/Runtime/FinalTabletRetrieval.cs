@@ -11,7 +11,7 @@ namespace Demon.Slice
         [TextArea] [SerializeField] string carryText = "已携带T07。回工具棚西侧空台，按E放置石板。";
         [TextArea] [SerializeField] string placedText = "T07已放回工具棚。靠近石板按E补全铭文。";
         [TextArea] [SerializeField] string compiledText = "湖已封闭。打开工具棚内的箱子B，阅读箱内记录。";
-        SliceSceneController world;
+        GameSceneController world;
         bool bound;
         public FinalTabletProgress Progress { get; private set; }
         public ThreatPickup Pickup => pickup;
@@ -19,7 +19,7 @@ namespace Demon.Slice
         public bool Available => world && world.Session != null && !world.Session.Descended && world.Campaign.FinalAvailable;
         public string Status => world.Session.Board.Frozen ? compiledText : Progress.Placed ? placedText : Progress.Acquired ? carryText : seekText;
         public void Configure(ThreatPickup item, GameObject stand) { pickup = item; emptyDock = stand; }
-        public void Initialize(SliceSceneController controller)
+        public void Initialize(GameSceneController controller)
         {
             if (!pickup || !emptyDock || !controller.Campaign || !controller.Finale)
                 throw new InvalidOperationException("T07 retrieval requires saved pickup, empty dock, campaign and finale.");
@@ -47,7 +47,7 @@ namespace Demon.Slice
             if (!Progress.Collect()) return;
             RefreshPresentation(); world.SetMessage(carryText);
         }
-        public bool Place(SlicePlayer player)
+        public bool Place(PlayerController player)
         {
             if (!Available || !Progress.Acquired) { world.SetMessage("先到湖岸找到T07，再带回此处放置。"); return false; }
             Progress.Place(); RefreshPresentation();

@@ -2,7 +2,7 @@ using UnityEngine;
 using Demon.Slice.Domain;
 namespace Demon.Slice
 {
-    public sealed class StationObservation : SliceInteractable
+    public sealed class StationObservation : Interactable
     {
         [SerializeField] ExplorationFlow owner;
         [SerializeField] ObservationSite site;
@@ -17,7 +17,7 @@ namespace Demon.Slice
         public override string Prompt => "观察并记录" + (site == ObservationSite.Radio ? "电台" : site == ObservationSite.WindVane ? "风向标" : "湖岸");
         public void Configure(ExplorationFlow flow, ObservationSite id, Transform view, Transform target, Transform stand)
         { owner = flow; site = id; closeView = view; aimTarget = target; approach = stand; }
-        public override void Use(SlicePlayer player)
+        public override void Use(PlayerController player)
         { if (!owner) throw new System.InvalidOperationException("Observation requires saved flow."); owner.Observe(this); }
     }
 }

@@ -1,45 +1,17 @@
-# Latest local handoff: GitHub setup (2026-11-01)
-User designated D:/MyProject/Demon as the persistent working repository. main and Git LFS are initialized; remote is git@github.com:TruthORZ/Demon.git (public). Existing origin/main history at 213cfd7 is preserved through a merge; upload completed and main tracks origin/main. Upload checkpoint f78f7ae matches the remote; approximately 3.90 GB of LFS resources uploaded successfully. This completion note is a later documentation-only commit; use git log -1 for the current HEAD. See [upload task](Tasks/DEMON-GITHUB-20261101.md). Statements below that this directory has no .git describe the historical state before this initialization.
-
----
-# 最新本地交接：Snow环境场景（2026-11-01）
-当前本地项目 D:/MyProject/Demon，Unity6000.6.0f1，无.git；下方TASK-014为原机器历史恢复记录，原文保留，旧测试/构建/HEAD不作为本轮本地证明。
-
-本轮[场景打包导入](Tasks/SNOW-SCENE-PACKAGE-IMPORT-20261101.md)已完成03验证。打开 Assets/ImportAsset/SnowEnviroment/Nature Pack - Winter Environment/Scenes/Snow.unity 查看编辑；尚未接入现有游戏或替换启动场景。包在源Snow同目录。原Demon资产/设置397项字节保持，新增1077项资源及文件夹meta、此任务文档与架构/交接更新。
-加载/保存重载、同机位小屋树林和水面渲染、约8秒Play通过；135个材质贴图引用保持，两个源LOD缺失引用如实保留。原PC管线使目标稍亮。完整证据、shader名称隔离和恢复点见任务记录。
-目标Editor已正常退出；源Editor恢复Snow场景。临时工具与pending请求已清除，Search本地设置恢复。曾遇Unity6 QuickSearch索引崩溃，临时低并发/释放内存后完成；恢复默认搜索设置后的启动未另测。下一步由00验收本轮场景交付；真正玩法接入与旧整体降级不自动启动。
-
----
-
-## 保留的原TASK-014交接（历史原文）
-
 # Session Handoff
-Updated: 2026-10-30 Asia/Shanghai
-Active task: [TASK-014 D5–D6声音与风铃搜寻](Tasks/TASK-014-signal-search.md)，实现/自动验证/Windows构建完成，用户于2026-10-30确认没问题并授权Git发布。TASK-013用户已授权推进，文字实际确认完整；不把推进授权当成独立exe完整试玩记录。
-Repository/Unity project: D:\Unity\Projects\Demon
-实现交付提交: 6492337a317d533d6056260a9f2ca00275da7cc2，main分支已推送origin/main并用ls-remote核对一致。本交接说明随后单独提交，最新含文档HEAD请用git log -1核对。TASK-009至014及T07双顺序共146个目标文件已提交；工作树只保留原ProjectSettings空preloadedAssets与UnityConnectSettings两处本地差异。
+Updated: 2026-11-06 Asia/Shanghai
+Active task: [TASK-020 美术雪地接入九天流程](Tasks/TASK-020-snow-gameplay-integration.md)
+Repository/Unity project: D:/Unity/Projects/Demon
+Branch: `main`，上游为 `origin/main`。
 
-## Current state
-用户批准D5静电电台→循湖中原广播找湖岸T04；D6沿林径找原T05，补全后看雪痕触铃，再绕木墙听高低音。可直接睡觉，无强制任务/伤害/新追逐波次。
-主DemonNineDay与新DemonSignalSearch保存SignalSearch_Authored：原T04(4.5,1.2,4.6)/Y0，原T05(12,1.2,-12)/Y90朝西；原板身份/子板/托盘/日期引用保持。原低铃(3.4,.15,-14.3)、高铃(9.5,.15,-14)、原墙(8,1.35,-15.7)，原监测目标仍是Chase唯一Agent。低铃按实际西侧绕行路径设置，能在木墙遮挡时触发。声音/光/封印/补全规则保持。可选D5/D6提示扩展ExplorationFlow/Definition/HUD至D6，旧Quick边界保持。详细结构/可调位置见[ARCHITECTURE第15节](ARCHITECTURE.md)。
-新原生SignalSearchNavigation主/Quick共享，旧9个Quick和5份Nav无改动。新SignalSearchSettings从D5 08:00，步速3.3，无预给工具/发现。T04去掉制作备注但未发明实体函数，签名/来源仍按GAME_SPEC未决。
+## 当前状态
 
-## Verification
-- final001-tests：78 passed/0 failed/0 skipped。
-- check001-boundary：自然D4→D5原声音转移/静电/T04，D6原T05开放，无发现前置/提前LIGHT/自动监听。
-- chime002-smoke/late/tuning/skip全部通过：真实WASD/E/Esc与鼠标错误/正确补全；完整D5–D6往返86.74223m、8次原近身；D6不读T04也能启用并监听49.07915m；真实Agent分别触发可见和ListeningOccluder遮挡的原生空间音源；零发现可睡到D9；保存2.8/提示前缀采用后恢复D5 08:00/3.3/原提示。
-- 新地图first-search/old-search分别复用D1–D2与D3–D4真实输入fixture通过（77.98295m/71.14587m），并非只测旧场景。final001-nine-normal/nine-skip/smoke-input回归通过。
-- final001 Windows64 Development：SignalSearch 174286453字节、NineDay 174286449字节，Builds/WindowsSignalSearch和WindowsNineDay；两份_Data中运行程序集一致并包含新接口。未真人独立exe试玩，保留匹配整个目录。
-- final002-signal-validate在构建/设置恢复/空白清理后保存重载通过，当前Unity为DemonSignalSearch、非Play，无pending。
-- final-audit：旧1842个主ID零丢失，当前1903；旧meta/GUID/9个Quick/5个Native Nav无变化，缺meta零，设置/BuildSettings与本轮基线完全一致。全量旧Demon仅7个预期文件变化；Native Nav精确binary，git diff --check=0。原字体/其他素材无变更。
-- PNG已查看T04全文、T05完整布局、可见原雪痕和木墙遮挡；未进行真人耳机定位/节奏/独立版验收。
+- 整合试玩入口是 `Assets/Demon/Scenes/DemonNineDay_Art.unity`。玩家在木屋床边开始，箱子、轮盘、拼板台在屋内，T07 暂放在门廊下方的围栏内。摆放对象在 `Gameplay_Editable` 下。正式构建入口仍是 `DemonNineDay.unity`。
+- 交付包含整合场景依赖的 [D7–D8 玩法](Tasks/TASK-015-final-days-preparation.md)、[架构重构](Tasks/TASK-016-solid-refactor.md)、[类名迁移](Tasks/TASK-019-remove-slice-class-prefix.md)，以及 [Snow 地形二进制修复与原运行管线设置](Tasks/TASK-017-art-scene-pull.md)。[类图](Diagrams/runtime-classes.md)对应 TASK-019 的运行时快照。
+- 本机保留 `ProjectSettings/ProjectSettings.asset` 和 `ProjectSettings/UnityConnectSettings.asset` 的既有本地差异。未跟踪的原始 `Snow-main/` 属于本地参考目录。
 
-## Resume here
-1. 打开Assets/Demon/Scenes/DemonSignalSearch.unity，▶从D5 08:00开始。E看电台/湖岸T04，Esc放下；睡袋到D6，背湖沿南侧通路入林向东找“旧监听站”与T05。E近看，RING放中心、CHIME放下中，Enter启用；木墙北侧看雪痕，绕南侧听高低音。仍可跳过搜寻直接睡。
-2. 提示在ExplorationDefinition，日程/原文NineDayDefinition，场地/原板/两铃/墙/标牌在SignalSearch_Authored。Route/Visible/Hidden只是布局/验证参考，不驱动玩家或NPC。改障碍后Bake本轮SignalSearchNavigation，保留旧练习资产。
-3. D5–D6阶段已由用户确认，下一步对齐D7–D8。D7–D8具体新探索尚未对齐，正式音频/美术、全九天真人体验、存档/暂停/设置范围仍有未决，本批实现已发布Git；构建/临时证据和两处原本本地设置均未纳入。
+## 验证与下一步
 
-## Evidence and tools
-恢复基线Logs/DemonCheckpoints/task014-baseline-20261029-2207包含本轮前Demon/Docs/ProjectSettings/EditorBuildSettings；先前TASK-013恢复基线仍保留。报告/XML/PNG/审计/RunTask014Checks.ps1和AuditTask014.ps1在Logs/DemonChecks/Task014，均被Git忽略。不要依赖Unity重启会清理的Temp作为唯一证据。
-无Unity MCP；固定Temp/DemonSliceAuthoring.request.json，一次一请求，报告Temp/DemonSliceReports。先检查pending/Play，编译回执不等于编译完成，不在Smoke Play时改Assets脚本，不开第二Editor或清Library。当前Shell require_escalated可用，本轮无需用户手动刷新。
-signal-create/validate/smoke/boundary/late/skip/tuning/build；first-search/old-search在新Quick做早期回归。create拒绝既有输出；finish/settings/low-chime仅修复已知初次状态，拒绝覆盖其他手动定制。当前所有probe已恢复。旧investigation/exploration等操作仍保留，见各任务；其旧快速场景独立，不是最新主地图。
+1. 整合场景保存重开、T07 移动随动、取板区往返碰撞检查，以及 D1–D2、D8 的 Play Mode 组件检查通过。81 项 EditMode 规则通过，原九天场景引用验证通过。证据和测试边界见 TASK-020。
+2. 在整合场景用键鼠连续实走 D1–D2，并从 D8 22:00 验证追逐中取板、返程和安放。之后验收剩余日期和独立 Windows 构建。
+3. 地形与追逐导航为 Unity 原生二进制资产，沿用 `.gitattributes` 的精确路径规则。改地面、障碍物或木屋通道后，重烘焙整合场景的导航。

@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 5
   Label: {fileID: 7750981521800138293}
 --- !u!1 &208169049017019953
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 789b069782e70724d995175616b00f64, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceTablet
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTablet
   closeView: {fileID: 3555628983554001588}
   slots:
   - {fileID: 7067685944833028545}
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 7
   Label: {fileID: 1954982213389041420}
 --- !u!1 &793714492216039829
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc37dd639ca4468418480d07c664a58f, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneTrayItem
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTrayItem
   Rune: 9
   Label: {fileID: 1080257465290920140}
 --- !u!1 &1004857324112367004
@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 2
   Label: {fileID: 7656245507256095257}
 --- !u!1 &2124447218723425917
@@ -1523,7 +1523,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 3
   Label: {fileID: 3289771526813931089}
 --- !u!1 &2559733830242531646
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 8
   Label: {fileID: 3662547040634345944}
 --- !u!1 &2832729707208822139
@@ -1883,7 +1883,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc37dd639ca4468418480d07c664a58f, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneTrayItem
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTrayItem
   Rune: 7
   Label: {fileID: 4138382460807911058}
 --- !u!1 &3649920345866300514
@@ -2712,7 +2712,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 6
   Label: {fileID: 1471657986838850374}
 --- !u!1 &4622147394149180150
@@ -2839,7 +2839,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc37dd639ca4468418480d07c664a58f, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneTrayItem
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTrayItem
   Rune: 4
   Label: {fileID: 347983227565089680}
 --- !u!1 &4881572361490075245
@@ -3378,7 +3378,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 1
   Label: {fileID: 998431481561141536}
 --- !u!1 &6258443164612586263
@@ -3536,7 +3536,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc37dd639ca4468418480d07c664a58f, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneTrayItem
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTrayItem
   Rune: 8
   Label: {fileID: 2425442367056162269}
 --- !u!1 &6543704855627807480
@@ -3769,7 +3769,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 4
   Label: {fileID: 8660828044972390406}
 --- !u!1 &7912258830255800682
@@ -4092,6 +4092,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 0
   Label: {fileID: 8950211901793212805}

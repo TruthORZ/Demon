@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 namespace Demon.Slice
 {
-    public sealed class ThreatPickup : SliceInteractable
+    public sealed class ThreatPickup : Interactable
     {
-        [SerializeField] SliceSceneController world;
+        [SerializeField] GameSceneController world;
         [SerializeField] Transform closeView;
         [SerializeField] GameObject itemVisual;
         [SerializeField, Min(.1f)] float holdSeconds = 1.2f;
@@ -22,14 +22,14 @@ namespace Demon.Slice
         public float HoldSeconds => holdSeconds;
         public int CollectionCount { get; private set; }
         public override string Prompt => "按住 E 拾取" + itemName;
-        public void Configure(SliceSceneController owner, Transform view, GameObject visual)
+        public void Configure(GameSceneController owner, Transform view, GameObject visual)
         { world = owner; closeView = view; itemVisual = visual; }
         void Awake()
         {
             if (!world || !closeView || !itemVisual) throw new InvalidOperationException("Pickup requires saved composition, view and item visual.");
             Attempt = new PickupAttempt(holdSeconds);
         }
-        public override void Use(SlicePlayer player)
+        public override void Use(PlayerController player)
         {
             if (!isActiveAndEnabled || world.Session.Descended || Attempt.Active || Attempt.Completed ||
                 (requestBegin != null && !requestBegin()) || !Attempt.Begin()) return;

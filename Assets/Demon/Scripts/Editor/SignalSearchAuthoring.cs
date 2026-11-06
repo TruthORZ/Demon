@@ -29,7 +29,7 @@ namespace Demon.Slice.Editor
             foreach (string path in new[] { ScenePath, SettingsPath, NavigationPath })
                 if (File.Exists(path)) throw new InvalidOperationException("Preserving existing signal-search output: " + path);
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Exploration || !world.Exploration.HasInvestigation || world.Exploration.HasSignalSearch || GameObject.Find("SignalSearch_Authored"))
                 throw new InvalidOperationException("Expected accepted D1–D4 composition without signal-search extension.");
             var tablets = UnityEngine.Object.FindObjectsByType<NineDayTablet>(FindObjectsInactive.Include);
@@ -76,7 +76,7 @@ namespace Demon.Slice.Editor
             // Retain the unresolved T04 signature in design records, not in player-facing implementation notes.
             plan.Tablets[3].Record = "【T04 · 封印四 · 已固化】\nIF DAY == 9\n\n第九天零点，湖中的投影将获得实体。\n\n边缘残缺，实体来自何处已无法辨认。日期刻痕仍然清晰。\n发现或放下这块石板，不会改变它预告的时刻。";
             EditorUtility.SetDirty(plan); EditorUtility.SetDirty(world.Exploration.Definition);
-            var hud = UnityEngine.Object.FindAnyObjectByType<SliceHud>(); var binding = hud.GetComponent<SliceFontBinding>();
+            var hud = UnityEngine.Object.FindAnyObjectByType<GameHud>(); var binding = hud.GetComponent<SceneFontBinding>();
             binding.Configure(font, hud.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
             var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
             var late = tablets.Select(t => t.gameObject).Concat(new[] { world.Tablet.gameObject, world.Retrieval.Pickup.gameObject }).Distinct().ToArray();
@@ -88,13 +88,13 @@ namespace Demon.Slice.Editor
             Save(); Validate();
             return CreateQuick(world);
         }
-        static string CreateQuick(SliceSceneController world)
+        static string CreateQuick(GameSceneController world)
         {
             var quick = UnityEngine.Object.Instantiate(world.Settings); quick.name = "SignalSearchSettings"; quick.StartDay = 5; quick.StartHour = 8;
             AssetDatabase.CreateAsset(quick, SettingsPath); AssetDatabase.SaveAssets();
             if (!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not save signal-search quick scene.");
-            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var so = new SerializedObject(world); so.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath); so.ApplyModifiedProperties();
+            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var so = new SerializedObject(world); so.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath); so.ApplyModifiedProperties();
             Save(); EditorSceneManager.OpenScene(ScenePath); return Validate();
         }
         public static string FinishLayout()
@@ -102,7 +102,7 @@ namespace Demon.Slice.Editor
             Editable();
             if (File.Exists(ScenePath) || File.Exists(SettingsPath)) throw new InvalidOperationException("FinishLayout only recovers initial failed creation; edit existing saved scenes normally.");
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var flow = world.Exploration;
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var flow = world.Exploration;
             if (!flow.HasSignalSearch || Vector3.Distance(flow.FifthTablet.transform.position,new Vector3(14,1.2f,-14.5f))>.01f) throw new InvalidOperationException("Expected initial candidate T05; preserving other manual layout.");
             flow.FifthTablet.transform.position = new Vector3(12,1.2f,-12); flow.FifthTablet.transform.rotation = Quaternion.Euler(0,90,0); EditorUtility.SetDirty(flow.FifthTablet.transform);
             flow.ListeningRoute[5].position = new Vector3(9,.04f,-12); flow.ListeningRoute[6].position = new Vector3(9.8f,.04f,-12);
@@ -111,9 +111,9 @@ namespace Demon.Slice.Editor
             root.Find("ForestListeningSite_Editable/OldReceiverPost").position = new Vector3(12.2f,.65f,-14.8f);
             RebakeOwnedNavigation(world);
             Save(); EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath); Validate();
-            return CreateQuick(UnityEngine.Object.FindAnyObjectByType<SliceSceneController>());
+            return CreateQuick(UnityEngine.Object.FindAnyObjectByType<GameSceneController>());
         }
-        static void RebakeOwnedNavigation(SliceSceneController world)
+        static void RebakeOwnedNavigation(GameSceneController world)
         {
             var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
             var original = surface.navMeshData;
@@ -128,7 +128,7 @@ namespace Demon.Slice.Editor
             Editable();
             foreach(string path in new[]{NineDayAuthoring.ScenePath,ScenePath})
             {
-                EditorSceneManager.OpenScene(path); var world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var low=world.Listening.Chimes[0];
+                EditorSceneManager.OpenScene(path); var world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var low=world.Listening.Chimes[0];
                 if(Vector3.Distance(low.transform.position,new Vector3(5.4f,.15f,-14.6f))>.01f && Vector3.Distance(low.transform.position,new Vector3(4.4f,.15f,-15))>.01f) throw new InvalidOperationException("Preserving manually moved low chime.");
                 low.transform.position=new Vector3(3.4f,.15f,-14.3f); EditorUtility.SetDirty(low.transform);
                 if(path==NineDayAuthoring.ScenePath) RebakeOwnedNavigation(world);
@@ -151,8 +151,8 @@ namespace Demon.Slice.Editor
         public static void OpenQuick() { Editable(); EditorSceneManager.OpenScene(ScenePath); }
         public static string RepairSettings()
         {
-            OpenQuick(); var world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var settings=AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath);
+            OpenQuick(); var world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var settings=AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath);
             if(world.Settings || !settings || settings.StartDay!=5 || Math.Abs(settings.StartHour-8)>.001f) throw new InvalidOperationException("Repair only fills the missing initial quick-settings reference.");
             var so=new SerializedObject(world); so.FindProperty("settings").objectReferenceValue=settings; so.ApplyModifiedProperties(); Save();
             // Initial boundary attempt failed before reading/backing up or changing any setting.
@@ -160,7 +160,7 @@ namespace Demon.Slice.Editor
         }
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
             if (!world || !world.Settings || !world.Exploration.HasSignalSearch || !surface || AssetDatabase.GetAssetPath(surface.navMeshData) != NavigationPath || !world.Cipher.Wheel.ReadCode().SequenceEqual(new[] {3,4,2})) throw new InvalidOperationException("Invalid saved signal-search settings/composition/navigation/cipher.");
             var flow = world.Exploration;
             if (flow.FourthTablet.Index != 3 || flow.FifthTablet.Index != 4 || !world.Listening.Tablet.transform.IsChildOf(flow.FifthTablet.transform) || world.Listening.Chimes.Any(c => c.MonitoredTarget != world.Chase.Agent.transform)) throw new InvalidOperationException("Original tablet/chime references changed.");
@@ -174,7 +174,7 @@ namespace Demon.Slice.Editor
         public static void BeginProbe(string op)
         {
             if (SessionState.GetBool(Probe, false)) throw new InvalidOperationException("Restore previous signal-search probe first.");
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Settings) throw new InvalidOperationException("Saved signal-search settings reference missing.");
             SessionState.SetBool(Probe,true); SessionState.SetInt(Probe+"day",world.Settings.StartDay); SessionState.SetFloat(Probe+"hour",world.Settings.StartHour); SessionState.SetFloat(Probe+"speed",world.Settings.WalkMetresPerSecond); SessionState.SetString(Probe+"guide",world.Exploration.Definition.Day5Guide);
             if (op == "signal-late") world.Settings.StartDay = 6;
@@ -187,7 +187,7 @@ namespace Demon.Slice.Editor
         public static void RestoreProbe()
         {
             if (!SessionState.GetBool(Probe,false)) return;
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             world.Settings.StartDay = SessionState.GetInt(Probe+"day",5); world.Settings.StartHour = SessionState.GetFloat(Probe+"hour",8); world.Settings.WalkMetresPerSecond = SessionState.GetFloat(Probe+"speed",3.3f); world.Exploration.Definition.Day5Guide = SessionState.GetString(Probe+"guide",world.Exploration.Definition.Day5Guide);
             EditorUtility.SetDirty(world.Settings); EditorUtility.SetDirty(world.Exploration.Definition); Save(); SessionState.SetBool(Probe,false); Debug.Log("DEMON_SIGNAL_PROBE_RESTORED");
         }

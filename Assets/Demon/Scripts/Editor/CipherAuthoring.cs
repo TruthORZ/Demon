@@ -26,7 +26,7 @@ namespace Demon.Slice.Editor
             Editable();
             if (File.Exists(ScenePath) || File.Exists(DefinitionPath) || File.Exists(SettingsPath)) throw new InvalidOperationException("Cipher outputs exist; edit saved content rather than regenerate.");
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (world.Cipher || GameObject.Find("Cipher_Authored")) throw new InvalidOperationException("Preserving existing cipher content.");
             var data = ScriptableObject.CreateInstance<CipherDefinition>(); AssetDatabase.CreateAsset(data, DefinitionPath);
             font = AssetDatabase.LoadAssetAtPath<Font>("Assets/Demon/UI/WindowsChinese.fontsettings");
@@ -94,12 +94,12 @@ namespace Demon.Slice.Editor
             plan.Days[6].Objective = "对照电台、太阳、风向标的固定方位，按箱面符号顺序输入密码，解开箱子A取得T06；也可提前探索。";
             plan.Tablets[5].Record = "【T06 · 已固化运动交换工具】\n从箱子A取得。\n稳定光束锁定恶魔区域时，交换恶魔与风向标的运动；失锁再交换一次复位。\n脚印停止时风向标转动；移开光束后恢复。\n\n风铃辨认所在区域，稳定光束争取行动时间；两种工具用途不同。";
             EditorUtility.SetDirty(plan); EditorUtility.SetDirty(world); EditorUtility.SetDirty(box);
-            var binding = UnityEngine.Object.FindAnyObjectByType<SliceHud>().GetComponent<SliceFontBinding>(); binding.Configure(font, binding.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
+            var binding = UnityEngine.Object.FindAnyObjectByType<GameHud>().GetComponent<SceneFontBinding>(); binding.Configure(font, binding.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
             Save();
             var settings = UnityEngine.Object.Instantiate(world.Settings); settings.name = "CipherSettings"; settings.StartDay = 1; settings.StartHour = 10; settings.InitialLakeSealed = true; AssetDatabase.CreateAsset(settings, SettingsPath); AssetDatabase.SaveAssets();
             if (!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not copy cipher quick scene.");
-            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath); serialized.ApplyModifiedProperties();
+            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath); serialized.ApplyModifiedProperties();
             var body = world.Player.GetComponent<CharacterController>(); body.enabled = false; world.Player.transform.SetPositionAndRotation(new Vector3(-8, .04f, -3.5f), Quaternion.identity); body.enabled = true;
             PrefabUtility.RecordPrefabInstancePropertyModifications(world.Player.transform); Save(); EditorSceneManager.OpenScene(ScenePath); return Validate();
         }
@@ -119,7 +119,7 @@ namespace Demon.Slice.Editor
         public static void OpenQuick() { Editable(); EditorSceneManager.OpenScene(ScenePath); }
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Cipher || !world.Cipher.Wheel || !world.Cipher.Wheel.Definition || !world.Cipher.CloseView) throw new InvalidOperationException("Missing saved cipher composition.");
             if (world.Cipher.GetComponentsInChildren<CipherDigit>(true).Length != 3 || world.Cipher.Wheel.ReadCode().Length != 3) throw new InvalidOperationException("Saved cipher digits/landmarks incomplete.");
             if (UnityEngine.Object.FindObjectsByType<NineDayTablet>(FindObjectsInactive.Include).Length != 6) throw new InvalidOperationException("Old six tablet identities were lost.");
@@ -128,7 +128,7 @@ namespace Demon.Slice.Editor
         const string Tune = "Demon.Cipher.Restore";
         public static void BeginTuning()
         {
-            var box = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>().Cipher;
+            var box = UnityEngine.Object.FindAnyObjectByType<GameSceneController>().Cipher;
             SessionState.SetString(Tune + "digits", string.Join(",", box.Wheel.Definition.DigitsClockwise)); SessionState.SetVector3(Tune + "view", box.CloseView.localPosition); SessionState.SetBool(Tune, true);
             var data = box.Wheel.Definition; int old = data.DigitsClockwise[9]; data.DigitsClockwise[9] = data.DigitsClockwise[8]; data.DigitsClockwise[8] = old; EditorUtility.SetDirty(data);
             box.CloseView.localPosition += Vector3.right * .08f; Save();
@@ -136,7 +136,7 @@ namespace Demon.Slice.Editor
         public static void RestoreTuning()
         {
             if (!SessionState.GetBool(Tune, false)) return;
-            var box = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>().Cipher;
+            var box = UnityEngine.Object.FindAnyObjectByType<GameSceneController>().Cipher;
             box.Wheel.Definition.DigitsClockwise = SessionState.GetString(Tune + "digits", "").Split(',').Select(int.Parse).ToArray(); EditorUtility.SetDirty(box.Wheel.Definition);
             box.CloseView.localPosition = SessionState.GetVector3(Tune + "view", Vector3.zero); Save(); SessionState.SetBool(Tune, false); Debug.Log("DEMON_CIPHER_TUNING_RESTORED");
         }

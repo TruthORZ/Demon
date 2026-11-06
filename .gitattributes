@@ -61,3 +61,9 @@ Assets/Demon/Data/SignalSearchNavigation.asset binary
 *.hdr filter=lfs diff=lfs merge=lfs -text
 *.exr filter=lfs diff=lfs merge=lfs -text
 *.unitypackage filter=lfs diff=lfs merge=lfs -text
+
+Assets/Demon/Data/PreparationNavigation.asset binary
+Assets/Demon/Data/SnowIntegrationNavigation.asset binary
+
+# TerrainData is native binary; preserve embedded CRLF bytes.
+"Assets/ImportAsset/SnowEnviroment/Nature Pack - Winter Environment/Scenes/Demo_Scene_02.asset" binary

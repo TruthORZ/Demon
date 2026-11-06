@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d569c48bd8d647d4b9815f7afa4cc3d5, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceHud
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.GameHud
   clockText: {fileID: 1358430894}
   messageText: {fileID: 1566778781}
   helpText: {fileID: 1040298119}
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e896aa11286b1f949bbd66dd312d5aac, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceFontBinding
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SceneFontBinding
   useWindowsSystemFont: 1
   authoredFont: {fileID: 12800000, guid: 4a6f3df3a40f5394b8043b5888605a5c, type: 2}
   systemFontNames:
@@ -1407,7 +1407,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7523f2065889cb3478d6c1ec932e5094, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SlicePresentation
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.WorldPresentation
   lidPivot: {fileID: 5812433720026582144}
   openLidEuler: {x: 105, y: 0, z: 0}
   lidBlendSeconds: 0.6
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 102bc3a8f59a3e74fa962eaf38c6744e, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceSceneController
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.GameSceneController
   settings: {fileID: 11400000, guid: 66ea79324aea5664f9efc5f481fea6dc, type: 2}
   player: {fileID: 1061131879844052853}
   tablet: {fileID: 4876387587973834586}
@@ -2037,7 +2037,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ec43bb5dd5edfb4081362db91ae6a79, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceFinaleSequence
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.FinaleSequence
   clockView: {fileID: 915289751}
   hourHand: {fileID: 282504547}
   minuteHand: {fileID: 1785476873}
@@ -7006,7 +7006,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e2f24977efeb314d82456d1e20fc518, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceBed
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SleepPoint
   world: {fileID: 422812707}
 --- !u!4 &1645645854
 Transform:
@@ -8729,7 +8729,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c41b4dc5656d9be4ebf2e55e03a94a05, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SlicePlayer
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.PlayerController
 --- !u!1001 &4876387587973834585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8881,7 +8881,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 789b069782e70724d995175616b00f64, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceTablet
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTablet
 --- !u!1001 &5812433720026582141
 PrefabInstance:
   m_ObjectHideFlags: 0

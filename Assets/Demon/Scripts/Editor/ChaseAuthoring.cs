@@ -25,7 +25,7 @@ namespace Demon.Slice.Editor
             Editable();
             if (File.Exists(ScenePath) || File.Exists(DataPath) || File.Exists(SettingsPath) || File.Exists("Assets/Demon/Data/ChaseNavigation.asset") || File.Exists("Assets/Demon/Data/ChasePracticeNavigation.asset")) throw new InvalidOperationException("Chase outputs already exist; preserve saved authoring.");
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world.Tether || world.Chase || GameObject.Find("Chase_Authored")) throw new InvalidOperationException("Unexpected chase source composition.");
             var proxy = UnityEngine.Object.FindAnyObjectByType<ListeningTrailProxy>();
             if (!proxy) throw new InvalidOperationException("Original proxy must remain available for audit.");
@@ -47,8 +47,8 @@ namespace Demon.Slice.Editor
             Bake(surface, "Assets/Demon/Data/ChaseNavigation.asset"); late.SetActive(lateWasActive); agent.enabled = true; Save();
             var settings = UnityEngine.Object.Instantiate(world.Settings); settings.name = "ChaseSettings"; settings.StartDay = 7; settings.StartHour = 10; settings.InitialLakeSealed = false; AssetDatabase.CreateAsset(settings, SettingsPath); AssetDatabase.SaveAssets();
             if (!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not save chase practice scene.");
-            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath); serialized.ApplyModifiedProperties();
+            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var serialized = new SerializedObject(world); serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath); serialized.ApplyModifiedProperties();
             var practice = new GameObject("ChasePractice_Authored").transform;
             var stone = AssetDatabase.LoadAssetAtPath<Material>("Assets/Demon/Art/Materials/Stone.mat"); var paper = AssetDatabase.LoadAssetAtPath<Material>("Assets/Demon/Art/Materials/Paper.mat"); var wood = AssetDatabase.LoadAssetAtPath<Material>("Assets/Demon/Art/Materials/BoxWood.mat"); var font = AssetDatabase.LoadAssetAtPath<Font>("Assets/Demon/UI/WindowsChinese.fontsettings");
             Primitive("PracticeRoutingWall", practice, new Vector3(0, 1.1f, -5.5f), new Vector3(3, 2.2f, .4f), wood);
@@ -61,7 +61,7 @@ namespace Demon.Slice.Editor
             var view = new GameObject("PickupView").transform; view.SetParent(pickupRoot, false); view.localPosition = new Vector3(0, 1.2f, -1.6f); view.LookAt(pickupRoot.position + Vector3.up * .9f);
             pickupRoot.gameObject.AddComponent<ThreatPickup>().Configure(world, view, visual.gameObject);
             Label("PracticeInstructions", practice, new Vector3(4.7f, 2, -.3f), "牵制与拾取练习\n松开光束后伸手；被逼近会打断\n已完成的解谜和收集保留", font, .018f);
-            var binding = UnityEngine.Object.FindAnyObjectByType<SliceHud>().GetComponent<SliceFontBinding>(); binding.Configure(font, binding.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
+            var binding = UnityEngine.Object.FindAnyObjectByType<GameHud>().GetComponent<SceneFontBinding>(); binding.Configure(font, binding.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
             var body = world.Player.GetComponent<CharacterController>(); body.enabled = false; world.Player.transform.SetPositionAndRotation(new Vector3(1.8f, .04f, -3.7f), Quaternion.identity); body.enabled = true; PrefabUtility.RecordPrefabInstancePropertyModifications(world.Player.transform);
             surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>(); surface.RemoveData(); surface.navMeshData = null;
             Bake(surface, "Assets/Demon/Data/ChasePracticeNavigation.asset"); Save(); EditorSceneManager.OpenScene(ScenePath); return Validate();
@@ -89,7 +89,7 @@ namespace Demon.Slice.Editor
         public static void OpenQuick() { Editable(); EditorSceneManager.OpenScene(ScenePath); }
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
             if (!world || !world.Chase || !world.Chase.Agent || !surface || !surface.navMeshData || !EditorUtility.IsPersistent(surface.navMeshData)) throw new InvalidOperationException("Missing persisted chase navigation/composition.");
             var proxy = world.Chase.Agent.GetComponentInParent<ListeningTrailProxy>();
             if (proxy && proxy.enabled) throw new InvalidOperationException("Two movement owners are enabled.");
@@ -99,7 +99,7 @@ namespace Demon.Slice.Editor
         const string Tune = "Demon.Chase.Restore";
         public static void BeginTuning()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var data = world.Chase.Definition; var pickup = UnityEngine.Object.FindAnyObjectByType<ThreatPickup>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var data = world.Chase.Definition; var pickup = UnityEngine.Object.FindAnyObjectByType<ThreatPickup>();
             SessionState.SetFloat(Tune + "speed", data.MetresPerSecond); SessionState.SetFloat(Tune + "hold", pickup.HoldSeconds); SessionState.SetBool(Tune, true);
             data.MetresPerSecond = 2.2f; EditorUtility.SetDirty(data); SetFloat(pickup, "holdSeconds", 1.8f); Save();
         }

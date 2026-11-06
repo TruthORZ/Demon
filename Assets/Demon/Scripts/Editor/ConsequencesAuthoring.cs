@@ -30,7 +30,7 @@ namespace Demon.Slice.Editor
             foreach (string path in new[] { NineDayAuthoring.ScenePath, FinalTabletAuthoring.ScenePath })
             { EditorSceneManager.OpenScene(path); Install(); Save(); }
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             var quick = UnityEngine.Object.Instantiate(world.Settings); quick.name = "ConsequencesSettings"; quick.StartDay = 4; quick.StartHour = 23 + 50f / 60; quick.InitialLakeSealed = false;
             quick.Instructions += "\nD5听电台与湖中声源；D7观察失光日轮。可用睡袋跳日。"; AssetDatabase.CreateAsset(quick, SettingsPath);
             var definition = world.Campaign.Definition;
@@ -40,14 +40,14 @@ namespace Demon.Slice.Editor
             definition.Days[6].Objective = "预期日出后仍是夜色，太阳参照只剩白边，湖中持续发光。对照太阳符号与轮盘解A，取得T06。";
             EditorUtility.SetDirty(definition); AssetDatabase.SaveAssets();
             if (!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Cannot save consequences quick scene.");
-            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var ws = new SerializedObject(world); ws.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath); ws.ApplyModifiedProperties();
+            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var ws = new SerializedObject(world); ws.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath); ws.ApplyModifiedProperties();
             var body = world.Player.GetComponent<CharacterController>(); body.enabled = false; world.Player.transform.SetPositionAndRotation(new Vector3(-8, .04f, -2.4f), Quaternion.identity); body.enabled = true; PrefabUtility.RecordPrefabInstancePropertyModifications(world.Player.transform);
             Save(); EditorSceneManager.OpenScene(ScenePath); return Validate();
         }
         static void Install()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Cipher || !world.Chase || !world.Finale || !world.Retrieval || world.Consequences || GameObject.Find("Consequences_Authored")) throw new InvalidOperationException("Expected accepted T07 composition without consequences.");
             var root = new GameObject("Consequences_Authored").transform;
             var landmarks = world.Cipher.Wheel.Landmarks;
@@ -107,7 +107,7 @@ namespace Demon.Slice.Editor
             Editable();
             foreach (string path in new[] { NineDayAuthoring.ScenePath, FinalTabletAuthoring.ScenePath, ScenePath })
             {
-                EditorSceneManager.OpenScene(path); var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var disk = world.Consequences.SolarDisk.transform;
+                EditorSceneManager.OpenScene(path); var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var disk = world.Consequences.SolarDisk.transform;
                 var scale = disk.localScale; scale.z = .03f; disk.localScale = scale;
                 var rim = (new SerializedObject(world.Consequences).FindProperty("whiteRim").objectReferenceValue as GameObject).transform;
                 var position = rim.localPosition; position.z = -.025f; rim.localPosition = position; EditorUtility.SetDirty(disk); EditorUtility.SetDirty(rim); Save();
@@ -116,7 +116,7 @@ namespace Demon.Slice.Editor
         }
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Settings || !world.Player || !world.Presentation || !world.Consequences || !world.Consequences.BroadcastClip || !world.Consequences.RadioBroadcast || !world.Consequences.RadioStatic || !world.Consequences.DemonBroadcast || !world.Finale || !world.Retrieval) throw new InvalidOperationException("Missing saved sound/light composition.");
             if (!world.Cipher.Wheel.ReadCode().SequenceEqual(new[] { 3, 4, 2 })) throw new InvalidOperationException("Solar/root edits changed accepted cipher342.");
             var so = new SerializedObject(world.Consequences);
@@ -126,7 +126,7 @@ namespace Demon.Slice.Editor
         const string Tune = "Demon.Consequences.Restore";
         public static void BeginProbe(bool late, bool tune)
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var effects = world.Consequences;
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var effects = world.Consequences;
             if (SessionState.GetBool(Tune, false)) throw new InvalidOperationException("Restore the prior attribute probe first.");
             SessionState.SetBool(Tune, true); SessionState.SetString(Tune + "clip", AssetDatabase.GetAssetPath(effects.BroadcastClip));
             SessionState.SetFloat(Tune + "radio", effects.RadioBroadcast.volume); SessionState.SetFloat(Tune + "day", world.Settings.StartDay); SessionState.SetFloat(Tune + "hour", world.Settings.StartHour);
@@ -143,7 +143,7 @@ namespace Demon.Slice.Editor
         public static void RestoreProbe()
         {
             if (!SessionState.GetBool(Tune, false)) return;
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var effects = world.Consequences;
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var effects = world.Consequences;
             world.Settings.StartDay = (int)SessionState.GetFloat(Tune + "day", 4); world.Settings.StartHour = SessionState.GetFloat(Tune + "hour", 23 + 50f / 60); EditorUtility.SetDirty(world.Settings);
             effects.RadioBroadcast.volume = SessionState.GetFloat(Tune + "radio", .35f); EditorUtility.SetDirty(effects.RadioBroadcast);
             var so = new SerializedObject(effects); so.FindProperty("broadcastClip").objectReferenceValue = AssetDatabase.LoadAssetAtPath<AudioClip>(SessionState.GetString(Tune + "clip", BroadcastPath)); so.ApplyModifiedProperties(); EditorUtility.SetDirty(effects);

@@ -19,6 +19,16 @@ namespace Demon.Slice
     [CreateAssetMenu(menuName = "Demon/Nine Day Definition")]
     public sealed class NineDayDefinition : ScriptableObject
     {
+        // All campaign consumers use T01's actual authored date, not a second copy in a tool definition.
+        public int MotionDay
+        {
+            get
+            {
+                if (Tablets == null || Tablets.Length == 0 || Tablets[0] == null || Tablets[0].DateNodeDay < 1 || Tablets[0].DateNodeDay > 9)
+                    throw new InvalidOperationException("T01 requires a motion date between D1 and D9.");
+                return Tablets[0].DateNodeDay;
+            }
+        }
         public DayPlan[] Days = new DayPlan[9];
         public FixedTabletPlan[] Tablets = new FixedTabletPlan[6];
         [Tooltip("Temporary pacing for the first-night opening; no cultist sequence yet.")]

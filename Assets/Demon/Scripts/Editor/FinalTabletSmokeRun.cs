@@ -9,12 +9,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 namespace Demon.Slice.Editor
 {
-    public sealed class FinalTabletSmokeRun
+    public sealed class FinalTabletSmokeRun : ISmokeRun
     {
         readonly string operation;
         readonly Action<bool, string> finish;
         readonly double started = EditorApplication.timeSinceStartup;
-        SliceSceneController world;
+        GameSceneController world;
         FinalTabletRetrieval retrieval;
         ThreatPickup pickup;
         Keyboard keyboard; Mouse mouse;
@@ -33,7 +33,7 @@ namespace Demon.Slice.Editor
             try
             {
                 if (EditorApplication.timeSinceStartup - started > 180) throw new TimeoutException("T07 timed out at stage " + stage);
-                if (!world) world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                if (!world) world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (world && !world.enabled) throw new InvalidOperationException("World disabled: inspect missing authored references before Play.");
                 if (!world || world.Session == null || !world.Retrieval || world.Retrieval.Progress == null  ) return;
                 if (stage == 0 && !world.Chase.HasNavigation) return;
@@ -158,7 +158,7 @@ namespace Demon.Slice.Editor
                 {
                     Require(now - since < 4, "Box approach blocked.");
                     if (world.Player.transform.position.x >= -4.1f)
-                    { PointAt(UnityEngine.Object.FindAnyObjectByType<SliceBox>().transform.position + Vector3.up * .6f, false); Keys(Key.E); Next(19, now); }
+                    { PointAt(UnityEngine.Object.FindAnyObjectByType<RecordBox>().transform.position + Vector3.up * .6f, false); Keys(Key.E); Next(19, now); }
                 }
                 else if (stage == 19 && now - since > .4)
                 { Require(world.HasReadBox && world.Player.Reading && world.Finale.TimeReserved && !world.Finale.IsDirecting, "Actual E failed to open B record."); Keys(); Capture("record"); Next(20, now); }
@@ -184,7 +184,7 @@ namespace Demon.Slice.Editor
         }
         void BuildClicks(bool fill, bool restoreAndReverse = false)
         {
-            var slots = world.Tablet.GetComponentsInChildren<SliceRuneSlot>(); var tray = world.Tablet.GetComponentsInChildren<SliceRuneTrayItem>();
+            var slots = world.Tablet.GetComponentsInChildren<RuneSlot>(); var tray = world.Tablet.GetComponentsInChildren<RuneTrayItem>();
             Transform Slot(int i) => slots.Single(s => s.Index == i).transform; Transform Tray(RuneKind kind) => tray.Single(t => t.Rune == kind).transform;
             foreach (var item in tray) ValidateClick(item.transform);
             var correction = restoreAndReverse ? new[] { Slot(4), Slot(7), Slot(4), Slot(7), Slot(8), Slot(7) } : new[] { Slot(4), Slot(7), Slot(4) };
@@ -192,7 +192,7 @@ namespace Demon.Slice.Editor
         }
         Vector3 ValidateClick(Transform target)
         {
-            var tray = target.GetComponent<SliceRuneTrayItem>();
+            var tray = target.GetComponent<RuneTrayItem>();
             Vector3 screen = world.Player.ViewCamera.WorldToScreenPoint(tray ? tray.Label.transform.position : target.position);
             Require(screen.z > 0 && screen.x > 0 && screen.x < Screen.width && screen.y > 0 && screen.y < Screen.height, "Docked target outside camera: " + target.name);
             var hit = Physics.RaycastAll(world.Player.ViewCamera.ScreenPointToRay(screen), 20).Where(h => !h.collider.transform.IsChildOf(world.Player.transform)).OrderBy(h => h.distance).FirstOrDefault();

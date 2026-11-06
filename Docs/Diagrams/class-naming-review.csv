@@ -1,0 +1,111 @@
+﻿现行类名,原名,范围,命名审查,可选命名,源码位置
+ArchitectureRefactorChecks,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ArchitectureRefactorChecks.cs:11
+ArchitectureSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ArchitectureSmokeRun.cs:10
+AttributeOperations,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:10
+BeamAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/BeamAuthoring.cs:12
+BeamDefinition,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/BeamDefinition.cs:5
+BeamSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/BeamSmokeRun.cs:11
+BeamTether,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/BeamTether.cs:7
+BearingCipher,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/BearingCipher.cs:4
+ChaseAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ChaseAuthoring.cs:14
+ChaseController,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/ChaseController.cs:7
+ChaseDefinition,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/ChaseDefinition.cs:5
+ChaseSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ChaseSmokeRun.cs:12
+CipherAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/CipherAuthoring.cs:12
+CipherBox,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/CipherBox.cs:6
+CipherDefinition,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/CipherDefinition.cs:6
+CipherDigit,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/CipherDigit.cs:4
+CipherSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/CipherSmokeRun.cs:10
+CipherWheel,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/CipherWheel.cs:6
+ClosePassGate,,Domain,近身距离门槛、触发及冷却,ClosePassTrigger,Assets/Demon/Scripts/Runtime/Domain/PursuitRules.cs:4
+ConsequencesAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ConsequencesAuthoring.cs:11
+ConsequencesSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ConsequencesSmokeRun.cs:12
+DayPlan,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/NineDayDefinition.cs:6
+DiscoveryProgress,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/DiscoveryProgress.cs:5
+EditorRequestRunner,DemonSliceRequestRunner,Editor,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Editor/EditorRequestRunner.cs:19
+ExplorationAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ExplorationAuthoring.cs:14
+ExplorationDefinition,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs:14
+ExplorationFlow,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/ExplorationFlow.cs:6
+ExplorationGuidance,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs:34
+ExplorationGuideRule,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/ExplorationGuidance.cs:18
+ExplorationSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ExplorationSmokeRun.cs:12
+FinalTabletAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/FinalTabletAuthoring.cs:12
+FinalTabletDock,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/FinalTabletDock.cs:4
+FinalTabletProgress,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/FinalTabletProgress.cs:4
+FinalTabletRetrieval,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/FinalTabletRetrieval.cs:6
+FinalTabletSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/FinalTabletSmokeRun.cs:12
+FinaleAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/FinaleAuthoring.cs:13
+FinaleSequence,SliceFinaleSequence,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/FinaleSequence.cs:10
+FinaleTimeWindow,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/FinaleTimeWindow.cs:7
+FirstDayInspectionLog,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/FirstDayInspectionLog.cs:5
+FixedTabletPlan,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/NineDayDefinition.cs:12
+GameClock,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:35
+GameHud,SliceHud,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/GameHud.cs:8
+GameSceneController,SliceSceneController,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/GameSceneController.cs:9
+GameSession,SliceSession,Domain,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:157
+GameSettings,SliceSettings,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/GameSettings.cs:9
+Interactable,SliceInteractable,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/Interactable.cs:7
+InvestigationAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/InvestigationAuthoring.cs:15
+InvestigationSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/InvestigationSmokeRun.cs:13
+ListeningAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ListeningAuthoring.cs:14
+ListeningChime,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/ListeningChime.cs:7
+ListeningDefinition,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/ListeningDefinition.cs:7
+ListeningSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/ListeningSmokeRun.cs:12
+ListeningTool,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/ListeningTool.cs:7
+ListeningTrailProxy,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/ListeningTrailProxy.cs:7
+NineDayAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/NineDayAuthoring.cs:12
+NineDayDefinition,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/NineDayDefinition.cs:20
+NineDayFlow,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/NineDayFlow.cs:7
+NineDaySmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/NineDaySmokeRun.cs:11
+NineDayTablet,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/NineDayTablet.cs:5
+ObservationText,,运行时,观察站各状态的文案,StationObservationText,Assets/Demon/Scripts/Runtime/ExplorationDefinition.cs:6
+PickupAttempt,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/PursuitRules.cs:28
+PlayerController,SlicePlayer,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/PlayerController.cs:10
+PreparationAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/PreparationAuthoring.cs:15
+PreparationRecord,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/PreparationRecord.cs:9
+PreparationSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/PreparationSmokeRun.cs:14
+ProbeInteraction,,Editor,内部类型由外层工具限定含义,,Assets/Demon/Scripts/Editor/ArchitectureSmokeRun.cs:12
+PrototypeSceneAuthoring,DemonSliceAuthoring,Editor,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Editor/PrototypeSceneAuthoring.cs:17
+PrototypeSmokeRun,SliceSmokeRun,Editor,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Editor/PrototypeSmokeRun.cs:12
+RecordBox,SliceBox,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/RecordBox.cs:7
+RegionEntryLatch,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/RegionEntryLatch.cs:4
+Report,,Editor,内部类型由外层工具限定含义,,Assets/Demon/Scripts/Editor/EditorRequestRunner.cs:28
+Request,,Editor,内部类型由外层工具限定含义,,Assets/Demon/Scripts/Editor/EditorRequestRunner.cs:27
+RuneBoardModel,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:72
+RuneSlot,SliceRuneSlot,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/RuneSlot.cs:7
+RuneTablet,SliceTablet,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/RuneTablet.cs:8
+RuneTrayItem,SliceRuneTrayItem,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/RuneTrayItem.cs:8
+SceneFontBinding,SliceFontBinding,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/SceneFontBinding.cs:10
+ScheduledWorldAttributes,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/ScheduledWorldAttributes.cs:4
+SignalSearchAuthoring,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/SignalSearchAuthoring.cs:15
+SignalSearchSmokeRun,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/SignalSearchSmokeRun.cs:14
+SleepPoint,SliceBed,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/SleepPoint.cs:7
+SmokePlayerDriver,,Editor,名称描述工具职责或验证场景,,Assets/Demon/Scripts/Editor/SmokePlayerDriver.cs:10
+StableBeamMotion,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/StableBeamMotion.cs:5
+StationObservation,,运行时,名称描述组件、配置或记录的职责,,Assets/Demon/Scripts/Runtime/StationObservation.cs:5
+TestCallbacks,,Editor,内部类型由外层工具限定含义,,Assets/Demon/Scripts/Editor/EditorRequestRunner.cs:396
+ThreatPickup,,运行时,按住交互键持续拾取,HoldPickupInteraction,Assets/Demon/Scripts/Runtime/ThreatPickup.cs:7
+ThreeDigitLock,,Domain,名称描述规则、状态或算法,,Assets/Demon/Scripts/Runtime/Domain/BearingCipher.cs:25
+WorldAttributeConsequences,,运行时,声音和光属性的场景表现,WorldAttributePresentation,Assets/Demon/Scripts/Runtime/WorldAttributeConsequences.cs:6
+WorldPresentation,SlicePresentation,运行时,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Scripts/Runtime/WorldPresentation.cs:7
+BearingCipherTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/BearingCipherTests.cs:6
+CoreGameRuleTests,SliceRuleTests,EditMode 测试,已去掉 Slice 前缀，按职责改名,,Assets/Demon/Tests/EditMode/CoreGameRuleTests.cs:8
+ExplorationGuidanceTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/ExplorationGuidanceTests.cs:7
+FinalTabletProgressTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/FinalTabletProgressTests.cs:5
+FinaleTimeWindowTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/FinaleTimeWindowTests.cs:7
+FirstDayInspectionLogTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/FirstDayInspectionLogTests.cs:6
+NineDayRuleTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/NineDayRuleTests.cs:7
+PursuitRuleTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/PursuitRuleTests.cs:6
+RegionEntryLatchTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/RegionEntryLatchTests.cs:6
+ScheduledWorldAttributesTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/ScheduledWorldAttributesTests.cs:6
+StableBeamMotionTests,,EditMode 测试,测试主题加 Tests 后缀,,Assets/Demon/Tests/EditMode/StableBeamMotionTests.cs:6
+LC_Door,,外部美术包,含下划线，沿用供应方命名,,Assets/ImportAsset/LogCabin/Source/Scripts/LC_Door.cs:6
+AGGlobalSettings,,外部美术包,供应方前缀，保持与源包一致,,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSettings.cs:11
+AGGlobalSnowGrass,,外部美术包,供应方前缀，保持与源包一致,,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowGrass.cs:12
+AGGlobalSnowHeight,,外部美术包,供应方前缀，保持与源包一致,,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowHeight.cs:12
+AGGlobalSnowProps,,外部美术包,供应方前缀，保持与源包一致,,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowProps.cs:12
+AGGlobalSnowTree,,外部美术包,供应方前缀，保持与源包一致,,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalSnowTree.cs:12
+AGGlobalWind,,外部美术包,供应方前缀，保持与源包一致,,Assets/ImportAsset/SnowEnviroment/Nature Pack - Common/Scripts/AGGlobalWind.cs:12
+ReadmeEditor,,Unity 模板,模板自带名称，沿用原名,,Assets/TutorialInfo/Editor/ReadmeEditor.cs:8
+Readme,,Unity 模板,模板自带名称，沿用原名,,Assets/TutorialInfo/Readme.cs:5
+Section,,Unity 模板,模板自带名称，沿用原名,,Assets/TutorialInfo/Readme.cs:16

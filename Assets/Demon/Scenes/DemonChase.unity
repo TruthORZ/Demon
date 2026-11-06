@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d569c48bd8d647d4b9815f7afa4cc3d5, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceHud
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.GameHud
   clockText: {fileID: 1358430894}
   messageText: {fileID: 1566778781}
   helpText: {fileID: 1040298119}
@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e896aa11286b1f949bbd66dd312d5aac, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceFontBinding
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SceneFontBinding
   useWindowsSystemFont: 1
   authoredFont: {fileID: 12800000, guid: 4a6f3df3a40f5394b8043b5888605a5c, type: 2}
   systemFontNames:
@@ -3584,7 +3584,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7523f2065889cb3478d6c1ec932e5094, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SlicePresentation
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.WorldPresentation
   lidPivot: {fileID: 5812433720026582144}
   openLidEuler: {x: 105, y: 0, z: 0}
   lidBlendSeconds: 0.6
@@ -4001,7 +4001,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 6
   Label: {fileID: 95772725}
 --- !u!1 &330021140
@@ -4967,7 +4967,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc37dd639ca4468418480d07c664a58f, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneTrayItem
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTrayItem
   Rune: 14
   Label: {fileID: 1598197238}
 --- !u!1 &384599516
@@ -5274,7 +5274,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 102bc3a8f59a3e74fa962eaf38c6744e, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceSceneController
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.GameSceneController
   settings: {fileID: 11400000, guid: 56b8dd5e31236464aa122a8ecafdb3b1, type: 2}
   player: {fileID: 1061131879844052853}
   tablet: {fileID: 4876387587973834586}
@@ -5334,7 +5334,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ec43bb5dd5edfb4081362db91ae6a79, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceFinaleSequence
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.FinaleSequence
   clockView: {fileID: 915289751}
   hourHand: {fileID: 282504547}
   minuteHand: {fileID: 1785476873}
@@ -12159,7 +12159,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc37dd639ca4468418480d07c664a58f, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneTrayItem
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTrayItem
   Rune: 9
   Label: {fileID: 735446685}
 --- !u!1 &1108837799
@@ -12650,7 +12650,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc37dd639ca4468418480d07c664a58f, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneTrayItem
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTrayItem
   Rune: 15
   Label: {fileID: 1451717703}
 --- !u!1 &1154185244
@@ -13588,7 +13588,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 5
   Label: {fileID: 1375918853}
 --- !u!1 &1237311448
@@ -16984,7 +16984,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 789b069782e70724d995175616b00f64, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceTablet
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTablet
   closeView: {fileID: 1269619172}
   listeningTool: {fileID: 422812711}
   slots:
@@ -18162,7 +18162,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 1
   Label: {fileID: 1360459039}
 --- !u!1 &1566778780
@@ -18386,7 +18386,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 4
   Label: {fileID: 1742484738}
 --- !u!1 &1574230596
@@ -18998,7 +18998,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e2f24977efeb314d82456d1e20fc518, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceBed
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SleepPoint
   world: {fileID: 422812707}
 --- !u!4 &1645645854
 Transform:
@@ -19143,7 +19143,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 0
   Label: {fileID: 1167769930}
 --- !u!1 &1653507342
@@ -19272,7 +19272,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 8
   Label: {fileID: 127811080}
 --- !u!1 &1656741589
@@ -19700,7 +19700,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 3
   Label: {fileID: 434529851}
 --- !u!1 &1670850600
@@ -22627,7 +22627,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 7
   Label: {fileID: 2087171123}
 --- !u!1 &1933196928
@@ -24512,7 +24512,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a246ea951d680438fb7b0b2fa7aa0a, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceRuneSlot
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneSlot
   Index: 2
   Label: {fileID: 1706000850}
 --- !u!1 &2087171121
@@ -25120,7 +25120,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c41b4dc5656d9be4ebf2e55e03a94a05, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SlicePlayer
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.PlayerController
 --- !u!4 &1061131879844052854 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3774253490868553435, guid: 565149018449e644fb21f4c641fd5fc4, type: 3}
@@ -25302,7 +25302,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 789b069782e70724d995175616b00f64, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.SliceTablet
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.RuneTablet
 --- !u!1 &4876387587973834587 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 208169049017019953, guid: 36b602e5a323acc42bd315355dad9763, type: 3}

@@ -20,10 +20,10 @@ namespace Demon.Slice.Editor
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode || SceneManager.GetActiveScene().isDirty)
                 throw new InvalidOperationException("Leave Play Mode and save the current scene first.");
-            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath) || AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath) ||
+            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath) || AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath) ||
                 AssetDatabase.LoadAssetAtPath<NineDayDefinition>(DefinitionPath))
                 throw new InvalidOperationException("Nine-day outputs exist; open and edit them instead of regenerating.");
-            var settings = UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<SliceSettings>("Assets/Demon/Data/SliceSettings.asset"));
+            var settings = UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameSettings>("Assets/Demon/Data/SliceSettings.asset"));
             settings.name = "NineDaySettings"; settings.StartDay = 1; settings.StartHour = 8;
             settings.InitialLakeSealed = true;
             AssetDatabase.CreateAsset(settings, SettingsPath);
@@ -51,13 +51,13 @@ namespace Demon.Slice.Editor
             for (int i = 0; i < 6; i++) definition.Tablets[i] = new FixedTabletPlan {
                 Title = "T" + (i + 1).ToString("00") + " 石板记录", DiscoveryDay = i + 2, DateNodeDay = nodes[i], Record = records[i] };
             AssetDatabase.CreateAsset(definition, DefinitionPath);
-            if (!AssetDatabase.CopyAsset(DemonSliceAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not copy the saved slice scene.");
+            if (!AssetDatabase.CopyAsset(PrototypeSceneAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not copy the saved slice scene.");
             EditorSceneManager.OpenScene(ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             var flow = Undo.AddComponent<NineDayFlow>(world.gameObject);
             world.ConfigureCampaign(flow);
             var serialized = new SerializedObject(world);
-            serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath);
+            serialized.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath);
             serialized.ApplyModifiedProperties();
             var fixedRoot = new GameObject("FixedTablets_Authored").transform;
             var tablets = new NineDayTablet[6];
@@ -82,10 +82,10 @@ namespace Demon.Slice.Editor
                 tablets[i] = go.AddComponent<NineDayTablet>(); tablets[i].Configure(flow, i, anchor);
             }
             flow.Configure(AssetDatabase.LoadAssetAtPath<NineDayDefinition>(DefinitionPath), tablets, world.Tablet.gameObject);
-            var hud = UnityEngine.Object.FindAnyObjectByType<SliceHud>();
-            hud.GetComponent<SliceFontBinding>().Configure(font, hud.GetComponentsInChildren<Text>(true),
+            var hud = UnityEngine.Object.FindAnyObjectByType<GameHud>();
+            hud.GetComponent<SceneFontBinding>().Configure(font, hud.GetComponentsInChildren<Text>(true),
                 UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include));
-            EditorUtility.SetDirty(world); EditorUtility.SetDirty(flow); EditorUtility.SetDirty(hud.GetComponent<SliceFontBinding>());
+            EditorUtility.SetDirty(world); EditorUtility.SetDirty(flow); EditorUtility.SetDirty(hud.GetComponent<SceneFontBinding>());
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
             EditorSceneManager.SaveScene(SceneManager.GetActiveScene()); AssetDatabase.SaveAssets();
             var scenes = EditorBuildSettings.scenes.Where(s => s.path != ScenePath).ToList();
@@ -96,12 +96,12 @@ namespace Demon.Slice.Editor
         public static string Validate()
         {
             if (SceneManager.GetActiveScene().path != ScenePath) throw new InvalidOperationException("Open DemonNineDay first.");
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world || !world.Campaign || !world.Campaign.Definition || world.Settings.StartDay != 1 || world.Campaign.Definition.FinalTabletDay != 8)
                 throw new InvalidOperationException("Nine-day composition/settings incomplete.");
             if (UnityEngine.Object.FindObjectsByType<NineDayTablet>(FindObjectsInactive.Include).Length != 6)
                 throw new InvalidOperationException("Expected six authored fixed tablets.");
-            var box = UnityEngine.Object.FindAnyObjectByType<SliceBox>();
+            var box = UnityEngine.Object.FindAnyObjectByType<RecordBox>();
             if (!box || new SerializedObject(box).FindProperty("world").objectReferenceValue != world)
                 throw new InvalidOperationException("Box lost its scene binding.");
             return "Nine-day scene, six fixed tablets, independent settings and box binding verified.";
@@ -111,8 +111,8 @@ namespace Demon.Slice.Editor
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode || SceneManager.GetActiveScene().path != ScenePath)
                 throw new InvalidOperationException("Open the nine-day scene outside Play Mode.");
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var settings = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath);
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var settings = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath);
             if (!world || !settings) throw new InvalidOperationException("Nine-day settings are missing.");
             var serialized = new SerializedObject(world);
             var field = serialized.FindProperty("settings");

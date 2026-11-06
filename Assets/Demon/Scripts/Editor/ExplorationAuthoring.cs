@@ -25,7 +25,7 @@ namespace Demon.Slice.Editor
             foreach(string name in Materials) if(File.Exists("Assets/Demon/Art/Materials/" + name + ".mat")) throw new InvalidOperationException("Preserving existing exploration material.");
             MaterialAsset("PineNeedle", new Color(.08f, .15f, .12f)); MaterialAsset("HumanFootprint", new Color(.14f, .2f, .24f));
             AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<ExplorationDefinition>(), DefinitionPath);
-            EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath); var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath); var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world.Consequences || !world.Retrieval || world.Exploration || GameObject.Find("Exploration_Authored")) throw new InvalidOperationException("Expected accepted nine-day source without exploration.");
             var root = new GameObject("Exploration_Authored").transform; var flow = world.gameObject.AddComponent<ExplorationFlow>(); world.ConfigureExploration(flow);
             var font = AssetDatabase.LoadAssetAtPath<Font>("Assets/Demon/UI/WindowsChinese.fontsettings");
@@ -75,16 +75,16 @@ namespace Demon.Slice.Editor
             Primitive("Post",lake,new Vector3(0,.7f,0),new Vector3(.08f,1.4f,.08f),Mat("BoxWood"));var lakeTarget=Primitive("ObservationFace",lake,new Vector3(0,1.2f,0),new Vector3(.9f,.45f,.09f),Mat("BoxWood"));Label("ObservationLabel",lake,new Vector3(0,1.2f,-.05f),"湖岸观察点",font,.012f);
             points[2]=lake.gameObject.AddComponent<StationObservation>();points[2].Configure(flow,ObservationSite.Lake,GameObject.Find("Consequences_Authored/LakeView").transform,lakeTarget.transform,Anchor("LakeApproach",root,new Vector3(1.5f,.04f,2.1f),lake.position+Vector3.up*1.2f));
             var home=Anchor("CampReturn",root,new Vector3(0,.04f,-4),Vector3.forward);flow.Configure(AssetDatabase.LoadAssetAtPath<ExplorationDefinition>(DefinitionPath),points,trail.gameObject,nodes,first,home);
-            var hud=UnityEngine.Object.FindAnyObjectByType<SliceHud>();var status=new GameObject("ExplorationStatus",typeof(RectTransform),typeof(Text)).GetComponent<Text>();status.transform.SetParent(hud.transform,false);
+            var hud=UnityEngine.Object.FindAnyObjectByType<GameHud>();var status=new GameObject("ExplorationStatus",typeof(RectTransform),typeof(Text)).GetComponent<Text>();status.transform.SetParent(hud.transform,false);
             var rect=status.rectTransform;rect.anchorMin=rect.anchorMax=rect.pivot=Vector2.one;rect.anchoredPosition=new Vector2(-30,-26);rect.sizeDelta=new Vector2(600,150);status.font=font;status.fontSize=24;status.alignment=TextAnchor.UpperRight;status.color=Color.white;status.raycastTarget=false;var outline=status.gameObject.AddComponent<Outline>();outline.effectColor=new Color(0,0,0,.8f);outline.effectDistance=new Vector2(1,-1);hud.ConfigureExplorationStatus(status);EditorUtility.SetDirty(hud);
-            var binding=hud.GetComponent<SliceFontBinding>();binding.Configure(font,hud.GetComponentsInChildren<Text>(true),UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include));EditorUtility.SetDirty(binding);
+            var binding=hud.GetComponent<SceneFontBinding>();binding.Configure(font,hud.GetComponentsInChildren<Text>(true),UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include));EditorUtility.SetDirty(binding);
             var plan=world.Campaign.Definition;plan.Days[0].Objective="可选检查电台、风向标和湖岸，熟悉正常状态。完成与否都可用睡袋到次日。";plan.Days[1].Objective="南侧林间小径出现小脚印，沿痕迹去山洞寻找T01。尚未到恶魔获得运动的日期。";EditorUtility.SetDirty(plan);
             FitSnowColliders();var surface=UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();surface.center=new Vector3(2,1,-11);surface.size=new Vector3(30,8,34);
             bool firstActive=first.gameObject.activeSelf;bool finalActive=world.Tablet.gameObject.activeSelf;bool pickupActive=world.Retrieval.Pickup.gameObject.activeSelf;
             first.gameObject.SetActive(true);world.Tablet.gameObject.SetActive(true);world.Retrieval.Pickup.gameObject.SetActive(true);surface.BuildNavMesh();if(!surface.navMeshData)throw new InvalidOperationException("Expanded navigation bake failed.");AssetDatabase.CreateAsset(surface.navMeshData,NavigationPath);EditorUtility.SetDirty(surface);
             first.gameObject.SetActive(firstActive);world.Tablet.gameObject.SetActive(finalActive);world.Retrieval.Pickup.gameObject.SetActive(pickupActive);trail.gameObject.SetActive(false);EditorUtility.SetDirty(world);EditorUtility.SetDirty(flow);Save();
             var quick=UnityEngine.Object.Instantiate(world.Settings);quick.name="ExplorationSettings";quick.StartDay=1;quick.StartHour=8;quick.InitialLakeSealed=true;AssetDatabase.CreateAsset(quick,SettingsPath);AssetDatabase.SaveAssets();
-            if(!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath,ScenePath))throw new InvalidOperationException("Could not save exploration scene.");EditorSceneManager.OpenScene(ScenePath);world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();var so=new SerializedObject(world);so.FindProperty("settings").objectReferenceValue=AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath);so.ApplyModifiedProperties();Save();EditorSceneManager.OpenScene(ScenePath);return Validate();
+            if(!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath,ScenePath))throw new InvalidOperationException("Could not save exploration scene.");EditorSceneManager.OpenScene(ScenePath);world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>();var so=new SerializedObject(world);so.FindProperty("settings").objectReferenceValue=AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath);so.ApplyModifiedProperties();Save();EditorSceneManager.OpenScene(ScenePath);return Validate();
         }
         static GameObject Primitive(string name,Transform parent,Vector3 position,Vector3 scale,Material material,bool collision=true,PrimitiveType type=PrimitiveType.Cube)
         {var go=GameObject.CreatePrimitive(type);go.name=name;go.transform.SetParent(parent,false);go.transform.localPosition=position;go.transform.localScale=scale;go.GetComponent<Renderer>().sharedMaterial=material;if(!collision)UnityEngine.Object.DestroyImmediate(go.GetComponent<Collider>());return go;}
@@ -106,7 +106,7 @@ namespace Demon.Slice.Editor
         public static string RepairSnowCollision()
         {
             Editable();EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);FitSnowColliders();
-            var world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();var surface=UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();var saved=AssetDatabase.LoadAssetAtPath<UnityEngine.AI.NavMeshData>(NavigationPath);
+            var world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>();var surface=UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();var saved=AssetDatabase.LoadAssetAtPath<UnityEngine.AI.NavMeshData>(NavigationPath);
             bool first=world.Exploration.FirstTablet.gameObject.activeSelf,final=world.Tablet.gameObject.activeSelf,pickup=world.Retrieval.Pickup.gameObject.activeSelf;
             world.Exploration.FirstTablet.gameObject.SetActive(true);world.Tablet.gameObject.SetActive(true);world.Retrieval.Pickup.gameObject.SetActive(true);
             surface.BuildNavMesh();var baked=surface.navMeshData;if(!baked||baked==saved)throw new InvalidOperationException("Expected separate native rebake output.");
@@ -118,7 +118,7 @@ namespace Demon.Slice.Editor
         {
             Editable();foreach(var path in new[]{NineDayAuthoring.ScenePath,ScenePath})
             {
-                EditorSceneManager.OpenScene(path);var world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                EditorSceneManager.OpenScene(path);var world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 var stand=world.Exploration.Observations[0].Approach;stand.position=new Vector3(-9.1f,.04f,-2.4f);EditorUtility.SetDirty(stand);Save();
             }
             return "Saved radio approach clear of BoxA lock occlusion; facilities and navigation unchanged.";
@@ -126,7 +126,7 @@ namespace Demon.Slice.Editor
         public static void OpenQuick(){Editable();EditorSceneManager.OpenScene(ScenePath);}
         public static string Validate()
         {
-            var world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();var surface=UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
+            var world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>();var surface=UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
             if(!world||!world.Settings||!world.Player||!world.Exploration||!world.Exploration.Definition||!world.Consequences||!surface||AssetDatabase.GetAssetPath(surface.navMeshData)!=NavigationPath)throw new InvalidOperationException("Exploration composition/navigation/settings missing.");
             if(world.Exploration.Observations.Length!=3||world.Exploration.FirstTablet.Index!=0||world.Exploration.FirstTablet.transform.position.z>-20||!world.Cipher.Wheel.ReadCode().SequenceEqual(new[]{3,4,2}))throw new InvalidOperationException("Original T01/cipher/observation migration failed.");
             RequirePath(new Vector3(0,0,-4),world.Exploration.TrailWaypoints.Last().position);RequirePath(world.Exploration.TrailWaypoints.Last().position,new Vector3(0,0,-4));
@@ -136,12 +136,12 @@ namespace Demon.Slice.Editor
         const string Tune="Demon.Exploration.Restore";
         public static void BeginProbe(bool late,bool tune)
         {
-            if(SessionState.GetBool(Tune,false))throw new InvalidOperationException("Restore previous exploration probe first.");var world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();SessionState.SetBool(Tune,true);SessionState.SetFloat(Tune+"day",world.Settings.StartDay);SessionState.SetFloat(Tune+"hour",world.Settings.StartHour);SessionState.SetFloat(Tune+"speed",world.Settings.WalkMetresPerSecond);SessionState.SetString(Tune+"text",world.Exploration.Definition.Radio.Normal);
+            if(SessionState.GetBool(Tune,false))throw new InvalidOperationException("Restore previous exploration probe first.");var world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>();SessionState.SetBool(Tune,true);SessionState.SetFloat(Tune+"day",world.Settings.StartDay);SessionState.SetFloat(Tune+"hour",world.Settings.StartHour);SessionState.SetFloat(Tune+"speed",world.Settings.WalkMetresPerSecond);SessionState.SetString(Tune+"text",world.Exploration.Definition.Radio.Normal);
             if(late){world.Settings.StartDay=2;world.Settings.StartHour=8;}if(tune){world.Settings.WalkMetresPerSecond=2.7f;world.Exploration.Definition.Radio.Normal="【保存参数检查】"+world.Exploration.Definition.Radio.Normal;EditorUtility.SetDirty(world.Exploration.Definition);}EditorUtility.SetDirty(world.Settings);Save();
         }
         public static void RestoreProbe()
         {
-            if(!SessionState.GetBool(Tune,false))return;var world=UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();world.Settings.StartDay=(int)SessionState.GetFloat(Tune+"day",1);world.Settings.StartHour=SessionState.GetFloat(Tune+"hour",8);world.Settings.WalkMetresPerSecond=SessionState.GetFloat(Tune+"speed",3.3f);world.Exploration.Definition.Radio.Normal=SessionState.GetString(Tune+"text",world.Exploration.Definition.Radio.Normal);EditorUtility.SetDirty(world.Settings);EditorUtility.SetDirty(world.Exploration.Definition);Save();SessionState.SetBool(Tune,false);Debug.Log("DEMON_EXPLORATION_PROBE_RESTORED");
+            if(!SessionState.GetBool(Tune,false))return;var world=UnityEngine.Object.FindAnyObjectByType<GameSceneController>();world.Settings.StartDay=(int)SessionState.GetFloat(Tune+"day",1);world.Settings.StartHour=SessionState.GetFloat(Tune+"hour",8);world.Settings.WalkMetresPerSecond=SessionState.GetFloat(Tune+"speed",3.3f);world.Exploration.Definition.Radio.Normal=SessionState.GetString(Tune+"text",world.Exploration.Definition.Radio.Normal);EditorUtility.SetDirty(world.Settings);EditorUtility.SetDirty(world.Exploration.Definition);Save();SessionState.SetBool(Tune,false);Debug.Log("DEMON_EXPLORATION_PROBE_RESTORED");
         }
         public static string Build(){Editable();Directory.CreateDirectory("Builds/WindowsExploration");var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{ScenePath},locationPathName="Builds/WindowsExploration/DemonExploration.exe",target=BuildTarget.StandaloneWindows64,options=BuildOptions.Development});if(report.summary.result!=BuildResult.Succeeded)throw new InvalidOperationException("Exploration Windows build failed.");return "Exploration Windows64 succeeded, "+report.summary.totalSize+" bytes.";}
     }

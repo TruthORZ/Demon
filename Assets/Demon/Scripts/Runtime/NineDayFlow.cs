@@ -9,7 +9,7 @@ namespace Demon.Slice
         [SerializeField] NineDayDefinition definition;
         [SerializeField] NineDayTablet[] fixedTablets;
         [SerializeField] GameObject finalTablet;
-        SliceSceneController world;
+        GameSceneController world;
         int currentDay;
         bool openedFirstNight;
         public DiscoveryProgress Progress { get; private set; }
@@ -20,7 +20,7 @@ namespace Demon.Slice
         public void Configure(NineDayDefinition data, NineDayTablet[] tablets, GameObject editableTablet)
         { definition = data; fixedTablets = tablets; finalTablet = editableTablet; }
 
-        public void Initialize(SliceSceneController controller)
+        public void Initialize(GameSceneController controller)
         {
             if (!definition || definition.Days.Length != 9 || definition.Tablets.Length != 6 ||
                 fixedTablets == null || fixedTablets.Length != 6 || !finalTablet)

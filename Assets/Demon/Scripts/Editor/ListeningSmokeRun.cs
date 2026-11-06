@@ -9,12 +9,12 @@ using UnityEngine.InputSystem.LowLevel;
 
 namespace Demon.Slice.Editor
 {
-    public sealed class ListeningSmokeRun
+    public sealed class ListeningSmokeRun : ISmokeRun
     {
         readonly string operation;
         readonly Action<bool, string> finish;
         readonly double started = EditorApplication.timeSinceStartup;
-        SliceSceneController world;
+        GameSceneController world;
         ListeningTool tool;
         ListeningChime a, b;
         ListeningTrailProxy proxy;
@@ -35,7 +35,7 @@ namespace Demon.Slice.Editor
             {
                 double now = Time.timeAsDouble;
                 if (EditorApplication.timeSinceStartup - started > 95) throw new TimeoutException("Listening smoke timed out at stage " + stage);
-                if (!world) world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+                if (!world) world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
                 if (!world || world.Session == null || !world.Listening || world.Listening.Board == null) return;
                 tool = world.Listening;
                 if (stage == 0)
@@ -63,7 +63,7 @@ namespace Demon.Slice.Editor
                     Require(world.Player.InspectingTablet && world.Player.ActiveTablet == tool.Tablet && !world.HasReadBox, "E did not select T05, or entered B reading.");
                     Require(Vector3.Distance(world.Player.ViewCamera.transform.position, tool.Tablet.CloseView.position) < .03f, "Saved T05 camera ignored.");
                     Require(world.Campaign.Progress.FoundCount == 1 && !world.Finale.TimeReserved, "T05 discovery duplicated or reserved T07 time.");
-                    var tray = tool.Tablet.GetComponentsInChildren<SliceRuneTrayItem>(); var slots = tool.Tablet.GetComponentsInChildren<SliceRuneSlot>();
+                    var tray = tool.Tablet.GetComponentsInChildren<RuneTrayItem>(); var slots = tool.Tablet.GetComponentsInChildren<RuneSlot>();
                     targets = new[] { tray.Single(t => t.Rune == RuneKind.Open).transform, slots.Single(s => s.Index == 4).transform };
                     Next(3, now);
                 }
@@ -76,7 +76,7 @@ namespace Demon.Slice.Editor
                 {
                     InputSystem.QueueStateEvent(keyboard, new KeyboardState());
                     Require(!tool.Active && !world.Session.Board.Frozen && world.Session.ExchangeCount == 0, "Wrong T05 attempt changed rules.");
-                    var tray = tool.Tablet.GetComponentsInChildren<SliceRuneTrayItem>(); var slots = tool.Tablet.GetComponentsInChildren<SliceRuneSlot>();
+                    var tray = tool.Tablet.GetComponentsInChildren<RuneTrayItem>(); var slots = tool.Tablet.GetComponentsInChildren<RuneSlot>();
                     targets = new[] { tray.Single(t => t.Rune == RuneKind.Ring).transform, slots.Single(s => s.Index == 4).transform,
                         tray.Single(t => t.Rune == RuneKind.Chime).transform, slots.Single(s => s.Index == 7).transform };
                     click = 0; Next(5, now);

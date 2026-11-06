@@ -21,7 +21,7 @@ namespace Demon.Slice.Editor
             Editable();
             if (File.Exists(ScenePath) || File.Exists(SettingsPath) || File.Exists(NavPath)) throw new InvalidOperationException("T07 outputs already exist; preserve saved authoring.");
             EditorSceneManager.OpenScene(NineDayAuthoring.ScenePath);
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (!world.Chase || !world.Finale || world.Retrieval || GameObject.Find("T07Retrieval_Authored")) throw new InvalidOperationException("Expected accepted chase source without T07 retrieval.");
             var root = new GameObject("T07Retrieval_Authored").transform;
             var stone = AssetDatabase.LoadAssetAtPath<Material>("Assets/Demon/Art/Materials/Stone.mat");
@@ -45,12 +45,12 @@ namespace Demon.Slice.Editor
             var dockUse = dock.gameObject.AddComponent<FinalTabletDock>(); dockUse.Configure(owner); owner.Configure(pickup, empty.gameObject);
             // Keep the original serialized board, slot IDs, line graph and prefab connection.
             var tablet = world.Tablet.transform; tablet.SetPositionAndRotation(new Vector3(-5.3f, 1.5f, 1), Quaternion.Euler(0, 90, 0)); tablet.localScale = Vector3.one * .6f; PrefabUtility.RecordPrefabInstancePropertyModifications(tablet); AlignLightInOpenScene(world); FrameBoard(world);
-            var hud = UnityEngine.Object.FindAnyObjectByType<SliceHud>();
+            var hud = UnityEngine.Object.FindAnyObjectByType<GameHud>();
             var status = new GameObject("T07Status", typeof(RectTransform), typeof(Text)).GetComponent<Text>(); status.transform.SetParent(hud.transform, false);
             var rect = status.rectTransform; rect.anchorMin = rect.anchorMax = rect.pivot = Vector2.one; rect.anchoredPosition = new Vector2(-30, -26); rect.sizeDelta = new Vector2(600, 150);
             status.font = font; status.fontSize = 24; status.alignment = TextAnchor.UpperRight; status.color = Color.white; status.raycastTarget = false;
             var outline = status.gameObject.AddComponent<Outline>(); outline.effectColor = new Color(0, 0, 0, .8f); outline.effectDistance = new Vector2(1, -1); hud.ConfigureFinalTabletStatus(status);
-            var binding = hud.GetComponent<SliceFontBinding>(); binding.Configure(font, hud.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
+            var binding = hud.GetComponent<SceneFontBinding>(); binding.Configure(font, hud.GetComponentsInChildren<Text>(true), UnityEngine.Object.FindObjectsByType<TextMesh>(FindObjectsInactive.Include)); EditorUtility.SetDirty(binding);
             var definition = world.Campaign.Definition; definition.Days[7].Objective = "T07在指定夜间出现在湖岸。按住E拾取，带回工具棚西侧放置台补全；也可直接睡到第九天。"; EditorUtility.SetDirty(definition);
             world.Settings.Instructions += "\nD8夜间：湖岸按住E取T07，回棚西侧按E放置。"; EditorUtility.SetDirty(world.Settings);
             // Include late-visible geometry conservatively, without changing any old navigation asset.
@@ -60,8 +60,8 @@ namespace Demon.Slice.Editor
             EditorUtility.SetDirty(world); EditorUtility.SetDirty(owner); EditorUtility.SetDirty(pickup); EditorUtility.SetDirty(dockUse); EditorUtility.SetDirty(hud); Save();
             var quick = UnityEngine.Object.Instantiate(world.Settings); quick.name = "RetrievalSettings"; quick.StartDay = 8; quick.StartHour = 21.9f; quick.InitialLakeSealed = false; AssetDatabase.CreateAsset(quick, SettingsPath); AssetDatabase.SaveAssets();
             if (!AssetDatabase.CopyAsset(NineDayAuthoring.ScenePath, ScenePath)) throw new InvalidOperationException("Could not save retrieval quick scene.");
-            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
-            var ws = new SerializedObject(world); ws.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath); ws.ApplyModifiedProperties();
+            EditorSceneManager.OpenScene(ScenePath); world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
+            var ws = new SerializedObject(world); ws.FindProperty("settings").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath); ws.ApplyModifiedProperties();
             var body = world.Player.GetComponent<CharacterController>(); body.enabled = false; world.Player.transform.SetPositionAndRotation(new Vector3(-8, .04f, -2.4f), Quaternion.identity); body.enabled = true; PrefabUtility.RecordPrefabInstancePropertyModifications(world.Player.transform);
             Save(); EditorSceneManager.OpenScene(ScenePath); return Validate();
         }
@@ -69,46 +69,46 @@ namespace Demon.Slice.Editor
         { var go = GameObject.CreatePrimitive(PrimitiveType.Cube); go.name = name; go.transform.SetParent(parent, false); go.transform.localPosition = pos; go.transform.localScale = scale; go.GetComponent<Renderer>().sharedMaterial = material; return go; }
         static void Label(string name, Transform parent, Vector3 pos, string text, Font font, float size)
         { var go = new GameObject(name).AddComponent<TextMesh>(); go.transform.SetParent(parent, false); go.transform.localPosition = pos; go.font = font; go.fontSize = 64; go.characterSize = size; go.anchor = TextAnchor.MiddleCenter; go.alignment = TextAlignment.Center; go.text = text; }
-        static void AlignLightInOpenScene(SliceSceneController world)
+        static void AlignLightInOpenScene(GameSceneController world)
         {
             var sequence = new SerializedObject(world.Finale); var pulse = sequence.FindProperty("tabletPulse").objectReferenceValue as Light;
             if (!pulse) throw new InvalidOperationException("Missing authored midnight pulse.");
             pulse.transform.SetParent(world.Tablet.transform, false); pulse.transform.localPosition = Vector3.back * .5f; EditorUtility.SetDirty(pulse.transform);
         }
-        static void FrameBoard(SliceSceneController world)
+        static void FrameBoard(GameSceneController world)
         {
             var view = world.Tablet.CloseView; var local = view.localPosition; local.x = -.45f; local.z = -2.4f; view.localPosition = local;
             view.LookAt(world.Tablet.transform.TransformPoint(new Vector3(.45f, -.08f, 0))); PrefabUtility.RecordPrefabInstancePropertyModifications(view);
             // Labels remain within their original collider panels, clear of the authored shed post.
-            foreach (var item in world.Tablet.GetComponentsInChildren<SliceRuneTrayItem>(true))
+            foreach (var item in world.Tablet.GetComponentsInChildren<RuneTrayItem>(true))
             { var label = item.Label.transform; var position = label.localPosition; position.x = 1.9f; label.localPosition = position; PrefabUtility.RecordPrefabInstancePropertyModifications(label); }
             var title = world.Tablet.transform.Find("TrayTitle"); var titlePosition = title.localPosition; titlePosition.x = 1.9f; title.localPosition = titlePosition; PrefabUtility.RecordPrefabInstancePropertyModifications(title);
         }
         public static string RepairView()
         {
             Editable(); foreach (var path in new[] { NineDayAuthoring.ScenePath, ScenePath })
-            { EditorSceneManager.OpenScene(path); var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); AlignLightInOpenScene(world); FrameBoard(world); Save(); }
+            { EditorSceneManager.OpenScene(path); var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); AlignLightInOpenScene(world); FrameBoard(world); Save(); }
             return Validate();
         }
         public static string AlignLighting()
         {
             Editable(); foreach (var path in new[] { NineDayAuthoring.ScenePath, ScenePath })
-            { EditorSceneManager.OpenScene(path); AlignLightInOpenScene(UnityEngine.Object.FindAnyObjectByType<SliceSceneController>()); Save(); }
+            { EditorSceneManager.OpenScene(path); AlignLightInOpenScene(UnityEngine.Object.FindAnyObjectByType<GameSceneController>()); Save(); }
             return Validate();
         }
         static void Save() { EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene()); EditorSceneManager.SaveScene(SceneManager.GetActiveScene()); AssetDatabase.SaveAssets(); }
         public static void OpenQuick() { Editable(); EditorSceneManager.OpenScene(ScenePath); }
         public static string RepairQuickSettings()
         {
-            OpenQuick(); var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>();
+            OpenQuick(); var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>();
             if (world.Settings) return Validate();
-            var saved = AssetDatabase.LoadAssetAtPath<SliceSettings>(SettingsPath); if (!saved) throw new InvalidOperationException("Saved quick settings missing.");
+            var saved = AssetDatabase.LoadAssetAtPath<GameSettings>(SettingsPath); if (!saved) throw new InvalidOperationException("Saved quick settings missing.");
             var so = new SerializedObject(world); so.FindProperty("settings").objectReferenceValue = saved; so.ApplyModifiedProperties(); EditorUtility.SetDirty(world); Save();
             EditorSceneManager.OpenScene(ScenePath); return Validate();
         }
         public static string Validate()
         {
-            var world = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>(); var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
+            var world = UnityEngine.Object.FindAnyObjectByType<GameSceneController>(); var surface = UnityEngine.Object.FindAnyObjectByType<NavMeshSurface>();
             if (!world || !world.Settings || !world.Player || !world.Tablet || !world.Campaign || !world.Finale || !world.Retrieval || !world.Retrieval.Pickup || !world.Chase || !surface || !surface.navMeshData || AssetDatabase.GetAssetPath(surface.navMeshData) != NavPath) throw new InvalidOperationException("Missing saved T07 pickup/dock/navigation composition.");
             var dock = UnityEngine.Object.FindAnyObjectByType<FinalTabletDock>(); if (!dock || dock.Retrieval != world.Retrieval || world.Tablet.gameObject.activeSelf || world.Retrieval.Pickup.gameObject.activeSelf) throw new InvalidOperationException("Unexpected initial T07 visibility or dock reference.");
             if (Vector3.Distance(world.Tablet.transform.position, new Vector3(-5.3f, 1.5f, 1)) > .01f) throw new InvalidOperationException("Original T07 board not saved in shed.");
@@ -119,21 +119,21 @@ namespace Demon.Slice.Editor
         const string Tune = "Demon.Retrieval.Restore";
         public static void BeginTuning()
         {
-            var pickup = UnityEngine.Object.FindAnyObjectByType<SliceSceneController>().Retrieval.Pickup;
+            var pickup = UnityEngine.Object.FindAnyObjectByType<GameSceneController>().Retrieval.Pickup;
             SessionState.SetFloat(Tune + "hold", pickup.HoldSeconds); SessionState.SetBool(Tune, true); SetHold(pickup, 1.8f); Save();
         }
         public static void RestoreTuning()
         {
             if (!SessionState.GetBool(Tune, false)) return;
-            SetHold(UnityEngine.Object.FindAnyObjectByType<SliceSceneController>().Retrieval.Pickup, SessionState.GetFloat(Tune + "hold", 1.2f)); Save(); SessionState.SetBool(Tune, false); Debug.Log("DEMON_RETRIEVAL_TUNING_RESTORED");
+            SetHold(UnityEngine.Object.FindAnyObjectByType<GameSceneController>().Retrieval.Pickup, SessionState.GetFloat(Tune + "hold", 1.2f)); Save(); SessionState.SetBool(Tune, false); Debug.Log("DEMON_RETRIEVAL_TUNING_RESTORED");
         }
         static void SetHold(ThreatPickup pickup, float hold) { var so = new SerializedObject(pickup); so.FindProperty("holdSeconds").floatValue = hold; so.ApplyModifiedProperties(); EditorUtility.SetDirty(pickup); }
         public static string UpdateOperandWording()
         {
             Editable(); int changed = 0;
-            foreach (var guid in AssetDatabase.FindAssets("t:SliceSettings", new[] { "Assets/Demon/Data" }))
+            foreach (var guid in AssetDatabase.FindAssets($"t:{nameof(GameSettings)}", new[] { "Assets/Demon/Data" }))
             {
-                var data = AssetDatabase.LoadAssetAtPath<SliceSettings>(AssetDatabase.GUIDToAssetPath(guid));
+                var data = AssetDatabase.LoadAssetAtPath<GameSettings>(AssetDatabase.GUIDToAssetPath(guid));
                 if (!data || string.IsNullOrEmpty(data.BoxText)) continue;
                 string text = data.BoxText.Replace("从湖的槽位回到DAY", "从末端参数槽回到DAY");
                 if (text == data.BoxText) continue;
