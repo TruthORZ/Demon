@@ -16,6 +16,7 @@ namespace Demon.Slice
         ITabletProgram program;
         RuneBoardModel board;
         bool bound;
+        Material[] authoredLineMaterials;
         public override string Prompt => board != null && board.Frozen ? "查看已固化石板" : "查看并补全石板";
         public Transform CloseView => closeView;
         public RuneBoardModel Board => board;
@@ -31,6 +32,14 @@ namespace Demon.Slice
         {
             if (!closeView || slots == null || slots.Length != 9)
                 throw new System.InvalidOperationException("Tablet requires an anchor and nine saved slots.");
+            if (bound && board != null) board.Changed -= Refresh;
+            bound = false;
+            if (authoredLineMaterials == null)
+            {
+                authoredLineMaterials = new Material[lines.Length];
+                for (int i = 0; i < lines.Length; i++) authoredLineMaterials[i] = lines[i].sharedMaterial;
+            }
+            else for (int i = 0; i < lines.Length; i++) lines[i].sharedMaterial = authoredLineMaterials[i];
             program = owner ?? throw new System.ArgumentNullException(nameof(owner));
             board = program.Board;
             Bind(); Refresh();

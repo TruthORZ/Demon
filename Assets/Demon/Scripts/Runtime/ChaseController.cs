@@ -20,6 +20,8 @@ namespace Demon.Slice
         ISceneFeedback feedback;
         float replanAt, stepAt, missingNavSeconds;
         bool retreating;
+        Vector3 authoredPosition;
+        Quaternion authoredRotation;
         public ClosePassGate Gate { get; private set; }
         public ChasePhase Phase { get; private set; }
         public NavMeshAgent Agent => agent;
@@ -32,13 +34,24 @@ namespace Demon.Slice
             if (!definition || !agent || retreatPoints == null || retreatPoints.Length < 2 || !footstepSource || !footstepClip || !motion || !actor || rules == null || messages == null)
                 throw new InvalidOperationException("Chase requires saved settings, agent, retreat points, footsteps and T06 motion owner.");
             foreach (var point in retreatPoints) if (!point) throw new InvalidOperationException("Missing retreat point.");
-            candidatePath = new NavMeshPath(); // Native navigation objects require the main-thread initialization phase.
+            if (candidatePath == null)
+            {
+                candidatePath = new NavMeshPath(); // Native navigation objects require the main-thread initialization phase.
+                authoredPosition = agent.transform.position; authoredRotation = agent.transform.rotation;
+            }
+            else
+            {
+                Stop();
+                if (HasNavigation) agent.Warp(authoredPosition); else agent.transform.position = authoredPosition;
+                agent.transform.rotation = authoredRotation;
+            }
+            replanAt = stepAt = missingNavSeconds = 0; retreating = false; Phase = ChasePhase.Dormant;
             session = rules; player = actor; tether = motion; feedback = messages; Gate = new ClosePassGate(definition.ClosePassMetres, definition.ClosePassCooldownSeconds);
             agent.speed = definition.MetresPerSecond; agent.acceleration = definition.AccelerationMetresPerSecondSquared; agent.angularSpeed = definition.AngularDegreesPerSecond;
         }
         void Update()
         {
-            if (Gate == null) return;
+            if (Gate == null || player.MenuOpen) return;
             Gate.Advance(Time.deltaTime);
             if (session.Descended) { Phase = ChasePhase.Ended; Stop(); return; }
             if (!tether.ProxyCanTravel || session.LakeSeal != 0) { Phase = ChasePhase.Dormant; Stop(); return; }

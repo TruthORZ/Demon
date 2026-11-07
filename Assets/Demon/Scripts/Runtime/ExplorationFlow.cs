@@ -114,6 +114,8 @@ namespace Demon.Slice
                     if (record.Owner != this || !record.CloseView || !record.AimTarget || !record.Approach)
                         throw new InvalidOperationException("Preparation record requires explicit owner, close view, aim and approach.");
             }
+            if (session != null) { session.Clock.Midnight -= RefreshDate; session.Changed -= RefreshTrails; }
+            solarRead = handoverRead = sawBeamLock = sawBeamRelease = false;
             session = rules; campaign = schedule; consequences = effects; tether = motion; cipher = tool; listening = listener; retrieval = item; feedback = messages;
             ExplorationGuidance.Validate(definition.GuideRules);
             Log = new FirstDayInspectionLog();
@@ -133,7 +135,8 @@ namespace Demon.Slice
                 handoverRecord.gameObject.SetActive(!session.Descended && session.Clock.Day >= 8);
             }
         }
-        void Update()
+        void Update() => RefreshPracticeProgress();
+        public void RefreshPracticeProgress()
         {
             if (session == null || !HasFinalPreparation || session.Descended || session.Clock.Day < 7) return;
             // This is a presentation memory, never a prerequisite for tools, sleep or retrieval.

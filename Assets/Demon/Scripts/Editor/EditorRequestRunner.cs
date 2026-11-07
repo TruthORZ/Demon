@@ -57,6 +57,15 @@ namespace Demon.Slice.Editor
                     throw new InvalidOperationException("Authoring requests cannot interrupt an existing Play session.");
                 switch (request.operation)
                 {
+                    case "day-jump-inspect": Finish(request, true, DayJumpMenuAuthoring.Inspect()); break;
+                    case "day-jump-input": Finish(request, true, DayJumpMenuAuthoring.RepairInput()); break;
+                    case "day-jump-editability": Finish(request, true, DayJumpMenuAuthoring.ProbeEditability()); break;
+                    case "day-jump-hint": Finish(request, true, DayJumpMenuAuthoring.PlaceHint()); break;
+                    case "day-jump-create": Finish(request, true, DayJumpMenuAuthoring.Create()); break;
+                    case "day-jump-validate": DayJumpMenuAuthoring.OpenSaved(); Finish(request, true, DayJumpMenuAuthoring.Validate()); break;
+                    case "day-jump-smoke":
+                        DayJumpMenuAuthoring.OpenSaved();
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
                     case "arch-runtime":
                         OpenNine(); ArchitectureRefactorChecks.BeginProbe();
                         SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
@@ -273,7 +282,9 @@ namespace Demon.Slice.Editor
                 {
                     SessionState.EraseString(ActiveSmokeKey);
                     var request = JsonUtility.FromJson<Request>(json);
-                    if (request.operation == "arch-runtime")
+                    if (request.operation == "day-jump-smoke")
+                        activeRun = new DayJumpMenuSmokeRun((success, message) => Finish(request, success, message));
+                    else if (request.operation == "arch-runtime")
                         activeRun = new ArchitectureSmokeRun((success, message) => Finish(request, success, message));
                     else if (request.operation == "prep-first-search")
                         activeRun = new ExplorationSmokeRun("exploration-smoke", (success, message) => Finish(request, success, message));

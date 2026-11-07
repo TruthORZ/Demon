@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace Demon.Slice
 {
@@ -19,14 +18,18 @@ namespace Demon.Slice
         Transform closeAnchor;
         Vector3 homePosition;
         Quaternion homeRotation;
+        Vector3 spawnPosition;
+        Quaternion spawnRotation;
         ViewMode mode;
         float pitch, verticalSpeed;
+        int menuClosedFrame = -1;
         ICloseViewInteraction activeInteraction;
         ThreatPickup activePickup;
         public ThreatPickup CurrentPickup => activePickup;
         public bool IsPickingUp => mode == ViewMode.Pickup;
         public bool InspectingLock => mode == ViewMode.Interaction && activeInteraction is CipherBox;
-        public bool CanUseTools => mode == ViewMode.Explore && Cursor.lockState == CursorLockMode.Locked;
+        public bool MenuOpen { get; private set; }
+        public bool CanUseTools => !MenuOpen && mode == ViewMode.Explore && Cursor.lockState == CursorLockMode.Locked;
         readonly RaycastHit[] interactionHits = new RaycastHit[32];
         public Camera ViewCamera => viewCamera;
         public bool InspectingTablet => mode == ViewMode.Interaction && activeInteraction is RuneTablet;
@@ -42,28 +45,37 @@ namespace Demon.Slice
             if (!viewCamera || !inputActions)
                 throw new System.InvalidOperationException("Player camera or Input Actions is missing.");
             world = controller;
-            body = GetComponent<CharacterController>();
-            actions = Instantiate(inputActions);
+            if (!body || !actions)
+            {
+                body = GetComponent<CharacterController>();
+                spawnPosition = transform.position; spawnRotation = transform.rotation;
+                homePosition = viewCamera.transform.localPosition; homeRotation = viewCamera.transform.localRotation;
+                actions = Instantiate(inputActions);
+            }
+            else
+            {
+                bool wasEnabled = body.enabled; body.enabled = false;
+                transform.SetPositionAndRotation(spawnPosition, spawnRotation); body.enabled = wasEnabled;
+                ReturnToExploration();
+            }
             move = actions.FindAction("Player/Move", true);
             look = actions.FindAction("Player/Look", true);
             interact = actions.FindAction("Player/Interact", true);
             sprint = actions.FindAction("Player/Sprint", true);
             actions.FindActionMap("Player", true).Enable();
-            homePosition = viewCamera.transform.localPosition;
-            homeRotation = viewCamera.transform.localRotation;
-            pitch = viewCamera.transform.localEulerAngles.x;
+            pitch = Mathf.DeltaAngle(0, homeRotation.eulerAngles.x);
             LockCursor(true);
         }
 
         void Update()
         {
-            if (world == null || world.Session == null) return;
+            if (world == null || world.Session == null || MenuOpen || menuClosedFrame == Time.frameCount) return;
             var keyboard = Keyboard.current;
             if (world.EndingPresented)
             {
                 BlendCloseView();
                 if (keyboard != null && keyboard.rKey.wasPressedThisFrame)
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().path);
+                    world.Restart();
                 return;
             }
             if (mode == ViewMode.Sequence) { FocusPrompt = ""; BlendCloseView(); return; }
@@ -196,6 +208,19 @@ namespace Demon.Slice
                 cam.localRotation = homeRotation;
                 mode = ViewMode.Explore;
             }
+        }
+
+        public void SetMenuOpen(bool value)
+        { if (MenuOpen && !value) menuClosedFrame = Time.frameCount; MenuOpen = value; }
+
+        public void ReturnToExploration()
+        {
+            if (mode == ViewMode.Pickup && activePickup) activePickup.Cancel(false);
+            activePickup = null; activeInteraction = null; closeAnchor = null;
+            mode = ViewMode.Explore; FocusPrompt = ""; verticalSpeed = 0;
+            viewCamera.transform.SetLocalPositionAndRotation(homePosition, homeRotation);
+            pitch = Mathf.DeltaAngle(0, homeRotation.eulerAngles.x);
+            LockCursor(true);
         }
 
         static void LockCursor(bool locked)

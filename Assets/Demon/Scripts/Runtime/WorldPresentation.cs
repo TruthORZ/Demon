@@ -24,6 +24,7 @@ namespace Demon.Slice
         GameSceneController world;
         Quaternion authoredLidRotation;
         bool boxOpened;
+        bool initialized;
         public Transform BoxReadView => boxReadView;
         public bool LakeSealVisible => lakeSeal && lakeSeal.activeSelf;
         public Transform LidPivot => lidPivot;
@@ -38,7 +39,8 @@ namespace Demon.Slice
                 throw new System.InvalidOperationException("Presentation has missing authored references.");
             if (sunsetHour <= sunriseHour) throw new System.InvalidOperationException("Sunset must follow sunrise.");
             world = controller;
-            authoredLidRotation = lidPivot.localRotation;
+            if (!initialized) authoredLidRotation = lidPivot.localRotation;
+            initialized = true; boxOpened = false; lidPivot.localRotation = authoredLidRotation;
             Refresh();
         }
 

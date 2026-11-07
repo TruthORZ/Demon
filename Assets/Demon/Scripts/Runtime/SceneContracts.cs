@@ -16,6 +16,7 @@ namespace Demon.Slice
         GameSettings Settings { get; }
         bool EndingPresented { get; }
         bool OnReadingClosed();
+        void Restart();
     }
 
     public interface IHudState

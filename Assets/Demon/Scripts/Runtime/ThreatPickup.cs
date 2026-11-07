@@ -27,8 +27,10 @@ namespace Demon.Slice
         void Awake()
         {
             if (!world || !closeView || !itemVisual) throw new InvalidOperationException("Pickup requires saved composition, view and item visual.");
-            Attempt = new PickupAttempt(holdSeconds);
+            ResetAttempt();
         }
+        public void ResetAttempt()
+        { Attempt?.Cancel(false); Attempt = new PickupAttempt(holdSeconds); CollectionCount = 0; itemVisual.SetActive(true); }
         public override void Use(PlayerController player)
         {
             if (!isActiveAndEnabled || world.Session.Descended || Attempt.Active || Attempt.Completed ||

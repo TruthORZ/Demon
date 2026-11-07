@@ -24,6 +24,8 @@ namespace Demon.Slice
             if (!pickup || !emptyDock || !controller.Campaign || !controller.Finale)
                 throw new InvalidOperationException("T07 retrieval requires saved pickup, empty dock, campaign and finale.");
             world = controller; Progress = new FinalTabletProgress();
+            if (bound) pickup.UnbindAttempt();
+            pickup.ResetAttempt();
             pickup.BindAttempt(TryBeginPickup, Collected); bound = true;
             RefreshPresentation();
         }

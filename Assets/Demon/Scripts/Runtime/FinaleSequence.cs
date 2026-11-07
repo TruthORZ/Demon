@@ -54,6 +54,7 @@ namespace Demon.Slice
             if (!clockView || !hourHand || !minuteHand || !secondHand || !lakeOpenGlow || !tabletPulse || !sequenceAudio)
                 throw new InvalidOperationException("Finale requires saved clock, views, light and audio references.");
             world = controller; presentation = visuals;
+            phase = Phase.Idle; elapsed = 0; countdownStart = 0; lastSecond = -1; sequenceAudio.Stop();
             window = new FinaleTimeWindow((world.Settings.FinalDay - 1) * (double)GameClock.MinutesPerDay, reservedGameMinutes);
             UpdateVisuals();
         }

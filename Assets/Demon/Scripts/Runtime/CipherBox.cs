@@ -16,6 +16,7 @@ namespace Demon.Slice
         GameSceneController world;
         ThreeDigitLock model;
         Quaternion restingLid;
+        bool initialized;
         public CipherWheel Wheel => wheel;
         public ThreeDigitLock Model => model;
         public Transform CloseView => closeView;
@@ -27,7 +28,9 @@ namespace Demon.Slice
         {
             if (!wheel || !closeView || !recordView || digits == null || digits.Length != 3 || !lidPivot || !tabletVisual)
                 throw new InvalidOperationException("Box A requires its saved wheel, three digits, views, lid and tablet.");
-            world = controller; wheel.Initialize(world); model = new ThreeDigitLock(wheel.ReadCode()); restingLid = lidPivot.localRotation;
+            if (!initialized) restingLid = lidPivot.localRotation;
+            initialized = true; lidPivot.localRotation = restingLid; tabletVisual.SetActive(true);
+            world = controller; wheel.Initialize(world); model = new ThreeDigitLock(wheel.ReadCode());
             foreach (var digit in digits) if (!digit || !digit.Label) throw new InvalidOperationException("Missing saved lock digit.");
             RefreshDigits();
         }

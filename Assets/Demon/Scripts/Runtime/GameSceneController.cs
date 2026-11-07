@@ -70,6 +70,20 @@ namespace Demon.Slice
                 enabled = false;
                 return;
             }
+            InitializeSession();
+        }
+
+        public void Restart()
+        {
+            if (!initialized) throw new InvalidOperationException("Cannot restart an uninitialized scene.");
+            InitializeSession();
+        }
+
+        void InitializeSession()
+        {
+            initialized = false;
+            if (Session != null) { Session.Changed -= OnStateChanged; Session.Dispose(); }
+            readingBox = false; ReadingText = null; HasReadBox = false; EndingPresented = false;
             var board = new RuneBoardModel(settings.Initial, settings.Target, settings.LooseRunes);
             Session = new GameSession(settings.StartDay, settings.StartHour * 60, settings.FinalDay, board,
                 settings.InitialLakeSealed, campaign ? campaign.Definition.FinalTabletDay : 1);

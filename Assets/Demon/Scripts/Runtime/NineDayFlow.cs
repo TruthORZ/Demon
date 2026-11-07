@@ -10,6 +10,7 @@ namespace Demon.Slice
         [SerializeField] NineDayTablet[] fixedTablets;
         [SerializeField] GameObject finalTablet;
         GameSceneController world;
+        GameSession session;
         int currentDay;
         bool openedFirstNight;
         public DiscoveryProgress Progress { get; private set; }
@@ -32,7 +33,8 @@ namespace Demon.Slice
                 days[i] = definition.Tablets[i].DiscoveryDay;
             }
             foreach (var day in definition.Days) if (day == null) throw new InvalidOperationException("Missing day plan.");
-            world = controller;
+            if (session != null) session.Clock.Midnight -= OnMidnight;
+            world = controller; session = controller.Session; openedFirstNight = false;
             Progress = new DiscoveryProgress(days);
             world.Session.Clock.Midnight += OnMidnight;
             RefreshDay();
@@ -41,9 +43,9 @@ namespace Demon.Slice
         void Update()
         {
             if (!world) return;
-            EvaluateFirstNight();
-            RefreshFinalTablet();
+            RefreshClockState();
         }
+        public void RefreshClockState() { EvaluateFirstNight(); RefreshFinalTablet(); }
         public void RefreshFinalTablet()
         { bool visible = FinalAvailable && (!world.Retrieval || world.Retrieval.ReadyToReconstruct); if (finalTablet.activeSelf != visible) finalTablet.SetActive(visible); }
         void OnMidnight(int day) { RefreshDay(); EvaluateFirstNight(); }
@@ -78,6 +80,6 @@ namespace Demon.Slice
             Progress.Acquire(5);
             ReadTablet(5, view);
         }
-        void OnDestroy() { if (world && world.Session != null) world.Session.Clock.Midnight -= OnMidnight; }
+        void OnDestroy() { if (session != null) session.Clock.Midnight -= OnMidnight; }
     }
 }

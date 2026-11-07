@@ -53,12 +53,14 @@ namespace Demon.Slice
             if (!definition || !aimRegion || !targetVisual || !vaneBlade || !flashlight || !beamLine || !flashlightBody || !targetGlow || !observationPoint || !tool || !listener || !actor || rules == null || firstMotionDay < 1 || firstMotionDay > 9)
                 throw new InvalidOperationException("T06 requires saved aim region, vane, flashlight, feedback and composition references.");
             if (definition.RangeMetres <= 0 || definition.RegionRadiusMetres <= 0) throw new InvalidOperationException("Beam range and region radius must be positive.");
+            Rule?.Release(); BeamOn = false; ClearAim = false;
+            flashlightBody.SetActive(false); targetGlow.enabled = false;
             session = rules; player = actor; cipher = tool; motionDay = firstMotionDay; Rule = new StableBeamMotion(definition.StableSeconds); SetLight(false);
             targetVisual.SetActive(ProxyCanTravel);
         }
         void LateUpdate()
         {
-            if (Rule == null) return;
+            if (Rule == null || player.MenuOpen) return;
             bool exploring = player.CanUseTools && !session.Descended;
             BeamOn = Equipped && exploring && Mouse.current != null && Mouse.current.rightButton.isPressed;
             ClearAim = ProxyCanTravel && CanSeeRegion();

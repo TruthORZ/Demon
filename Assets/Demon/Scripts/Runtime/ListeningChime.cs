@@ -30,7 +30,9 @@ namespace Demon.Slice
         {
             if (!monitoredTarget || !source || !enterClip || !hangingVisual)
                 throw new InvalidOperationException("Chime requires an explicit target, audio clip/source and hanging visual.");
-            tool = owner; session = rules; restingRotation = hangingVisual.localRotation;
+            if (!tool) restingRotation = hangingVisual.localRotation;
+            tool = owner; session = rules; hangingVisual.localRotation = restingRotation;
+            entry.SetEnabled(false, false); swingRemaining = 0; RingCount = 0; source.Stop();
             SetListening(tool.Active);
         }
         public void SetListening(bool enabled) => entry.SetEnabled(enabled && isActiveAndEnabled, TargetInside);

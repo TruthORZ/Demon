@@ -1,6 +1,6 @@
 # Demon 当前工程档案
 
-Updated: 2026-11-05 Asia/Shanghai
+Updated: 2026-11-07 Asia/Shanghai
 本文件记录已观察或已创建的工程结构，不把建议组件写成已有架构。玩法以 [GAME_SPEC.md](GAME_SPEC.md) 为准；拟实施模块和选择理由见 [TASK-002](Tasks/TASK-002-playable-slice.md)。
 
 ## 1 已观察的工程配置
@@ -317,10 +317,36 @@ PreparationAuthoring仅显式Create创建，已有输出即拒绝；无自动重
 
 `Demon.Slice` 系列程序集与命名空间继续作为兼容标识。旧场景、预制体、设置文件及编辑器请求路径仍可按原名称查找。Unity 脚本随原 `.meta` 移动，序列化字段、引用和实例覆盖保持。类名迁移在 12 个场景、3 个预制体和配置的原生加载中完成前后比对，九天设置仍在 `Assets/Demon/Data/NineDaySettings.asset` 编辑，启动场景仍为 `Assets/Demon/Scenes/DemonNineDay.unity`。
 
-## 20 Snow 玩法整合副本（TASK-020）
+## 20 Snow 玩法整合副本（TASK-020、TASK-021）
 
-`Assets/Demon/Scenes/DemonNineDay_Art.unity` 组合 Snow 美术环境和现有九天流程，复用玩家、UI、时钟、交互、规则数据和预制体。它是 Unity 内的整合试玩入口。已构建版本仍使用原九天场景。
+`Assets/Demon/Scenes/DemonNineDay_Art.unity` 是 Unity 内的雪地整合试玩入口。当前层级按用途分为七个根组。原灰盒九天场景继续作为已配置的构建入口。
 
-`Gameplay_Editable/Interior_Points` 管理床边出生、睡眠、箱子、轮盘和拼板台，`Outdoor_Points` 管理探索与岸边交互。移动整组 `T07_Table_Editable` 可同时移动空台和石板，移动 `T07_Shore_Editable` 可同时移动拾取物、近景及岸边台座。木屋门的 `CabinDoorInteraction` 复用玩家 E 键与美术门动画。昼夜使用 Snow 主方向光，试玩只启用 Demon 玩家相机。
+| 根组 | 当前归属和编辑入口 |
+| --- | --- |
+| `00_系统与界面` | `GameSystems_系统接线` 上的流程组件、WorldPresentation、Finale 音频和保存的 uGUI。 |
+| `01_玩家` | 原 Player 预制体及其 PlayerCamera、T06 手电。Player 的位置是开局位置。 |
+| `02_室内交互` | SleepPoint、Radio_FixedPosition、FixedBearingWheel、BoxA、BoxB_Record、T07_Table_Editable、SolarObservation_Editable、HandoverDesk_Editable、WallClock 及照明。移动每个父物体可带动其交互和镜头子物体。 |
+| `03_逐日点位` | `D02_T01_点位`、`D03_T02_点位`、`D04_T03_点位`、`D05_T04_点位`、`D06_T05_监听站`、`D07_光束练习`、`D08_T07_湖岸`。公共_室外设施包含风向标、太阳参照和湖岸观察点。 |
+| `04_湖面事件与结局` | LakeSeal、LakeOpenGlow、DemonBroadcast_Lake、D09_DescentFigure_Editable、EndingView。 |
+| `05_路线与导航` | 路线参考下保存脚印、探索参考节点和 CampReturn。Chase_Authored 保存 NavMeshSurface/退开点；SnowDisturbance_Target 是实际追逐对象，门槛和楼梯导航连接单独可选。 |
+| `06_美术环境` | 原雪地 Terrain、树木、岩石、Water、we/LogCabin、围栏、飘雪、全局美术设置、灯光、Port 和 Temple。 |
 
-`Gameplay_Editable/Chase_Authored` 的 `NavMeshSurface` 使用独立的 `Assets/Demon/Data/SnowIntegrationNavigation.asset`。编辑道路或墙体后只为整合场景重烘焙，并检查取板站位和退开点。临时摆放、验收步骤和实测记录见 [TASK-020](Tasks/TASK-020-snow-gameplay-integration.md)。
+每日点位组的枢轴已放在对应石板附近。移动点位组会带动模型、交互与近景；路线参考在 `05_路线与导航` 中另行调整。T05 监听站还包含两只风铃、声音遮挡墙和观察参考点。T07 的空台和放好后的拼板仍由 `02_室内交互/T07_Table_Editable` 一起移动。
+
+BeamTether.ObservationPoint 显式引用 `03_逐日点位/D07_光束练习/BeamPracticePoint_Editable`。已删除无用途的旧教学代理、旧代理路线、停用相机、旧镜头参考、分隔线、冗余空组和 T06 旧陈列几何。T06_RecordIdentity 保留原 NineDayTablet 身份和日程引用，位于 BoxA 下。SleepPoint 使用已有交互碰撞，床的可见外观来自美术木屋。
+
+追逐沿用独立的 `Assets/Demon/Data/SnowIntegrationNavigation.asset`。改道路、障碍、门槛或目标的可站立范围后，在本场景的 Chase_Authored 对应 Surface 重烘焙，并检查玩家和敌人的实际通行。
+
+整合版独立引用 `SnowIntegrationExploration.asset` 和 `SnowIntegrationSchedule.asset`，分别编辑探索文案和日程/石板内容。移动轮盘、电台、风向标或太阳参照后应重测密码。屋顶挡雪保留 Particle_Snow 对专层的精确检测。结构整理与启动修复的检查记录见 [TASK-021](Tasks/TASK-021-hierarchy-recovery.md)，布局和流程历史见 [TASK-020](Tasks/TASK-020-snow-gameplay-integration.md)。
+
+## 21 天数调试菜单（TASK-022）
+
+整合场景 `00_系统与界面/SliceHUD/DayJumpMenu_天数快捷菜单` 保存 DayJumpMenu、菜单 uGUI、按钮、顶部中央快捷键提示及 MenuEventSystem。F8 开关，1–9 跳到对应天的开局，0 跳到 D8 日程设定的夜间开放时刻，Esc 继续。D9 是零点终局。菜单位置和尺寸在 MenuPanel_菜单面板/Card_菜单布局 的 RectTransform 编辑，按钮/说明为保存的 Text；DayJumpMenu 的 toggleKey 与 availableInPlayer 可在 Inspector 调整。改热键时同步修改提示文字。后者默认允许独立游戏内使用。
+
+DayJumpMenu 调用 GameSceneController.Restart，再由 CompletedDayReplay 从 D1 沿原 GameClock 的每个零点推进，调用既有观察、阅读、符文盘操作、密码解锁、工具取得、T07 拾取安放、箱 B 阅读与 FinaleSequence。目标当天不代完成，D8 夜间额外补齐交接记录并停在湖岸拾取前。正常开局不重放。回退重新创建 GameSession/规则模型，各组件复用 Initialize 配对解绑旧事件、重绑新模型并恢复自身状态；玩家恢复开局位置/镜头，追逐恢复起点，地图/字体/UI 对象保持。R 重新开始也通过 IPlayerSession.Restart 使用同一路径。不会倒拨旧时钟，不需要把整合场景加入构建列表。
+
+重初始化显式恢复两个符文盘的监听/线材质、箱 A 模型/盖子/工具视觉、风铃计数/摆动、光束状态、追逐冷却/路径、T07 拾取尝试/放置、箱 B 盖子、结局阶段/音频、观察记忆。关卡布置和共享数据不更改。当前版本整图异步重载曾两次在 GPUResidentDrawer 的 ObjectDispatcher 原生工作任务崩溃，所以使用局部玩法重置，未禁用 GRD、修改管线或修改包缓存。失败调查留在任务记录。
+
+菜单打开保存/恢复 Time.timeScale、AudioListener.pause 与鼠标状态。PlayerController.MenuOpen 隔离移动/交互，关闭帧隔离 Esc；BeamTether/ChaseController 暂停期间不更新瞬时光束锁定/追近判定。RefreshClockState 和 RefreshPracticeProgress 是既有刷新逻辑的显式入口，不增加新的规则状态。菜单的 EventSystem 使用原有 InputSystem_Actions.inputactions 的已保存 UI 引用，中文标签加入 SceneFontBinding。
+
+显式 Editor 工具 DayJumpMenuAuthoring 仅对当前整合场景添加菜单，存在即拒绝覆盖。EditorRequestRunner 的 day-jump-inspect/create/input/hint/validate/editability/smoke 请求用于检查、创建、接线、保存重开、编辑性探针及回归。验证状态见 [TASK-022](Tasks/TASK-022-day-jump-menu.md)。
