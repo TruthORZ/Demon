@@ -36,7 +36,13 @@ Unity 导入编译与保存重开引用检查。实际 Play Mode 从菜单反复
 - IPlayerSession 增 Restart，GameSceneController 复用初始化；结局 R 使用同一安全路径，整合场景无须加入构建列表。菜单快捷键/面板文字及按钮保存引用有效，最终重开场景检查通过，布局截图人工目视检查通过。
 - day-jump-final-editability：临时平移 Card 的 RectTransform，保存重开确认生效，再恢复并重开通过。场景最终保留原2870份序列化对象，新增147份菜单相关记录；仅原HUD子节点和字体绑定两份记录改变。原场景、构建设置不变。TimeManager 在本轮 Editor 重启自动迁移的无关序列化差异已恢复。
 - day-jump-final-rules：81项 EditMode 通过，0失败、0跳过。day-jump-legacy-normal：原九天正常分支含 D8时段、拾取安放/拼板、长阅读、挂钟、两次交换、箱盖/湖光/延迟终局通过。day-jump-legacy-skip：原九天连续睡眠通过，0发现、0交换、D9零点终止。最终回到已保存 Art 场景，退出 Play Mode。
-- 证据复制到 Logs/DemonCheckpoints/task022-day-jump-20261107，含最终 JSON/XML、菜单截图与序列化对象对比。源码/文档及本轮新增 UI 的空白检查通过。全局 git diff --check 剩一条开工前已有的灯光 YAML m_Name 尾随空格；baseline-whitespace.txt 和原对象1663982443逐字节对比确认未改，保留原有内容。没有提交或推送。
+- 证据复制到 Logs/DemonCheckpoints/task022-day-jump-20261107，含最终 JSON/XML、菜单截图与序列化对象对比。源码/文档及本轮新增 UI 的空白检查通过。全局 git diff --check 剩一条开工前已有的灯光 YAML m_Name 尾随空格；baseline-whitespace.txt 和原对象1663982443逐字节对比确认未改，保留原有内容。验收阶段未提交，后续发布结果见下文。
 
 ## 验收边界
 逐天与原九天回归属于真实 Editor Play Mode 的组件/输入验证，不是人工连续键鼠九天游玩。独立 Windows 包本轮未构建或测试，仍沿 TASK-020 人工整体验收安排。
+
+## Git 发布（2026-11-07）
+- 用户明确要求 push。功能提交 `487c8942008c886e7494cdb433abb311a9c50ff4` 已推送到 origin/main，服务器 refs/heads/main 返回相同 SHA。
+- 发布37份文件，包含 TASK-020/021 的未发布场景整合、分组、挡雪和导航依赖及本任务菜单。SnowIntegration 两份配置与全部新 meta、SnowBlocker 项目层一并提交。
+- 本机 ProjectSettings.asset 和 UnityConnectSettings.asset、恢复备份与 Snow-main 参考目录未上传，文件哈希保持。
+- 暂存场景资源引用全部解析到已跟踪资产或锁定的 Unity 包；导航二进制与磁盘逐字节一致；Git LFS fsck --objects HEAD 通过。发布前仅整理新配置/metadata的空白，未修改运行规则。证据在 Logs/DemonCheckpoints/task022-git-push-20261107。

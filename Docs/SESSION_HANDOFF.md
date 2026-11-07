@@ -2,7 +2,7 @@
 Updated: 2026-11-07 Asia/Shanghai
 Completed task: [TASK-022 天数快捷菜单](Tasks/TASK-022-day-jump-menu.md)。整合场景历史见 [TASK-020](Tasks/TASK-020-snow-gameplay-integration.md)、[TASK-021](Tasks/TASK-021-hierarchy-recovery.md)。
 Repository/Unity project: D:/Unity/Projects/Demon
-Branch and HEAD: main@d23cfa5381d477d1537808033a7107dabbf307f0；本轮未提交或推送。
+功能发布提交: main@487c8942008c886e7494cdb433abb311a9c50ff4。已推送 origin/main，服务器返回同一 SHA。后续发布记录的文档提交见 Git 最新历史。
 
 ## 当前状态
 - 雪地试玩入口 Assets/Demon/Scenes/DemonNineDay_Art.unity。层级按00–06分组，点位调整见 ARCHITECTURE 第20节。Terrain、导航、原九天场景及构建入口未因本轮菜单修改。
@@ -19,9 +19,10 @@ Branch and HEAD: main@d23cfa5381d477d1537808033a7107dabbf307f0；本轮未提交
 - 人工连续九天键鼠游玩及独立Windows构建本轮未进行，仍沿TASK-020安排。
 
 ## 工作树与保护边界
-- 保留开工前场景/导航/文档、项目设置差异、独立SnowIntegration数据、Assets/_Recovery及Snow-main参考目录。恢复了本轮临时构建列表追加及TimeManager自动序列化迁移。
-- 本轮新增4份菜单/重放/作者工具/验收脚本和meta，修改相关玩法组件的重初始化、输入隔离、R重开及文档。未移动或重新生成既有脚本meta/GUID。
+- 本次发布37份文件，包括此前雪地场景/导航/分组/挡雪修复、独立SnowIntegration数据、SnowBlocker层、菜单及流程重置代码与文档。恢复了本轮临时构建列表追加及TimeManager自动序列化迁移。
+- ProjectSettings/ProjectSettings.asset、UnityConnectSettings.asset 的本机差异，以及 Assets/_Recovery、Snow-main 仍留本地，未纳入提交。新增脚本和资源的meta一并提交，未重新生成既有GUID。
+- Git LFS fsck通过。暂存导航数据与磁盘逐字节相同，新增场景引用均在跟踪资产或已锁定Unity包中解析。本机两份设置的SHA256在提交前后相同。
 
 ## 下一步
 1. 用户可在Art场景Play后F8选天试玩。若继续调整布局，沿保存Hierarchy父组移动；改障碍需检查玩家通行与重新烘焙导航。
-2. 后续整体验收从D1连续键鼠到D9，再制作Windows包。若要求提交Git，先核对保留的既有差异和依赖，获得明确发布范围后再提交/推送。
+2. 后续整体验收从D1连续键鼠到D9，再制作Windows包。当前功能已按用户授权发布，继续开发以本次提交为基线。
