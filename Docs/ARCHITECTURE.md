@@ -397,3 +397,15 @@ D8检查交接后在屋内按T或点按钮，短黑屏等待后通过原时钟�
 Windows64候选输出为 `Builds/WindowsCompletePlaythrough/Demon.exe`（完整目录2970752238字节），已实际启动雪地入口和中文任务界面；实体键盘F8由用户确认。规则/最终集成/构建的原工具结果已保留到 `Logs/DemonCheckpoints/task023-final-20261111/recovered-tool-observations.json`，当前资产与包校验见同目录 `resume-integrity.json`。独立包日志仍有初始化导航和GaussianDepthOfField提示，影响与完整连续键鼠验收留在TASK-023，不据自动检查标记整体完成。
 
 TASK-024最新候选仍在同一Windows路径，构建报告2970828058字节；89项规则、格子/左键/快照/两针时钟集成、格子布局保存重开还原、完整结局回归均通过。证据在 `Logs/DemonCheckpoints/task024-inventory-controls-20261111/`。该候选已实看启动；连续实体键鼠通关仍归TASK-023验收。
+
+## 23 恶魔追踪贴花脚印（TASK-023）
+
+当前工作副本位于 `D:/MyProject/Demon`，Unity 6000.6.0f1 / URP 17.6。正式入口仍为 `Assets/Demon/Scenes/DemonNineDay_Art.unity`。在GameSceneController/Chase所在对象下保存 `Demon Terrain Footprints`，显式绑定真实ChaseController和唯一原生Terrain。玩家不绑定Emitter；D2静态路线保持原样。
+
+`ChaseController.Stepped(Vector3 position, Vector3 forward)`在现有踏雪音实际触发点发布，`PursuitReset`在Initialize/Restart重置后发布。位于`Assets/SnowSystem/FootPrint/DemonFootprints.cs`的表现适配器订阅/解绑这两个事件，交替左右脚调用通用Emitter.StampAt；跳跃导航链接、极小位移、传送跳变和未命中指定Terrain过滤。Demon.Slice不依赖贴花程序集；通用Emitter仍不依赖Demon或GlobalSnow。
+
+正式场景的Emitter关闭Automatic Steps，脚印0.4×0.85米、左右偏移0.3米、寿命35秒、池上限48。步频由现有ChaseDefinition.FootstepSeconds控制，与声音共用时机。光束冻结/停步/暂停不发布步事件；会话重启清空旧轨迹。静态鞋印的世界位置不跟随恶魔。仅两个旧SnowPrint Renderer被关闭，目标根、导航、音源、风铃和T06可瞄准区域保留。
+
+PC_Renderer增加DBuffer/AlbedoNormal Decal Renderer Feature，保留原渲染模式和SSAO。地形使用原有URP Terrain材质；不替换TerrainData/材质、导航或GlobalSnow。贴花只模拟颜色和法线，没有真实高度变形。
+
+Editor工具`DemonFootprintIntegration.Connect`显式接入Art场景，存在则验证并保留调参。`DemonFootprintVerification.RunBatch`包含首次接线、尺寸保存重开和实际追踪验证；`VerifyExistingBatch`只加载已有接线并运行验证，不保存场景。批处理入口需在同工程没有Unity实例时使用。当前验证与边界见 [TASK-023](Tasks/TASK-023-demon-footprint-decals.md)，使用说明见[FootPrint README](../Assets/SnowSystem/FootPrint/README.md)。
