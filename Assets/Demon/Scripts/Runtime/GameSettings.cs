@@ -9,6 +9,7 @@ namespace Demon.Slice
     public sealed class GameSettings : ScriptableObject
     {
         [Header("Time - one game day in real seconds")]
+        [Tooltip("现实多少秒对应游戏24小时。数值越小时间越快；720为12分钟一天，1440为24分钟一天。")]
         [Min(10)] public float RealSecondsPerDay = 1440;
         [Min(1)] public int StartDay = 8;
         [Range(0, 23.9f)] public float StartHour = 16;

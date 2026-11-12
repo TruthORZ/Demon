@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Demon.Slice
+{
+    // Saved cells and layout are authored in the scene; only overflow clones a saved template.
+    public sealed class JournalInventory : MonoBehaviour
+    {
+        public sealed class Item
+        {
+            public readonly string Id, Title, Body, Category;
+            public Item(string id, string title, string body, string category)
+            { Id = id; Title = title; Body = body; Category = category; }
+        }
+        [SerializeField] RectTransform content;
+        [SerializeField] JournalSlot template;
+        [SerializeField] JournalSlot[] authoredSlots;
+        [SerializeField] Text detailTitle, detailBody;
+        [SerializeField] ScrollRect gridScroll, detailScroll;
+        [SerializeField] string emptyTitle = "背包为空";
+        [SerializeField, TextArea] string emptyBody = "拾取纸条、石板或道具后，会各自占用一个格子。\n\n点击格子查看内容。";
+        readonly List<JournalSlot> extraSlots = new List<JournalSlot>();
+        readonly List<Item> items = new List<Item>();
+        public string SelectedId { get; private set; }
+        public int ItemCount => items.Count;
+        public IReadOnlyList<JournalSlot> AuthoredSlots => authoredSlots;
+        public string DetailText => detailBody.text;
+        public void Configure(RectTransform grid, JournalSlot source, JournalSlot[] cells, Text heading, Text body, ScrollRect scroll, ScrollRect reader)
+        { content = grid; template = source; authoredSlots = cells; detailTitle = heading; detailBody = body; gridScroll = scroll; detailScroll = reader; }
+        public void Show(IReadOnlyList<Item> records)
+        {
+            if (!content || !template || authoredSlots == null || authoredSlots.Length == 0 || !detailTitle || !detailBody || !gridScroll || !detailScroll)
+                throw new InvalidOperationException("Journal grid requires saved cells, template, reader and scrolling references.");
+            items.Clear(); var seen = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var item in records) if (seen.Add(item.Id)) items.Add(item);
+            while (authoredSlots.Length + extraSlots.Count < items.Count)
+            {
+                var cell = Instantiate(template, content); cell.name = "OverflowSlot_" + extraSlots.Count; extraSlots.Add(cell);
+            }
+            int count = authoredSlots.Length + extraSlots.Count;
+            for (int i = 0; i < count; i++)
+            {
+                var cell = i < authoredSlots.Length ? authoredSlots[i] : extraSlots[i - authoredSlots.Length];
+                cell.gameObject.SetActive(i < authoredSlots.Length || i < items.Count);
+                cell.Bind(i < items.Count ? items[i] : null, Select);
+            }
+            string keep = SelectedId;
+            SelectedId = null; detailTitle.text = emptyTitle; detailBody.text = emptyBody;
+            if (items.Count > 0) Select(items.Exists(x => x.Id == keep) ? keep : items[0].Id);
+            Canvas.ForceUpdateCanvases(); gridScroll.verticalNormalizedPosition = 1; detailScroll.verticalNormalizedPosition = 1;
+        }
+        void Select(string id)
+        {
+            var item = items.Find(x => x.Id == id); if (item == null) return;
+            SelectedId = id; detailTitle.text = item.Title; detailBody.text = item.Body;
+            foreach (var cell in authoredSlots) cell.SetSelected(cell.ItemId == id);
+            foreach (var cell in extraSlots) cell.SetSelected(cell.ItemId == id);
+            Canvas.ForceUpdateCanvases(); detailScroll.verticalNormalizedPosition = 1;
+        }
+    }
+}

@@ -3,7 +3,7 @@ using Demon.Slice.Domain;
 using UnityEngine;
 namespace Demon.Slice
 {
-    public sealed class FinalTabletRetrieval : MonoBehaviour
+    public sealed partial class FinalTabletRetrieval : MonoBehaviour
     {
         [SerializeField] ThreatPickup pickup;
         [SerializeField] GameObject emptyDock;

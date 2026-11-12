@@ -6,6 +6,8 @@ namespace Demon.Slice
     {
         [SerializeField] ExplorationFlow owner;
         [SerializeField] ObservationSite site;
+        [SerializeField] bool forestPoint;
+        public bool IsForest => forestPoint;
         [SerializeField] Transform closeView;
         [SerializeField] Transform aimTarget;
         [SerializeField] Transform approach;
@@ -14,7 +16,7 @@ namespace Demon.Slice
         public Transform AimTarget => aimTarget;
         public Transform Approach => approach;
         public Transform CloseView => closeView;
-        public override string Prompt => "观察并记录" + (site == ObservationSite.Radio ? "电台" : site == ObservationSite.WindVane ? "风向标" : "湖岸");
+        public override string Prompt => "观察并记录" + (forestPoint ? "森林" : site == ObservationSite.Radio ? "电台" : site == ObservationSite.WindVane ? "风向标" : "湖岸");
         public void Configure(ExplorationFlow flow, ObservationSite id, Transform view, Transform target, Transform stand)
         { owner = flow; site = id; closeView = view; aimTarget = target; approach = stand; }
         public override void Use(PlayerController player)

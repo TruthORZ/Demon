@@ -2,7 +2,7 @@ using System;
 namespace Demon.Slice.Domain
 {
     // Post-D3 MOTION pair. Aim changes trigger an exchange, never a per-frame swap.
-    public sealed class StableBeamMotion
+    public sealed partial class StableBeamMotion
     {
         public double RequiredSeconds { get; }
         public double StableSeconds { get; private set; }

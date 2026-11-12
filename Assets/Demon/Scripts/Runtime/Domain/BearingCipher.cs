@@ -22,7 +22,7 @@ namespace Demon.Slice.Domain
             }
         }
     }
-    public sealed class ThreeDigitLock
+    public sealed partial class ThreeDigitLock
     {
         readonly int[] answer;
         readonly int[] input = new int[3];

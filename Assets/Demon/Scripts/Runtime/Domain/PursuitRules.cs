@@ -1,7 +1,7 @@
 using System;
 namespace Demon.Slice.Domain
 {
-    public sealed class ClosePassGate
+    public sealed partial class ClosePassGate
     {
         public double Distance { get; }
         public double CooldownSeconds { get; }
@@ -25,7 +25,7 @@ namespace Demon.Slice.Domain
             Remaining = CooldownSeconds; PassCount++; return true;
         }
     }
-    public sealed class PickupAttempt
+    public sealed partial class PickupAttempt
     {
         public double RequiredSeconds { get; }
         public double Elapsed { get; private set; }

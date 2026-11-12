@@ -6,7 +6,7 @@ namespace Demon.Slice
 {
     [RequireComponent(typeof(CharacterController))]
     [MovedFrom(false, sourceClassName: "SlicePlayer")]
-    public sealed class PlayerController : MonoBehaviour
+    public sealed partial class PlayerController : MonoBehaviour
     {
         enum ViewMode { Explore, Interaction, Reading, Returning, Sequence, Ending, Inspect, Pickup }
         [SerializeField] Camera viewCamera;
@@ -29,7 +29,7 @@ namespace Demon.Slice
         public bool IsPickingUp => mode == ViewMode.Pickup;
         public bool InspectingLock => mode == ViewMode.Interaction && activeInteraction is CipherBox;
         public bool MenuOpen { get; private set; }
-        public bool CanUseTools => !MenuOpen && mode == ViewMode.Explore && Cursor.lockState == CursorLockMode.Locked;
+        public bool CanUseTools => !MenuOpen && menuClosedFrame != Time.frameCount && mode == ViewMode.Explore && Cursor.lockState == CursorLockMode.Locked;
         readonly RaycastHit[] interactionHits = new RaycastHit[32];
         public Camera ViewCamera => viewCamera;
         public bool InspectingTablet => mode == ViewMode.Interaction && activeInteraction is RuneTablet;

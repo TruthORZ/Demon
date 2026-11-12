@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Demon.Slice
 {
-    public sealed class ListeningChime : MonoBehaviour
+    public sealed partial class ListeningChime : MonoBehaviour
     {
         [SerializeField] Transform monitoredTarget;
         [Tooltip("World-space spherical region, in metres; center follows this saved transform.")]

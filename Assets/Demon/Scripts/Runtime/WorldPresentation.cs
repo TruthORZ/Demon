@@ -4,7 +4,7 @@ using UnityEngine.Scripting.APIUpdating;
 namespace Demon.Slice
 {
     [MovedFrom(false, sourceClassName: "SlicePresentation")]
-    public sealed class WorldPresentation : MonoBehaviour
+    public sealed partial class WorldPresentation : MonoBehaviour
     {
         [SerializeField] Transform lidPivot;
         [SerializeField] Vector3 openLidEuler = new Vector3(105, 0, 0);
@@ -61,7 +61,12 @@ namespace Demon.Slice
             float daylight = PermanentNight ? 0 : ExpectedDaylight;
             var settings = world.Settings;
             sun.intensity = PermanentNight ? 0 : Mathf.Lerp(settings.NightSunIntensity, settings.DaySunIntensity, daylight);
-            sun.transform.rotation = Quaternion.Euler(hour / 24 * 360 - 90, -30, 0);
+            if (world.Playthrough && PermanentNight)
+            {
+                Vector3 fixedDirection = world.Cipher.Wheel.Landmarks[1].position - world.Cipher.Wheel.transform.position; fixedDirection.y = Mathf.Max(2, new Vector2(fixedDirection.x, fixedDirection.z).magnitude * .35f);
+                sun.transform.rotation = Quaternion.LookRotation(-fixedDirection.normalized, Vector3.up);
+            }
+            else sun.transform.rotation = Quaternion.Euler(hour / 24 * 360 - 90, -30, 0);
             RenderSettings.ambientLight = Color.Lerp(settings.NightAmbient, settings.DayAmbient, daylight);
             RenderSettings.fogColor = Color.Lerp(settings.NightFog, settings.DayFog, daylight);
             world.Player.ViewCamera.backgroundColor = RenderSettings.fogColor;

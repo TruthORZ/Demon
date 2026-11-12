@@ -32,10 +32,13 @@ namespace Demon.Slice.Domain
         }
     }
 
-    public sealed class GameClock
+    public sealed partial class GameClock
     {
         public const int MinutesPerDay = 1440;
         public event Action<int> Midnight;
+        public event Action<int> DayEntered;
+        public event Action Advanced;
+        public Func<int, bool> CanEnterDay { get; set; }
         public double AbsoluteMinutes { get; private set; }
         public int Day => (int)Math.Floor(AbsoluteMinutes / MinutesPerDay) + 1;
         public double MinuteOfDay => AbsoluteMinutes - (Day - 1) * MinutesPerDay;
@@ -58,18 +61,22 @@ namespace Demon.Slice.Domain
             if (Stopped) return;
             while (NextMidnight <= target)
             {
-                AbsoluteMinutes = NextMidnight;
+                double boundary = NextMidnight;
+                if (CanEnterDay != null && !CanEnterDay(Day + 1)) return;
+                AbsoluteMinutes = boundary;
                 Midnight?.Invoke(Day);
                 // A midnight listener may end the game. Never continue a sleep/loop jump into D10.
                 if (Stopped) return;
+                DayEntered?.Invoke(Day);
             }
             AbsoluteMinutes = target;
+            Advanced?.Invoke();
         }
 
         public void Stop() => Stopped = true;
     }
 
-    public sealed class RuneBoardModel
+    public sealed partial class RuneBoardModel
     {
         readonly RuneKind[] slots;
         readonly RuneKind[] target;
@@ -154,7 +161,7 @@ namespace Demon.Slice.Domain
         }
     }
 
-    public sealed class GameSession : IDisposable
+    public sealed partial class GameSession : IDisposable
     {
         readonly HashSet<int> exchangedDays = new HashSet<int>();
         readonly int finalDay;

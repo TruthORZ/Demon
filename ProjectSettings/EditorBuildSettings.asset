@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Demon/Scenes/DemonNineDay_Art.unity
+    guid: 97437a10047783a46a30e47d686a2eb3
+  - enabled: 1
     path: Assets/Demon/Scenes/DemonNineDay.unity
     guid: b19523d7eb36093409a6994acf51bc47
   - enabled: 1

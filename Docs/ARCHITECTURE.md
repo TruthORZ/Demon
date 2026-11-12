@@ -1,6 +1,6 @@
 # Demon 当前工程档案
 
-Updated: 2026-11-07 Asia/Shanghai
+Updated: 2026-11-11 Asia/Shanghai
 本文件记录已观察或已创建的工程结构，不把建议组件写成已有架构。玩法以 [GAME_SPEC.md](GAME_SPEC.md) 为准；拟实施模块和选择理由见 [TASK-002](Tasks/TASK-002-playable-slice.md)。
 
 ## 1 已观察的工程配置
@@ -15,7 +15,7 @@ Updated: 2026-11-07 Asia/Shanghai
 | PC管线资产 | `Assets/Settings/PC_RPAsset.asset`，GUID `4b83569d67af61e458304325a23e5dfd`，由质量项引用 |
 | Graphics全局管线字段 | `m_CustomRenderPipeline`为0，但质量项有URP覆盖；不能仅凭该0值判断项目使用Built-in |
 | 输入 | Input System 1.20.0；`activeInputHandler: 1`；已有全局Actions资源 |
-| 启动场景 | `Assets/Demon/Scenes/DemonNineDay.unity`置首；DemonSlice与原SampleScene保留 |
+| 启动场景 | TASK-023后 `Assets/Demon/Scenes/DemonNineDay_Art.unity` 置首；原灰盒九天、DemonSlice与SampleScene保留 |
 | 游戏模块 | 已创建九天流程骨架及D8到D9单独验证场景，复用规则/玩家/箱子/时钟/uGUI与占位终局 |
 | 版本控制 | 已按用户授权初始化Git，分支main，origin为 `https://github.com/TruthORZ/Demon.git`；提交与推送验证见TASK-003 |
 | 构建平台 | 用户确认Windows，StandaloneWindows64；旧样例构建已通过，九天版本结果见TASK-004 |
@@ -32,7 +32,7 @@ Updated: 2026-11-07 Asia/Shanghai
 | Input System | 1.20.0 | 已配置为输入后端 |
 | Timeline | 6.6.0 | 已安装，当前样例采用少量显式状态过渡，无Timeline资产 |
 | uGUI | 2.6.0 | 样例使用保存于场景的Canvas/Text/Panel，运行时只绑定数据与切换状态 |
-| Test Framework | 1.8.0 | 项目EditMode程序集Demon.Slice.Tests，当前81项规则用例 |
+| Test Framework | 1.8.0 | 项目EditMode程序集Demon.Slice.Tests，TASK-023后89项规则用例已通过 |
 | AI Navigation | 2.0.14 | NavMeshSurface保存导航，主场景及DemonChase由NavMeshAgent追逐，见第10节 |
 | Visual Scripting | 1.9.12 | 已安装，尚未用于玩法 |
 
@@ -69,7 +69,7 @@ Actions由 `ProjectSettings/EditorBuildSettings.asset` 的configObjects引用。
 | `Assets/Demon/Art` | Materials中的简单URP占位材质，无正式美术资产 |
 | `Assets/Demon/Audio` | PrototypeClockTick/PrototypeBoxSlam及PrototypeChimeLow/High为保存的合成WAV占位音效，可在Inspector替换；无正式音频/混音 |
 | `Assets/Demon/UI` | WindowsChinese.fontsettings为字体名称配置，不含Windows字体二进制；运行时解析后已确认中文显示 |
-| `Assets/Demon/Tests/EditMode` | 11份规则测试，包括CoreGameRuleTests、NineDayRuleTests、ExplorationGuidanceTests等，当前81项用例 |
+| `Assets/Demon/Tests/EditMode` | 12份规则测试，含DailyProgressTests与原有规则测试，当前89项用例 |
 | `Assets/Demon/Tests/PlayMode` | 空目录，无测试和asmdef |
 | `Docs`与`Docs/Tasks` | 设计、工程档案、任务与交接，按AGENTS规定分工 |
 
@@ -125,7 +125,7 @@ git status --short
 
 本机官方CLI路径为 `D:\Unity\Unity Hub\resources\unity.exe`，但项目没有Pipeline包，status/recompile无法连接。CLI提示可更新，未升级或安装依赖。当前通过现有Editor已编译的项目内工具执行，不借此启动第二个Editor或假装MCP可用。
 
-菜单 `Demon > Slice > Create Graybox Scene`仅用于首次创建；场景存在时拒绝覆盖。外部自动化可写一次性 `Temp/PrototypeSceneAuthoring.request.json`，仅接受源码白名单的create/validate/refresh/fonts/tests/smoke/build等操作，目标固定在样例或忽略的Temp/Builds目录。请求消费后删除，无请求不写资源。后台Editor未导入新工具时需人工Assets/Refresh；工具更新后可用refresh请求。流程记录见TASK-002。
+菜单 `Demon > Slice > Create Graybox Scene`仅用于首次创建；场景存在时拒绝覆盖。外部自动化可写一次性 `Temp/DemonSliceAuthoring.request.json`，仅接受源码白名单操作，字段为id和operation，报告在Temp/DemonSliceReports。请求消费后删除，无请求不写资源。后台Editor未导入新工具时需人工Assets/Refresh；工具更新后可用refresh请求。流程记录见TASK-002与TASK-023。
 
 已经验证：Editor创建保存、四个程序集编译、14项EditMode、正常及未修复睡觉路线Play Mode、中文显示、Input System的W/E/六次鼠标选择/Enter输入链。交互射线忽略玩家自身碰撞体，避免近景被身体挡住。测试临时使用虚拟设备和焦点配置，结束恢复，不改变正常输入配置。
 
@@ -350,3 +350,50 @@ DayJumpMenu 调用 GameSceneController.Restart，再由 CompletedDayReplay 从 D
 菜单打开保存/恢复 Time.timeScale、AudioListener.pause 与鼠标状态。PlayerController.MenuOpen 隔离移动/交互，关闭帧隔离 Esc；BeamTether/ChaseController 暂停期间不更新瞬时光束锁定/追近判定。RefreshClockState 和 RefreshPracticeProgress 是既有刷新逻辑的显式入口，不增加新的规则状态。菜单的 EventSystem 使用原有 InputSystem_Actions.inputactions 的已保存 UI 引用，中文标签加入 SceneFontBinding。
 
 显式 Editor 工具 DayJumpMenuAuthoring 仅对当前整合场景添加菜单，存在即拒绝覆盖。EditorRequestRunner 的 day-jump-inspect/create/input/hint/validate/editability/smoke 请求用于检查、创建、接线、保存重开、编辑性探针及回归。验证状态见 [TASK-022](Tasks/TASK-022-day-jump-menu.md)。
+
+## 22 完整九天主线实现 TASK-023
+
+本节描述2026-11-11已接入并通过规则/组件检查的新增实现；新版玩法目标由GAME_SPEC第10–12节维护。第5–21节中的旧灰盒/轻量切片行为仍说明各自历史版本，新雪地主线以本节为准。Windows构建与人工验收的最新结果见[TASK-023](Tasks/TASK-023-complete-playthrough-plan.md)。
+
+`DemonNineDay_Art.unity` 的 `00_系统与界面/GameSystems_系统接线` 保存 `CompletePlaythrough` 与 `SkySunPresentation`，组合根 `GameSceneController.playthrough` 显式引用它。未配置该组件的旧切片继续沿用旧规则，不被每日主线门槛影响。
+
+| 数据或对象 | 已实现职责和编辑位置 |
+| --- | --- |
+| `Assets/Demon/Data/CompletePlaythrough/MainRouteSettings.asset` | 独立日长720秒、速度/交互/阅读/结局基础配置；原NineDaySettings保留。 |
+| `MainRouteDefinition.asset` 同目录 | 九天关键事项ID清单、纸条正文、开场/提示时长、夜间门槛、D3–D8速度、发现/脱离距离、丢失视野时限、误导笑声间隔与偏移。只读共享定义，不存本局收集状态。 |
+| `MainRouteExploration.asset` 同目录 | 主线观察/探索文案，包括D5啸叫与D8等待提示；不改旧切片共享文本。 |
+| `MainRouteSchedule.asset` 同目录 | 独立主线日期/石板文本，移除旧可选巡查文案并同步T02啸叫；原SnowIntegrationSchedule留给旧版本。 |
+| `MainRouteBeam.asset` 同目录 | 主线专用光束数值/左键点击开关提示；旧机制切片继续使用原共享配置。 |
+| `SliceHUD/CompletePlaythrough_完整流程界面` | 保存的今日任务、中央提示、全屏黑色开场/等待、失败重试面板和带ScrollRect的记录背包。布局在各RectTransform，字体仍由SceneFontBinding绑定。 |
+| `02_室内交互/D01_桌面线索` 与D02–D06点位组下 `Record_*` | 保存的纸条与手电占位模型/交互/阅读机位引用；纸条随对应点位组移动。淡黄色纸条带标题，按日可见、收录去重，重试同步还原可见状态。 |
+| `03_逐日点位/公共_室外设施/ForestInspection_森林巡查` | 新增森林巡查交互，位置当前位于T02附近，原三站Transform未移动。 |
+| `06_美术环境/.../LogCabin/CabinSafeZone_木屋安全范围` | 保存的BoxCollider触发范围及NavMeshObstacle carving；Inspector调整安全范围，改动后检查门开关与实际追逐。玩家使用CharacterController，不受导航carving限制。 |
+| `GameSystems_系统接线/CabinExit_敌人停留边界` | 恶魔误入安全范围时的显式室外回退位置，需位于安全区外的有效导航上。 |
+| `WorldPresentation/SkySun_可编辑日轮` | 保存的日轮/黑心占位；SkySunPresentation按相机远裁剪范围、太阳方向放到远景，D7与固定密码太阳方位一致。 |
+| `GameSystems_系统接线/MisleadingVoice_误导笑声占位` | 独立3D声源，其偏移不改变恶魔和风铃数据。音量与传播范围在AudioSource。 |
+
+`Domain/DailyProgress` 管理当日任务去重、重置与睡眠资格；`RecordCollection` 管理本局已收录ID。原 `ObservationSite` 三值及 `FirstDayInspectionLog` 契约保留，森林使用 `StationObservation.forestPoint` 单独标记；主线进度由DailyProgress记录，旧D1三站统计不承担新版门槛。
+
+`GameClock.CanEnterDay` 在任何零点副作用前裁决是否允许跨日。允许后先通知原Midnight监听，再通知DayEntered，最后在本次推进达到目标时通知Advanced。主线据此先建立新日快照，再在睡眠抵达醒来时刻后更新为实际入口；大步进不能重复使用上一日任务。失败仅暂停当前会话并显示缺项，直到点击重试，不先执行次日属性变化。
+
+`RuleSnapshots.cs` 提供GameSession、符文盘、发现、密码锁、光束、拾取等显式捕获/恢复；`CheckpointState.cs` 保存玩家姿态、观察记忆、风铃、追逐目标/速度/冷却、风向标角度、广播采样位置、箱盖及门的值状态。`CompletePlaythrough.RetryDay` 重建规则会话、解绑旧事件、恢复实际入口快照并重绑表现；不倒拨旧GameClock，不重载地图，不用CompletedDayReplay补全玩家历史。R重新开始也创建新的D1重试点，避免只有首次Start建点。快照仅存内存，不是退出后存档。
+
+木屋主线门由 `CabinDoorInteraction` 独立管理可恢复的开关/插值/音效；只在整合场景实例禁用旧LC_Door协程组件，保留供应商脚本、资源和原UnityEvent。旧切片没有主线标记时仍调用原事件。门口敌人导航连接不因开门启用，安全范围另外由导航carving与追逐目的地/近身判定共同保护。
+
+`BeamTether.HasLamp` 和 `Equipped` 分开表示普通手电与T06。普通照明不会交换运动；没取手电但已取T06会提示回屋拾取。追逐按配置速度和视线/距离侦测，丢失目标停止读取实时目的地；木屋安全不会交换运动属性。D5电台换为占位啸叫，笑声独立定位，监听风铃继续采样真实目标。新占位WAV为 `Assets/Demon/Audio/PlaceholderRadioHowl.wav`、`PlaceholderMisleadingLaugh.wav`，均为本地生成素材。
+
+背包默认Tab开关、Esc关闭；暂停世界和音频、隔离玩家操作，关闭恢复先前倍率。`JournalInventory`展示当前收录，`JournalSlot`绑定独立物品的按钮/标题/类别/选中标记。主场景保存6列×4行初始空格、GridLayoutGroup、溢出模板和右侧滚动正文；超出初始格数只克隆保存模板，不构成容量限制。每件物品独占一格，点击只重读该物品，不调用现场开箱/固化或午夜导演。编辑入口为 `CompletePlaythrough_完整流程界面/Journal_背包记录/GridViewport_格子滚动区/GridContent_格子布局`；模板在同背包根下 `SlotTemplate_溢出格模板`。
+
+主线 `BeamTether.LampSwitchedOn` 保存左键点击锁存状态；松开不关闭，再点切换。只有探索且可用工具时接收点击，菜单关闭帧也隔离输入；近景有效照射仍中断。当天快照同时保存并还原开关。旧无CompletePlaythrough的机制切片保留原右键按住输入。主场景挂钟的SecondHand已用Editor API删除，FinaleSequence的秒针引用成为可选，时针/分针与导演不变。
+
+D8检查交接后在屋内按T或点按钮，短黑屏等待后通过原时钟推进到22:00；T07有效拾取后仍使用FinaleTimeWindow保护，现场箱B记录关闭才交还午夜导演。F8前置重放补齐新任务并建立目标入口，失败重试与调试重放分开。
+
+时间流速在 `Assets/Demon/Data/CompletePlaythrough/MainRouteSettings.asset` 的 `RealSecondsPerDay` 调整，当前720现实秒/游戏24小时。数值越小越快；运行时GameSceneController以此换算GameClock推进，不启动时覆盖Inspector数值。编辑器检查接受>=10秒的自定义日长，不再限定720。StartHour/WakeHour另管开始/醒来时刻；Inspector中新增中文单位说明。
+
+新增EditorRequestRunner操作为 `complete-inspect/create/content/sky/labels/presentation/finalize-content/reachability/repair-records/inventory-controls/inventory-validate/save/validate/smoke/route-smoke/integration/editability/build`。请求文件仍为 `Temp/DemonSliceAuthoring.request.json`，字段仍只有合法id/operation。create拒绝覆盖，后续操作明确针对已保存的主线对象；操作前若场景有延迟序列化变脏，会先在 `Logs/DemonCheckpoints/task023-work` 保存副本并保存当前现场，绝不以磁盘旧图覆盖现场。
+
+已验证：89项EditMode；主线D1–D9及各日重试组件回归；分帧Tab/Esc/右键/T输入、背包按钮射线、木屋安全、逐日速度、D7日轮/密码、T07保留窗口；纸条/布局/速度修改保存重开后运行采用并还原。真实连续键鼠通关不在这些自动检查的证明范围内，不能据此宣称已通过人工完整验收。
+
+Windows64候选输出为 `Builds/WindowsCompletePlaythrough/Demon.exe`（完整目录2970752238字节），已实际启动雪地入口和中文任务界面；实体键盘F8由用户确认。规则/最终集成/构建的原工具结果已保留到 `Logs/DemonCheckpoints/task023-final-20261111/recovered-tool-observations.json`，当前资产与包校验见同目录 `resume-integrity.json`。独立包日志仍有初始化导航和GaussianDepthOfField提示，影响与完整连续键鼠验收留在TASK-023，不据自动检查标记整体完成。
+
+TASK-024最新候选仍在同一Windows路径，构建报告2970828058字节；89项规则、格子/左键/快照/两针时钟集成、格子布局保存重开还原、完整结局回归均通过。证据在 `Logs/DemonCheckpoints/task024-inventory-controls-20261111/`。该候选已实看启动；连续实体键鼠通关仍归TASK-023验收。

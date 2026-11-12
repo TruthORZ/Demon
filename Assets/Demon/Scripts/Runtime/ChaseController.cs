@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 namespace Demon.Slice
 {
-    public sealed class ChaseController : MonoBehaviour
+    public sealed partial class ChaseController : MonoBehaviour
     {
         public enum ChasePhase { Dormant, Pursuing, Frozen, Retreating, Waiting, Ended }
         [SerializeField] ChaseDefinition definition;
@@ -19,7 +19,12 @@ namespace Demon.Slice
         BeamTether tether;
         ISceneFeedback feedback;
         float replanAt, stepAt, missingNavSeconds;
-        bool retreating;
+        bool retreating, tracking;
+        float unseenSeconds, laughAt;
+        CompletePlaythrough main;
+        [SerializeField] AudioSource misleadingVoice;
+        [SerializeField] AudioClip laughClip;
+        public bool Tracking => tracking;
         Vector3 authoredPosition;
         Quaternion authoredRotation;
         public ClosePassGate Gate { get; private set; }
@@ -45,7 +50,8 @@ namespace Demon.Slice
                 if (HasNavigation) agent.Warp(authoredPosition); else agent.transform.position = authoredPosition;
                 agent.transform.rotation = authoredRotation;
             }
-            replanAt = stepAt = missingNavSeconds = 0; retreating = false; Phase = ChasePhase.Dormant;
+            replanAt = stepAt = missingNavSeconds = unseenSeconds = laughAt = 0; tracking = false; main = (messages as GameSceneController)?.Playthrough; retreating = false; Phase = ChasePhase.Dormant;
+            if (misleadingVoice) misleadingVoice.Stop();
             session = rules; player = actor; tether = motion; feedback = messages; Gate = new ClosePassGate(definition.ClosePassMetres, definition.ClosePassCooldownSeconds);
             agent.speed = definition.MetresPerSecond; agent.acceleration = definition.AccelerationMetresPerSecondSquared; agent.angularSpeed = definition.AngularDegreesPerSecond;
         }
@@ -67,6 +73,7 @@ namespace Demon.Slice
                 }
             }
             missingNavSeconds = 0;
+            if (main && !UpdateDetection()) return;
             if (!tether.DemonCanMove) { Phase = ChasePhase.Frozen; Stop(); return; }
             agent.isStopped = false;
             float distance = Vector3.Distance(agent.transform.position, player.transform.position);
@@ -89,18 +96,49 @@ namespace Demon.Slice
                 if (Time.time >= replanAt)
                 {
                     replanAt = Time.time + definition.ReplanSeconds;
-                    if (NavMesh.SamplePosition(player.transform.position, out var goal, definition.TargetProjectionMetres, agent.areaMask)) agent.SetDestination(goal.position);
+                    if (NavMesh.SamplePosition(player.transform.position, out var goal, definition.TargetProjectionMetres, agent.areaMask) && (!main || !main.InsideCabin(goal.position))) agent.SetDestination(goal.position);
                     else Stop();
                 }
             }
             if (!agent.isStopped && agent.velocity.sqrMagnitude > .05f && Time.time >= stepAt)
             { footstepSource.PlayOneShot(footstepClip); stepAt = Time.time + definition.FootstepSeconds; }
         }
+        bool UpdateDetection()
+        {
+            var plan = main.Definition;
+            agent.speed = plan.ChaseSpeeds[Mathf.Clamp(session.Clock.Day - 3, 0, plan.ChaseSpeeds.Length - 1)];
+            if (main.InsideCabin(agent.transform.position))
+            {
+                Stop();
+                if (NavMesh.SamplePosition(main.CabinExit, out var outside, 3, agent.areaMask) && !main.InsideCabin(outside.position)) agent.Warp(outside.position);
+                tracking = false; Phase = ChasePhase.Waiting; return false;
+            }
+            if (main.InsideCabin(player.transform.position)) { tracking = false; retreating = false; unseenSeconds = 0; Phase = ChasePhase.Waiting; Stop(); return false; }
+            float distance = Vector3.Distance(agent.transform.position, player.transform.position);
+            bool sight = HasSightToPlayer();
+            if (tracking)
+            {
+                unseenSeconds = sight ? 0 : unseenSeconds + Time.deltaTime;
+                if (distance > plan.LoseMetres || unseenSeconds >= plan.LostSightSeconds) tracking = false;
+            }
+            else if (distance <= plan.DetectionMetres && sight) { tracking = true; unseenSeconds = 0; }
+            if (!tracking) { Phase = ChasePhase.Waiting; Stop(); return false; }
+            if (session.Clock.Day >= 5 && misleadingVoice && laughClip && Time.time >= laughAt)
+            {
+                laughAt = Time.time + plan.LaughIntervalSeconds;
+                // A separate emitter may disagree with the real target; chimes still sample the real target.
+                Vector3 offset = Vector3.Cross(Vector3.up, (player.transform.position - agent.transform.position).normalized) * plan.MisleadingOffsetMetres;
+                misleadingVoice.transform.position = agent.transform.position + offset;
+                misleadingVoice.PlayOneShot(laughClip);
+            }
+            return true;
+        }
         bool ChooseRetreat()
         {
             Vector3 best = default; float score = -1;
             foreach (var point in retreatPoints)
             {
+                if (main && main.InsideCabin(point.position)) continue;
                 float distance = Vector3.Distance(point.position, player.transform.position);
                 if (distance < definition.RetreatMinimumMetres || distance <= score || !NavMesh.SamplePosition(point.position, out var goal, 1, agent.areaMask)) continue;
                 if (!agent.CalculatePath(goal.position, candidatePath) || candidatePath.status != NavMeshPathStatus.PathComplete) continue;

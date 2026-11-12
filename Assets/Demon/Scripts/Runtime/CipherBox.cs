@@ -3,7 +3,7 @@ using Demon.Slice.Domain;
 using UnityEngine;
 namespace Demon.Slice
 {
-    public sealed class CipherBox : Interactable, ICloseViewInteraction
+    public sealed partial class CipherBox : Interactable, ICloseViewInteraction
     {
         [SerializeField] CipherWheel wheel;
         [SerializeField] Transform closeView;
@@ -17,6 +17,7 @@ namespace Demon.Slice
         ThreeDigitLock model;
         Quaternion restingLid;
         bool initialized;
+        public GameSceneController World => world;
         public CipherWheel Wheel => wheel;
         public ThreeDigitLock Model => model;
         public Transform CloseView => closeView;
@@ -37,11 +38,13 @@ namespace Demon.Slice
         public override void Use(PlayerController player)
         {
             if (!world || world.Session.Descended) return;
+            if (world.Playthrough) world.Playthrough.Record("box-a");
             if (model.Unlocked)
             {
                 model.TryAcquire(); tabletVisual.SetActive(false);
                 world.Campaign.AcquireExchangeTablet(recordView);
-                world.SetMessage(world.Tether ? "T06已取得。回到湖岸观察点，按住右键照住雪痕。" : "T06已取得。");
+                world.SetMessage(world.Tether ? (world.Playthrough ? "T06已取得。点击左键打开手电筒，稳定照住雪痕。" : "T06已取得。回到湖岸观察点，按住右键照住雪痕。") : "T06已取得。");
+                if (world.Playthrough && !world.Playthrough.HasFlashlight) world.SetMessage("T06已取得。回木屋桌边拾取手电筒后即可使用光束牵制。");
             }
             else { world.SetMessage(wheel.Definition.LockInstructions); player.EnterLockView(this, closeView); }
         }

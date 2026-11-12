@@ -31,6 +31,7 @@ namespace Demon.Slice
         FinalTabletRetrieval retrieval;
         ExplorationFlow exploration;
         string lastClock;
+        bool mainRoute;
         public void Configure(Text clock, Text message, Text help, Text focus, Text held,
             GameObject reading, Text page, GameObject ending, Text end)
         { clockText = clock; messageText = message; helpText = help; focusText = focus; heldText = held;
@@ -38,6 +39,7 @@ namespace Demon.Slice
 
         public void Initialize(IHudState status, Demon.Slice.Domain.GameSession rules, GameSettings settings, PlayerController actor, NineDayFlow schedule, FinaleSequence sequence, BeamTether tool, FinalTabletRetrieval item, ExplorationFlow guide)
         {
+            mainRoute = guide && guide.GetComponent<CompletePlaythrough>();
             state = status; session = rules; player = actor; campaign = schedule; finale = sequence; tether = tool; retrieval = item; exploration = guide;
             helpText.text = settings.Instructions;
             readingText.text = settings.BoxText;
@@ -50,7 +52,7 @@ namespace Demon.Slice
             bool directing = finale && finale.IsDirecting;
             clockText.gameObject.SetActive(!directing);
             int minute = (int)session.Clock.MinuteOfDay;
-            string clock = $"灰盒样例  第 {session.Clock.Day} 天  {minute / 60:00}:{minute % 60:00}\n" +
+            string clock = $"{(mainRoute ? "" : "灰盒样例  ")}第 {session.Clock.Day} 天  {minute / 60:00}:{minute % 60:00}\n" +
                 $"箱子 B：{(session.BoxSeal == 1 ? "封闭" : "解封")}　湖：{(session.LakeSeal == 1 ? "封印" : "开启")}";
             if (campaign) clock += $"\n石板记录 {campaign.Progress.FoundCount}/6　{campaign.Title}";
             if (lastClock != clock) { clockText.text = clock; lastClock = clock; }
@@ -68,7 +70,7 @@ namespace Demon.Slice
                 toolStatus.text = tether ? tether.Status : "";
             }
             if (explorationStatus)
-            { bool show = exploration && exploration.ShowStatus && !player.Reading && !directing; explorationStatus.gameObject.SetActive(show); if (show) explorationStatus.text = exploration.Status; }
+            { bool show = exploration && !mainRoute && exploration.ShowStatus && !player.Reading && !directing; explorationStatus.gameObject.SetActive(show); if (show) explorationStatus.text = exploration.Status; }
             if (finalTabletStatus)
             { bool show = retrieval && retrieval.Available && !player.Reading && !directing; finalTabletStatus.gameObject.SetActive(show); if (show) finalTabletStatus.text = retrieval.Status; }
             helpText.gameObject.SetActive(!player.Reading && !session.Descended && !(finale && finale.IsDirecting));

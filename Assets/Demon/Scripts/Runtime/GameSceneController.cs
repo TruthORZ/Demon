@@ -23,6 +23,9 @@ namespace Demon.Slice
         [SerializeField] FinalTabletRetrieval retrieval;
         [SerializeField] WorldAttributeConsequences consequences;
         [SerializeField] ExplorationFlow exploration;
+        [SerializeField] CompletePlaythrough playthrough;
+        public CompletePlaythrough Playthrough => playthrough;
+        public void ConfigurePlaythrough(CompletePlaythrough flow) => playthrough = flow;
         public ExplorationFlow Exploration => exploration;
         public void ConfigureExploration(ExplorationFlow flow) => exploration = flow;
         public WorldAttributeConsequences Consequences => consequences;
@@ -77,15 +80,18 @@ namespace Demon.Slice
         {
             if (!initialized) throw new InvalidOperationException("Cannot restart an uninitialized scene.");
             InitializeSession();
+            if (playthrough) playthrough.CaptureDayStart();
         }
 
-        void InitializeSession()
+        internal void RestoreSession(GameSession.Snapshot snapshot) => InitializeSession(snapshot);
+
+        void InitializeSession(GameSession.Snapshot restored = null)
         {
             initialized = false;
             if (Session != null) { Session.Changed -= OnStateChanged; Session.Dispose(); }
             readingBox = false; ReadingText = null; HasReadBox = false; EndingPresented = false;
             var board = new RuneBoardModel(settings.Initial, settings.Target, settings.LooseRunes);
-            Session = new GameSession(settings.StartDay, settings.StartHour * 60, settings.FinalDay, board,
+            Session = restored != null ? GameSession.FromSnapshot(restored) : new GameSession(settings.StartDay, settings.StartHour * 60, settings.FinalDay, board,
                 settings.InitialLakeSealed, campaign ? campaign.Definition.FinalTabletDay : 1);
             player.Initialize(this);
             tablet.Initialize(this);
@@ -102,12 +108,13 @@ namespace Demon.Slice
             if (finale) finale.Initialize(this, presentation);
             if (retrieval) retrieval.Initialize(this);
             if (exploration) exploration.Initialize(Session, campaign, consequences, tether, cipherBox, listeningTool, retrieval, this);
+            if (playthrough) playthrough.Initialize(this);
             OnStateChanged();
         }
 
         void Update()
         {
-            if (!initialized) return;
+            if (!initialized || (playthrough && playthrough.BlocksClock)) return;
             float dt = Time.deltaTime;
             if (finale && finale.Tick(dt)) return;
             if (Session.Descended) return;
@@ -156,6 +163,7 @@ namespace Demon.Slice
                 return;
             }
             HasReadBox = true;
+            if (playthrough) playthrough.RememberBoxRecord();
             readingBox = true;
             ReadingText = settings.BoxText;
             presentation.OpenBox();
@@ -167,6 +175,7 @@ namespace Demon.Slice
         public bool OnReadingClosed()
         {
             bool wasBox = readingBox;
+            if (wasBox && playthrough) playthrough.Record("box-record");
             readingBox = false;
             return wasBox && finale && finale.FinishRecord();
         }
@@ -174,6 +183,7 @@ namespace Demon.Slice
         public void Sleep()
         {
             if (Session.Descended || (finale && finale.IsDirecting)) return;
+            if (playthrough && !playthrough.RequestSleep()) return;
             if (finale) finale.ReleaseForSleep();
             Session.SleepToNextDay((campaign ? campaign.WakeHourFor(Session.Clock.Day + 1) : settings.WakeHour) * 60);
         }

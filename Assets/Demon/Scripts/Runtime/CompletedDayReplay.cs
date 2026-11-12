@@ -14,9 +14,11 @@ namespace Demon.Slice
             if (!world || world.Session == null || !world.Exploration || !world.Exploration.HasFinalPreparation ||
                 world.Session.Clock.Day != 1 || world.Campaign.Progress.FoundCount != 0)
                 throw new InvalidOperationException("Complete-day replay requires a fresh D1 campaign with all authored exploration tools.");
+            if (world.Playthrough) world.Playthrough.BeginDebugReplay();
             while (world.Session.Clock.Day < targetDay)
             {
                 int day = world.Session.Clock.Day;
+                if (world.Playthrough) world.Playthrough.PrepareDayForReplay();
                 Complete(world, day);
                 if (day < 8) world.Sleep();
                 Require(world.Session.Clock.Day == day + 1, "Day advancement did not complete D" + day);
@@ -25,10 +27,12 @@ namespace Demon.Slice
             {
                 world.Exploration.HandoverRecord.Use(world.Player);
                 world.Player.ExitCloseView();
-                Advance(world, 7 * GameClock.MinutesPerDay + world.Campaign.Definition.FinalTabletHour * 60);
+                if (world.Playthrough) world.Playthrough.WaitForDebugReplay();
+                else Advance(world, 7 * GameClock.MinutesPerDay + world.Campaign.Definition.FinalTabletHour * 60);
                 world.Retrieval.RefreshPresentation();
             }
             if (!world.Session.Descended) world.Player.ReturnToExploration();
+            if (world.Playthrough) world.Playthrough.EndDebugReplay();
         }
 
         static void Complete(GameSceneController world, int day)
@@ -67,7 +71,8 @@ namespace Demon.Slice
                     break;
                 case 8:
                     guide.HandoverRecord.Use(world.Player); world.Player.ExitCloseView();
-                    Advance(world, 7 * GameClock.MinutesPerDay + world.Campaign.Definition.FinalTabletHour * 60);
+                    if (world.Playthrough) world.Playthrough.WaitForDebugReplay();
+                    else Advance(world, 7 * GameClock.MinutesPerDay + world.Campaign.Definition.FinalTabletHour * 60);
                     world.Retrieval.RefreshPresentation();
                     var pickup = world.Retrieval.Pickup;
                     pickup.Use(world.Player); pickup.TickHeld(true, pickup.HoldSeconds + .01f);

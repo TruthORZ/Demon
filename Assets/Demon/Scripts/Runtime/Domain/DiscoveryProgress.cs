@@ -2,7 +2,7 @@ using System;
 
 namespace Demon.Slice.Domain
 {
-    public sealed class DiscoveryProgress
+    public sealed partial class DiscoveryProgress
     {
         readonly int[] days;
         readonly bool[] found;

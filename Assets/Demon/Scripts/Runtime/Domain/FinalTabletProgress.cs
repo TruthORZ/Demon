@@ -1,7 +1,7 @@
 namespace Demon.Slice.Domain
 {
     // Session-local acquisition and placement; never owns time, rune compilation or SEAL.
-    public sealed class FinalTabletProgress
+    public sealed partial class FinalTabletProgress
     {
         public bool Acquired { get; private set; }
         public bool Placed { get; private set; }

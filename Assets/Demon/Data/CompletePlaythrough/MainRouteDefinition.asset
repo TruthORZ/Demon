@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3cf0c637e1b674184e8efbfb474185, type: 3}
+  m_Name: MainRouteDefinition
+  m_EditorClassIdentifier: Demon.Slice::Demon.Slice.PlaythroughDefinition
+  Days:
+  - Tasks:
+    - inspect-0
+    - inspect-1
+    - inspect-2
+    - inspect-3
+    - note-a
+    - box-a
+    - box-b
+  - Tasks:
+    - inspect-0
+    - inspect-1
+    - inspect-2
+    - inspect-3
+    - tablet-1
+  - Tasks:
+    - inspect-0
+    - inspect-1
+    - inspect-2
+    - inspect-3
+    - tablet-2
+  - Tasks:
+    - inspect-0
+    - inspect-1
+    - inspect-2
+    - inspect-3
+    - tablet-3
+  - Tasks:
+    - inspect-0
+    - inspect-1
+    - inspect-2
+    - inspect-3
+    - tablet-4
+  - Tasks:
+    - inspect-0
+    - inspect-1
+    - inspect-2
+    - inspect-3
+    - tablet-5
+    - listening
+  - Tasks:
+    - inspect-0
+    - inspect-1
+    - inspect-2
+    - inspect-3
+    - tablet-6
+  - Tasks:
+    - handover
+    - wait
+    - retrieved
+    - placed
+    - compiled
+    - box-record
+  - Tasks: []
+  Entries:
+  - Id: note-a
+    Title: "\u503C\u5B88\u987B\u77E5"
+    Body: "\u6BCF\u5929\u68C0\u67E5\u7535\u53F0\u3001\u98CE\u5411\u6807\u3001\u6E56\u7554\u548C\u68EE\u6797\u56DB\u4E2A\u5DE1\u67E5\u70B9\u3002\u5168\u90E8\u5B8C\u6210\u540E\uFF0C\u5728\u591C\u95F4\u4F11\u606F\u3002\u5F53\u5929\u7684\u91CD\u8981\u53D1\u73B0\u4E5F\u9700\u8981\u5904\u7406\u5B8C\u3002\n\n\u5C4B\u540E\u7684\u4E24\u4E2A\u7BB1\u5B50\uFF0C\u4E5F\u8BB8\u6709\u4E00\u5929\u4F1A\u5E2E\u4E0A\u5927\u5FD9\u3002\u6728\u5C4B\u53EF\u4EE5\u8EB2\u907F\u5916\u9762\u7684\u4E1C\u897F\u3002\n\n\u82E5\u5F53\u5929\u7ED3\u675F\u4ECD\u6709\u5173\u952E\u4E8B\u9879\u672A\u5B8C\u6210\uFF0C\u672C\u65E5\u503C\u5B88\u5931\u8D25\u3002"
+  - Id: note-b
+    Title: "\u7B26\u6587\u7B14\u8BB0 \u5360\u4F4D"
+    Body: "DAY \u8868\u793A\u65E5\u671F\u3002TRANSFER \u8868\u793A\u8F6C\u79FB\u3002EXCHANGE \u8868\u793A\u53CC\u65B9\u4EA4\u6362\u3002\n\n\u6709\u4E9B\u7B26\u53F7\u8FD8\u65E0\u6CD5\u8FA8\u8BA4\u3002\u8BF7\u5BF9\u7167\u8BBE\u65BD\u53D8\u5316\u7EE7\u7EED\u89C2\u5BDF\u3002"
+  - Id: flashlight
+    Title: "\u624B\u7535\u7B52"
+    Body: "\u70B9\u51FB\u9F20\u6807\u5DE6\u952E\u6253\u5F00\u624B\u7535\u7B52\uFF0C\u518D\u6B21\u70B9\u51FB\u5173\u95ED\uFF0C\u65E0\u7535\u6C60\u6D88\u8017\u3002\u53D6\u5F97T06\u540E\uFF0C\u6253\u5F00\u624B\u7535\u5E76\u7A33\u5B9A\u7167\u5C04\u96EA\u75D5\u533A\u57DF\u53EF\u7275\u5236\u8FD0\u52A8\u3002\u80CC\u5305\u548C\u8C1C\u9898\u4E2D\u7684\u70B9\u51FB\u4E0D\u4F1A\u64CD\u4F5C\u624B\u7535\u3002"
+  - Id: note-t1
+    Title: "\u9057\u843D\u7EB8\u6761\u4E00"
+    Body: "\u7B2C\u4E09\u65E5\uFF0C\u7942\u5C06\u83B7\u5F97\u8FD0\u52A8\u3002"
+  - Id: note-t2
+    Title: "\u9057\u843D\u7EB8\u6761\u4E8C"
+    Body: "\u7B2C\u4E94\u65E5\uFF0C\u7942\u5C06\u83B7\u5F97\u58F0\u97F3\u3002"
+  - Id: note-t3
+    Title: "\u9057\u843D\u7EB8\u6761\u4E09"
+    Body: "\u7B2C\u4E03\u65E5\uFF0C\u7942\u5C06\u83B7\u5F97\u5149\u3002"
+  - Id: note-t4
+    Title: "\u9057\u843D\u7EB8\u6761\u56DB"
+    Body: "\u7B2C\u4E5D\u65E5\uFF0C\u7942\u5C06\u83B7\u5F97\u5B9E\u4F53\u3002"
+  - Id: note-t5
+    Title: "\u76D1\u542C\u5DE5\u5177\u8BF4\u660E"
+    Body: "\u8865\u5168T05\u540E\uFF0C\u98CE\u94C3\u4F1A\u5728\u7942\u8FDB\u5165\u76D1\u6D4B\u533A\u57DF\u65F6\u62A5\u8B66\u3002\u58F0\u97F3\u63D0\u793A\u533A\u57DF\uFF0C\u6C89\u9ED8\u4E0D\u610F\u5473\u7740\u5B89\u5168\u3002\n\n\u98CE\u94C3\u4E0D\u4F1A\u8DDF\u968F\u8BEF\u5BFC\u7B11\u58F0\uFF0C\u53EA\u62A5\u544A\u771F\u5B9E\u7684\u8FDB\u5165\u4E8B\u4EF6\u3002"
+  - Id: T07
+    Title: "\u6700\u540E\u4E00\u5757\u77F3\u677F"
+    Body: "\u5DF2\u53D6\u5F97\u7684\u7834\u788E\u77F3\u677F\u3002\u5E26\u56DE\u5DE5\u5177\u68DA\u53F0\u5EA7\u653E\u7F6E\uFF0C\u5728\u573A\u666F\u4E2D\u8865\u5168\u7A0B\u5E8F\u3002"
+  NightHour: 18
+  Opening: "\u4F60\u72EC\u81EA\u5728\u96EA\u5730\u76D1\u6D4B\u7AD9\u503C\u5B88\u3002\u6BCF\u5929\u68C0\u67E5\u8BBE\u65BD\u548C\u5DE1\u67E5\u70B9\uFF0C\u5E76\u7559\u610F\u4EA4\u73ED\u524D\u7684\u5F02\u5E38\u3002\n\n\u7EB8\u6761\u4E0E\u6536\u96C6\u8BB0\u5F55\u53EF\u5728\u80CC\u5305\u4E2D\u91CD\u8BFB\u3002"
+  OpeningSeconds: 5
+  NoticeSeconds: 6
+  WaitSeconds: 3
+  ChaseSpeeds:
+  - 2.6
+  - 3
+  - 3.5
+  - 4
+  - 4.6
+  - 5.7
+  DetectionMetres: 28
+  LoseMetres: 42
+  LostSightSeconds: 4
+  LaughIntervalSeconds: 9
+  MisleadingOffsetMetres: 9
+  PursuitNoticeMetres: 14

@@ -48,6 +48,7 @@ namespace Demon.Slice
         public void RefreshClockState() { EvaluateFirstNight(); RefreshFinalTablet(); }
         public void RefreshFinalTablet()
         { bool visible = FinalAvailable && (!world.Retrieval || world.Retrieval.ReadyToReconstruct); if (finalTablet.activeSelf != visible) finalTablet.SetActive(visible); }
+        public void RefreshRestoredState() { RefreshDay(); EvaluateFirstNight(); }
         void OnMidnight(int day) { RefreshDay(); EvaluateFirstNight(); }
         void RefreshDay()
         {

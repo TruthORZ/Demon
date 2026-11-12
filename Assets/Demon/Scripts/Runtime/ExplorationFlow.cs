@@ -3,7 +3,7 @@ using Demon.Slice.Domain;
 using UnityEngine;
 namespace Demon.Slice
 {
-    public sealed class ExplorationFlow : MonoBehaviour
+    public sealed partial class ExplorationFlow : MonoBehaviour
     {
         [SerializeField] ExplorationDefinition definition;
         [SerializeField] StationObservation[] observations;
@@ -84,10 +84,10 @@ namespace Demon.Slice
         { definition = data; observations = points; humanTrail = trail; trailWaypoints = route; firstTablet = tablet; returnPoint = home; }
         public void Initialize(GameSession rules, NineDayFlow schedule, WorldAttributeConsequences effects, BeamTether motion, CipherBox tool, ListeningTool listener, FinalTabletRetrieval item, ISceneFeedback messages)
         {
-            if (!definition || !humanTrail || observations == null || observations.Length != 3 || trailWaypoints == null || trailWaypoints.Length < 2 || !firstTablet || firstTablet.Index != 0 || !returnPoint || !schedule || !effects || !motion || rules == null || messages == null)
+            if (!definition || !humanTrail || observations == null || observations.Length != (controllerSize(messages)) || trailWaypoints == null || trailWaypoints.Length < 2 || !firstTablet || firstTablet.Index != 0 || !returnPoint || !schedule || !effects || !motion || rules == null || messages == null)
                 throw new InvalidOperationException("Exploration requires saved observations, trail/route, original T01 and return point.");
-            var sites = new bool[3]; foreach (var point in observations)
-            { if (!point || point.Owner != this || !point.CloseView || !point.AimTarget || !point.Approach || (int)point.Site < 0 || (int)point.Site >= sites.Length || sites[(int)point.Site]) throw new InvalidOperationException("Invalid observation composition."); sites[(int)point.Site] = true; }
+            var sites = new bool[observations.Length]; foreach (var point in observations)
+            { if (!point || point.Owner != this || !point.CloseView || !point.AimTarget || !point.Approach || (int)point.Site < 0 || (point.IsForest ? 3 : (int)point.Site) >= sites.Length || sites[point.IsForest ? 3 : (int)point.Site]) throw new InvalidOperationException("Invalid observation composition."); sites[point.IsForest ? 3 : (int)point.Site] = true; }
             foreach (var node in trailWaypoints) if (!node) throw new InvalidOperationException("Missing saved trail waypoint.");
             bool anyExtension = largeTrail || secondTablet || thirdTablet || (forestRoute != null && forestRoute.Length > 0) || (ritualRoute != null && ritualRoute.Length > 0);
             if (anyExtension)
@@ -157,20 +157,25 @@ namespace Demon.Slice
         {
             if (session == null || session.Descended) return;
             var site = point.Site; ObservationText text; string record;
-            switch (site)
+            switch (point.IsForest ? 3 : (int)site)
             {
-                case ObservationSite.Radio:
+                case 0:
                     text = definition.Radio; record = consequences.Rule.RadioSound == 1 ? text.Normal : text.Changed; break;
-                case ObservationSite.WindVane:
+                case 1:
                     text = definition.WindVane; record = tether.Rule.Locked ? text.Special : tether.MotionReady ? text.Changed : text.Normal; break;
+                case 3:
+                    text = new ObservationText { Title = "森林巡查", Normal = "林间小径畅通。留意每日出现的新脚印、遗留纸条和石板。" }; record = tether.MotionReady ? "雪地留下巨大的脚印。留意风铃，追逐时返回木屋。" : text.Normal; break;
                 default:
                     text = definition.Lake; record = session.LakeSeal == 1 ? text.Normal : consequences.Rule.DemonLight == 1 ? text.Special : text.Changed; break;
             }
-            Log.Record(session.Clock.Day, site);
+            if (!point.IsForest) Log.Record(session.Clock.Day, site);
+            var main = (feedback as GameSceneController)?.Playthrough;
+            if (main) main.RecordObservation(point.IsForest ? 3 : (int)site);
             int minute = (int)session.Clock.MinuteOfDay;
             feedback.ReadDocument(text.Title + "\n观察时刻：D" + session.Clock.Day + " " + (minute / 60).ToString("00") + ":" + (minute % 60).ToString("00") + "\n\n" + record + "\n\nEsc 放下记录。", point.CloseView);
-            feedback.SetMessage("观察已记录。日常检查为可选内容，可以自由睡到次日。");
+            feedback.SetMessage(main ? "今日巡查已记录。完成全部关键事项并入夜后才能睡觉。" : "观察已记录。日常检查为可选内容，可以自由睡到次日。");
         }
+        static int controllerSize(ISceneFeedback messages) => messages is GameSceneController c && c.Playthrough ? 4 : 3;
         void OnDestroy()
         {
             if (session == null || session == null) return;

@@ -3,11 +3,12 @@ using Demon.Slice.Domain;
 using UnityEngine;
 namespace Demon.Slice
 {
-    public sealed class WorldAttributeConsequences : MonoBehaviour
+    public sealed partial class WorldAttributeConsequences : MonoBehaviour
     {
         [Header("Transferable broadcast; change this clip once for both emitters")]
         [SerializeField] AudioClip broadcastClip;
         [SerializeField] AudioClip staticClip;
+        [SerializeField] AudioClip mainRouteHowl;
         [Header("Saved emitters own volume, distance and spatialization")]
         [SerializeField] AudioSource radioBroadcast;
         [SerializeField] AudioSource radioStatic;
@@ -53,7 +54,7 @@ namespace Demon.Slice
         void LateUpdate() { if (world && Rule != null) ApplyPresentation(); }
         void ApplyPresentation()
         {
-            bool above = world.Presentation.ExpectedSunAboveHorizon;
+            bool above = world.Presentation.ExpectedSunAboveHorizon || (world.Playthrough && Rule.SunLight == 0);
             bool lost = Rule.SunLight == 0;
             solarDisk.sharedMaterial = lost ? emptySolarMaterial : normalSolarMaterial;
             solarDisk.gameObject.SetActive(above); whiteRim.SetActive(above && lost);
@@ -64,6 +65,8 @@ namespace Demon.Slice
             if (!atRadio && radioBroadcast.isPlaying) parkedSample = radioBroadcast.timeSamples;
             if (!atDemon && demonBroadcast.isPlaying) parkedSample = demonBroadcast.timeSamples;
             SetLoop(radioBroadcast, atRadio, parkedSample); SetLoop(demonBroadcast, atDemon, parkedSample);
+            AudioClip noise = world.Playthrough && !atRadio && mainRouteHowl ? mainRouteHowl : staticClip;
+            if (radioStatic.clip != noise) { radioStatic.Stop(); radioStatic.clip = noise; }
             SetLoop(radioStatic, true, 0); // Device/environment noise is not the transferable broadcast.
         }
         static void SetLoop(AudioSource source, bool play, int sample)

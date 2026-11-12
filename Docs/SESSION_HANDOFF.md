@@ -1,28 +1,36 @@
 # Session Handoff
-Updated: 2026-11-07 Asia/Shanghai
-Completed task: [TASK-022 天数快捷菜单](Tasks/TASK-022-day-jump-menu.md)。整合场景历史见 [TASK-020](Tasks/TASK-020-snow-gameplay-integration.md)、[TASK-021](Tasks/TASK-021-hierarchy-recovery.md)。
+Updated: 2026-11-11 Asia/Shanghai
+Active tasks: [TASK-024 格子背包/左键手电/两针时钟](Tasks/TASK-024-inventory-flashlight-clock.md) done；父任务[TASK-023 完整流程](Tasks/TASK-023-complete-playthrough-plan.md) awaiting verification。
 Repository/Unity project: D:/Unity/Projects/Demon
-功能发布提交: main@487c8942008c886e7494cdb433abb311a9c50ff4。已推送 origin/main，服务器返回同一 SHA。后续发布记录的文档提交见 Git 最新历史。
+Branch and HEAD: main@b31abc5c65524662a4448b4e0117d486da1d1fa7；本轮未提交、未推送。
 
 ## 当前状态
-- 雪地试玩入口 Assets/Demon/Scenes/DemonNineDay_Art.unity。层级按00–06分组，点位调整见 ARCHITECTURE 第20节。Terrain、导航、原九天场景及构建入口未因本轮菜单修改。
-- 菜单位于 00_系统与界面/SliceHUD/DayJumpMenu_天数快捷菜单，F8开关、1–9跳天、0到D8夜间、Esc关闭。鼠标按钮同样可选。D9直接进入零点终局。
-- 用户确认按完整路线补齐之前各天，目标当天留待体验。跳转回到开局位置；D8晨间有T05监听和T06，T07仍待当晚拾取，D8夜间入口可直接开始拾取。可回退、重复切换、结局后F8或R重来。
-- 最终使用 GameSceneController.Restart 重建玩法会话，各模块配对解绑/重置自身状态，CompletedDayReplay沿现有规则/交互补齐。保留环境、字体、UI对象，不反复卸载地图。原整图异步重载曾触发GPUResidentDrawer/ObjectDispatcher原生崩溃，已放弃，不能恢复为最终实现。调查及两份日志见TASK-022。
-- 菜单位置/样式在 MenuPanel_菜单面板/Card_菜单布局调整。toggleKey和availableInPlayer在DayJumpMenu Inspector调整；改热键同步改提示文案。详细结构见ARCHITECTURE第21节。
 
-## 验证
-- 最新原地重置版两轮逐天切换通过。最终含所有日期、D8夜、回退/重复D9、R回D1、旧时钟事件隔离、监听文字重绑、拾取次数清理、暂停/输入隔离及拾取恢复。没有再次崩溃。
-- 81项EditMode规则通过，0失败、0跳过。原九天正常分支与全睡眠分支通过。菜单RectTransform临时修改、保存重开及恢复通过，保存引用重开检查和截图目视检查通过。
-- 原2870份场景记录保留，新增147份UI相关记录；原记录仅HUD子节点及字体绑定改变。源码/文档与本轮新增UI空白检查通过，全局diff check仍有开工前灯光m_Name尾随空格，原记录保持不变，已记录证据。
-- Logs/DemonCheckpoints/task022-day-jump-20261107 保存开工/完工场景、最终JSON/XML、菜单截图、对象对比和崩溃调查。当前已回到Art场景并退出Play Mode。
-- 人工连续九天键鼠游玩及独立Windows构建本轮未进行，仍沿TASK-020安排。
+- 主场景 `Assets/Demon/Scenes/DemonNineDay_Art.unity` 已接入完整九天流程；设计见GAME_SPEC，当前模块/资产见ARCHITECTURE第22节。
+- TASK-024新增：主线左键点击切换手电，松开保持、再点关闭，右键不改变；菜单/谜题点击隔离；当天重试还原开关。旧机制切片保留其原输入。
+- 背包改为保存的24格（6列×4行）、独立格子/选中状态与右侧滚动正文；纸条/石板/道具各占一格，收录去重，超出初始格数克隆保存模板扩展，不设容量。Tab/Esc开关、暂停规则保留。
+- 挂钟SecondHand及子Hand已用Editor API删除，FinaleSequence接受空秒针；时针/分针和午夜导演保留。
+- 时间流速编辑 `Assets/Demon/Data/CompletePlaythrough/MainRouteSettings.asset` → Real Seconds Per Day，当前720现实秒/游戏24小时。数值越小越快；360为2倍速度，1440为一半。08:00到午夜为全天2/3，当前约现实8分钟。已构建程序需重新构建才采用之后的资产修改。
+- 记录正文在MainRouteDefinition.asset；主线独立MainRouteBeam.asset编辑光束配置/提示。UI在 `00_系统与界面/SliceHUD/CompletePlaythrough_完整流程界面/Journal_背包记录`，格子尺寸/列数/间距在GridViewport/GridContent的GridLayoutGroup调整，溢出模板SlotTemplate可编辑。迁移工具再次执行只验证，不覆盖Inspector后续修改。
+- 最新Windows64包 `Builds/WindowsCompletePlaythrough/Demon.exe`（task024-windows-build成功，总2970828058字节），入口Art；须保留完整输出目录。已实际启动查看雪地、中文任务、左键提示和时钟，无托管异常。本轮自启测试程序已关闭；用户已有Unity Editor保留在编辑状态。
+
+## 验证与剩余项
+
+- task024-rules：89 EditMode通过，0失败/0跳过。
+- task024-grid-editability：实际InputSystem鼠标点击纸条格显示其正文，空24格/30物品溢出与去重，关闭按钮不触发手电，左键开/释放保持/再点关、右键无效、开关快照恢复，两针挂钟与原主线集成通过。隔离测试UI设备后恢复原设备过滤。
+- 格子间距临时8→6，保存重开并在运行中采用；随后恢复8；纸条/任务列表布局/D3速度也均恢复。恢复说明、规则XML、JSON和截图保存在 `Logs/DemonCheckpoints/task024-inventory-controls-20261111/`。
+- task024-ending-route：D1–D9主线组件路线、各日失败重试、两次交换和结局通过。TASK-023已有真实独立包D1自然午夜缺项失败与鼠标重试结果继续保留。
+- TASK-023仍未完成的人工验收：无F8/传送/专用倍率的实际键鼠D1–D9连续通关、物理路线与日长节奏、完整音效和分辨率矩阵。TASK-024输入/背包行为来自Unity测试设备/uGUI真实事件，不冒称重新做完Windows实体键鼠全链。
+- Windows原导航初始化、GaussianDepthOfField提示仍有，未为本次修改隐藏或抑制；其影响见父任务。新包启动日志和观察范围见证据目录standalone-startup.json。
 
 ## 工作树与保护边界
-- 本次发布37份文件，包括此前雪地场景/导航/分组/挡雪修复、独立SnowIntegration数据、SnowBlocker层、菜单及流程重置代码与文档。恢复了本轮临时构建列表追加及TimeManager自动序列化迁移。
-- ProjectSettings/ProjectSettings.asset、UnityConnectSettings.asset 的本机差异，以及 Assets/_Recovery、Snow-main 仍留本地，未纳入提交。新增脚本和资源的meta一并提交，未重新生成既有GUID。
-- Git LFS fsck通过。暂存导航数据与磁盘逐字节相同，新增场景引用均在跟踪资产或已锁定Unity包中解析。本机两份设置的SHA256在提交前后相同。
 
-## 下一步
-1. 用户可在Art场景Play后F8选天试玩。若继续调整布局，沿保存Hierarchy父组移动；改障碍需检查玩家通行与重新烘焙导航。
-2. 后续整体验收从D1连续键鼠到D9，再制作Windows包。当前功能已按用户授权发布，继续开发以本次提交为基线。
+- TASK-023未提交实现全部保留。TASK-024开工快照 `Logs/DemonCheckpoints/task024-before-inventory-controls-20261111`，原dirty现场先留副本保存，未重载覆盖。以live-before-grid首份副本核对：3242→3782条场景记录；仅删除秒针父子对应6条记录，原3D物体布局不变。UI阅读区/关闭按钮按本轮意图调整。
+- 开工前ProjectSettings全部恢复为本轮基线字节，_Recovery和Snow-main保留。7份供应商材质、构建预加载项和TimeManager自动迁移逐项审计备份后撤回；不能整仓reset/clean。
+- 原脚本meta未变，新资产无缺meta，git diff --check通过。最终审计在 `final-integrity.json`；场景/设置初查在asset-integrity.json，设置恢复后的结果以final-integrity为准。
+
+## Resume here
+
+1. 用户可从上述exe或Art场景测试本轮修改；若继续做完整九天人工验收，沿TASK-023剩余矩阵记录实际结果。
+2. 当前Editor已打开，不启动竞争实例；仍使用现有EditorRequestRunner，新增complete-inventory-controls（首次迁移/之后只验证）和complete-inventory-validate。
+3. 仅修复观察到的问题后重跑相关检查/重建，保护现有未提交场景、资产、设置和用户现场；父任务全部验收通过前不标done。

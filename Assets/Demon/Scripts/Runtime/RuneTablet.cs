@@ -34,7 +34,7 @@ namespace Demon.Slice
                 throw new System.InvalidOperationException("Tablet requires an anchor and nine saved slots.");
             if (bound && board != null) board.Changed -= Refresh;
             bound = false;
-            if (authoredLineMaterials == null)
+            if (authoredLineMaterials == null || authoredLineMaterials.Length != lines.Length)
             {
                 authoredLineMaterials = new Material[lines.Length];
                 for (int i = 0; i < lines.Length; i++) authoredLineMaterials[i] = lines[i].sharedMaterial;

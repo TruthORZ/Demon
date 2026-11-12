@@ -51,7 +51,7 @@ namespace Demon.Slice
 
         public void Initialize(GameSceneController controller, WorldPresentation visuals)
         {
-            if (!clockView || !hourHand || !minuteHand || !secondHand || !lakeOpenGlow || !tabletPulse || !sequenceAudio)
+            if (!clockView || !hourHand || !minuteHand || !lakeOpenGlow || !tabletPulse || !sequenceAudio)
                 throw new InvalidOperationException("Finale requires saved clock, views, light and audio references.");
             world = controller; presentation = visuals;
             phase = Phase.Idle; elapsed = 0; countdownStart = 0; lastSecond = -1; sequenceAudio.Stop();
@@ -122,7 +122,7 @@ namespace Demon.Slice
             double minute = world.Session.Clock.MinuteOfDay;
             hourHand.localRotation = Quaternion.Euler(0, 0, -(float)(minute % 720) / 2);
             minuteHand.localRotation = Quaternion.Euler(0, 0, -(float)(minute % 60) * 6);
-            secondHand.localRotation = Quaternion.Euler(0, 0, -(float)(minute % 1) * 360);
+            if (secondHand) secondHand.localRotation = Quaternion.Euler(0, 0, -(float)(minute % 1) * 360);
             bool lightReady = world.Consequences && world.Consequences.Rule != null ? world.Consequences.Rule.DemonLight == 1 : world.Session.Clock.Day >= 7;
             lakeOpenGlow.SetActive(world.Session.LakeSeal == 0 && lightReady);
             tabletPulse.intensity = phase == Phase.MidnightHold || phase == Phase.Box ?

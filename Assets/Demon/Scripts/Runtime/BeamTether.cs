@@ -20,6 +20,8 @@ namespace Demon.Slice
         PlayerController player;
         CipherBox cipher;
         int motionDay;
+        CompletePlaythrough main;
+        public bool HasLamp => main ? main.HasFlashlight : Equipped;
         public int MotionDay => motionDay;
         public StableBeamMotion Rule { get; private set; }
         public BeamDefinition Definition => definition;
@@ -32,6 +34,8 @@ namespace Demon.Slice
         public bool VaneCanMove => !MotionReady || (Rule != null && Rule.VaneMotion == 1);
         public bool ProxyCanTravel => session != null && !session.Descended && MotionReady;
         public bool BeamOn { get; private set; }
+        public bool LampSwitchedOn { get; private set; }
+        internal void RestoreLampSwitch(bool value) => LampSwitchedOn = value;
         public bool TargetVisible => targetVisual && targetVisual.activeInHierarchy;
         public bool LightVisible => flashlight && flashlight.enabled;
         public bool ClearAim { get; private set; }
@@ -40,6 +44,7 @@ namespace Demon.Slice
             get
             {
                 if (!Equipped) return "";
+                if (main && !HasLamp) return "T06已取得。先回木屋桌边拾取手电筒，再使用光束牵制。";
                 if (Rule.Locked) return definition.LockedText;
                 if (ClearAim && BeamOn) return $"稳定照射 {Rule.StableSeconds:0.0} / {definition.StableSeconds:0.0} 秒\n保持光束跟随雪痕区域。";
                 return definition.ReadyText;
@@ -53,20 +58,23 @@ namespace Demon.Slice
             if (!definition || !aimRegion || !targetVisual || !vaneBlade || !flashlight || !beamLine || !flashlightBody || !targetGlow || !observationPoint || !tool || !listener || !actor || rules == null || firstMotionDay < 1 || firstMotionDay > 9)
                 throw new InvalidOperationException("T06 requires saved aim region, vane, flashlight, feedback and composition references.");
             if (definition.RangeMetres <= 0 || definition.RegionRadiusMetres <= 0) throw new InvalidOperationException("Beam range and region radius must be positive.");
-            Rule?.Release(); BeamOn = false; ClearAim = false;
+            Rule?.Release(); BeamOn = false; LampSwitchedOn = false; ClearAim = false;
             flashlightBody.SetActive(false); targetGlow.enabled = false;
-            session = rules; player = actor; cipher = tool; motionDay = firstMotionDay; Rule = new StableBeamMotion(definition.StableSeconds); SetLight(false);
+            session = rules; player = actor; cipher = tool; main = tool.World.Playthrough; motionDay = firstMotionDay; Rule = new StableBeamMotion(definition.StableSeconds); SetLight(false);
             targetVisual.SetActive(ProxyCanTravel);
         }
         void LateUpdate()
         {
             if (Rule == null || player.MenuOpen) return;
             bool exploring = player.CanUseTools && !session.Descended;
-            BeamOn = Equipped && exploring && Mouse.current != null && Mouse.current.rightButton.isPressed;
+            // The main route uses a latched switch. UI and close-view clicks cannot change it.
+            if (main && HasLamp && exploring && Mouse.current?.leftButton.wasPressedThisFrame == true)
+                LampSwitchedOn = !LampSwitchedOn;
+            BeamOn = HasLamp && exploring && (main ? LampSwitchedOn : Mouse.current != null && Mouse.current.rightButton.isPressed);
             ClearAim = ProxyCanTravel && CanSeeRegion();
-            Rule.Advance(BeamOn && ClearAim && MotionReady, Time.deltaTime);
+            Rule.Advance(BeamOn && Equipped && ClearAim && MotionReady, Time.deltaTime);
             targetVisual.SetActive(ProxyCanTravel);
-            flashlightBody.SetActive(Equipped && exploring);
+            flashlightBody.SetActive(HasLamp && exploring);
             SetLight(BeamOn);
             targetGlow.enabled = Rule.Locked;
             if (!session.Descended && VaneCanMove)
@@ -107,7 +115,7 @@ namespace Demon.Slice
         }
         void OnDisable()
         {
-            Rule?.Release(); BeamOn = false; ClearAim = false;
+            Rule?.Release(); BeamOn = false; LampSwitchedOn = false; ClearAim = false;
             if (flashlight) flashlight.enabled = false;
             if (beamLine) beamLine.enabled = false;
             if (flashlightBody) flashlightBody.SetActive(false);

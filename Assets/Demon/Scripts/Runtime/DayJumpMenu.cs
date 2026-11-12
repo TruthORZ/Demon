@@ -61,7 +61,7 @@ namespace Demon.Slice
 
         public void Open()
         {
-            if (open || loading || !world || world.Session == null) return;
+            if (open || loading || !world || world.Session == null || (world.Playthrough && world.Playthrough.BlocksMenu)) return;
             open = true;
             previousScale = Time.timeScale; previousAudioPause = AudioListener.pause;
             previousCursorLock = Cursor.lockState; previousCursorVisible = Cursor.visible;

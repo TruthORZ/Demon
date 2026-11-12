@@ -57,6 +57,28 @@ namespace Demon.Slice.Editor
                     throw new InvalidOperationException("Authoring requests cannot interrupt an existing Play session.");
                 switch (request.operation)
                 {
+                    case "complete-inventory-controls": Finish(request, true, CompletePlaythroughAuthoring.ApplyInventoryControls()); break;
+                    case "complete-inventory-validate": Finish(request, true, CompletePlaythroughAuthoring.ValidateInventoryControls()); break;
+                    case "complete-integration":
+                    case "complete-route-smoke":
+                    case "complete-smoke":
+                        DayJumpMenuAuthoring.OpenSaved();
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "complete-validate": Finish(request, true, CompletePlaythroughAuthoring.Validate()); break;
+                    case "complete-build": Finish(request, true, CompletePlaythroughAuthoring.Build()); break;
+                    case "complete-editability":
+                        CompletePlaythroughAuthoring.BeginEditability();
+                        SessionState.SetString(ActiveSmokeKey, JsonUtility.ToJson(request)); EditorApplication.EnterPlaymode(); break;
+                    case "complete-presentation": Finish(request, true, CompletePlaythroughAuthoring.CompletePresentation()); break;
+                    case "complete-finalize-content": Finish(request, true, CompletePlaythroughAuthoring.FinalizeRouteContent()); break;
+                    case "complete-reachability": Finish(request, true, CompletePlaythroughAuthoring.InspectReachability()); break;
+                    case "complete-repair-records": Finish(request, true, CompletePlaythroughAuthoring.RepairBlockedRecords()); break;
+                    case "complete-labels": Finish(request, true, CompletePlaythroughAuthoring.LabelPickups()); break;
+                    case "complete-save": Finish(request, true, CompletePlaythroughAuthoring.SaveCheckpoint()); break;
+                    case "complete-sky": Finish(request, true, CompletePlaythroughAuthoring.AddSky()); break;
+                    case "complete-content": Finish(request, true, CompletePlaythroughAuthoring.FinishContent()); break;
+                    case "complete-create": Finish(request, true, CompletePlaythroughAuthoring.Create()); break;
+                    case "complete-inspect": Finish(request, true, CompletePlaythroughAuthoring.Inspect()); break;
                     case "day-jump-inspect": Finish(request, true, DayJumpMenuAuthoring.Inspect()); break;
                     case "day-jump-input": Finish(request, true, DayJumpMenuAuthoring.RepairInput()); break;
                     case "day-jump-editability": Finish(request, true, DayJumpMenuAuthoring.ProbeEditability()); break;
@@ -282,7 +304,11 @@ namespace Demon.Slice.Editor
                 {
                     SessionState.EraseString(ActiveSmokeKey);
                     var request = JsonUtility.FromJson<Request>(json);
-                    if (request.operation == "day-jump-smoke")
+                    if (request.operation == "complete-integration" || request.operation == "complete-editability")
+                        activeRun = new CompletePlaythroughIntegrationRun((success, message) => Finish(request, success, message));
+                    else if (request.operation == "complete-smoke" || request.operation == "complete-route-smoke")
+                        activeRun = new CompletePlaythroughSmokeRun((success, message) => Finish(request, success, message), request.operation == "complete-route-smoke");
+                    else if (request.operation == "day-jump-smoke")
                         activeRun = new DayJumpMenuSmokeRun((success, message) => Finish(request, success, message));
                     else if (request.operation == "arch-runtime")
                         activeRun = new ArchitectureSmokeRun((success, message) => Finish(request, success, message));
@@ -328,6 +354,7 @@ namespace Demon.Slice.Editor
             if (state == PlayModeStateChange.EnteredEditMode)
             {
                 activeRun?.Cleanup(); activeRun = null;
+                CompletePlaythroughAuthoring.RestoreEditability();
                 ArchitectureRefactorChecks.RestoreProbe();
                 PreparationAuthoring.RestoreProbe(); SignalSearchAuthoring.RestoreProbe();
                 InvestigationAuthoring.RestoreProbe(); ExplorationAuthoring.RestoreProbe();

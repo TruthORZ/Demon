@@ -1,7 +1,7 @@
 using System;
 namespace Demon.Slice.Domain
 {
-    public enum ObservationSite { Radio, WindVane, Lake }
+    public enum ObservationSite { Radio = 0, WindVane = 1, Lake = 2 }
     public sealed class FirstDayInspectionLog
     {
         readonly bool[] observed = new bool[3];
