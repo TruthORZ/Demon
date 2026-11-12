@@ -10,7 +10,7 @@
 1. 打开该场景，Play。
 2. 按 **F8** 打开天数菜单，选 **第3天**（或按3）。D1/D2恶魔还没有运动能力，因此不会生成追踪脚印。
 3. 走出木屋，恶魔的 `SnowDisturbance_Target` 沿真实 NavMesh 追踪时，会在 Terrain 上交替留下大脚印。脚印与原踏雪音同一触发点，玩家移动不会留印。
-4. 旧脚印留在地面，默认35秒消退、最多48个。冻结/停步/暂停停止新增；跳天和Restart清除旧轨迹。
+4. 旧脚印留在地面，默认35秒消退、最多48个。冻结/停步/暂停停止新增；当天重试、跳天和Restart清除旧轨迹。
 
 Hierarchy 搜索 **Demon Terrain Footprints**，即可调整 `TerrainFootprintEmitter`：
 - `Footprint Size`：默认0.4×0.85米；`Lateral Offset`：左右各0.3米。
@@ -20,7 +20,7 @@ Hierarchy 搜索 **Demon Terrain Footprints**，即可调整 `TerrainFootprintEm
 
 代码关系：`ChaseController.Stepped(position, forward)` → `DemonFootprints` → `TerrainFootprintEmitter.StampAt`；`PursuitReset` → 清空脚印。追踪代码不引用贴花模块；只有适配器引用 `Demon.Slice`。若把通用Emitter导出到没有Demon代码的项目，排除DemonFootprints及DemonFootprintIntegration/Verification三个接入文件。
 
-本轮修改正式Art场景、`ChaseController.cs`和`Assets/Settings/PC_Renderer.asset`（增加Decal Feature）。仅关闭恶魔根下两个随移动漂移的 `SnowPrint_0/1` Renderer，保留原对象、导航、光束目标区域、风铃和D2静态人类脚印。GlobalSnow、玩家控制器、Terrain材质/数据与导航资产未改。
+本轮修改正式Art场景、`ChaseController.cs`和`Assets/Settings/PC_Renderer.asset`（增加Decal Feature）。已删除恶魔根下两个随移动漂移的 `SnowPrint_0/1` 占位对象，保留导航、光束目标区域、风铃和D2静态人类脚印。GlobalSnow、玩家控制器、Terrain材质/数据与导航资产未改。
 
 已通过实际场景追踪、左右交替、旧脚印固定、D1/玩家过滤、冻结/恢复、禁用追踪、暂停、Restart清除及渲染检查。可编辑尺寸已保存重开验证并恢复默认。证据在工程 `Logs/DemonCheckpoints/task023-footprints-20261112`。
 

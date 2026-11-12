@@ -404,7 +404,7 @@ TASK-024最新候选仍在同一Windows路径，构建报告2970828058字节；8
 
 `ChaseController.Stepped(Vector3 position, Vector3 forward)`在现有踏雪音实际触发点发布，`PursuitReset`在Initialize/Restart重置后发布。位于`Assets/SnowSystem/FootPrint/DemonFootprints.cs`的表现适配器订阅/解绑这两个事件，交替左右脚调用通用Emitter.StampAt；跳跃导航链接、极小位移、传送跳变和未命中指定Terrain过滤。Demon.Slice不依赖贴花程序集；通用Emitter仍不依赖Demon或GlobalSnow。
 
-正式场景的Emitter关闭Automatic Steps，脚印0.4×0.85米、左右偏移0.3米、寿命35秒、池上限48。步频由现有ChaseDefinition.FootstepSeconds控制，与声音共用时机。光束冻结/停步/暂停不发布步事件；会话重启清空旧轨迹。静态鞋印的世界位置不跟随恶魔。仅两个旧SnowPrint Renderer被关闭，目标根、导航、音源、风铃和T06可瞄准区域保留。
+正式场景的Emitter关闭Automatic Steps，脚印0.4×0.85米、左右偏移0.3米、寿命35秒、池上限48。步频由现有ChaseDefinition.FootstepSeconds控制，与声音共用时机。光束冻结/停步/暂停不发布步事件；会话重启和当天重试清空旧轨迹。静态鞋印的世界位置不跟随恶魔。两个旧 SnowPrint 移动占位对象已删除，目标根、导航、音源、风铃和T06可瞄准区域保留。
 
 PC_Renderer增加DBuffer/AlbedoNormal Decal Renderer Feature，保留原渲染模式和SSAO。地形使用原有URP Terrain材质；不替换TerrainData/材质、导航或GlobalSnow。贴花只模拟颜色和法线，没有真实高度变形。
 

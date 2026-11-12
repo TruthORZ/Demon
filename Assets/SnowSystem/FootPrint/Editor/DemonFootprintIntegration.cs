@@ -25,7 +25,17 @@ namespace StandaloneTerrainFootprints.Editor
             var terrains = UnityEngine.Object.FindObjectsByType<Terrain>();
             if (terrains.Length != 1) throw new InvalidOperationException("Expected the Art scene's single native Terrain.");
             var existing = UnityEngine.Object.FindObjectsByType<DemonFootprints>(FindObjectsInactive.Include);
-            if (existing.Length > 0) { Validate(); Debug.Log("Demon footprints already connected; saved tuning preserved."); return; }
+            if (existing.Length > 0)
+            {
+                if (RemoveOldPrints(world.Chase.Agent.transform))
+                {
+                    EditorSceneManager.MarkSceneDirty(scene);
+                    EditorSceneManager.SaveScene(scene);
+                    EditorSceneManager.OpenScene(ScenePath);
+                }
+                Validate();
+                return;
+            }
             var projector = AssetDatabase.LoadAssetAtPath<GameObject>(Generated + "/FootprintProjector.prefab");
             if (!projector) throw new InvalidOperationException("Create standalone footprint assets first.");
             var go = new GameObject("Demon Terrain Footprints");
@@ -46,20 +56,26 @@ namespace StandaloneTerrainFootprints.Editor
             emitter.drawDistance = 60;
             var adapter = go.AddComponent<DemonFootprints>();
             adapter.Configure(world.Chase, emitter);
-            foreach (string name in new[] { "SnowPrint_0", "SnowPrint_1" })
-            {
-                var oldPrint = world.Chase.Agent.transform.Find(name);
-                if (!oldPrint) throw new InvalidOperationException("Expected original moving print: " + name);
-                var renderer = oldPrint.GetComponent<Renderer>();
-                Undo.RecordObject(renderer, "Replace moving footprint placeholder");
-                renderer.enabled = false;
-            }
+            RemoveOldPrints(world.Chase.Agent.transform);
             AddRendererFeature();
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             AssetDatabase.SaveAssets();
             EditorSceneManager.OpenScene(ScenePath);
             Validate();
+        }
+
+        static bool RemoveOldPrints(Transform agent)
+        {
+            bool removed = false;
+            foreach (string name in new[] { "SnowPrint_0", "SnowPrint_1" })
+            {
+                var oldPrint = agent.Find(name);
+                if (!oldPrint) continue;
+                Undo.DestroyObjectImmediate(oldPrint.gameObject);
+                removed = true;
+            }
+            return removed;
         }
 
         static void AddRendererFeature()
@@ -102,7 +118,7 @@ namespace StandaloneTerrainFootprints.Editor
             var renderer = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(RendererPath);
             if (!renderer.rendererFeatures.Any(f => f is DecalRendererFeature && f.isActive)) throw new InvalidOperationException("Missing active decal feature.");
             foreach (string name in new[] { "SnowPrint_0", "SnowPrint_1" })
-                if (world.Chase.Agent.transform.Find(name).GetComponent<Renderer>().enabled) throw new InvalidOperationException("Moving print placeholder still enabled.");
+                if (world.Chase.Agent.transform.Find(name)) throw new InvalidOperationException("Obsolete moving print still present: " + name);
             Debug.Log("Demon footprints: Art scene references, demon-only attachment and renderer validated.");
         }
     }

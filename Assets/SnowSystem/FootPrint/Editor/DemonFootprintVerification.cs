@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.AI;
 
 namespace StandaloneTerrainFootprints.Editor
 {
@@ -14,7 +15,7 @@ namespace StandaloneTerrainFootprints.Editor
     public static class DemonFootprintVerification
     {
         const string Key = "DemonFootprintVerification";
-        const string Logs = "Logs/DemonCheckpoints/task023-footprints-20261112";
+        const string Logs = "Logs/DemonCheckpoints/task025-footprint-merge";
         static int lastFrame = -1;
         static double phaseStart;
         static int count;
@@ -94,6 +95,11 @@ namespace StandaloneTerrainFootprints.Editor
                     Require(emitter.TotalStamped == 0, "Player movement creates no prints.");
                     menu.JumpToDay(3);
                     Require(world.Session.Clock.Day == 3, "Existing day menu enters D3.");
+                    Next(11);
+                }
+                else if (phase == 11 && world.Chase.HasNavigation)
+                {
+                    PlacePlayerInSight(world);
                     Next(3);
                 }
                 else if (phase == 3)
@@ -148,6 +154,11 @@ namespace StandaloneTerrainFootprints.Editor
                 {
                     Require(emitter.TotalStamped == count, "Paused menu adds no footprints.");
                     menu.Close();
+                    Require(emitter.ActiveCount > 0, "D3 has a trail before retry.");
+                    world.Session.Clock.AdvanceTo(world.Session.Clock.NextMidnight);
+                    Require(world.Playthrough.Failed, "Incomplete D3 reaches the retry screen.");
+                    world.Playthrough.RetryDay();
+                    Require(world.Session.Clock.Day == 3 && !world.Playthrough.Failed && emitter.ActiveCount == 0, "Retry restores D3 and clears the old trail.");
                     menu.JumpToDay(1);
                     Require(emitter.ActiveCount == 0, "Actual session reset clears old demon trail.");
                     count = emitter.TotalStamped; Next(10);
@@ -162,6 +173,38 @@ namespace StandaloneTerrainFootprints.Editor
                 }
             }
             catch (Exception e) { Fail(e); }
+        }
+
+        static void PlacePlayerInSight(GameSceneController world)
+        {
+            var agent = world.Chase.Agent;
+            var body = world.Player.GetComponent<CharacterController>();
+            var mesh = NavMesh.CalculateTriangulation();
+            var terrain = UnityEngine.Object.FindAnyObjectByType<DemonFootprints>().Emitter.targetTerrain;
+            for (int i = 0; i < mesh.indices.Length; i += 3)
+            {
+                var start = (mesh.vertices[mesh.indices[i]] + mesh.vertices[mesh.indices[i + 1]] + mesh.vertices[mesh.indices[i + 2]]) / 3;
+                if (world.Playthrough.InsideCabin(start) || !OnTerrain(start, terrain)) continue;
+                for (int angle = 0; angle < 360; angle += 45)
+                {
+                    var point = start + Quaternion.Euler(0, angle, 0) * Vector3.forward * 15;
+                    if (!NavMesh.SamplePosition(point, out var hit, 4, agent.areaMask) || world.Playthrough.InsideCabin(hit.position)
+                        || !OnTerrain(hit.position, terrain) || NavMesh.Raycast(start, hit.position, out _, agent.areaMask)) continue;
+                    if (!agent.Warp(start)) continue;
+                    body.enabled = false;
+                    world.Player.transform.position = hit.position + Vector3.up * .15f;
+                    body.enabled = true;
+                    Physics.SyncTransforms();
+                    if (world.Chase.HasSightToPlayer()) return;
+                }
+            }
+            throw new InvalidOperationException("Could not place player on an outdoor chase route in sight of demon.");
+        }
+
+        static bool OnTerrain(Vector3 point, Terrain terrain)
+        {
+            return Physics.Raycast(point + Vector3.up, Vector3.down, out var hit, 2f, ~0, QueryTriggerInteraction.Ignore)
+                && hit.collider == terrain.GetComponent<TerrainCollider>();
         }
 
         static void Next(int phase) { SessionState.SetInt(Key, phase); phaseStart = EditorApplication.timeSinceStartup; }

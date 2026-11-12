@@ -55,6 +55,7 @@ namespace Demon.Slice
             replanAt = Time.time + saved.replan; stepAt = Time.time + saved.step; retreating = saved.retreat; Phase = saved.phase; tracking = saved.tracking; unseenSeconds = saved.unseen; laughAt = Time.time + saved.laugh;
             if (HasNavigation && saved.hasPath) { agent.isStopped = saved.stopped; agent.SetDestination(saved.destination); agent.velocity = saved.velocity; }
             else if (retreating) ChooseRetreat();
+            PursuitReset?.Invoke();
         }
     }
     public sealed partial class WorldPresentation

@@ -1,3 +1,9 @@
+# 当前交接 — 恶魔脚印清理
+
+更新于 2026-11-12（Asia/Shanghai）。主线基线为 GitHub 合并提交 8033386，父提交为 0685e21（main）和 d25a332（art）。经用户确认，最终场景保留这次合并后的布景和植被材质。清理范围、验证与复测步骤见 [TASK-025](Tasks/TASK-025-footprint-merge.md)。在正式场景按 F8 选 D3，走到木屋外并进入恶魔视线即可查看脚印。完整九天连续实体键鼠试玩仍属主线人工验收项。
+
+## 前次合并交接
+
 # Session Handoff — art/main integration
 Updated: 2026-11-12 Asia/Shanghai
 Repository: D:/MyProject/Demon
