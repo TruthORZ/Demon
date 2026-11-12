@@ -1,0 +1,2 @@
+FootprintDecal.shadergraph is a copy of the Decal graph shipped with Unity URP 17.6.0, under the included Unity Companion License notice.
+Scripts and procedural sole textures are new for this standalone module. No GlobalSnow source or artwork is copied or required.

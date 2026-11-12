@@ -350,3 +350,15 @@ DayJumpMenu 调用 GameSceneController.Restart，再由 CompletedDayReplay 从 D
 菜单打开保存/恢复 Time.timeScale、AudioListener.pause 与鼠标状态。PlayerController.MenuOpen 隔离移动/交互，关闭帧隔离 Esc；BeamTether/ChaseController 暂停期间不更新瞬时光束锁定/追近判定。RefreshClockState 和 RefreshPracticeProgress 是既有刷新逻辑的显式入口，不增加新的规则状态。菜单的 EventSystem 使用原有 InputSystem_Actions.inputactions 的已保存 UI 引用，中文标签加入 SceneFontBinding。
 
 显式 Editor 工具 DayJumpMenuAuthoring 仅对当前整合场景添加菜单，存在即拒绝覆盖。EditorRequestRunner 的 day-jump-inspect/create/input/hint/validate/editability/smoke 请求用于检查、创建、接线、保存重开、编辑性探针及回归。验证状态见 [TASK-022](Tasks/TASK-022-day-jump-menu.md)。
+
+## 22 恶魔追踪贴花脚印（TASK-023）
+
+当前工作副本位于 `D:/MyProject/Demon`，Unity 6000.6.0f1 / URP 17.6。正式入口仍为 `Assets/Demon/Scenes/DemonNineDay_Art.unity`。在GameSceneController/Chase所在对象下保存 `Demon Terrain Footprints`，显式绑定真实ChaseController和唯一原生Terrain。玩家不绑定Emitter；D2静态路线保持原样。
+
+`ChaseController.Stepped(Vector3 position, Vector3 forward)`在现有踏雪音实际触发点发布，`PursuitReset`在Initialize/Restart重置后发布。位于`Assets/SnowSystem/FootPrint/DemonFootprints.cs`的表现适配器订阅/解绑这两个事件，交替左右脚调用通用Emitter.StampAt；跳跃导航链接、极小位移、传送跳变和未命中指定Terrain过滤。Demon.Slice不依赖贴花程序集；通用Emitter仍不依赖Demon或GlobalSnow。
+
+正式场景的Emitter关闭Automatic Steps，脚印0.4×0.85米、左右偏移0.3米、寿命35秒、池上限48。步频由现有ChaseDefinition.FootstepSeconds控制，与声音共用时机。光束冻结/停步/暂停不发布步事件；会话重启清空旧轨迹。静态鞋印的世界位置不跟随恶魔。仅两个旧SnowPrint Renderer被关闭，目标根、导航、音源、风铃和T06可瞄准区域保留。
+
+PC_Renderer增加DBuffer/AlbedoNormal Decal Renderer Feature，保留原渲染模式和SSAO。地形使用原有URP Terrain材质；不替换TerrainData/材质、导航或GlobalSnow。贴花只模拟颜色和法线，没有真实高度变形。
+
+Editor工具`DemonFootprintIntegration.Connect`显式接入Art场景，存在则验证并保留调参。`DemonFootprintVerification.RunBatch`包含首次接线、尺寸保存重开和实际追踪验证；`VerifyExistingBatch`只加载已有接线并运行验证，不保存场景。批处理入口需在同工程没有Unity实例时使用。当前验证与边界见 [TASK-023](Tasks/TASK-023-demon-footprint-decals.md)，使用说明见[FootPrint README](../Assets/SnowSystem/FootPrint/README.md)。

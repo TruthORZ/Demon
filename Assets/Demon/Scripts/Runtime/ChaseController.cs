@@ -26,6 +26,9 @@ namespace Demon.Slice
         public ChasePhase Phase { get; private set; }
         public NavMeshAgent Agent => agent;
         public ChaseDefinition Definition => definition;
+        // Presentation subscribes to the actual chase step; navigation has no decal dependency.
+        public event Action<Vector3, Vector3> Stepped;
+        public event Action PursuitReset;
         public bool HasNavigation => agent && agent.isActiveAndEnabled && agent.isOnNavMesh;
         public void Configure(ChaseDefinition data, NavMeshAgent actor, Transform[] points, AudioSource audio, AudioClip clip)
         { definition = data; agent = actor; retreatPoints = points; footstepSource = audio; footstepClip = clip; }
@@ -48,6 +51,7 @@ namespace Demon.Slice
             replanAt = stepAt = missingNavSeconds = 0; retreating = false; Phase = ChasePhase.Dormant;
             session = rules; player = actor; tether = motion; feedback = messages; Gate = new ClosePassGate(definition.ClosePassMetres, definition.ClosePassCooldownSeconds);
             agent.speed = definition.MetresPerSecond; agent.acceleration = definition.AccelerationMetresPerSecondSquared; agent.angularSpeed = definition.AngularDegreesPerSecond;
+            PursuitReset?.Invoke();
         }
         void Update()
         {
@@ -94,7 +98,11 @@ namespace Demon.Slice
                 }
             }
             if (!agent.isStopped && agent.velocity.sqrMagnitude > .05f && Time.time >= stepAt)
-            { footstepSource.PlayOneShot(footstepClip); stepAt = Time.time + definition.FootstepSeconds; }
+            {
+                footstepSource.PlayOneShot(footstepClip);
+                stepAt = Time.time + definition.FootstepSeconds;
+                Stepped?.Invoke(agent.transform.position, agent.velocity.normalized);
+            }
         }
         bool ChooseRetreat()
         {

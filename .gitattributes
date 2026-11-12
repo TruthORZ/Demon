@@ -67,3 +67,6 @@ Assets/Demon/Data/SnowIntegrationNavigation.asset binary
 
 # TerrainData is native binary; preserve embedded CRLF bytes.
 "Assets/ImportAsset/SnowEnviroment/Nature Pack - Winter Environment/Scenes/Demo_Scene_02.asset" binary
+
+# Preserve native binary footprint test terrain.
+Assets/SnowSystem/FootPrint/Generated/FootprintTestTerrain.asset binary

@@ -1,28 +1,29 @@
+# Art branch snapshot (2026-11-12)
+User requested publishing all current saved changes to art at git@github.com:TruthORZ/Demon.git. Created art from local b31abc5c65524662a4448b4e0117d486da1d1fa7, including current Art scene/layout and two vegetation material edits, footprint sources/resources/integration, PC renderer and existing task documentation. Remote main at inspection is 0685e2146673b2cd3f22bb5344e823b4a7659dfc; that newer gameplay commit is not merged into this art snapshot.
+Added an exact binary attribute for FootprintTestTerrain.asset so Git preserves its native bytes; new PNG files use existing LFS rules. All new footprint assets/folders have matching metadata. Existing scene/material serialization contains 63 trailing-whitespace diagnostics; retained the user's saved content. No Unity runtime/build checks were rerun for this publishing task. TASK-023 results below describe earlier checks, before subsequent scene/material edits, and do not independently validate today's complete snapshot.
+Continue art work in this same directory. Use git status and git log -1 for actual branch/commit state; remote push success is verified separately in dispatch/handoffs/05_DEMON-ART-PUSH-20261112.json in the Snow dispatch workspace.
+
+---
 # Session Handoff
-Updated: 2026-11-07 Asia/Shanghai
-Completed task: [TASK-022 天数快捷菜单](Tasks/TASK-022-day-jump-menu.md)。整合场景历史见 [TASK-020](Tasks/TASK-020-snow-gameplay-integration.md)、[TASK-021](Tasks/TASK-021-hierarchy-recovery.md)。
-Repository/Unity project: D:/Unity/Projects/Demon
-功能发布提交: main@487c8942008c886e7494cdb433abb311a9c50ff4。已推送 origin/main，服务器返回同一 SHA。后续发布记录的文档提交见 Git 最新历史。
+Updated: 2026-11-12 Asia/Shanghai
+Completed task: [TASK-023 恶魔追踪贴花脚印](Tasks/TASK-023-demon-footprint-decals.md)。此前天数菜单与雪地整合见[TASK-022](Tasks/TASK-022-day-jump-menu.md)、[TASK-020](Tasks/TASK-020-snow-gameplay-integration.md)。
+Repository/Unity project: D:/MyProject/Demon
+Branch/HEAD: main@b31abc5c65524662a4448b4e0117d486da1d1fa7。此次未提交/push。
 
 ## 当前状态
-- 雪地试玩入口 Assets/Demon/Scenes/DemonNineDay_Art.unity。层级按00–06分组，点位调整见 ARCHITECTURE 第20节。Terrain、导航、原九天场景及构建入口未因本轮菜单修改。
-- 菜单位于 00_系统与界面/SliceHUD/DayJumpMenu_天数快捷菜单，F8开关、1–9跳天、0到D8夜间、Esc关闭。鼠标按钮同样可选。D9直接进入零点终局。
-- 用户确认按完整路线补齐之前各天，目标当天留待体验。跳转回到开局位置；D8晨间有T05监听和T06，T07仍待当晚拾取，D8夜间入口可直接开始拾取。可回退、重复切换、结局后F8或R重来。
-- 最终使用 GameSceneController.Restart 重建玩法会话，各模块配对解绑/重置自身状态，CompletedDayReplay沿现有规则/交互补齐。保留环境、字体、UI对象，不反复卸载地图。原整图异步重载曾触发GPUResidentDrawer/ObjectDispatcher原生崩溃，已放弃，不能恢复为最终实现。调查及两份日志见TASK-022。
-- 菜单位置/样式在 MenuPanel_菜单面板/Card_菜单布局调整。toggleKey和availableInPlayer在DayJumpMenu Inspector调整；改热键同步改提示文案。详细结构见ARCHITECTURE第21节。
+- 正式入口 Assets/Demon/Scenes/DemonNineDay_Art.unity。恶魔实际NavMesh追逐已接入Terrain贴花脚印；玩家不生成动态脚印。
+- `ChaseController.Stepped`沿用实际踏雪音时机，`DemonFootprints`适配器交替落印；`PursuitReset`清除旧轨迹。D1/D2不生成，D3起追逐；冻结/停步/菜单暂停不新增。
+- `Demon Terrain Footprints`是保存场景对象；材质、贴图、预制体在Assets/SnowSystem/FootPrint。默认.4×.85米、偏移.3米、35秒、48个池；Automatic Steps保持关闭。步频在现有ChaseDefinition.FootstepSeconds调节。
+- PC_Renderer新增DBuffer AlbedoNormal Decal Feature；原SSAO及渲染模式保留。GlobalSnow、玩家控制器、Terrain材质/数据、导航资产、旧练习场景未改。仅关闭恶魔两个移动的SnowPrint Renderer，光束瞄准区域和D2静态路线保留。
+- F8天数菜单仍使用GameSceneController.Restart/CompletedDayReplay流程，勿恢复整图异步重载方案。历史原因见TASK-022。
 
 ## 验证
-- 最新原地重置版两轮逐天切换通过。最终含所有日期、D8夜、回退/重复D9、R回D1、旧时钟事件隔离、监听文字重绑、拾取次数清理、暂停/输入隔离及拾取恢复。没有再次崩溃。
-- 81项EditMode规则通过，0失败、0跳过。原九天正常分支与全睡眠分支通过。菜单RectTransform临时修改、保存重开及恢复通过，保存引用重开检查和截图目视检查通过。
-- 原2870份场景记录保留，新增147份UI相关记录；原记录仅HUD子节点及字体绑定改变。源码/文档与本轮新增UI空白检查通过，全局diff check仍有开工前灯光m_Name尾随空格，原记录保持不变，已记录证据。
-- Logs/DemonCheckpoints/task022-day-jump-20261107 保存开工/完工场景、最终JSON/XML、菜单截图、对象对比和崩溃调查。当前已回到Art场景并退出Play Mode。
-- 人工连续九天键鼠游玩及独立Windows构建本轮未进行，仍沿TASK-020安排。
+- 两次Unity6000.6.0f1/URP17.6/DX11实际Art场景Play验证通过；最终保存版本通过引用重载、实际追逐、左右交替、位置固定、冻结/恢复、停用、暂停和重开清理检查。
+- 目视检查有/无贴花实际渲染截图；Shader编译无错误。尺寸参数保存重开并恢复默认通过。81项EditMode规则全部通过，0失败/跳过；git diff --check通过。
+- 证据：Logs/DemonCheckpoints/task023-footprints-20261112。冻结验证调用生产StableBeamMotion并临时关闭输入轮询；本轮未进行完整人工键鼠九天游玩或Windows构建。
+- 清理Unity自动场景空白改动；原有记录仅三项必要改变，新增四项记录。Renderer仅保留贴花所需差异；TimeManager自动迁移恢复。
 
-## 工作树与保护边界
-- 本次发布37份文件，包括此前雪地场景/导航/分组/挡雪修复、独立SnowIntegration数据、SnowBlocker层、菜单及流程重置代码与文档。恢复了本轮临时构建列表追加及TimeManager自动序列化迁移。
-- ProjectSettings/ProjectSettings.asset、UnityConnectSettings.asset 的本机差异，以及 Assets/_Recovery、Snow-main 仍留本地，未纳入提交。新增脚本和资源的meta一并提交，未重新生成既有GUID。
-- Git LFS fsck通过。暂存导航数据与磁盘逐字节相同，新增场景引用均在跟踪资产或已锁定Unity包中解析。本机两份设置的SHA256在提交前后相同。
-
-## 下一步
-1. 用户可在Art场景Play后F8选天试玩。若继续调整布局，沿保存Hierarchy父组移动；改障碍需检查玩家通行与重新烘焙导航。
-2. 后续整体验收从D1连续键鼠到D9，再制作Windows包。当前功能已按用户授权发布，继续开发以本次提交为基线。
+## 工作树和后续
+- 开工前仅FootPrint目录及meta为前一任务未跟踪成果，已保留。当前新增恶魔接入脚本/Editor工具，修改ChaseController、Art场景、PC_Renderer及相关Docs。
+- 使用说明：Assets/SnowSystem/FootPrint/README.md。运行Art场景后F8→第3天，走出木屋观察。
+- 后续若美术调脚型，直接替换FootPrint/Generated的左右脚遮罩和法线；贴花为颜色/法线假凹陷，不修改地形高度。
