@@ -16,11 +16,17 @@ namespace Demon.Slice
         [SerializeField] GameObject failurePanel, journalPanel, openingPanel;
         [SerializeField] Button retryButton, journalClose, openingContinue, waitButton;
         [SerializeField] JournalInventory journalInventory;
+        [SerializeField] TabletInventoryView tabletViewer;
         [SerializeField] BoxCollider cabinSafeZone;
         [SerializeField] Transform cabinExit;
         [SerializeField] CabinDoorInteraction[] cabinDoors;
         [SerializeField] ParticleSystem snowfall;
+        [SerializeField] AudioSource morningMusic;
+        bool musicStarted;
         [SerializeField] GameObject lakeFigure;
+        [SerializeField, Tooltip("Far, middle and near lake positions.")] Transform lakeFar, lakeMiddle, lakeNear;
+        [SerializeField, Min(1), Tooltip("Minutes between sightings.")] int sightingIntervalMinutes = 120;
+        [SerializeField, Min(1), Tooltip("Minutes per sighting.")] int sightingDurationMinutes = 30;
         [SerializeField] AudioSource cueAudio;
         [SerializeField] AudioClip cueClip;
         [SerializeField, Min(1)] float stormMultiplier = 2.5f;
@@ -68,12 +74,20 @@ namespace Demon.Slice
             Unbind(); ReleasePause(); world = owner;
             cueAudio.Stop(); noticeRemaining = 0; noticeSoundPending = false; currentNotice = null; noticeText.gameObject.SetActive(false);
             if (cabinDoors != null) foreach (var door in cabinDoors) door.ResetForSession();
+            if (tabletViewer)
+            {
+                tabletViewer.Close();
+                journalInventory.ItemClicked -= InspectInventoryTablet;
+                journalInventory.ItemClicked += InspectInventoryTablet;
+            }
             Failed = Waiting = opening = journalOpen = false; waited = false; checkpoint = null;
             Records = new RecordCollection(); Tasks = new DailyProgress(world.Session.Clock.Day); cues.Clear(); lastTasks = null;
             failurePanel.SetActive(false); journalPanel.SetActive(false); openingPanel.SetActive(false);
             pendingCheckpoint = false;
             boundClock = world.Session.Clock; boundClock.CanEnterDay = CanEnterDay; boundClock.DayEntered += EnteredDay; boundClock.Advanced += AfterAdvance;
             if (snowfall && snowRate == 0) snowRate = snowfall.emission.rateOverTimeMultiplier;
+            RefreshWeatherAndMusic();
+            RefreshLakeFigure();
             SyncProgress();
         }
         void Start()
@@ -106,7 +120,15 @@ namespace Demon.Slice
                 else if (world.Player.CanUseTools) OpenJournal();
                 return;
             }
-            if (journalOpen) { if (keyboard?.escapeKey.wasPressedThisFrame == true) CloseJournal(); return; }
+            if (journalOpen)
+            {
+                if (keyboard?.escapeKey.wasPressedThisFrame == true)
+                {
+                    if (tabletViewer && tabletViewer.IsOpen) tabletViewer.Close();
+                    else CloseJournal();
+                }
+                return;
+            }
             if (!world.Player.MenuOpen && !world.Finale.IsDirecting && !world.Session.Descended && world.Session.Clock.Day == 8 && world.Exploration.HandoverRead && InsideCabin(world.Player.transform.position) && !waited && keyboard?.tKey.wasPressedThisFrame == true)
                 WaitUntilNight();
             SyncProgress(); RefreshTasks();
@@ -124,11 +146,44 @@ namespace Demon.Slice
         {
             int day = world.Session.Clock.Day;
             bool storm = day == 1 && world.Session.Clock.MinuteOfDay >= definition.NightHour * 60;
-            if (snowfall) { var emission = snowfall.emission; emission.rateOverTimeMultiplier = snowRate * (storm ? stormMultiplier : 1); }
-            if (storm) Notice("storm", "我得赶紧回家。");
-            if (lakeFigure) lakeFigure.SetActive(day >= 3 && day < 9 && world.Session.LakeSeal == 0 && (day >= 7 || !world.Presentation.ExpectedSunAboveHorizon || storm));
+            RefreshWeatherAndMusic();
+            if (storm) Notice("storm", "I need to get back inside.");
+            RefreshLakeFigure();
             if (day >= 3 && day < 9 && world.Chase.Phase == ChaseController.ChasePhase.Pursuing && Vector3.Distance(world.Chase.Agent.transform.position, world.Player.transform.position) < definition.PursuitNoticeMetres)
-                Notice("first-pursuit", "快跑！");
+                Notice("first-pursuit", "Run!");
+        }
+        void RefreshWeatherAndMusic()
+        {
+            var clock = world.Session.Clock;
+            bool firstDay = clock.Day == 1;
+            bool snow = !firstDay || clock.MinuteOfDay >= definition.NightHour * 60;
+            if (snowfall)
+            {
+                var emission = snowfall.emission;
+                emission.rateOverTimeMultiplier = snow ? snowRate * (firstDay ? stormMultiplier : 1) : 0;
+                emission.enabled = snow;
+                if (!snow && snowfall.particleCount > 0) snowfall.Clear(true);
+                if (snow && !snowfall.isPlaying) snowfall.Play(true);
+            }
+            bool musicDue = clock.Day > 2 || (clock.Day == 2 && clock.MinuteOfDay >= world.Campaign.WakeHourFor(2) * 60);
+            if (morningMusic && musicDue != musicStarted)
+            {
+                if (musicDue) morningMusic.Play(); else morningMusic.Stop();
+                musicStarted = musicDue;
+            }
+        }
+        void RefreshLakeFigure()
+        {
+            if (!lakeFigure) return;
+            var clock = world.Session.Clock;
+            int day = clock.Day;
+            var anchor = day >= 7 ? lakeNear : day >= 5 ? lakeMiddle : lakeFar;
+            if (anchor) lakeFigure.transform.SetPositionAndRotation(anchor.position, anchor.rotation);
+            bool snowing = snowfall && snowfall.isEmitting && snowfall.emission.rateOverTimeMultiplier > 0;
+            bool sighting = clock.MinuteOfDay % Mathf.Max(1, sightingIntervalMinutes) < sightingDurationMinutes;
+            bool visible = day >= 3 && day < 9 && world.Session.LakeSeal == 0 &&
+                (day >= 7 || (sighting && (snowing || !world.Presentation.ExpectedSunAboveHorizon)));
+            if (lakeFigure.activeSelf != visible) lakeFigure.SetActive(visible);
         }
         public void Notice(string id, string text)
         {
@@ -138,14 +193,14 @@ namespace Demon.Slice
         void FinishOpening()
         {
             if (!opening) return;
-            opening = false; openingPanel.SetActive(false); ReleasePause(); Notice("arrival", "太冷了，我需要赶快进屋。");
+            opening = false; openingPanel.SetActive(false); ReleasePause(); Notice("arrival", "I can hardly feel my hands. Get inside.");
         }
         public void Record(string id) { if (Tasks.Record(id)) lastTasks = null; }
         public void RecordObservation(int site)
         {
             Record("inspect-" + (int)site);
-            if (site == 1 && world.Session.Clock.Day == 3) Notice("still-vane", "现在明明有风啊…");
-            if (world.Session.Clock.Day == 7) Notice("eternal-night", "太阳…等等，我似乎明白了什么…屋后的那个箱子…");
+            if (site == 1 && world.Session.Clock.Day == 3) Notice("still-vane", "But the wind is still blowing…");
+            if (world.Session.Clock.Day == 7) Notice("eternal-night", "The sun. That mark on the chest behind the cabin…");
         }
         void SyncProgress()
         {
@@ -154,7 +209,8 @@ namespace Demon.Slice
             { string id = "T0" + (i + 1); Records.Add(id); Record("tablet-" + (i + 1)); }
             if (world.Listening.Active) Record("listening");
             if (world.Cipher.Acquired) { Records.Add("T06"); Record("tablet-6"); }
-            if (world.Exploration.HandoverRead) Record("handover");
+            if (world.Exploration.SolarRead) Records.Add("solar-record");
+            if (world.Exploration.HandoverRead) { Records.Add("handover-record"); Record("handover"); }
             if (world.Retrieval.Progress.Acquired) { Records.Add("T07"); Record("retrieved"); }
             if (world.Retrieval.Progress.Placed) Record("placed");
             if (world.Session.Board.Frozen) Record("compiled");
@@ -163,28 +219,29 @@ namespace Demon.Slice
         {
             var entry = definition.Entry(id); if (entry == null) throw new InvalidOperationException("Unknown journal ID: " + id);
             Records.Add(id); if (id == "note-a") Record("note-a");
-            if (id == "flashlight") { world.SetMessage("手电筒已取得。点击鼠标左键开关照明；T06将解锁牵制能力。"); return; }
-            world.ReadDocument(entry.Title + "\n\n" + entry.Body + "\n\n已收入背包，Tab可重读。", view);
+            if (id == "flashlight") { world.SetMessage("Torch collected. Left click to switch it on."); return; }
+            world.ReadDocument(entry.Title + "\n\n" + entry.Body + "\n\nEsc · Put away", view);
         }
         public void RememberBoxRecord() => Records.Add("box-record");
         public bool RequestSleep()
         {
             SyncProgress();
             if (Failed || BlocksClock) return false;
-            if (world.Session.Clock.Day >= 8) { world.SetMessage("今天不能睡过交班与最后的封印。检查交接记录，等待夜间。"); return false; }
-            if (!Tasks.Complete(definition.Required(Tasks.Day))) { world.SetMessage("还有关键事项未完成：" + Missing()); return false; }
-            if (world.Session.Clock.MinuteOfDay < definition.NightHour * 60) { world.SetMessage("关键事项已完成，入夜后才能睡觉。"); return false; }
+            if (world.Session.Clock.Day >= 8) { world.SetMessage("My relief is due today. Check the handover book and wait for night."); return false; }
+            if (!Tasks.Complete(definition.Required(Tasks.Day))) { world.SetMessage("Still to enter in the watch book: " + Missing()); return false; }
+            if (world.Session.Clock.MinuteOfDay < definition.NightHour * 60) { world.SetMessage("It is still light. Rest after dark."); return false; }
             return true;
         }
         bool CanEnterDay(int day)
         {
             SyncProgress();
             if (!Failed && Tasks.Day == world.Session.Clock.Day && Tasks.Complete(definition.Required(Tasks.Day))) return true;
-            Fail("一天结束，关键事项尚未完成。\n" + Missing()); return false;
+            Fail("The watch ended with entries missing.\n" + Missing()); return false;
         }
         void AfterAdvance()
         {
             if (restoring || world.Session.Descended) return;
+            world.Chase.RefreshMorningSpawn(world.Campaign.WakeHourFor(world.Session.Clock.Day));
             if (pendingCheckpoint) { pendingCheckpoint = false; CaptureDayStart(); }
         }
         void EnteredDay(int day)
@@ -195,11 +252,11 @@ namespace Demon.Slice
         {
             switch (id)
             {
-                case "inspect-0": return "检查电台"; case "inspect-1": return "检查风向标"; case "inspect-2": return "湖畔巡查"; case "inspect-3": return "森林巡查";
-                case "note-a": return "阅读值守纸条"; case "box-a": return "检查屋后箱A"; case "box-b": return "检查屋后箱B";
-                case "listening": return "补全T05监听"; case "handover": return "检查交接记录"; case "wait": return "在屋内等待夜间";
-                case "retrieved": return "取得T07"; case "placed": return "带回并放置T07"; case "compiled": return "补全T07"; case "box-record": return "打开箱B并读完记录";
-                default: return id.StartsWith("tablet-") ? "发现T0" + id.Substring(7) : id;
+                case "inspect-0": return "Check the radio"; case "inspect-1": return "Check the vane"; case "inspect-2": return "Walk the shore"; case "inspect-3": return "Patrol the woods";
+                case "note-a": return "Read the watch orders"; case "box-a": return "Inspect Chest A"; case "box-b": return "Inspect Chest B";
+                case "listening": return "Mend the listening tablet"; case "handover": return "Read the handover book"; case "wait": return "Wait indoors for nightfall";
+                case "retrieved": return "Retrieve Tablet VII"; case "placed": return "Return Tablet VII to its stand"; case "compiled": return "Mend Tablet VII"; case "box-record": return world.Session.BoxSeal == 0 || Tasks.Contains("box-record") ? "Read the letter in Chest B" : "Check the lake seal";
+                default: return id.StartsWith("tablet-") ? "Find T0" + id.Substring(7) : id;
             }
         }
         string Missing()
@@ -209,21 +266,21 @@ namespace Demon.Slice
             bool show = !world.Player.Reading && !world.Finale.IsDirecting && !world.Session.Descended;
             taskText.gameObject.SetActive(show);
             if (lastTasks != null) return;
-            var text = new StringBuilder("今日关键事项\n");
+            var text = new StringBuilder("Watch book\n");
             foreach (string id in definition.Required(Tasks.Day)) text.Append(Tasks.Contains(id) ? "✓ " : "□ ").Append(TaskLabel(id)).Append('\n');
-            text.Append("Tab 背包"); if (Tasks.Day == 8 && !waited) text.Append("  T 屋内等待");
+            text.Append("Tab · Inventory"); if (Tasks.Day == 8 && !waited) text.Append("   T · Wait inside");
             string value = text.ToString(); if (value != lastTasks) { taskText.text = value; lastTasks = value; }
         }
         public void WaitUntilNight()
         {
             if (BlocksClock || world.Player.MenuOpen || world.Session.Clock.Day != 8 || !world.Exploration.HandoverRead || !InsideCabin(world.Player.transform.position) || waited) return;
-            world.Player.ReturnToExploration(); Waiting = true; elapsed = 0; openingContinue.gameObject.SetActive(false); openingText.text = "等待交班……\n\n没有人来。"; openingPanel.SetActive(true); Pause();
+            world.Player.ReturnToExploration(); Waiting = true; elapsed = 0; openingContinue.gameObject.SetActive(false); openingText.text = "Waiting for relief…\n\nNo one came."; openingPanel.SetActive(true); Pause();
         }
         void FinishWaiting()
         {
             Waiting = false; openingPanel.SetActive(false); openingContinue.gameObject.SetActive(true); ReleasePause(); waited = true; Record("wait");
             world.Session.Clock.AdvanceTo(Math.Max(world.Session.Clock.AbsoluteMinutes, 7 * GameClock.MinutesPerDay + world.Campaign.Definition.FinalTabletHour * 60));
-            world.Retrieval.RefreshPresentation(); Notice("night-arrival", "天已经黑了。去湖岸寻找最后一块石板。");
+            world.Retrieval.RefreshPresentation(); Notice("night-arrival", "Night has fallen. Search the shore for the last tablet.");
         }
         public void WaitForDebugReplay()
         {
@@ -239,16 +296,23 @@ namespace Demon.Slice
             foreach (string id in Records.Capture())
             {
                 var entry = definition.Entry(id);
-                if (entry != null) items.Add(new JournalInventory.Item(id, entry.Title, entry.Body, id.StartsWith("note-") ? "纸条" : "道具"));
+                if (entry != null) items.Add(new JournalInventory.Item(id, entry.Title, entry.Body, id == "T07" ? "Tablet" : id.StartsWith("note-") ? "Note" : "Equipment"));
                 else if (id.StartsWith("T0") && int.TryParse(id.Substring(1), out int index) && index <= 6)
-                    items.Add(new JournalInventory.Item(id, id + " 石板", world.Campaign.Definition.Tablets[index - 1].Record, "石板"));
-                else if (id == "box-record") items.Add(new JournalInventory.Item(id, "箱B记录", world.Settings.BoxText, "记录"));
+                    items.Add(new JournalInventory.Item(id, id + " tablet", world.Campaign.Definition.Tablets[index - 1].Record, "Tablet"));
+                else if (id == "solar-record") items.Add(new JournalInventory.Item(id, "Sunrise log", world.Exploration.Definition.SolarRecord, "Record"));
+                else if (id == "handover-record") items.Add(new JournalInventory.Item(id, "Handover book", world.Exploration.Definition.HandoverRecord, "Record"));
+                else if (id == "box-record") items.Add(new JournalInventory.Item(id, "Letter from Chest B", world.Settings.BoxText, "Record"));
             }
             if (!journalInventory) throw new InvalidOperationException("Assign the saved journal grid in the main-route scene.");
             journalInventory.Show(items);
             journalOpen = true; journalPanel.SetActive(true); Pause();
         }
-        public void CloseJournal() { if (!journalOpen) return; journalOpen = false; journalPanel.SetActive(false); ReleasePause(); }
+        void InspectInventoryTablet(JournalInventory.Item item)
+        {
+            if (!journalOpen || !tabletViewer || item.Category != "Tablet" || !int.TryParse(item.Id.Substring(1), out int number) || number < 1 || number > 7) return;
+            tabletViewer.Show(number - 1, item.Title, item.Body, number == 5 ? world.Listening.Board : number == 7 ? world.Session.Board : null);
+        }
+        public void CloseJournal() { if (!journalOpen) return; if (tabletViewer) tabletViewer.Close(); journalOpen = false; journalPanel.SetActive(false); ReleasePause(); }
         void Pause()
         {
             if (ownsPause) return; ownsPause = true; previousScale = Time.timeScale; previousAudio = AudioListener.pause;
@@ -260,7 +324,7 @@ namespace Demon.Slice
             if (world) world.Player.SetMenuOpen(false); Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false;
         }
         void Fail(string message)
-        { if (Failed) return; Failed = true; failureText.text = message + "\n\n重试会恢复当天开始时的状态。"; failurePanel.SetActive(true); Pause(); }
+        { if (Failed) return; Failed = true; failureText.text = message + "\n\nRetry from the start of this watch."; failurePanel.SetActive(true); Pause(); }
         public void CaptureDayStart()
         {
             if (!world || restoring || world.Session.Descended) return;
@@ -292,9 +356,14 @@ namespace Demon.Slice
                 var chimes = world.Listening.Chimes; for (int i = 0; i < chimes.Length; i++) chimes[i].Restore(saved.chimes[i]);
                 cues.Clear(); foreach (string id in saved.cues) cues.Add(id); checkpoint = saved;
                 for (int i = 0; i < saved.doors.Length; i++) cabinDoors[i].Restore(saved.doors[i]);
-                world.SetMessage("已恢复第 " + saved.day + " 天开始时的状态。");
+                world.SetMessage("Returned to the start of day " + saved.day + ".");
             }
             finally { restoring = false; }
+        }
+        public void PrepareDaySelection()
+        {
+            if (opening) FinishOpening();
+            if (journalOpen) CloseJournal();
         }
         public void BeginDebugReplay() { replay = true; FinishOpening(); CloseJournal(); }
         public void EndDebugReplay() { replay = false; SyncProgress(); CaptureDayStart(); }

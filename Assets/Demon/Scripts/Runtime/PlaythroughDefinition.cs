@@ -19,11 +19,11 @@ namespace Demon.Slice
         public DayRequirements[] Days;
         public JournalEntry[] Entries;
         [Range(0, 23)] public float NightHour = 18;
-        [TextArea] public string Opening = "你独自在雪地监测站值守。每天检查设施和巡查点，并留意交班前的异常。\n\n纸条与收集记录可在背包中重读。";
+        [TextArea] public string Opening = "Alone at the snow station. Make your rounds and keep the watch until relief arrives. Tab opens the watch book.";
         [Min(1)] public float OpeningSeconds = 5;
         [Min(1)] public float NoticeSeconds = 6;
         [Min(.1f)] public float WaitSeconds = 3;
-        [Tooltip("D3到D8的移动速度，单位米/秒。")]
+        [Tooltip("Pursuit speed on days 3–8 (m/s).")]
         public float[] ChaseSpeeds = { 2.6f, 3, 3.5f, 4, 4.6f, 5.7f };
         [Min(1)] public float DetectionMetres = 28;
         [Min(1)] public float LoseMetres = 42;

@@ -16,6 +16,11 @@ namespace Demon.Slice
         [SerializeField] Light sun;
         [SerializeField, Range(0, 23)] float sunriseHour = 6;
         [SerializeField, Range(1, 24)] float sunsetHour = 18;
+        [Header("Solar path")]
+        [SerializeField, Range(10, 85)] float noonElevation = 48;
+        [SerializeField, Range(0, 360)] float sunriseBearing = 105;
+        [SerializeField] Color horizonSun = new Color(1f, .51f, .26f);
+        [SerializeField] Color noonSun = new Color(1f, .96f, .84f);
         public Light Sun => sun;
         public float SunriseHour => sunriseHour;
         public bool PermanentNight => world && world.Consequences && world.Consequences.Rule != null && world.Consequences.Rule.SunLight == 0;
@@ -66,7 +71,17 @@ namespace Demon.Slice
                 Vector3 fixedDirection = world.Cipher.Wheel.Landmarks[1].position - world.Cipher.Wheel.transform.position; fixedDirection.y = Mathf.Max(2, new Vector2(fixedDirection.x, fixedDirection.z).magnitude * .35f);
                 sun.transform.rotation = Quaternion.LookRotation(-fixedDirection.normalized, Vector3.up);
             }
+            else if (world.Playthrough)
+            {
+                float phase = (hour - sunriseHour) / (sunsetHour - sunriseHour) * Mathf.PI;
+                Vector3 horizon = Quaternion.Euler(0, sunriseBearing, 0) * Vector3.forward;
+                Vector3 meridian = Quaternion.AngleAxis(90, Vector3.up) * horizon;
+                Vector3 noon = Vector3.RotateTowards(meridian, Vector3.up, noonElevation * Mathf.Deg2Rad, 0);
+                Vector3 direction = Mathf.Cos(phase) * horizon + Mathf.Sin(phase) * noon;
+                sun.transform.rotation = Quaternion.LookRotation(-direction, Vector3.up);
+            }
             else sun.transform.rotation = Quaternion.Euler(hour / 24 * 360 - 90, -30, 0);
+            if (world.Playthrough) sun.color = Color.Lerp(horizonSun, noonSun, Mathf.SmoothStep(0, 1, daylight));
             RenderSettings.ambientLight = Color.Lerp(settings.NightAmbient, settings.DayAmbient, daylight);
             RenderSettings.fogColor = Color.Lerp(settings.NightFog, settings.DayFog, daylight);
             world.Player.ViewCamera.backgroundColor = RenderSettings.fogColor;

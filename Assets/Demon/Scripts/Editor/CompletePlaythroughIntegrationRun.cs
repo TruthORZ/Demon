@@ -57,14 +57,7 @@ namespace Demon.Slice.Editor
                     uiActions = (EventSystem.current.currentInputModule as InputSystemUIInputModule)?.actionsAsset;
                     Require(uiActions, "Missing authored UI input module/actions."); previousUIDevices = uiActions.devices?.ToArray();
                     uiActions.devices = new InputDevice[] { keyboard, mouse }; // Keep hardware motion from replacing the test pointer.
-                    var note = world.gameObject.scene.GetRootGameObjects().SelectMany(x => x.GetComponentsInChildren<StoryPickup>(true)).First(x => x.EntryId == "note-a");
-                    Require(CompletePlaythroughAuthoring.TryStandpoint(note, world, out var feet, out var aim), "Critical paper A has no clear standing/raycast position.");
-                    MovePlayer(feet);
-                    var desired = Quaternion.LookRotation(aim - world.Player.ViewCamera.transform.position);
-                    float yaw = Mathf.DeltaAngle(world.Player.transform.eulerAngles.y, desired.eulerAngles.y);
-                    float pitch = Mathf.DeltaAngle(0, desired.eulerAngles.x);
-                    float current = Mathf.DeltaAngle(0, world.Player.ViewCamera.transform.localEulerAngles.x);
-                    InputSystem.QueueDeltaStateEvent(mouse.delta, new Vector2(yaw, current - pitch) / world.Settings.MouseSensitivity);
+                    AimAtPickup("note-a");
                     Next(100);
                 }
                 else if (stage == 100)
@@ -72,7 +65,17 @@ namespace Demon.Slice.Editor
                 else if (stage == 101)
                 {
                     Require(flow.Records.Contains("note-a") && world.Player.Reading, "The actual E did not collect readable paper A.");
-                    Press(); world.Player.ReturnToExploration(); flow.Collect("flashlight", world.Player.transform);
+                    Press(); world.Player.ReturnToExploration(); AimAtPickup("flashlight"); Next(102);
+                }
+                else if (stage == 102)
+                {
+                    Require(world.Player.FocusPrompt.Contains("torch"), "D1 flashlight is not under the interaction reticle: " + world.Player.FocusPrompt);
+                    Press(Key.E); Next(103);
+                }
+                else if (stage == 103)
+                {
+                    Require(flow.HasFlashlight, "Physical E press did not collect the D1 flashlight.");
+                    Press();
                     Press(Key.Tab); Next(1);
                 }
                 else if (stage == 1)
@@ -190,10 +193,15 @@ namespace Demon.Slice.Editor
                 else if (stage == 31)
                 {
                     var notice = (Text)new SerializedObject(flow).FindProperty("noticeText").objectReferenceValue;
-                    Require(notice.gameObject.activeSelf && notice.text.Contains("现在明明有风"), "Observation notice expired while hidden by the reading page.");
+                    Require(notice.gameObject.activeSelf && notice.text.Contains("wind is still blowing"), "Observation notice expired while hidden by the reading page.");
                     var agent = world.Chase.Agent;
-                    Require(NavMesh.SamplePosition(agent.transform.position + Vector3.forward * 5, out var goal, 4, agent.areaMask), "No saved destination probe point.");
-                    Require(agent.SetDestination(goal.position), "Destination probe failed."); Next(20);
+                    var spawns = new SerializedObject(world.Chase).FindProperty("morningSpawns");
+                    Require(spawns.arraySize == 6, "Expected six pursuit mornings in the formal scene.");
+                    var day3 = (Transform)spawns.GetArrayElementAtIndex(0).objectReferenceValue;
+                    var day4 = (Transform)spawns.GetArrayElementAtIndex(1).objectReferenceValue;
+                    Require(Vector3.Distance(agent.transform.position, day3.position) < 2f, "D3 enemy missed its morning spawn.");
+                    Require(Vector3.Distance(day3.position, day4.position) > 2f && NavMesh.SamplePosition(day4.position, out _, 2f, agent.areaMask), "Expected a distinct, walkable D4 destination.");
+                    Require(agent.SetDestination(day4.position), "Destination probe failed."); Next(20);
                 }
                 else if (stage == 20)
                 {
@@ -209,7 +217,10 @@ namespace Demon.Slice.Editor
                 }
                 else if (stage == 7)
                 {
-                    Require(world.Presentation.PermanentNight && world.Consequences.WhiteRimVisible, "D7 lost light/rim failed.");
+                    var sky = new SerializedObject(world.GetComponent<SkySunPresentation>());
+                    var disc = (Transform)sky.FindProperty("disc").objectReferenceValue;
+                    var core = (GameObject)sky.FindProperty("darkCore").objectReferenceValue;
+                    Require(world.Presentation.PermanentNight && disc.gameObject.activeInHierarchy && core.activeInHierarchy, "D7 authored sun disc or dark core is missing.");
                     sun = world.Presentation.Sun.transform.rotation;
                     world.Session.Clock.AdvanceBy(120); Next(8);
                 }
@@ -250,12 +261,35 @@ namespace Demon.Slice.Editor
         }
         void Press(params Key[] keys) => InputSystem.QueueStateEvent(keyboard, new KeyboardState(keys));
         void MakeCurrent() { keyboard?.MakeCurrent(); mouse?.MakeCurrent(); }
+        void AimAtPickup(string id)
+        {
+            var pickup = world.gameObject.scene.GetRootGameObjects().SelectMany(x => x.GetComponentsInChildren<StoryPickup>(true)).First(x => x.EntryId == id);
+            Require(CompletePlaythroughAuthoring.TryStandpoint(pickup, world, out var feet, out var aim), id + " has no clear standing/raycast position.");
+            MovePlayer(feet);
+            var desired = Quaternion.LookRotation(aim - world.Player.ViewCamera.transform.position);
+            float yaw = Mathf.DeltaAngle(world.Player.transform.eulerAngles.y, desired.eulerAngles.y);
+            float pitch = Mathf.DeltaAngle(0, desired.eulerAngles.x);
+            float current = Mathf.DeltaAngle(0, world.Player.ViewCamera.transform.localEulerAngles.x);
+            InputSystem.QueueDeltaStateEvent(mouse.delta, new Vector2(yaw, current - pitch) / world.Settings.MouseSensitivity);
+        }
         void MovePlayer(Vector3 point)
         { var body = world.Player.GetComponent<CharacterController>(); body.enabled = false; world.Player.transform.position = point; body.enabled = true; world.Player.ReturnToExploration(); }
         public void Cleanup()
         {
             if (devices)
-            { if (uiActions) uiActions.devices = previousUIDevices; InputSystem.onAfterUpdate -= MakeCurrent; InputSystem.RemoveDevice(keyboard); InputSystem.RemoveDevice(mouse); InputSystem.settings.backgroundBehavior = oldBackground; InputSystem.settings.editorInputBehaviorInPlayMode = oldInput; }
+            {
+                if (uiActions)
+                {
+                    // Null allows every device. An empty device filter disables UI input.
+                    if (previousUIDevices == null) uiActions.devices = null;
+                    else uiActions.devices = previousUIDevices;
+                }
+                InputSystem.onAfterUpdate -= MakeCurrent;
+                InputSystem.RemoveDevice(keyboard);
+                InputSystem.RemoveDevice(mouse);
+                InputSystem.settings.backgroundBehavior = oldBackground;
+                InputSystem.settings.editorInputBehaviorInPlayMode = oldInput;
+            }
             Time.timeScale = 1; AudioListener.pause = false;
         }
         static void Require(bool condition, string message) { if (!condition) throw new InvalidOperationException(message); }

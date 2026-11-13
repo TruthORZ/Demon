@@ -12,6 +12,7 @@ namespace Demon.Slice
         [SerializeField] Transform vaneBlade;
         [SerializeField] Light flashlight;
         [SerializeField] LineRenderer beamLine;
+        [SerializeField] Transform scatteringVolume;
         [SerializeField] GameObject flashlightBody;
         [SerializeField] Light targetGlow;
         [SerializeField] Transform observationPoint;
@@ -44,10 +45,10 @@ namespace Demon.Slice
             get
             {
                 if (!Equipped) return "";
-                if (main && !HasLamp) return "T06已取得。先回木屋桌边拾取手电筒，再使用光束牵制。";
-                if (Rule.Locked) return definition.LockedText;
-                if (ClearAim && BeamOn) return $"稳定照射 {Rule.StableSeconds:0.0} / {definition.StableSeconds:0.0} 秒\n保持光束跟随雪痕区域。";
-                return definition.ReadyText;
+                if (main && !HasLamp) return "The torch is on the cabin table.";
+                if (Rule.Locked) return main ? "The tracks have stopped." : definition.LockedText;
+                if (ClearAim && BeamOn) return main ? "Hold steady…" : $"Steady beam: {Rule.StableSeconds:0.0} / {definition.StableSeconds:0.0} s";
+                return main ? "" : definition.ReadyText;
             }
         }
         public void Configure(BeamDefinition data, Transform target, GameObject visible, Transform blade,
@@ -55,7 +56,7 @@ namespace Demon.Slice
         { definition = data; aimRegion = target; targetVisual = visible; vaneBlade = blade; flashlight = lamp; beamLine = line; flashlightBody = body; targetGlow = glow; observationPoint = observer; }
         public void Initialize(GameSession rules, PlayerController actor, CipherBox tool, ListeningTool listener, int firstMotionDay)
         {
-            if (!definition || !aimRegion || !targetVisual || !vaneBlade || !flashlight || !beamLine || !flashlightBody || !targetGlow || !observationPoint || !tool || !listener || !actor || rules == null || firstMotionDay < 1 || firstMotionDay > 9)
+            if (!definition || !aimRegion || !targetVisual || !vaneBlade || !flashlight || (!beamLine && !scatteringVolume) || !flashlightBody || !targetGlow || !observationPoint || !tool || !listener || !actor || rules == null || firstMotionDay < 1 || firstMotionDay > 9)
                 throw new InvalidOperationException("T06 requires saved aim region, vane, flashlight, feedback and composition references.");
             if (definition.RangeMetres <= 0 || definition.RegionRadiusMetres <= 0) throw new InvalidOperationException("Beam range and region radius must be positive.");
             Rule?.Release(); BeamOn = false; LampSwitchedOn = false; ClearAim = false;
@@ -104,9 +105,17 @@ namespace Demon.Slice
         }
         void SetLight(bool on)
         {
-            flashlight.enabled = on; beamLine.enabled = on;
+            flashlight.enabled = on;
+            if (beamLine) beamLine.enabled = on && !scatteringVolume;
             flashlight.range = definition.RangeMetres; flashlight.spotAngle = definition.SpotAngleDegrees;
             flashlight.intensity = definition.LightIntensity; flashlight.color = definition.BeamColor;
+            if (scatteringVolume)
+            {
+                scatteringVolume.gameObject.SetActive(on);
+                float diameter = 2 * Mathf.Tan(flashlight.spotAngle * .5f * Mathf.Deg2Rad) * flashlight.range;
+                scatteringVolume.localScale = new Vector3(diameter, diameter, flashlight.range);
+                return;
+            }
             if (!on || session == null) return;
             var camera = player.ViewCamera.transform;
             float distance = NearestObstacle(camera.position, camera.forward, definition.RangeMetres);
@@ -117,6 +126,7 @@ namespace Demon.Slice
         {
             Rule?.Release(); BeamOn = false; LampSwitchedOn = false; ClearAim = false;
             if (flashlight) flashlight.enabled = false;
+            if (scatteringVolume) scatteringVolume.gameObject.SetActive(false);
             if (beamLine) beamLine.enabled = false;
             if (flashlightBody) flashlightBody.SetActive(false);
             if (targetGlow) targetGlow.enabled = false;

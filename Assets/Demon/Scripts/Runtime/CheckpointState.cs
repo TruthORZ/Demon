@@ -43,13 +43,14 @@ namespace Demon.Slice
     public sealed partial class ChaseController
     {
         internal struct State
-        { public Vector3 position, destination, velocity; public bool hasPath, stopped; public Quaternion rotation; public float replan, step; public double cooldown; public int passes; public bool retreat, tracking; public float unseen, laugh; public ChasePhase phase; }
+        { public Vector3 position, destination, velocity; public bool hasPath, stopped; public Quaternion rotation; public float replan, step; public double cooldown; public int passes; public bool retreat, tracking; public int lastSpawnDay; public float unseen, laugh; public ChasePhase phase; }
         internal State Capture() => new State { position = agent.transform.position, rotation = agent.transform.rotation,
             destination = HasNavigation && agent.hasPath ? agent.destination : agent.transform.position, hasPath = HasNavigation && agent.hasPath, stopped = !HasNavigation || agent.isStopped, velocity = HasNavigation ? agent.velocity : Vector3.zero,
             replan = Mathf.Max(0, replanAt - Time.time), step = Mathf.Max(0, stepAt - Time.time), cooldown = Gate.Remaining,
-            passes = Gate.PassCount, retreat = retreating, phase = Phase, tracking = tracking, unseen = unseenSeconds, laugh = Mathf.Max(0, laughAt - Time.time) };
+            lastSpawnDay = lastSpawnDay, passes = Gate.PassCount, retreat = retreating, phase = Phase, tracking = tracking, unseen = unseenSeconds, laugh = Mathf.Max(0, laughAt - Time.time) };
         internal void Restore(State saved)
         {
+            lastSpawnDay = saved.lastSpawnDay;
             Stop(); if (HasNavigation) agent.Warp(saved.position); else agent.transform.position = saved.position;
             agent.transform.rotation = saved.rotation; Gate.Restore(saved.cooldown, saved.passes);
             replanAt = Time.time + saved.replan; stepAt = Time.time + saved.step; retreating = saved.retreat; Phase = saved.phase; tracking = saved.tracking; unseenSeconds = saved.unseen; laughAt = Time.time + saved.laugh;

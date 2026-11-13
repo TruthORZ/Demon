@@ -409,3 +409,37 @@ TASK-024最新候选仍在同一Windows路径，构建报告2970828058字节；8
 PC_Renderer增加DBuffer/AlbedoNormal Decal Renderer Feature，保留原渲染模式和SSAO。地形使用原有URP Terrain材质；不替换TerrainData/材质、导航或GlobalSnow。贴花只模拟颜色和法线，没有真实高度变形。
 
 Editor工具`DemonFootprintIntegration.Connect`显式接入Art场景，存在则验证并保留调参。`DemonFootprintVerification.RunBatch`包含首次接线、尺寸保存重开和实际追踪验证；`VerifyExistingBatch`只加载已有接线并运行验证，不保存场景。批处理入口需在同工程没有Unity实例时使用。当前验证与边界见 [TASK-023](Tasks/TASK-023-demon-footprint-decals.md)，使用说明见[FootPrint README](../Assets/SnowSystem/FootPrint/README.md)。
+
+## 独立黑影外观
+`Assets/ArtAsset/ShadowDemon/ShadowDemon.prefab` 引用 ArtAsset/Model/Shadow 的静态 FBX；根节点位于脚底，身高 2.4 米，面向本地 +Z。Face_Glow 使用按头部表面采样的曲面和 FaceGlow 材质。Flowing_Shadow 下双侧肩、前臂、指尖各有独立位置，三种材质共用 InkFlow 着色器及循环墨纹，依靠 Unity 时间滚动纹理。该资源可单独拖入场景，无运行时脚本依赖。详见 [TASK-026](Tasks/TASK-026-shadow-demon.md)。
+
+## 正式雪地场景的湖影和道具
+湖影使用 ShadowDemon 预制体。Art 场景的 `00_系统与界面/WorldPresentation/LakeShadow_湖中黑影` 下，LakeShadow_D3、D5、D7 三个空物体定义位置和朝向。在场景视图拖动即可调距离。CompletePlaythrough 使用游戏时钟、原有太阳/降雪状态和湖封印判定显隐；Inspector 中 Sighting Interval Minutes / Duration Minutes 调整早期间歇显现的游戏内分钟数。D9 由原终局对象接管。道具外观保存在各玩法对象下面的 Art_* 节点，箱身、箱盖分开接于原机构。材质、派生箱身/箱盖见 `Assets/ArtAsset/LakeProps`。点位、模型对应及验证见 [TASK-027](Tasks/TASK-027-lake-shadow-props.md)。
+
+## 平放石板与观察
+正式场景使用 `Assets/ArtAsset/Tablets/T01.prefab` 至 `T07.prefab`。Socket_1 至 Socket_9 保存槽位、符文网格及材质，Circuit 子物体保存线路。Glyphs 目录保存 25 套凹刻法线和发光材质。固定石板由 NineDayFlow 管理收录与近景退出；RuneTablet 把盘面快照和变化传给 TabletSurface。背包的 JournalInventory.ItemClicked 只响应实际点格，CompletePlaythrough 按条目选择 TabletInventoryView；TabletInspectionStudio 使用独立摄像机和 RenderTexture 显示同源预制体。场景镜头位置、各槽、线路和三维观察面板都支持 Inspector 调整。
+
+### 雪地物品、定位光束与格子图像
+正式场景 GameSystems 上的 RouteItemPresentation 按原有发现、取回和阅读状态控制七个光束与纸张的显隐。场景内 TabletBeacons_石板定位光束保存位置，Assets/ArtAsset/ItemPresentation 保存光束网格、可调颜色材质、预制体与九张物品缩略图。JournalInventory 绑定纸张、手电与七块石板的 Sprite，JournalSlot 的 Image 适用于 24 个原始格及溢出模板。箱内展示物位于 BoxA/T06_Inside 与 BoxB_Record/Record。详见 [TASK-030](Tasks/TASK-030-snow-items.md)。
+
+### 正式雪地场景的光雾与风铃
+- 全局雾由正式 Art 场景 Lighting 的 Environment 设置保存。湖雾体位于 `04_湖面事件与结局/LakeMist_湖面局部雾`，Transform 控制范围，`Assets/ArtAsset/SnowAtmosphere/LakeMist.mat` 的 Density per metre 控制浓度。局部湖雾和手电空气光使用玩家相机深度纹理，在场景表面处截断。
+- `BeamTether` 使用手电光口的 Spot Light 照明，空气光跟随同一角度和距离；正式路线参数在 `Assets/Demon/Data/CompletePlaythrough/MainRouteBeam.asset`。旧切片保留原显示路径。
+- `WorldPresentation` 的 Solar path 控制太阳方向、正午高度和颜色；`SkySunPresentation` 根据同一个光源与时钟显示日轮和永夜日蚀。
+- `Assets/Demon/Prefabs/ForestWindChime.prefab` 的根节点是吊点。正式场景启动时 `ListeningTool` 将已放置的活动风铃加入监听；原有高低风铃保留原有次序。
+
+### TASK-034 森林监听、引导脚印和原刻对照
+- 正式 Art 场景保存 32 个 ForestWindChime 实例。Hierarchy 搜索 `ForestChime_` 可定位；普通树上的实例为树的子物体，Terrain 绘制的树没有独立 Transform，其风铃保存在 `06_美术环境/ForestChimes_林区监听`。单个 ListeningChime 的 Radius Metres 为 30，音源的 Max Distance 为 48。
+- HumanTrail_D2_Editable 与 ResidualLargeTracks_D3_Editable 保留原标记点。各点子级是静态左右鞋底 Decal Projector，Size 的 X/Y 控制宽/长；动态追逐仍由 Demon Terrain Footprints 的 Footprint Size 控制。人类 0.09 × 0.21 米，静态遗留及动态恶魔 0.62 × 1.32 米。
+- `00_系统与界面/WorldPresentation/LakeShadow_湖中黑影/ShadowDemon` 是独立场景实例。Scale 调大小，同级 LakeShadow_D3、D5、D7 的 Y 调露出水面的高度；Water 的水面 Y 为 95.4。湖影使用专用水下裁切与波纹材质，D9 终局另有身体实例。
+- T04 固定盘面的七块刻石沿 3→2→1→5→7→8→9 排列。T07_Original.prefab 是 T04 的外观变体，第八、九槽覆盖为 SEAL 和 FALSE，供 TabletInventoryView 的「对照原刻」按钮切换；实际可编辑 T07 继续由 RuneBoardModel 驱动。Glyphs 目录有 29 套刻纹，其中 26–29 为 GET、ENTITY、TRUE、FALSE；其法线沿用现有凹刻生成方式。
+
+正式场景由 PlayerCamera 输出玩家画面，Portable Boombox 模型附带的 Camera 已在场景实例上关闭。可调整各纸条 PaperReadView、各石板 ReadView / CloseView 的 Transform；InspectionFraming 控制前方裁切距离。阅读时 PlayerController 使用左侧视口，ReadingPanel 在右侧排版，退出时恢复原视口。正式场景 ListeningTool 会从实际摆放的风铃组建监听列表，GameSceneController 将追逐对象显式传入，不依赖某一只示范风铃。
+
+TASK-038：正式场景 CompletePlaythrough 引用雪粒子和 Music - Second Morning 的二维循环 AudioSource；MainRouteSettings.RealSecondsPerDay 控制日长。场景隐藏非交互世界标签，保留密码锁、轮盘数字和 HUD 交互提示。SnowDisturbanceRegion 保留玩法引用，移除网格；SpatialSnowSteps 的音源静音，Stepped 事件仍用于脚印。F8 开场可用；同步调日重放不设置玩家菜单输入锁。
+
+正式雪地场景的 RouteItemPresentation 按 T01–T07 顺序配对 Tablet Beacons 和 Tablet Centers（实物预制体中央的 Socket_5）。箱 A 的三个 Rune_ 子对象与石板共用 RuneInsert 和 Glyphs 材质。ChaseController.proximityVoice 指向导航敌人子对象 Proximity Scream 的空间音源；触发距离与 MainRouteDefinition.PursuitNoticeMetres 共用。
+
+TASK-041：DayJumpMenu 在打开时选择当前天，按钮的 Navigation 使用场景中显式保存的上下左右邻居。正式开场标题在 Opening_开场与等待/Title，产品名在 Player Settings。两者均为 Demon Principles。
+
+正式雪地场景的 ChaseController.morningSpawns 依运动生效日顺序绑定 Morning Spawns/Day 3 至 Day 8。调整位置时在 Scene 中移动对应空物体到可通行地面。主流程在时钟推进后按当日 WakeHour 放置 NavMeshAgent，并在检查点记录已经刷新的日期。

@@ -150,8 +150,8 @@ namespace Demon.Slice
             if ((!solar && record != handoverRecord) || session.Clock.Day < (solar ? campaign.Definition.Tablets[2].DateNodeDay : 8)) return;
             if (solar) solarRead = true; else handoverRead = true;
             int minute = (int)session.Clock.MinuteOfDay;
-            feedback.ReadDocument((solar ? definition.SolarRecord : definition.HandoverRecord) + "\n\n记录时刻：D" + session.Clock.Day + " " +
-                (minute / 60).ToString("00") + ":" + (minute % 60).ToString("00") + "\nEsc 放下记录。", record.CloseView);
+            feedback.ReadDocument((solar ? definition.SolarRecord : definition.HandoverRecord) + "\n\nLogged on day " + session.Clock.Day + " " +
+                (minute / 60).ToString("00") + ":" + (minute % 60).ToString("00") + "\nEsc · Put down", record.CloseView);
         }
         public void Observe(StationObservation point)
         {
@@ -164,7 +164,7 @@ namespace Demon.Slice
                 case 1:
                     text = definition.WindVane; record = tether.Rule.Locked ? text.Special : tether.MotionReady ? text.Changed : text.Normal; break;
                 case 3:
-                    text = new ObservationText { Title = "森林巡查", Normal = "林间小径畅通。留意每日出现的新脚印、遗留纸条和石板。" }; record = tether.MotionReady ? "雪地留下巨大的脚印。留意风铃，追逐时返回木屋。" : text.Normal; break;
+                    text = new ObservationText { Title = "Patrol the woods", Normal = "Fresh snow covers the path. Shallow prints remain by the roots." }; record = tether.MotionReady ? "Deep prints cross the path and vanish behind a tree. I can still see the cabin door." : text.Normal; break;
                 default:
                     text = definition.Lake; record = session.LakeSeal == 1 ? text.Normal : consequences.Rule.DemonLight == 1 ? text.Special : text.Changed; break;
             }
@@ -172,8 +172,8 @@ namespace Demon.Slice
             var main = (feedback as GameSceneController)?.Playthrough;
             if (main) main.RecordObservation(point.IsForest ? 3 : (int)site);
             int minute = (int)session.Clock.MinuteOfDay;
-            feedback.ReadDocument(text.Title + "\n观察时刻：D" + session.Clock.Day + " " + (minute / 60).ToString("00") + ":" + (minute % 60).ToString("00") + "\n\n" + record + "\n\nEsc 放下记录。", point.CloseView);
-            feedback.SetMessage(main ? "今日巡查已记录。完成全部关键事项并入夜后才能睡觉。" : "观察已记录。日常检查为可选内容，可以自由睡到次日。");
+            feedback.ReadDocument(text.Title + "\nTime of observation: Day " + session.Clock.Day + " " + (minute / 60).ToString("00") + ":" + (minute % 60).ToString("00") + "\n\n" + record + "\n\nEsc · Put down", point.CloseView);
+            feedback.SetMessage(main ? "Entered in the watch book." : "Observation recorded.");
         }
         static int controllerSize(ISceneFeedback messages) => messages is GameSceneController c && c.Playthrough ? 4 : 3;
         void OnDestroy()

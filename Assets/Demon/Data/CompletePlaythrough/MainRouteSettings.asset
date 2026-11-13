@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff04ebeda21a46140b7d33627f6ffd9d, type: 3}
   m_Name: MainRouteSettings
   m_EditorClassIdentifier: Demon.Slice::Demon.Slice.GameSettings
-  RealSecondsPerDay: 720
+  RealSecondsPerDay: 480
   StartDay: 1
   StartHour: 8
   FinalDay: 9
@@ -32,6 +32,6 @@ MonoBehaviour:
   NightFog: {r: 0.025, g: 0.045, b: 0.09, a: 1}
   DaySunIntensity: 1.15
   NightSunIntensity: 0.12
-  Instructions: "WASD \u79FB\u52A8\u3000Shift \u5954\u8DD1\u3000E \u4EA4\u4E92\n\u5DE6\u952E \u70B9\u51FB\u5F00\u5173\u624B\u7535 / T06\u7275\u5236\u3000Tab \u80CC\u5305\u3000F8 \u8C03\u8BD5\n\u62FC\u677F\uFF1A\u9F20\u6807\u70B9\u9009\u3000Enter \u786E\u8BA4\u3000Esc \u8FD4\u56DE"
-  BoxText: "\u3010\u7BB1\u5185\u8BB0\u5F55\u3011\n\nIF\u6EE1\u8DB3\u6761\u4EF6\u540E\u53EA\u6267\u884C\u4E00\u6B21\uFF0C\u968F\u540E\u7ED3\u675F\u3002\nWHILE\u6CBF\u8FD4\u56DE\u7EBF\u8DEF\u91CD\u65B0\u7B49\u5F85\uFF0C\u6BCF\u4E2A\u7B26\u5408\u65E5\u671F\u7684\u65E5\u5B50\u6267\u884C\u4E00\u6B21\u3002\n\n\u4ECE\u672B\u7AEF\u53C2\u6570\u69FD\u56DE\u5230DAY\u7684\u90A3\u6761\u7EBF\uFF0C\u5E76\u4E0D\u662F\u88C2\u75D5\u3002\n\u4ECA\u5929\u7684\u4EA4\u6362\u5DF2\u7ECF\u7ED3\u675F\uFF0C\u4E0B\u4E00\u8F6E\u4F1A\u5728\u5348\u591C\u5230\u6765\u3002\n\n\u4EA4\u6362\u662F\u53CC\u5411\u7684\u3002\u518D\u4EA4\u6362\u4E00\u6B21\uFF0C\u5C01\u95ED\u5C31\u4F1A\u56DE\u5230\u7BB1\u5B50\uFF0C\u6E56\u5C06\u91CD\u65B0\u5F00\u542F\u3002\n\u7194\u65AD\u540E\uFF0C\u7A0B\u5E8F\u7559\u5728\u77F3\u677F\u5185\u90E8\uFF0C\u53D6\u4E0B\u7B26\u6587\u4E5F\u65E0\u6CD5\u64A4\u9500\u3002\n\n\u7B2C\u4E5D\u5929\uFF0C\u5B83\u5C06\u83B7\u5F97\u5B9E\u4F53\u3002\n\nEsc \u653E\u4E0B\u8BB0\u5F55\u3002"
-  EndingText: "\u7B2C\u4E5D\u5929\n\n\u6E56\u4E2D\u5C01\u5370\u518D\u6B21\u5F00\u542F\u3002\n\u8FD9\u4E00\u6B21\uFF0C\u5B83\u62E5\u6709\u4E86\u5B9E\u4F53\u3002\n\n\u6309 R \u91CD\u65B0\u5F00\u59CB"
+  Instructions: "WASD move \xB7 Shift run \xB7 E interact \xB7 Tab inventory\nSelect stones and sockets. Enter to confirm. Esc to return."
+  BoxText: "To the keeper who relieves me,\n\nIf you can lift this lid, the lake is sealed. That very seal was on the chest. You made no second seal. You traded their places.\n\nI thought it ended there too. Run a fingernail along the cut from the last stone. It goes all the way back to the day mark. It is no crack. An ordinary cut ends. This one comes back each day to test the date again.\n\nAt midnight it will be the ninth day. The marks will still match. The latch will bite again and the lake will open.\n\nThe figure on the fourth tablet will no longer need water to stand in.\n\n\u2014The last watchkeeper"
+  EndingText: "Day Nine\n\nThe lake seal opens again. This time it has flesh.\n\nR \xB7 Start again"

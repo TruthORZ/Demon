@@ -95,7 +95,7 @@ namespace Demon.Slice.Editor
             var fit = journalText.gameObject.AddComponent<ContentSizeFitter>(); fit.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
             var scrolling = scroll.GetComponent<ScrollRect>(); scrolling.viewport = sr; scrolling.content = journalText.rectTransform; scrolling.horizontal = false; scrolling.movementType = ScrollRect.MovementType.Clamped;
             var close = Button("Close_关闭背包", bag.transform, new Vector2(0, -245), "关闭背包  Tab / Esc", font);
-            var black = Panel("Opening_开场与等待", ui, font, "雪地值守", out var introText);
+            var black = Panel("Opening_开场与等待", ui, font, "Demon Principles", out var introText);
             var proceed = Button("Continue_继续", black.transform, new Vector2(0, -245), "继续  Enter", font);
             var wait = Button("Wait_等待交班", ui, new Vector2(0, -330), "等待到夜间  T", font);
             var scene = SceneManager.GetActiveScene(); var transforms = scene.GetRootGameObjects().SelectMany(x => x.GetComponentsInChildren<Transform>(true)).ToArray();

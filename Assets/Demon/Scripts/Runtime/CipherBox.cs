@@ -22,7 +22,7 @@ namespace Demon.Slice
         public ThreeDigitLock Model => model;
         public Transform CloseView => closeView;
         public bool Acquired => model != null && model.Acquired;
-        public override string Prompt => model == null || !model.Unlocked ? "查看箱子 A 密码锁" : Acquired ? "查看已取得的 T06" : "取出箱内 T06";
+        public override string Prompt => model == null || !model.Unlocked ? "Inspect the lock on Chest A" : Acquired ? "Examine Tablet VI" : "Take Tablet VI";
         public void Configure(CipherWheel compass, Transform view, Transform reading, CipherDigit[] buttons, Transform lid, GameObject tablet)
         { wheel = compass; closeView = view; recordView = reading; digits = buttons; lidPivot = lid; tabletVisual = tablet; }
         public void Initialize(GameSceneController controller)
@@ -43,8 +43,8 @@ namespace Demon.Slice
             {
                 model.TryAcquire(); tabletVisual.SetActive(false);
                 world.Campaign.AcquireExchangeTablet(recordView);
-                world.SetMessage(world.Tether ? (world.Playthrough ? "T06已取得。点击左键打开手电筒，稳定照住雪痕。" : "T06已取得。回到湖岸观察点，按住右键照住雪痕。") : "T06已取得。");
-                if (world.Playthrough && !world.Playthrough.HasFlashlight) world.SetMessage("T06已取得。回木屋桌边拾取手电筒后即可使用光束牵制。");
+                world.SetMessage(world.Tether ? (world.Playthrough ? "Switch on the torch and hold the beam on the tracks." : "Hold the beam on the tracks at the shore.") : "Tablet VI collected.");
+                if (world.Playthrough && !world.Playthrough.HasFlashlight) world.SetMessage("Fetch the torch from the cabin table.");
             }
             else { world.SetMessage(wheel.Definition.LockInstructions); player.EnterLockView(this, closeView); }
         }
@@ -58,7 +58,7 @@ namespace Demon.Slice
         public bool TryConfirm()
         {
             if (!world || world.Session.Descended) return false;
-            if (!model.TryUnlock()) { world.SetMessage(model.Unlocked ? wheel.Definition.UnlockedText : "密码不符。观察轮盘和三个物体的位置，可以继续尝试。"); return false; }
+            if (!model.TryUnlock()) { world.SetMessage(model.Unlocked ? wheel.Definition.UnlockedText : "The catch holds. Check the bearings again."); return false; }
             world.SetMessage(wheel.Definition.UnlockedText); world.Player.ExitCloseView(); return true;
         }
         void Update()

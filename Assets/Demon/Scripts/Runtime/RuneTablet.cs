@@ -8,6 +8,7 @@ namespace Demon.Slice
     public sealed class RuneTablet : Interactable, ICloseViewInteraction
     {
         [SerializeField] Transform closeView;
+        [SerializeField] TabletSurface surface;
         [SerializeField] ListeningTool listeningTool;
         [SerializeField] RuneSlot[] slots;
         [SerializeField] RuneTrayItem[] tray;
@@ -17,7 +18,7 @@ namespace Demon.Slice
         RuneBoardModel board;
         bool bound;
         Material[] authoredLineMaterials;
-        public override string Prompt => board != null && board.Frozen ? "查看已固化石板" : "查看并补全石板";
+        public override string Prompt => board != null && board.Frozen ? "Examine the fused tablet" : "Examine the broken tablet";
         public Transform CloseView => closeView;
         public RuneBoardModel Board => board;
         public void ConfigureListening(ListeningTool owner) => listeningTool = owner;
@@ -46,7 +47,11 @@ namespace Demon.Slice
         }
 
         void Bind() { if (board != null && !bound) { board.Changed += Refresh; bound = true; } }
-        void OnEnable() => Bind();
+        void OnEnable()
+        {
+            Bind();
+            if (board != null) Refresh();
+        }
         void OnDisable() { if (board != null && bound) board.Changed -= Refresh; bound = false; }
         public override void Use(PlayerController player)
         {
@@ -63,9 +68,10 @@ namespace Demon.Slice
 
         void Refresh()
         {
+            if (surface) surface.Display(board);
             foreach (var slot in slots) slot.Label.text = RuneLabel(board.At(slot.Index));
             foreach (var item in tray)
-                item.Label.text = RuneLabel(item.Rune) + "  " + board.Available(item.Rune);
+                item.SetAvailable(board.Available(item.Rune));
             if (board.Frozen)
                 foreach (var line in lines) line.sharedMaterial = frozenLineMaterial;
         }

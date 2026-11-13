@@ -56,7 +56,7 @@ namespace Demon.Slice
         public RuneTablet Tablet => tablet;
         public bool EndingPresented { get; private set; }
         public bool HasReadBox { get; private set; }
-        public string Message { get; private set; } = "找到石板，补全铭文。箱子目前打不开。";
+        public string Message { get; private set; } = "Find the tablet and restore its inscription.";
 
         public void Configure(GameSettings data, PlayerController actor, RuneTablet stone,
             WorldPresentation visuals, GameHud overlay, Transform endingAnchor)
@@ -100,7 +100,7 @@ namespace Demon.Slice
             Session.Changed += OnStateChanged;
             initialized = true;
             if (campaign) campaign.Initialize(this);
-            if (listeningTool) listeningTool.Initialize(Session, campaign, player, this);
+            if (listeningTool) listeningTool.Initialize(Session, campaign, player, this, chase && chase.Agent ? chase.Agent.transform : null);
             if (cipherBox) cipherBox.Initialize(this);
             if (tether) tether.Initialize(Session, player, cipherBox, listeningTool, campaign ? campaign.Definition.MotionDay : tether.Definition.DemonMotionDay);
             if (consequences) consequences.Initialize(this);
@@ -127,9 +127,9 @@ namespace Demon.Slice
         {
             if (Session == null || Session.Descended) return false;
             if (campaign && !campaign.FinalAvailable)
-            { SetMessage("最后一块石板会在第八天夜间出现。"); return false; }
+            { SetMessage("Search the shore on the eighth night."); return false; }
             if (retrieval && !retrieval.ReadyToReconstruct)
-            { SetMessage("先取得T07，并带回工具棚放置。"); return false; }
+            { SetMessage("Bring Tablet VII back to its stand first."); return false; }
             if (finale) finale.ReserveTime();
             return true;
         }
@@ -138,18 +138,18 @@ namespace Demon.Slice
         {
             if (Session == null || Session.Descended) return false;
             if (campaign && !campaign.FinalAvailable)
-            { SetMessage("最后一块石板尚未出现。"); return false; }
+            { SetMessage("The last tablet has yet to surface."); return false; }
             if (!BeginFinalInteraction()) return false;
             bool success = Session.TryCompile();
             if (success)
             {
-                SetMessage("铭文已固化。箱子解封了，湖也关闭了。去看看箱子。" );
+                SetMessage("A click from the cabin. The latch has sprung." );
                 player.ExitCloseView();
             }
             else
             {
-                SetMessage(Session.Board.Frozen ? "程序已经固化，取下表面符文也不会中断。" :
-                    "铭文尚未对应这块石板的目标。可以继续调整，尚未固化。" );
+                SetMessage(Session.Board.Frozen ? "The lines have fused. Taking the stones out will not undo it." :
+                    "The lines fade. Try another order." );
             }
             return success;
         }
@@ -159,23 +159,26 @@ namespace Demon.Slice
             if (Session.Descended) return;
             if (Session.BoxSeal != 0)
             {
-                SetMessage("箱子被封闭，暂时打不开。" );
+                SetMessage("The lid will not budge." );
                 return;
             }
             HasReadBox = true;
-            if (playthrough) playthrough.RememberBoxRecord();
             readingBox = true;
             ReadingText = settings.BoxText;
             presentation.OpenBox();
             player.EnterReadingView(presentation.BoxReadView);
             if (finale) finale.RecordOpened();
-            SetMessage("箱内有一份记录。" );
+            SetMessage("There is a letter inside." );
         }
 
         public bool OnReadingClosed()
         {
             bool wasBox = readingBox;
-            if (wasBox && playthrough) playthrough.Record("box-record");
+            if (wasBox && playthrough)
+            {
+                playthrough.RememberBoxRecord();
+                playthrough.Record("box-record");
+            }
             readingBox = false;
             return wasBox && finale && finale.FinishRecord();
         }
@@ -202,7 +205,7 @@ namespace Demon.Slice
         {
             if (Session.Descended)
             {
-                Message = "第九天，恶魔降临。";
+                Message = "On the ninth day it came ashore.";
                 if (!finale || !finale.IsDirecting) PresentEnding();
             }
         }

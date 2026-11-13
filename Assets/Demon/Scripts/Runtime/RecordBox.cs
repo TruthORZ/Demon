@@ -7,7 +7,7 @@ namespace Demon.Slice
     public sealed class RecordBox : Interactable
     {
         [SerializeField] GameSceneController world;
-        public override string Prompt => "打开箱子并查看记录";
+        public override string Prompt => "Open the chest and read the letter";
         public void Configure(GameSceneController controller) => world = controller;
         public override void Use(PlayerController player) { if (world.Playthrough) world.Playthrough.Record("box-b"); world.ReadBox(); }
     }

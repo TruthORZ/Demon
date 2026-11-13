@@ -21,7 +21,7 @@ namespace Demon.Slice
         public void ResetForSession() { EnsureInitialized(); Restore(new State { rotation = closedRotation }); }
         void EnsureInitialized() { if (initialized) return; initialized = true; closedRotation = transform.localRotation; }
 
-        public override string Prompt => "开关木屋门";
+        public override string Prompt => "Open or close the cabin door";
         public UnityEvent Toggle => toggle;
 
         void Awake()

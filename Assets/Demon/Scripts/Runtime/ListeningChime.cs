@@ -26,8 +26,9 @@ namespace Demon.Slice
         public bool TargetInside => monitoredTarget && (monitoredTarget.position - transform.position).sqrMagnitude <= radiusMetres * radiusMetres;
         public void Configure(Transform target, float radius, AudioSource audio, AudioClip clip, Transform visual)
         { monitoredTarget = target; radiusMetres = radius; source = audio; enterClip = clip; hangingVisual = visual; }
-        public void Initialize(ListeningTool owner, GameSession rules)
+        public void Initialize(ListeningTool owner, GameSession rules, Transform defaultTarget = null)
         {
+            if (!monitoredTarget) monitoredTarget = defaultTarget;
             if (!monitoredTarget || !source || !enterClip || !hangingVisual)
                 throw new InvalidOperationException("Chime requires an explicit target, audio clip/source and hanging visual.");
             if (!tool) restingRotation = hangingVisual.localRotation;

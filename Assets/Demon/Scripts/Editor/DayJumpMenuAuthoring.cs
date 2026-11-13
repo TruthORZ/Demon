@@ -71,7 +71,7 @@ namespace Demon.Slice.Editor
             card.gameObject.AddComponent<Image>().color = new Color(.045f, .065f, .09f, .99f);
             Label("Title", card, new Vector2(.5f, 1), new Vector2(0, -53), new Vector2(830, 58), font, 36).text = "天数快捷菜单";
             Label("Explanation", card, new Vector2(.5f, 1), new Vector2(0, -118), new Vector2(830, 72), font, 23).text =
-                "调试跳转 · 补齐前置流程\nF8 / Esc 关闭　数字键 1–9 选择天数";
+                "Click a day, or use the arrow keys and Enter.\n1–9: choose day   ·   0: eighth night   ·   F8 / Esc: resume";
             var status = Label("Status_当前状态", card, new Vector2(.5f, 1), new Vector2(0, -207), new Vector2(830, 100), font, 21);
             status.text = "选择目标后重置流程并回到开局位置，补齐此前各天。";
             var buttons = new Button[9];
@@ -84,6 +84,7 @@ namespace Demon.Slice.Editor
             var night = MakeButton("D08_Night_直接拾取入口", card, new Vector2(0, -268), new Vector2(820, 76), font,
                 "[0]  第 8 天夜间 · 湖岸 T07 待拾取");
             var close = MakeButton("Close_继续游戏", card, new Vector2(0, -359), new Vector2(820, 64), font, "继续当前游戏  /  Esc");
+            WireNavigation(buttons, night, close);
             menu.Configure(world, shade.gameObject, buttons, night, close, status);
             shade.gameObject.SetActive(false);
 
@@ -216,13 +217,29 @@ namespace Demon.Slice.Editor
             var outline = rect.gameObject.AddComponent<Outline>(); outline.effectColor = new Color(0, 0, 0, .6f);
             return text;
         }
+        internal static void WireNavigation(Button[] days, Button night, Button close)
+        {
+            for (int i = 0; i < days.Length; i++)
+            {
+                Link(days[i], i >= 3 ? days[i - 3] : null, i < 6 ? days[i + 3] : night,
+                    i % 3 > 0 ? days[i - 1] : null, i % 3 < 2 ? days[i + 1] : null);
+            }
+            Link(night, days[7], close, null, null);
+            Link(close, night, null, null, null);
+        }
+
+        static void Link(Button button, Button up, Button down, Button left, Button right)
+        {
+            button.navigation = new Navigation { mode = Navigation.Mode.Explicit, selectOnUp = up,
+                selectOnDown = down, selectOnLeft = left, selectOnRight = right };
+        }
+
         static Button MakeButton(string name, Transform parent, Vector2 position, Vector2 size, Font font, string text)
         {
             var rect = Rect(name, parent, new Vector2(.5f, .5f), position, size);
             var image = rect.gameObject.AddComponent<Image>(); image.color = new Color(.11f, .17f, .23f);
             var button = rect.gameObject.AddComponent<Button>(); button.targetGraphic = image;
             var colors = button.colors; colors.highlightedColor = new Color(.65f, .85f, 1); colors.pressedColor = new Color(.4f, .7f, .9f); button.colors = colors;
-            var navigation = button.navigation; navigation.mode = Navigation.Mode.None; button.navigation = navigation;
             Label("Label", rect, new Vector2(.5f, .5f), Vector2.zero, size - new Vector2(16, 8), font, 24).text = text;
             return button;
         }

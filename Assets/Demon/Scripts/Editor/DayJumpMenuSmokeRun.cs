@@ -21,6 +21,8 @@ namespace Demon.Slice.Editor
         GameSceneController world;
         DayJumpMenu menu;
         Keyboard keyboard;
+        Mouse mouse;
+        Vector2 buttonPoint;
         InputSettings.BackgroundBehavior oldBackground;
         InputSettings.EditorInputBehaviorInPlayMode oldEditorInput;
         bool oldRun, finished;
@@ -60,6 +62,7 @@ namespace Demon.Slice.Editor
                     InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
                     InputSystem.settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
                     keyboard = InputSystem.AddDevice<Keyboard>();
+                    mouse = InputSystem.AddDevice<Mouse>();
                     InputSystem.onAfterUpdate += MakeCurrent; MakeCurrent();
                     Press(Key.F8); Next(1, now);
                 }
@@ -74,7 +77,7 @@ namespace Demon.Slice.Editor
                     var results = new List<RaycastResult>(); EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = point }, results);
                     Require(results.Count > 0 && results[0].gameObject.GetComponentInParent<Button>() == button, "D8 button is not mouse-raycastable.");
                     ScreenCapture.CaptureScreenshot(Path.GetFullPath("Temp/DemonSliceReports/day-jump-menu.png"));
-                    Press(Key.W, Key.Enter); Next(2, now);
+                    Press(Key.W); Next(2, now);
                 }
                 else if (stage == 2 && Elapsed(now))
                 {
@@ -97,10 +100,41 @@ namespace Demon.Slice.Editor
                     Time.timeScale = .5f; menu.Open(); menu.Close();
                     Require(Time.timeScale == .5f, "Menu did not restore the previous time scale."); Time.timeScale = 1;
                     checks.Add("F8, mouse raycast, paused movement/time/confirm, Esc reading isolation and previous time-scale restoration passed.");
-                    // Button events are deterministic here; actual pointer input is verified separately in the Editor UI.
-                    menu.Open(); var button = menu.GetComponentsInChildren<Button>(true).Single(x => x.name == "D8");
+                    // Exercise the UI input module, raycaster, and Button press/release together.
+                    menu.Open();
+                    Require(EventSystem.current.currentSelectedGameObject?.name == "D1", "Day 1 did not receive initial keyboard focus.");
+                    Press(Key.RightArrow); Next(41, now);
+                }
+                else if (stage == 41 && Elapsed(now))
+                {
+                    Require(EventSystem.current.currentSelectedGameObject?.name == "D2", "Right arrow did not select day 2.");
+                    Press(Key.Enter); Next(42, now);
+                }
+                else if (stage == 42 && Elapsed(now))
+                {
+                    Require(!menu.IsOpen && world.Session.Clock.Day == 2, "Enter did not start the selected day.");
+                    checks.Add("Arrow navigation and Enter started day 2.");
+                    Release(); menu.Open(); var button = menu.GetComponentsInChildren<Button>(true).Single(x => x.name == "D8");
                     lastSession = world.Session;
-                    button.onClick.Invoke(); Next(10, now);
+                    buttonPoint = RectTransformUtility.WorldToScreenPoint(null, button.transform.position);
+                    InputSystem.QueueStateEvent(mouse, new MouseState { position = buttonPoint });
+                    Next(5, now);
+                }
+                else if (stage == 5 && Elapsed(now))
+                {
+                    InputSystem.QueueStateEvent(mouse, new MouseState { position = buttonPoint }.WithButton(MouseButton.Left));
+                    Next(6, now);
+                }
+                else if (stage == 6 && Elapsed(now))
+                {
+                    InputSystem.QueueStateEvent(mouse, new MouseState { position = buttonPoint });
+                    Next(7, now);
+                }
+                else if (stage == 7 && Elapsed(now))
+                {
+                    Require(world.Session != lastSession && world.Session.Clock.Day == 8, "Pointer click did not select day 8.");
+                    checks.Add("Pointer down/up selected day 8 while paused.");
+                    Next(10, now);
                 }
                 else if (stage == 10)
                 {
@@ -184,6 +218,7 @@ namespace Demon.Slice.Editor
         {
             InputSystem.onAfterUpdate -= MakeCurrent;
             if (keyboard != null) InputSystem.RemoveDevice(keyboard);
+            if (mouse != null) InputSystem.RemoveDevice(mouse);
             InputSystem.settings.backgroundBehavior = oldBackground; InputSystem.settings.editorInputBehaviorInPlayMode = oldEditorInput;
             Application.runInBackground = oldRun; Time.timeScale = 1; AudioListener.pause = false;
         }

@@ -1,3 +1,73 @@
+# 追逐怪物清晨刷新点（2026-11-13）
+
+[TASK-042](Tasks/TASK-042-morning-spawns.md) 已在正式雪地场景保存 D3–D8 每天独立的 Morning Spawns 点位，按当日起床时间生效。main@b94f864，工作区包含前序修改。
+
+# 选天菜单与标题（2026-11-13）
+
+[TASK-041](Tasks/TASK-041-day-menu-title.md) 已在正式场景验证 F8 菜单的鼠标和键盘选天。开场及产品名为 Demon Principles。main@b94f864，含之前未提交的修改。Windows 独立包尚未重新导出。
+
+# 雪地场景的石板定位、箱锁刻纹和追逐音效（2026-11-13）
+
+[TASK-040](Tasks/TASK-040-tablet-beacons-and-pursuit.md) 修改 DemonNineDay_Art。七个光柱已绑定对应实体石板，箱 A 已改用三个符文，导航敌人已接入近身尖叫。main@b94f864，工作区含之前未提交的场景和美术调整。测试结果与验收范围见任务记录。
+
+# Figma 英文报告补全（2026-11-13）
+
+[TASK-039](Tasks/TASK-039-figma-report-completion.md) 已直接修改原 Figma 文件 `tJzzkybjun5u786kNH2vtT`：修订 1～11 frame，追加 12～22，保留深色风格与真实 AI 截图，三张核心类图均改为可编辑图形。已补原始设计/假设、核心职责、运行、历史验证及限制、两人独立 Reflection 待填页、真实 Git/AI 链接和提交核对。逐页查看并检查 308 个可见文字节点，无越页/裁切问题。截图与前后结构记录在 `output/Figma-Report-Completion-20261113`。个人信息、反思、真实阶段冻结/Tag 证据、后续 AI 记录及最终交付版本验收均明确为 To be confirmed。main@b94f864；本任务未修改游戏或创建 Git 记录。旧英文讲稿仍对应最初 11 页，不包含新增报告补充页。导出报告时选择 frame 1～22 并按数字排序。下面的游戏交接保持有效。
+
+# 英文雪地值守（2026-11-13）
+
+[TASK-038](Tasks/TASK-038-snow-english.md) 已接入正式 Art 场景。玩家文本已英文化，8 分钟一天，第二天早上起播放音乐，F8 输入及跨日跳转已验证。main 工作区保留前序修改，未提交。编辑器验收见任务记录。
+
+# Figma 报告核查与英文讲稿（2026-11-13）
+
+[TASK-037](Tasks/TASK-037-figma-report-review-and-script.md) 已完成。只读检查 Figma 的 1～11 frame，并对照作业原文及源码。中文逐页意见为 `Docs/Presentation/Demon_Report_Compliance_Review_ZH.txt`；完整英文讲稿为同目录 `Demon_English_Presentation_Script.docx` / `.txt`。讲稿 1,382 词，附建议 A/B 分工和约 3 分钟现场操作提示，Word 最终 6 页均已渲染检查。报告仍需补初始假设、验证/限制、分别署名的 Reflection、真实 Tag/个人分支证据及必要后续 AI 日志。未修改 Figma 或游戏；下面的游戏交接继续有效。
+
+# 正式雪地启动与阅读（2026-11-13）
+
+[TASK-036](Tasks/TASK-036-reading-views.md) 修正风铃缺失导致的启动失败、模型附带摄像机覆盖玩家画面、查看机位与玩家文案。main@b94f864，本地未提交，保留先前场景编辑。打开 DemonNineDay_Art，从第 1 天木屋纸条 B 验证阅读。箱 B 内容在终局首次交换后阅读。
+
+# 正式森林与符文（2026-11-13）
+
+[TASK-034](Tasks/TASK-034-forest-and-runes.md) 已在正式 Art 场景更新风铃布点、两类脚印、湖影和 T04/T07。T04 的语句已经确认；旧交接中的待确认事项已结束。main@b94f864，改动保留在本地工作区。复查入口为 D2 引导、D5 湖岸、T05 解锁后的森林、D8 拾取 T07 后的背包原刻对照。
+
+# 英文提交 README 与 AI 记录（2026-11-13）
+
+[TASK-035](Tasks/TASK-035-submission-readme-and-ai-records.md) 已完成。项目根目录 README.md 为英文提交说明；完整截止记录位于 `Docs/AI-Logs/Current-User/Through-2026-11-10`，从原 ZIP 原样复制 159 个文件，打开 index.html 阅读。英文索引为 `Docs/AI-Logs/README.md`。组号/成员/个人分支按用户要求暂填 To be confirmed。已核对文件字节、截止时间、消息数量和 43 个文档链接；README 如实记录缺少 Stage 标签、正式报告/声明、队友 AI 记录及截止时间后的记录等补齐事项。本次仅编写文档与复制证据，没有改游戏、提交或推送 Git。下面的游戏交接继续有效。
+
+# Demon 对话导出（2026-11-13）
+
+[TASK-033](Tasks/TASK-033-ai-conversation-export.md) 已完成：导出截至北京时间 2026-11-10 24:00 的项目全部可访问对话，6 个聊天、500 条文字记录、120 次图片展示，恢复 130 份去重附件。ZIP 位于 `output/Demon-AI-Export/Demon_AI_Conversations_until_2026-11-10_2400_CST.zip`；解压后打开 index.html。两份最初上传的 PDF 原文件缺失，已在清单注明；原始对话正文完整保留。源记录逐条、截止时间、附件、离线链接及 ZIP 已核查。未发布 Git，未修改游戏文件。以下游戏交接保持有效。
+
+# 正式雪地启动与光雾（2026-11-13）
+
+[TASK-032](Tasks/TASK-032-snow-lighting.md) 恢复 BoxB 封印引用并验证正式场景 Play Mode。风铃预制体、全场与湖面雾、手电与太阳已接入，湖岸旧台已移除。main@b94f864，本地未提交，保留前序任务和美术改动。可打开 DemonNineDay_Art，在 D1 林地、湖边观察雾和手电，在 D7 检查固定日蚀。T04 符文仍待用户复核。
+
+# 当前交接 — 雪地物品、背包及石板光束（2026-11-13）
+
+[TASK-030](Tasks/TASK-030-snow-items.md) 已在正式 Art 场景接入并验证。main@b94f864，保留前序修改，未提交。T04 符文定义等待用户复核；其余检查结果与复现位置见任务记录。
+
+# 英文课程演示稿　2026-11-13
+
+[TASK-031](Tasks/TASK-031-english-course-presentation.md) 已完成：11 页英文演示稿，包含游戏介绍、三个 Stage 的可编辑核心类图、两次扩展对比、真实对话截图、英文讲稿与来源链接。Spaces 页面为 `page_9906d8b628dc8191be6aacc8b02140c8`，可在查看器中导出 PowerPoint。全部页面已渲染并逐页检查。本次没有修改游戏代码或资产，未将 b94f864 之后的本地玩法改动纳入阶段图。下面的游戏交接继续保留。
+
+# 七块石板现场与背包观察　2026-11-12
+
+[TASK-029](Tasks/TASK-029-tablet-inspection.md) 已完成，正式场景已保存，main@b94f864，未提交。下一步可按 F8 选 D2 看第一块石板，在背包中打开对照；D8 夜间可验证最后一块。既有湖影和道具改动仍在工作区。
+
+# 三阶段架构展示材料 2026-11-12
+
+[TASK-028](Tasks/TASK-028-stage-architecture-evidence.md) 已完成。以 a37036c、b31abc5、b94f864 分别整理三个展示阶段，输出三张核心类图和两份完整变化清单，入口见 [Stages 总览](Diagrams/Stages/README.md)。Stage 编号按既有已发布快照整理，课程正式冻结与老师需求发布时间需要独立记录。当前远程尚无阶段 Tag。
+
+本轮从 Git 固定提交提取源码并做静态核查，436 个工程文件保持原哈希。没有将当前湖影/道具的未提交改动纳入 Stage 3。下面的玩法/美术交接继续有效。
+
+# 当前交接 — 正式雪地场景湖影与道具（2026-11-12）
+
+已接入湖中黑影、逐阶段靠岸和场景道具模型。修改未提交，main 基线 b94f864。验证范围和查看方法见 [TASK-027](Tasks/TASK-027-lake-shadow-props.md)。以下为前次交接。
+
+# 黑影外观预制体 — 2026-11-12
+
+[TASK-026](Tasks/TASK-026-shadow-demon.md) 已完成独立可拖放预制体和 Play Mode 视觉验证。下一步可由场景作者拖入关卡检查实际背景和曝光。工作基线 main@b94f864，此项未提交。
+
 # 当前交接 — 恶魔脚印清理
 
 更新于 2026-11-12（Asia/Shanghai）。主线基线为 GitHub 合并提交 8033386，父提交为 0685e21（main）和 d25a332（art）。经用户确认，最终场景保留这次合并后的布景和植被材质。清理范围、验证与复测步骤见 [TASK-025](Tasks/TASK-025-footprint-merge.md)。在正式场景按 F8 选 D3，走到木屋外并进入恶魔视线即可查看脚印。完整九天连续实体键鼠试玩仍属主线人工验收项。

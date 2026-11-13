@@ -52,15 +52,18 @@ namespace Demon.Slice
             bool directing = finale && finale.IsDirecting;
             clockText.gameObject.SetActive(!directing);
             int minute = (int)session.Clock.MinuteOfDay;
-            string clock = $"{(mainRoute ? "" : "灰盒样例  ")}第 {session.Clock.Day} 天  {minute / 60:00}:{minute % 60:00}\n" +
-                $"箱子 B：{(session.BoxSeal == 1 ? "封闭" : "解封")}　湖：{(session.LakeSeal == 1 ? "封印" : "开启")}";
-            if (campaign) clock += $"\n石板记录 {campaign.Progress.FoundCount}/6　{campaign.Title}";
+            string clock = $"Day {session.Clock.Day}   {minute / 60:00}:{minute % 60:00}";
+            if (!mainRoute)
+            {
+                clock += $"\nChest B: {(session.BoxSeal == 1 ? "sealed" : "open")}   Lake: {(session.LakeSeal == 1 ? "sealed" : "open")}";
+                if (campaign) clock += $"\nTablets {campaign.Progress.FoundCount}/6   {campaign.Title}";
+            }
             if (lastClock != clock) { clockText.text = clock; lastClock = clock; }
             messageText.text = state.Message;
             messageText.gameObject.SetActive(!player.Reading && !directing);
-            focusText.text = player.IsPickingUp ? $"按住 E 拾取　{player.CurrentPickup.Attempt.Progress:P0}　Esc 放下" : player.FocusPrompt;
+            focusText.text = player.IsPickingUp ? $"Hold E to lift: {player.CurrentPickup.Attempt.Progress:P0}   Esc to release" : player.FocusPrompt;
             heldText.text = player.InspectingTablet ?
-                $"手中符文：{RuneTablet.RuneLabel(player.ActiveTablet.Board.Held)}\n点击符文盘取符文，点击槽位交换。Enter 确认，Esc 退出。" : "";
+                "Choose a stone, then a socket. Enter to set it. Esc to leave." : "";
             readingPanel.SetActive(player.Reading && !session.Descended);
             if (player.Reading && readingText.text != state.ReadingText) readingText.text = state.ReadingText;
             endingPanel.SetActive(state.EndingPresented);

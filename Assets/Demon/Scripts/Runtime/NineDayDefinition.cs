@@ -36,6 +36,6 @@ namespace Demon.Slice
         [Range(1, 9)] public int FinalTabletDay = 8;
         [Tooltip("T07 appears by clock time, even during the permanent night. Does not itself reserve time.")]
         [Range(0, 23.9f)] public float FinalTabletHour = 22;
-        [TextArea(2, 4)] public string FirstNightMessage = "暴风雪中的湖发生了变化。封印已开启。\n（当前为流程占位，尚无邪教徒演出。）";
+        [TextArea(2, 4)] public string FirstNightMessage = "Ice cracks out on the lake.";
     }
 }

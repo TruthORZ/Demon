@@ -44,6 +44,12 @@ namespace Demon.Slice
         {
             if (!world) return;
             RefreshClockState();
+            for (int i = 0; i < fixedTablets.Length; i++)
+            {
+                var t = fixedTablets[i];
+                if (t.CollectPhysicalTablet && Progress.Found(i) && !world.Player.InspectingAt(t.Observation) && t.gameObject.activeSelf)
+                    t.gameObject.SetActive(false);
+            }
         }
         public void RefreshClockState() { EvaluateFirstNight(); RefreshFinalTablet(); }
         public void RefreshFinalTablet()
@@ -71,9 +77,17 @@ namespace Demon.Slice
             if (!Progress.Available(index, world.Session.Clock.Day) || world.Session.Descended || (index == 5 && world.Cipher && !world.Cipher.Acquired)) return;
             Progress.Discover(index, world.Session.Clock.Day);
             var tablet = definition.Tablets[index];
-            string node = tablet.DateNodeDay > 0 ? "日期节点：D" + tablet.DateNodeDay + " 00:00（" +
-                (world.Session.Clock.Day >= tablet.DateNodeDay ? "已到达" : "尚未到达") + "）" : "工具机制记录";
-            world.ReadDocument(tablet.Title + "\n" + node + "\n\n" + tablet.Record + "\n\nEsc 放下石板记录。", view);
+            var physical = fixedTablets[index];
+            if (physical.CollectPhysicalTablet)
+            {
+                physical.gameObject.SetActive(true);
+                world.SetMessage(tablet.Title + "   Esc · Stow tablet");
+                world.Player.EnterInspectionView(physical.Observation);
+                return;
+            }
+            string node = tablet.DateNodeDay > 0 ? "Marked date: Day " + tablet.DateNodeDay + " 00:00（" +
+                (world.Session.Clock.Day >= tablet.DateNodeDay ? "passed" : "still to come") + "）" : "Tool notes";
+            world.ReadDocument(tablet.Title + "\n" + node + "\n\n" + tablet.Record + "\n\nEsc · Put away", view);
         }
         public void AcquireExchangeTablet(Transform view)
         {

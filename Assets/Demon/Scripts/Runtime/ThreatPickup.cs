@@ -10,7 +10,7 @@ namespace Demon.Slice
         [SerializeField] Transform closeView;
         [SerializeField] GameObject itemVisual;
         [SerializeField, Min(.1f)] float holdSeconds = 1.2f;
-        [SerializeField] string itemName = "练习碎片";
+        [SerializeField] string itemName = "Practice shard";
         [SerializeField] UnityEvent onCollected = new UnityEvent();
         Func<bool> requestBegin;
         Action collected;
@@ -21,7 +21,7 @@ namespace Demon.Slice
         public Transform CloseView => closeView;
         public float HoldSeconds => holdSeconds;
         public int CollectionCount { get; private set; }
-        public override string Prompt => "按住 E 拾取" + itemName;
+        public override string Prompt => "Hold E to lift" + itemName;
         public void Configure(GameSceneController owner, Transform view, GameObject visual)
         { world = owner; closeView = view; itemVisual = visual; }
         void Awake()
@@ -35,7 +35,7 @@ namespace Demon.Slice
         {
             if (!isActiveAndEnabled || world.Session.Descended || Attempt.Active || Attempt.Completed ||
                 (requestBegin != null && !requestBegin()) || !Attempt.Begin()) return;
-            world.SetMessage("按住 E 完成拾取；松开或 Esc 放下。伸手时无法继续照射。");
+            world.SetMessage("Hold E to lift. Release E or press Esc to set it down. You must lower the torch to reach it.");
             player.EnterPickupView(this, closeView);
         }
         public void TickHeld(bool held, float seconds)
@@ -44,11 +44,11 @@ namespace Demon.Slice
             if (Attempt.Advance(seconds, held))
             {
                 CollectionCount++; itemVisual.SetActive(false);
-                world.SetMessage(itemName + "已取得。"); world.Player.ExitCloseView();
+                world.SetMessage(itemName + " collected."); world.Player.ExitCloseView();
                 collected?.Invoke();
                 onCollected.Invoke(); // Listeners may disable the item or load another scene.
             }
-            else if (!held) { world.SetMessage("已放下，靠近后可以重新拾取。"); world.Player.ExitCloseView(); }
+            else if (!held) { world.SetMessage(" set down. You can try again."); world.Player.ExitCloseView(); }
         }
         public bool Cancel(bool interrupted) => Attempt != null && Attempt.Cancel(interrupted);
         void OnDisable()

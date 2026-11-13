@@ -16,7 +16,7 @@ namespace Demon.Slice
         [Min(0)] public float LightIntensity = 14;
         public Color BeamColor = new Color(.72f, .9f, 1);
         [Min(0)] public float VaneDegreesPerSecond = 100;
-        [TextArea(2, 4)] public string ReadyText = "T06 · 按住鼠标右键，稳定照住雪痕区域。\n移开、遮挡或超距后会恢复运动。";
-        [TextArea(2, 4)] public string LockedText = "运动已交换：雪痕停止，风向标转动。\n保持照射；转身或进入近景会失锁。";
+        [TextArea(2, 4)] public string ReadyText = "Keep the beam on the tracks. Break the beam and they will move again.";
+        [TextArea(2, 4)] public string LockedText = "The tracks have stopped. Keep the light steady.";
     }
 }

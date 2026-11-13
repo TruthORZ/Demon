@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace Demon.Slice
 {
@@ -17,6 +18,8 @@ namespace Demon.Slice
         [SerializeField] Key toggleKey = Key.F8;
         [SerializeField] bool availableInPlayer = true;
         bool open, loading, ownsPause;
+        GameObject previousSelection;
+        bool previousPlayerMenu;
         float previousScale;
         bool previousAudioPause, previousCursorVisible;
         CursorLockMode previousCursorLock;
@@ -61,22 +64,31 @@ namespace Demon.Slice
 
         public void Open()
         {
-            if (open || loading || !world || world.Session == null || (world.Playthrough && world.Playthrough.BlocksMenu)) return;
+            if (open || loading || !world || world.Session == null) return;
+            if (world.Playthrough) { world.Playthrough.PrepareDaySelection(); if (world.Playthrough.Waiting) return; }
             open = true;
             previousScale = Time.timeScale; previousAudioPause = AudioListener.pause;
             previousCursorLock = Cursor.lockState; previousCursorVisible = Cursor.visible;
             ownsPause = true; Time.timeScale = 0; AudioListener.pause = true;
+            previousPlayerMenu = world.Player.MenuOpen;
             world.Player.SetMenuOpen(true);
             Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
             panel.SetActive(true);
-            statusText.text = "当前第 " + world.Session.Clock.Day + " 天 · 石板记录 " + world.Campaign.Progress.FoundCount + "/6\n选择目标后重置流程并回到开局位置，补齐此前各天，目标当天留待游玩。";
+            if (EventSystem.current)
+            {
+                previousSelection = EventSystem.current.currentSelectedGameObject;
+                dayButtons[Mathf.Clamp(world.Session.Clock.Day - 1, 0, dayButtons.Length - 1)].Select();
+            }
+            statusText.text = "Day " + world.Session.Clock.Day + " · Tablets recovered: " + world.Campaign.Progress.FoundCount + "/6\nChoose a day to begin at the cabin with earlier watches complete.";
         }
 
         public void Close()
         {
             if (!open) return;
             open = false; panel.SetActive(false); RestorePause();
-            world.Player.SetMenuOpen(false);
+            world.Player.SetMenuOpen(previousPlayerMenu);
+            if (EventSystem.current) EventSystem.current.SetSelectedGameObject(previousSelection && previousSelection.activeInHierarchy ? previousSelection : null);
+            previousSelection = null;
             Cursor.lockState = previousCursorLock; Cursor.visible = previousCursorVisible;
         }
 
@@ -85,17 +97,17 @@ namespace Demon.Slice
         void Request(int day, bool night)
         {
             if (loading || day < 1 || day > 9 || !world || world.Session == null) return;
-            loading = true; Close(); world.Player.SetMenuOpen(true);
+            loading = true; Close();
             try
             {
                 world.Restart();
                 CompletedDayReplay.Run(world, day, night);
-                if (!world.Session.Descended) world.SetMessage("已跳转到第 " + day + " 天" + (night ? "夜间" : "") + "，此前各天已按完整路线补齐。");
+                if (!world.Session.Descended) world.SetMessage("Day " + day + " " + (night ? "after dark" : "") + " · Previous watches complete.");
             }
             catch (Exception error)
             {
                 loading = false; Open();
-                statusText.text = "前置流程补齐失败，请检查 Console。可选择第 1 天重新开始。\n" + error.Message;
+                statusText.text = "Could not resume this watch. Restart from Day 1.\n" + error.Message;
                 Debug.LogException(error, this);
             }
             finally { loading = false; if (!open) world.Player.SetMenuOpen(false); }

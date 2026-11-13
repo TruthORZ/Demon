@@ -70,3 +70,4 @@ Assets/Demon/Data/SnowIntegrationNavigation.asset binary
 
 # Preserve native binary footprint test terrain.
 Assets/SnowSystem/FootPrint/Generated/FootprintTestTerrain.asset binary
+"Assets/ImportAsset/SnowEnviroment/Nature Pack - Winter Environment/Scenes/TerrainData_6d506cc6-6b91-4f44-b16b-cf223b8967b8.asset" binary

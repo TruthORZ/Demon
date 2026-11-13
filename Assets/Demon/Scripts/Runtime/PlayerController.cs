@@ -22,6 +22,9 @@ namespace Demon.Slice
         Quaternion spawnRotation;
         ViewMode mode;
         float pitch, verticalSpeed;
+        float explorationNearPlane;
+        Rect explorationViewport;
+        [SerializeField, Range(.4f, 1)] float readingViewportWidth = 1;
         int menuClosedFrame = -1;
         ICloseViewInteraction activeInteraction;
         ThreatPickup activePickup;
@@ -34,6 +37,8 @@ namespace Demon.Slice
         public Camera ViewCamera => viewCamera;
         public bool InspectingTablet => mode == ViewMode.Interaction && activeInteraction is RuneTablet;
         public RuneTablet ActiveTablet => activeInteraction as RuneTablet;
+        public bool ReadingAt(Transform anchor) => mode == ViewMode.Reading && closeAnchor == anchor;
+        public bool InspectingAt(Transform anchor) => mode == ViewMode.Inspect && closeAnchor == anchor;
         public bool Reading => mode == ViewMode.Reading;
         public string FocusPrompt { get; private set; } = "";
 
@@ -48,6 +53,8 @@ namespace Demon.Slice
             if (!body || !actions)
             {
                 body = GetComponent<CharacterController>();
+                explorationNearPlane = viewCamera.nearClipPlane;
+                explorationViewport = viewCamera.rect;
                 spawnPosition = transform.position; spawnRotation = transform.rotation;
                 homePosition = viewCamera.transform.localPosition; homeRotation = viewCamera.transform.localRotation;
                 actions = Instantiate(inputActions);
@@ -179,7 +186,14 @@ namespace Demon.Slice
             if (mode == ViewMode.Pickup && next != ViewMode.Pickup) { activePickup.Cancel(false); activePickup = null; }
             if (next != ViewMode.Interaction) activeInteraction = null;
             closeAnchor = anchor;
+            var framing = anchor.GetComponent<InspectionFraming>();
+            viewCamera.nearClipPlane = framing && next != ViewMode.Sequence ? framing.NearPlane : explorationNearPlane;
+            var viewport = explorationViewport;
+            if (next == ViewMode.Reading) viewport.width *= readingViewportWidth;
+            viewCamera.rect = viewport;
             mode = next;
+            if (next != ViewMode.Sequence && next != ViewMode.Ending)
+                viewCamera.transform.SetPositionAndRotation(anchor.position, anchor.rotation);
             LockCursor(false);
         }
 
@@ -189,6 +203,9 @@ namespace Demon.Slice
             if (mode == ViewMode.Reading && world.OnReadingClosed()) return;
             if (mode == ViewMode.Pickup) { activePickup.Cancel(false); activePickup = null; }
             mode = ViewMode.Returning;
+            viewCamera.rect = explorationViewport;
+            viewCamera.nearClipPlane = explorationNearPlane;
+            viewCamera.transform.SetLocalPositionAndRotation(homePosition, homeRotation);
             closeAnchor = null;
             activeInteraction = null;
             LockCursor(true);
@@ -218,6 +235,8 @@ namespace Demon.Slice
             if (mode == ViewMode.Pickup && activePickup) activePickup.Cancel(false);
             activePickup = null; activeInteraction = null; closeAnchor = null;
             mode = ViewMode.Explore; FocusPrompt = ""; verticalSpeed = 0;
+            viewCamera.rect = explorationViewport;
+            viewCamera.nearClipPlane = explorationNearPlane;
             viewCamera.transform.SetLocalPositionAndRotation(homePosition, homeRotation);
             pitch = Mathf.DeltaAngle(0, homeRotation.eulerAngles.x);
             LockCursor(true);

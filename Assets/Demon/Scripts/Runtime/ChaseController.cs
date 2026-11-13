@@ -24,7 +24,14 @@ namespace Demon.Slice
         CompletePlaythrough main;
         [SerializeField] AudioSource misleadingVoice;
         [SerializeField] AudioClip laughClip;
+        [SerializeField] AudioSource proximityVoice;
+        bool heardNearby;
+        float nextScream;
+
         public bool Tracking => tracking;
+        [Tooltip("One outdoor spawn per pursuit morning, starting on the first motion day.")]
+        [SerializeField] Transform[] morningSpawns;
+        int lastSpawnDay;
         Vector3 authoredPosition;
         Quaternion authoredRotation;
         public ClosePassGate Gate { get; private set; }
@@ -55,10 +62,40 @@ namespace Demon.Slice
             }
             replanAt = stepAt = missingNavSeconds = unseenSeconds = laughAt = 0; tracking = false; main = (messages as GameSceneController)?.Playthrough; retreating = false; Phase = ChasePhase.Dormant;
             if (misleadingVoice) misleadingVoice.Stop();
+            if (proximityVoice) proximityVoice.Stop();
+            lastSpawnDay = 0; heardNearby = false; nextScream = 0;
             session = rules; player = actor; tether = motion; feedback = messages; Gate = new ClosePassGate(definition.ClosePassMetres, definition.ClosePassCooldownSeconds);
             agent.speed = definition.MetresPerSecond; agent.acceleration = definition.AccelerationMetresPerSecondSquared; agent.angularSpeed = definition.AngularDegreesPerSecond;
             PursuitReset?.Invoke();
         }
+        internal void RefreshMorningSpawn(float wakeHour)
+        {
+            int day = session.Clock.Day;
+            int index = day - tether.MotionDay;
+            if (day == lastSpawnDay || index < 0 || morningSpawns == null || index >= morningSpawns.Length ||
+                session.Clock.MinuteOfDay < wakeHour * 60 || session.LakeSeal != 0) return;
+
+            lastSpawnDay = day;
+            Transform marker = morningSpawns[index];
+            if (!marker || !NavMesh.SamplePosition(marker.position, out var ground, 2f, agent.areaMask) || main.InsideCabin(ground.position))
+                throw new InvalidOperationException($"Day {day} needs an outdoor morning spawn on the enemy NavMesh.");
+            Stop();
+            if (agent.isActiveAndEnabled)
+            {
+                if (!agent.Warp(ground.position)) throw new InvalidOperationException($"Could not place enemy at the day {day} spawn.");
+                agent.ResetPath();
+            }
+            else agent.transform.position = ground.position;
+            agent.transform.rotation = marker.rotation;
+            tracking = retreating = heardNearby = false;
+            unseenSeconds = nextScream = replanAt = stepAt = 0;
+            if (proximityVoice) proximityVoice.Stop();
+            if (misleadingVoice) misleadingVoice.Stop();
+            Gate.Restore(0, Gate.PassCount);
+            Phase = ChasePhase.Waiting;
+            PursuitReset?.Invoke();
+        }
+
         void Update()
         {
             if (Gate == null || player.MenuOpen) return;
@@ -81,6 +118,17 @@ namespace Demon.Slice
             if (!tether.DemonCanMove) { Phase = ChasePhase.Frozen; Stop(); return; }
             agent.isStopped = false;
             float distance = Vector3.Distance(agent.transform.position, player.transform.position);
+            if (main && proximityVoice && proximityVoice.clip)
+            {
+                float range = main.Definition.PursuitNoticeMetres;
+
+                if (!retreating && !heardNearby && distance <= range && Time.time >= nextScream && !proximityVoice.isPlaying)
+                {
+                    proximityVoice.Play();
+                    heardNearby = true;
+                    nextScream = Time.time + Mathf.Max(8, proximityVoice.clip.length);
+                }
+            }
             if (Gate.TryPass(distance, HasSightToPlayer(), true))
             {
                 bool interrupted = player.InterruptPickup();
@@ -121,8 +169,9 @@ namespace Demon.Slice
                 if (NavMesh.SamplePosition(main.CabinExit, out var outside, 3, agent.areaMask) && !main.InsideCabin(outside.position)) agent.Warp(outside.position);
                 tracking = false; Phase = ChasePhase.Waiting; return false;
             }
-            if (main.InsideCabin(player.transform.position)) { tracking = false; retreating = false; unseenSeconds = 0; Phase = ChasePhase.Waiting; Stop(); return false; }
+            if (main.InsideCabin(player.transform.position)) { heardNearby = false; tracking = false; retreating = false; unseenSeconds = 0; Phase = ChasePhase.Waiting; Stop(); return false; }
             float distance = Vector3.Distance(agent.transform.position, player.transform.position);
+            if (distance > plan.PursuitNoticeMetres * 1.3f) heardNearby = false;
             bool sight = HasSightToPlayer();
             if (tracking)
             {

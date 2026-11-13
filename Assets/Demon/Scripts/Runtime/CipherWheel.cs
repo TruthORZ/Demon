@@ -14,7 +14,7 @@ namespace Demon.Slice
         public CipherDefinition Definition => definition;
         public Transform CloseView => closeView;
         public Transform[] Landmarks => (Transform[])landmarks.Clone();
-        public override string Prompt => "查看固定方位数字轮盘";
+        public override string Prompt => "Examine the bearing dial";
         public void Configure(CipherDefinition data, Transform[] objects, Transform view, TextMesh[] labels)
         { definition = data; landmarks = objects; closeView = view; digitLabels = labels; }
         public void Initialize(GameSceneController controller)

@@ -9,8 +9,11 @@ namespace Demon.Slice
         [SerializeField] Transform closeView;
         [SerializeField] RuneTablet editableTablet;
         public void ConfigureEditable(RuneTablet tablet) => editableTablet = tablet;
+        [SerializeField] bool collectPhysicalTablet;
+        public bool CollectPhysicalTablet => collectPhysicalTablet;
+        public Transform Observation => closeView;
         public int Index => index;
-        public override string Prompt => editableTablet ? editableTablet.Prompt : (index == 4 ? "查看监听石板记录 T" : "查看已固化石板 T") + (index + 1).ToString("00");
+        public override string Prompt => editableTablet ? editableTablet.Prompt : (index == 4 ? "Examine listening tablet T" : "Examine tablet T") + (index + 1).ToString("00");
         public void Configure(NineDayFlow owner, int number, Transform anchor)
         { flow = owner; index = number; closeView = anchor; }
         public override void Use(PlayerController player)
