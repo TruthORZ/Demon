@@ -1,0 +1,384 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2200" height="1460" viewBox="0 0 2200 1460" role="img"><title>Stage 1 基础九天规则版</title><desc>依据固定 Git 提交提取的核心类图，展示本阶段核心类型及主要关系，省略连线不表示没有其他依赖。</desc><rect width="100%" height="100%" fill="white"/><g font-family="Microsoft YaHei,Arial,sans-serif" fill="#14273b"><text x="44" y="62" font-size="34" font-weight="700">Stage 1 · 基础九天规则版</text><text x="44" y="103" font-size="19">a37036c · 2026-10-28 · 运行时源码 24 个类型；本图选择 18 个核心类型</text><line x1="44" y1="145" x2="109" y2="145" stroke="#586777" stroke-width="2" /><path d="M 109 145 l -13 -7 v 14 z" fill="white" stroke="#586777" stroke-width="2"/><text x="124" y="152" font-size="19">继承　实线＋空心三角</text><line x1="579" y1="145" x2="644" y2="145" stroke="#586777" stroke-width="2" stroke-dasharray="7 4"/><path d="M 644 145 l -13 -7 v 14 z" fill="white" stroke="#586777" stroke-width="2"/><text x="659" y="152" font-size="19">实现　虚线＋空心三角</text><line x1="1114" y1="145" x2="1179" y2="145" stroke="#586777" stroke-width="2" /><path d="M 1168 138 l 11 7 l -11 7" fill="none" stroke="#586777" stroke-width="2"/><text x="1194" y="152" font-size="19">关联　实线＋普通箭头</text><line x1="1649" y1="145" x2="1714" y2="145" stroke="#586777" stroke-width="2" stroke-dasharray="7 4"/><path d="M 1703 138 l 11 7 l -11 7" fill="none" stroke="#586777" stroke-width="2"/><text x="1729" y="152" font-size="19">依赖　虚线＋普通箭头</text><text x="44" y="196" font-size="18">绿色为纯 C# 规则；蓝色为接口；灰色为场景组件；浅黄为配置。新增 / 修改 / 延续按上一阶段源码对照。</text><text x="44" y="225" font-size="17" fill="#536476">保留各版本真实类名。仅展示主要关系，完整类型和变化清单见配套报告。</text><g transform="translate(310.3702090592335 244) scale(1.9425087108013936)"><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(8.64 565.64)">
+<title>G</title>
+<!-- SliceSceneController&#45;&gt;SliceSession -->
+<g id="edge1" class="edge">
+<title>SliceSceneController&#45;&gt;SliceSession</title>
+<g id="a_edge1"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceSceneController.cs:24">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M115.78,-345.24C154.24,-380.17 219,-439 219,-439 219,-439 220.25,-439.45 222.44,-440.25"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="230.27,-443.1 220.97,-443.79 227.52,-442.15 222.27,-440.24 222.28,-440.19 222.3,-440.15 227.55,-442.06 223.59,-436.6 230.27,-443.1"/>
+</a>
+</g>
+</g>
+<!-- SliceSceneController&#45;&gt;SlicePlayer -->
+<g id="edge5" class="edge">
+<title>SliceSceneController&#45;&gt;SlicePlayer</title>
+<g id="a_edge5"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceSceneController.cs:10">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M151.96,-345.39C185.22,-360.03 219,-375.5 219,-375.5 219,-375.5 225.25,-377.7 234.3,-380.97"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="242.05,-383.79 232.75,-384.48 239.3,-382.85 234.04,-380.93 234.06,-380.88 234.08,-380.84 239.33,-382.75 235.37,-377.29 242.05,-383.79"/>
+</a>
+</g>
+</g>
+<!-- SliceSceneController&#45;&gt;SliceHud -->
+<g id="edge6" class="edge">
+<title>SliceSceneController&#45;&gt;SliceHud</title>
+<g id="a_edge6"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceSceneController.cs:13">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M174.22,-332.12C196.1,-335.19 219.18,-338.43 239.58,-341.3"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="247.73,-342.45 238.78,-345.05 244.85,-342.09 239.31,-341.31 239.32,-341.26 239.32,-341.21 244.86,-341.99 239.85,-337.47 247.73,-342.45"/>
+</a>
+</g>
+</g>
+<!-- SliceSceneController&#45;&gt;SlicePresentation -->
+<g id="edge7" class="edge">
+<title>SliceSceneController&#45;&gt;SlicePresentation</title>
+<g id="a_edge7"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceSceneController.cs:12">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M174.22,-308.29C187.95,-306.42 202.15,-304.49 215.87,-302.63"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="223.94,-301.53 216.04,-306.47 221.07,-301.98 215.53,-302.73 215.52,-302.68 215.51,-302.63 221.05,-301.88 215.01,-298.89 223.94,-301.53"/>
+</a>
+</g>
+</g>
+<!-- SliceSceneController&#45;&gt;NineDayFlow -->
+<g id="edge17" class="edge">
+<title>SliceSceneController&#45;&gt;NineDayFlow</title>
+<g id="a_edge17"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceSceneController.cs:15">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M145.46,-294.56C180.66,-278.98 219,-262 219,-262 219,-262 220.25,-261.55 222.44,-260.75"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="230.27,-257.9 223.59,-264.4 227.55,-258.94 222.3,-260.85 222.28,-260.81 222.27,-260.76 227.52,-258.85 220.97,-257.21 230.27,-257.9"/>
+</a>
+</g>
+</g>
+<!-- SliceSceneController&#45;&gt;SliceFinaleSequence -->
+<g id="edge21" class="edge">
+<title>SliceSceneController&#45;&gt;SliceFinaleSequence</title>
+<g id="a_edge21"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceSceneController.cs:16">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M116.43,-294.61C154.95,-260.2 219,-203 219,-203 219,-203 221.29,-202.14 225.11,-200.7"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="232.88,-197.79 226.27,-204.36 230.17,-198.86 224.94,-200.82 224.92,-200.78 224.9,-200.73 230.14,-198.76 223.57,-197.19 232.88,-197.79"/>
+</a>
+</g>
+</g>
+<!-- SliceSession&#45;&gt;GameClock -->
+<g id="edge2" class="edge">
+<title>SliceSession&#45;&gt;GameClock</title>
+<g id="a_edge2"><a xlink:title="association | Assets/Demon/Scripts/Runtime/Domain/SliceRules.cs:157">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M373.72,-490.07C393.07,-495.87 414.2,-502.21 434.03,-508.16"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="442.06,-510.57 432.82,-511.79 439.26,-509.78 433.91,-508.17 433.92,-508.13 433.94,-508.08 439.29,-509.69 435.02,-504.46 442.06,-510.57"/>
+</a>
+</g>
+</g>
+<!-- SliceSession&#45;&gt;RuneBoardModel -->
+<g id="edge3" class="edge">
+<title>SliceSession&#45;&gt;RuneBoardModel</title>
+<g id="a_edge3"><a xlink:title="association | Assets/Demon/Scripts/Runtime/Domain/SliceRules.cs:158">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M373.59,-477.25C403.22,-480.73 431,-484 431,-484 431,-484 598,-484 598,-484 598,-484 620.26,-475.13 645.64,-465.02"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="653.48,-461.9 647,-468.6 650.79,-463.02 645.6,-465.09 645.58,-465.05 645.56,-465 650.75,-462.93 644.16,-461.49 653.48,-461.9"/>
+</a>
+</g>
+</g>
+<!-- SliceSession&#45;&gt;AttributeOperations -->
+<g id="edge4" class="edge">
+<title>SliceSession&#45;&gt;AttributeOperations</title>
+<g id="a_edge4"><a xlink:title="dependency | Assets/Demon/Scripts/Runtime/Domain/SliceRules.cs:213">
+<path fill="none" stroke="#586777" stroke-width="1.1" stroke-dasharray="5,2" d="M373.72,-461.31C388.97,-459.64 405.32,-457.85 421.28,-456.1"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="429.28,-455.22 421.25,-459.95 426.39,-455.59 420.84,-456.2 420.83,-456.15 420.83,-456.1 426.38,-455.49 420.41,-452.35 429.28,-455.22"/>
+</a>
+</g>
+</g>
+<!-- SlicePlayer&#45;&gt;SliceSceneController -->
+<g id="edge8" class="edge">
+<title>SlicePlayer&#45;&gt;SliceSceneController</title>
+<g id="a_edge8"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SlicePlayer.cs:14">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M243.31,-392.84C229.65,-388.25 219,-384.5 219,-384.5 219,-384.5 179.68,-366.49 144.12,-349.46"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="136.87,-345.98 146.19,-346.22 139.52,-347.19 144.55,-349.62 144.53,-349.66 144.51,-349.71 139.47,-347.29 142.88,-353.11 136.87,-345.98"/>
+</a>
+</g>
+</g>
+<!-- SlicePlayer&#45;&gt;SliceTablet -->
+<g id="edge14" class="edge">
+<title>SlicePlayer&#45;&gt;SliceTablet</title>
+<g id="a_edge14"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SlicePlayer.cs:22">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M361.72,-400.68C388.86,-396.81 421.25,-392.18 449.13,-388.2"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="457.45,-387.01 449.58,-392 454.58,-387.47 449.05,-388.26 449.04,-388.21 449.03,-388.16 454.57,-387.37 448.5,-384.42 457.45,-387.01"/>
+</a>
+</g>
+</g>
+<!-- SliceTablet&#45;&gt;SliceSceneController -->
+<g id="edge13" class="edge">
+<title>SliceTablet&#45;&gt;SliceSceneController</title>
+<g id="a_edge13"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceTablet.cs:13">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M458.93,-359.82C443.59,-354.43 431,-350 431,-350 431,-350 386,-143 386,-143 386,-143 219,-143 219,-143 219,-143 150.52,-235.53 112.58,-286.79"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="107.57,-293.56 109.55,-284.46 109.26,-291.19 112.58,-286.7 112.62,-286.73 112.66,-286.76 109.34,-291.25 115.7,-289.01 107.57,-293.56"/>
+</a>
+</g>
+</g>
+<!-- SliceTablet&#45;&gt;RuneBoardModel -->
+<g id="edge12" class="edge">
+<title>SliceTablet&#45;&gt;RuneBoardModel</title>
+<g id="a_edge12"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceTablet.cs:14">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M570.43,-394.43C593.03,-400.77 619.55,-408.22 643.86,-415.04"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="651.77,-417.26 642.55,-418.65 648.95,-416.52 643.57,-415.01 643.58,-414.96 643.6,-414.92 648.98,-416.43 644.62,-411.28 651.77,-417.26"/>
+</a>
+</g>
+</g>
+<!-- SliceTablet&#45;&gt;SliceInteractable -->
+<g id="edge9" class="edge">
+<title>SliceTablet&#45;&gt;SliceInteractable</title>
+<g id="a_edge9"><a xlink:title="inheritance | Assets/Demon/Scripts/Runtime/SliceTablet.cs:6">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M570.07,-359.82C585.41,-354.43 598,-350 598,-350 598,-350 665.13,-201.81 699.18,-126.65"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="701.88,-127.91 702.67,-118.94 696.46,-125.45 701.88,-127.91"/>
+</a>
+</g>
+</g>
+<!-- SliceBox&#45;&gt;SliceSceneController -->
+<g id="edge15" class="edge">
+<title>SliceBox&#45;&gt;SliceSceneController</title>
+<g id="a_edge15"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceBox.cs:7">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M461.19,-94.12C376.56,-110.5 219,-141 219,-141 219,-141 150.16,-235.06 112.29,-286.81"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="107.28,-293.65 109.22,-284.53 108.96,-291.27 112.26,-286.76 112.3,-286.79 112.34,-286.82 109.04,-291.33 115.39,-289.05 107.28,-293.65"/>
+</a>
+</g>
+</g>
+<!-- SliceBox&#45;&gt;SliceInteractable -->
+<g id="edge10" class="edge">
+<title>SliceBox&#45;&gt;SliceInteractable</title>
+<g id="a_edge10"><a xlink:title="inheritance | Assets/Demon/Scripts/Runtime/SliceBox.cs:5">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M567.78,-84C587.54,-84 610.59,-84 632.63,-84"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="632.51,-86.98 641.01,-84 632.51,-81.03 632.51,-86.98"/>
+</a>
+</g>
+</g>
+<!-- SliceBed&#45;&gt;SliceSceneController -->
+<g id="edge16" class="edge">
+<title>SliceBed&#45;&gt;SliceSceneController</title>
+<g id="a_edge16"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceBed.cs:7">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M455.32,-41.2C369.49,-65.1 219,-107 219,-107 219,-107 145.33,-226.78 108.49,-286.69"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="104.24,-293.59 105.44,-284.34 105.73,-291.08 108.65,-286.32 108.7,-286.35 108.74,-286.37 105.81,-291.14 111.96,-288.35 104.24,-293.59"/>
+</a>
+</g>
+</g>
+<!-- SliceBed&#45;&gt;SliceInteractable -->
+<g id="edge11" class="edge">
+<title>SliceBed&#45;&gt;SliceInteractable</title>
+<g id="a_edge11"><a xlink:title="inheritance | Assets/Demon/Scripts/Runtime/SliceBed.cs:5">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M573.94,-41.99C592.36,-47.34 613.11,-53.37 633.01,-59.15"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="632.1,-61.99 641.1,-61.5 633.76,-56.27 632.1,-61.99"/>
+</a>
+</g>
+</g>
+<!-- NineDayFlow&#45;&gt;NineDayDefinition -->
+<g id="edge18" class="edge">
+<title>NineDayFlow&#45;&gt;NineDayDefinition</title>
+<g id="a_edge18"><a xlink:title="association | Assets/Demon/Scripts/Runtime/NineDayFlow.cs:9">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M373.47,-257.44C381,-260.18 386,-262 386,-262 386,-262 431,-291 431,-291 431,-291 431.39,-291.14 432.1,-291.39"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="439.85,-294.11 430.56,-294.9 437.09,-293.19 431.82,-291.34 431.83,-291.29 431.85,-291.25 437.12,-293.1 433.1,-287.68 439.85,-294.11"/>
+</a>
+</g>
+</g>
+<!-- NineDayFlow&#45;&gt;DiscoveryProgress -->
+<g id="edge19" class="edge">
+<title>NineDayFlow&#45;&gt;DiscoveryProgress</title>
+<g id="a_edge19"><a xlink:title="association | Assets/Demon/Scripts/Runtime/NineDayFlow.cs:15">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M373.72,-241.7C391.18,-244.11 410.09,-246.72 428.2,-249.22"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="436.25,-250.33 427.31,-252.96 433.36,-249.98 427.82,-249.22 427.83,-249.17 427.84,-249.12 433.37,-249.88 428.35,-245.38 436.25,-250.33"/>
+</a>
+</g>
+</g>
+<!-- NineDayFlow&#45;&gt;NineDayTablet -->
+<g id="edge20" class="edge">
+<title>NineDayFlow&#45;&gt;NineDayTablet</title>
+<g id="a_edge20"><a xlink:title="association | Assets/Demon/Scripts/Runtime/NineDayFlow.cs:10">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M373.72,-221.97C394.92,-218.94 418.24,-215.61 439.67,-212.55"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="448.04,-211.35 440.16,-216.34 445.16,-211.81 439.63,-212.6 439.62,-212.55 439.62,-212.5 445.15,-211.71 439.08,-208.77 448.04,-211.35"/>
+</a>
+</g>
+</g>
+<!-- SliceFinaleSequence&#45;&gt;FinaleTimeWindow -->
+<g id="edge22" class="edge">
+<title>SliceFinaleSequence&#45;&gt;FinaleTimeWindow</title>
+<g id="a_edge22"><a xlink:title="association | Assets/Demon/Scripts/Runtime/SliceFinaleSequence.cs:31">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M386.2,-160.58C401.07,-158.53 416.57,-156.38 431.43,-154.33"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="439.76,-153.18 431.87,-158.13 436.89,-153.63 431.35,-154.4 431.34,-154.35 431.34,-154.3 436.87,-153.53 430.82,-150.56 439.76,-153.18"/>
+</a>
+</g>
+</g>
+<!-- SliceSceneController -->
+<g id="node1" class="node">
+<title>SliceSceneController</title>
+<g id="a_node1"><a xlink:title="Assets/Demon/Scripts/Runtime/SliceSceneController.cs:7">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="174,-345 0,-345 0,-295 174,-295 174,-345"/>
+<text xml:space="preserve" text-anchor="middle" x="87" y="-323.6" font-family="Microsoft YaHei" font-size="12.00">SliceSceneController</text>
+<text xml:space="preserve" text-anchor="middle" x="87" y="-309.2" font-family="Microsoft YaHei" font-size="12.00">组装依赖与协调流程</text>
+</a>
+</g>
+</g>
+<!-- SliceSession -->
+<g id="node2" class="node">
+<title>SliceSession</title>
+<g id="a_node2"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/SliceRules.cs:151">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="373.5,-494 231.5,-494 231.5,-444 373.5,-444 373.5,-494"/>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-472.6" font-family="Microsoft YaHei" font-size="12.00">SliceSession</text>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-458.2" font-family="Microsoft YaHei" font-size="12.00">封印交换与会话规则</text>
+</a>
+</g>
+</g>
+<!-- GameClock -->
+<g id="node3" class="node">
+<title>GameClock</title>
+<g id="a_node3"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/SliceRules.cs:35">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="585.5,-557 443.5,-557 443.5,-507 585.5,-507 585.5,-557"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-535.6" font-family="Microsoft YaHei" font-size="12.00">GameClock</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-521.2" font-family="Microsoft YaHei" font-size="12.00">游戏时钟与跨日通知</text>
+</a>
+</g>
+</g>
+<!-- RuneBoardModel -->
+<g id="node4" class="node">
+<title>RuneBoardModel</title>
+<g id="a_node4"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/SliceRules.cs:72">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="785.5,-461 653.5,-461 653.5,-411 785.5,-411 785.5,-461"/>
+<text xml:space="preserve" text-anchor="middle" x="719.5" y="-439.6" font-family="Microsoft YaHei" font-size="12.00">RuneBoardModel</text>
+<text xml:space="preserve" text-anchor="middle" x="719.5" y="-425.2" font-family="Microsoft YaHei" font-size="12.00">符文盘与固化快照</text>
+</a>
+</g>
+</g>
+<!-- AttributeOperations -->
+<g id="node5" class="node">
+<title>AttributeOperations</title>
+<g id="a_node5"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/SliceRules.cs:10">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="598,-479 431,-479 431,-413 598,-413 598,-479"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-456.8" font-family="Microsoft YaHei" font-size="12.00">«static»</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-442.4" font-family="Microsoft YaHei" font-size="12.00">AttributeOperations</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-428" font-family="Microsoft YaHei" font-size="12.00">属性交换与转移算法</text>
+</a>
+</g>
+</g>
+<!-- SlicePlayer -->
+<g id="node6" class="node">
+<title>SlicePlayer</title>
+<g id="a_node6"><a xlink:title="Assets/Demon/Scripts/Runtime/SlicePlayer.cs:7">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="361.5,-434 243.5,-434 243.5,-384 361.5,-384 361.5,-434"/>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-412.6" font-family="Microsoft YaHei" font-size="12.00">SlicePlayer</text>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-398.2" font-family="Microsoft YaHei" font-size="12.00">玩家输入与视角</text>
+</a>
+</g>
+</g>
+<!-- SliceHud -->
+<g id="node7" class="node">
+<title>SliceHud</title>
+<g id="a_node7"><a xlink:title="Assets/Demon/Scripts/Runtime/SliceHud.cs:6">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="355.5,-375 249.5,-375 249.5,-325 355.5,-325 355.5,-375"/>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-353.6" font-family="Microsoft YaHei" font-size="12.00">SliceHud</text>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-339.2" font-family="Microsoft YaHei" font-size="12.00">游戏状态显示</text>
+</a>
+</g>
+</g>
+<!-- SlicePresentation -->
+<g id="node8" class="node">
+<title>SlicePresentation</title>
+<g id="a_node8"><a xlink:title="Assets/Demon/Scripts/Runtime/SlicePresentation.cs:5">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="379.5,-316 225.5,-316 225.5,-266 379.5,-266 379.5,-316"/>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-294.6" font-family="Microsoft YaHei" font-size="12.00">SlicePresentation</text>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-280.2" font-family="Microsoft YaHei" font-size="12.00">箱盖、封印与环境表现</text>
+</a>
+</g>
+</g>
+<!-- SliceTablet -->
+<g id="node9" class="node">
+<title>SliceTablet</title>
+<g id="a_node9"><a xlink:title="Assets/Demon/Scripts/Runtime/SliceTablet.cs:6">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="570,-404 459,-404 459,-354 570,-354 570,-404"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-382.6" font-family="Microsoft YaHei" font-size="12.00">SliceTablet</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-368.2" font-family="Microsoft YaHei" font-size="12.00">符文石板近景</text>
+</a>
+</g>
+</g>
+<!-- SliceInteractable -->
+<g id="node10" class="node">
+<title>SliceInteractable</title>
+<g id="a_node10"><a xlink:title="Assets/Demon/Scripts/Runtime/SliceInteractable.cs:5">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="796,-117 643,-117 643,-51 796,-51 796,-117"/>
+<text xml:space="preserve" text-anchor="middle" x="719.5" y="-94.8" font-family="Microsoft YaHei" font-size="12.00">«abstract»</text>
+<text xml:space="preserve" text-anchor="middle" x="719.5" y="-80.4" font-family="Microsoft YaHei" font-size="12.00">SliceInteractable</text>
+<text xml:space="preserve" text-anchor="middle" x="719.5" y="-66" font-family="Microsoft YaHei" font-size="12.00">可交互物体抽象基类</text>
+</a>
+</g>
+</g>
+<!-- SliceBox -->
+<g id="node11" class="node">
+<title>SliceBox</title>
+<g id="a_node11"><a xlink:title="Assets/Demon/Scripts/Runtime/SliceBox.cs:5">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="567.5,-109 461.5,-109 461.5,-59 567.5,-59 567.5,-109"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-87.6" font-family="Microsoft YaHei" font-size="12.00">SliceBox</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-73.2" font-family="Microsoft YaHei" font-size="12.00">箱内记录入口</text>
+</a>
+</g>
+</g>
+<!-- SliceBed -->
+<g id="node12" class="node">
+<title>SliceBed</title>
+<g id="a_node12"><a xlink:title="Assets/Demon/Scripts/Runtime/SliceBed.cs:5">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="573.5,-50 455.5,-50 455.5,0 573.5,0 573.5,-50"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-28.6" font-family="Microsoft YaHei" font-size="12.00">SliceBed</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-14.2" font-family="Microsoft YaHei" font-size="12.00">睡到次日的入口</text>
+</a>
+</g>
+</g>
+<!-- NineDayFlow -->
+<g id="node13" class="node">
+<title>NineDayFlow</title>
+<g id="a_node13"><a xlink:title="Assets/Demon/Scripts/Runtime/NineDayFlow.cs:7">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="373.5,-257 231.5,-257 231.5,-207 373.5,-207 373.5,-257"/>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-235.6" font-family="Microsoft YaHei" font-size="12.00">NineDayFlow</text>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-221.2" font-family="Microsoft YaHei" font-size="12.00">九天日程与发现入口</text>
+</a>
+</g>
+</g>
+<!-- NineDayDefinition -->
+<g id="node14" class="node">
+<title>NineDayDefinition</title>
+<g id="a_node14"><a xlink:title="Assets/Demon/Scripts/Runtime/NineDayDefinition.cs:19">
+<polygon fill="#fff1d8" stroke="#b5bdc7" stroke-width="0.9" points="591,-345 438,-345 438,-295 591,-295 591,-345"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-323.6" font-family="Microsoft YaHei" font-size="12.00">NineDayDefinition</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-309.2" font-family="Microsoft YaHei" font-size="12.00">日程与石板配置</text>
+</a>
+</g>
+</g>
+<!-- DiscoveryProgress -->
+<g id="node15" class="node">
+<title>DiscoveryProgress</title>
+<g id="a_node15"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/DiscoveryProgress.cs:5">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="591,-286 438,-286 438,-236 591,-236 591,-286"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-264.6" font-family="Microsoft YaHei" font-size="12.00">DiscoveryProgress</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-250.2" font-family="Microsoft YaHei" font-size="12.00">石板发现状态</text>
+</a>
+</g>
+</g>
+<!-- NineDayTablet -->
+<g id="node16" class="node">
+<title>NineDayTablet</title>
+<g id="a_node16"><a xlink:title="Assets/Demon/Scripts/Runtime/NineDayTablet.cs:5">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="579.5,-227 449.5,-227 449.5,-177 579.5,-177 579.5,-227"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-205.6" font-family="Microsoft YaHei" font-size="12.00">NineDayTablet</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-191.2" font-family="Microsoft YaHei" font-size="12.00">固定石板阅读入口</text>
+</a>
+</g>
+</g>
+<!-- SliceFinaleSequence -->
+<g id="node17" class="node">
+<title>SliceFinaleSequence</title>
+<g id="a_node17"><a xlink:title="Assets/Demon/Scripts/Runtime/SliceFinaleSequence.cs:8">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="386,-197 219,-197 219,-147 386,-147 386,-197"/>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-175.6" font-family="Microsoft YaHei" font-size="12.00">SliceFinaleSequence</text>
+<text xml:space="preserve" text-anchor="middle" x="302.5" y="-161.2" font-family="Microsoft YaHei" font-size="12.00">午夜镜头与结局编排</text>
+</a>
+</g>
+</g>
+<!-- FinaleTimeWindow -->
+<g id="node18" class="node">
+<title>FinaleTimeWindow</title>
+<g id="a_node18"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/FinaleTimeWindow.cs:7">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="587.5,-168 441.5,-168 441.5,-118 587.5,-118 587.5,-168"/>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-146.6" font-family="Microsoft YaHei" font-size="12.00">FinaleTimeWindow</text>
+<text xml:space="preserve" text-anchor="middle" x="514.5" y="-132.2" font-family="Microsoft YaHei" font-size="12.00">保留午夜前操作时间</text>
+</a>
+</g>
+</g>
+</g>
+</g><text x="44" y="1408" font-size="17" fill="#536476">基线图保留历史 Slice 命名。 2026-11-12 依据源码制作。</text></g></svg>

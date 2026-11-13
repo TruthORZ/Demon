@@ -1,0 +1,41 @@
+classDiagram
+    SliceSceneController --> SliceSession
+    SliceSession --> GameClock
+    SliceSession --> RuneBoardModel
+    SliceSession ..> AttributeOperations
+    SliceSceneController --> SlicePlayer
+    SliceSceneController --> SliceHud
+    SliceSceneController --> SlicePresentation
+    SlicePlayer --> SliceSceneController
+    SliceTablet --|> SliceInteractable
+    SliceBox --|> SliceInteractable
+    SliceBed --|> SliceInteractable
+    SliceTablet --> RuneBoardModel
+    SliceTablet --> SliceSceneController
+    SlicePlayer --> SliceTablet
+    SliceBox --> SliceSceneController
+    SliceBed --> SliceSceneController
+    SliceSceneController --> NineDayFlow
+    NineDayFlow --> NineDayDefinition
+    NineDayFlow --> DiscoveryProgress
+    NineDayFlow --> NineDayTablet
+    SliceSceneController --> SliceFinaleSequence
+    SliceFinaleSequence --> FinaleTimeWindow
+    class SliceSceneController["SliceSceneController"]
+    class SliceSession["SliceSession"]
+    class GameClock["GameClock"]
+    class RuneBoardModel["RuneBoardModel"]
+    class AttributeOperations["AttributeOperations"]
+    class SlicePlayer["SlicePlayer"]
+    class SliceHud["SliceHud"]
+    class SlicePresentation["SlicePresentation"]
+    class SliceTablet["SliceTablet"]
+    class SliceInteractable["SliceInteractable"]
+    class SliceBox["SliceBox"]
+    class SliceBed["SliceBed"]
+    class NineDayFlow["NineDayFlow"]
+    class NineDayDefinition["NineDayDefinition"]
+    class DiscoveryProgress["DiscoveryProgress"]
+    class NineDayTablet["NineDayTablet"]
+    class SliceFinaleSequence["SliceFinaleSequence"]
+    class FinaleTimeWindow["FinaleTimeWindow"]

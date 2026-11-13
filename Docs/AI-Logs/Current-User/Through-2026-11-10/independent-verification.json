@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "sourceVisibleEntries": 620,
+  "exportedEntries": 620,
+  "exactNativeBodies": 500,
+  "interactiveQuestions": 16,
+  "displayedImageEntries": 120,
+  "verifiedLocalLinks": 880,
+  "attachments": 130,
+  "missingAttachments": 2,
+  "cutoff": "2026-11-11 00:00:00 +08:00",
+  "firstIncluded": "2026-10-22 22:57:11.458 +08:00",
+  "lastIncluded": "2026-11-10 23:59:36.394 +08:00"
+}

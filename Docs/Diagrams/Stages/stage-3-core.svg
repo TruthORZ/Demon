@@ -1,0 +1,520 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2200" height="1460" viewBox="0 0 2200 1460" role="img"><title>Stage 3 每日任务与重试背包版</title><desc>依据固定 Git 提交提取的核心类图，展示本阶段核心类型及主要关系，省略连线不表示没有其他依赖。</desc><rect width="100%" height="100%" fill="white"/><g font-family="Microsoft YaHei,Arial,sans-serif" fill="#14273b"><text x="44" y="62" font-size="34" font-weight="700">Stage 3 · 每日任务与重试背包版</text><text x="44" y="103" font-size="19">b94f864 · 2026-11-12 · 运行时源码 85 个类型；本图选择 25 个核心类型</text><line x1="44" y1="145" x2="109" y2="145" stroke="#586777" stroke-width="2" /><path d="M 109 145 l -13 -7 v 14 z" fill="white" stroke="#586777" stroke-width="2"/><text x="124" y="152" font-size="19">继承　实线＋空心三角</text><line x1="579" y1="145" x2="644" y2="145" stroke="#586777" stroke-width="2" stroke-dasharray="7 4"/><path d="M 644 145 l -13 -7 v 14 z" fill="white" stroke="#586777" stroke-width="2"/><text x="659" y="152" font-size="19">实现　虚线＋空心三角</text><line x1="1114" y1="145" x2="1179" y2="145" stroke="#586777" stroke-width="2" /><path d="M 1168 138 l 11 7 l -11 7" fill="none" stroke="#586777" stroke-width="2"/><text x="1194" y="152" font-size="19">关联　实线＋普通箭头</text><line x1="1649" y1="145" x2="1714" y2="145" stroke="#586777" stroke-width="2" stroke-dasharray="7 4"/><path d="M 1703 138 l 11 7 l -11 7" fill="none" stroke="#586777" stroke-width="2"/><text x="1729" y="152" font-size="19">依赖　虚线＋普通箭头</text><text x="44" y="196" font-size="18">绿色为纯 C# 规则；蓝色为接口；灰色为场景组件；浅黄为配置。新增 / 修改 / 延续按上一阶段源码对照。</text><text x="44" y="225" font-size="17" fill="#536476">保留各版本真实类名。仅展示主要关系，完整类型和变化清单见配套报告。</text><g transform="translate(263.3884565499352 244) scale(1.4461738002594033)"><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(8.64 762.64)">
+<title>G</title>
+<!-- GameSceneController&#45;&gt;GameSession -->
+<g id="edge1" class="edge">
+<title>GameSceneController&#45;&gt;GameSession</title>
+<g id="a_edge1"><a xlink:title="association | Assets/Demon/Scripts/Runtime/GameSceneController.cs:51">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M118.26,-270.79C157.43,-224.35 237,-130 237,-130 237,-130 239.27,-129.33 243.13,-128.18"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="251.05,-125.83 244,-131.91 248.28,-126.7 242.92,-128.29 242.91,-128.25 242.89,-128.2 248.25,-126.61 241.82,-124.58 251.05,-125.83"/>
+</a>
+</g>
+</g>
+<!-- GameSceneController&#45;&gt;PlayerController -->
+<g id="edge5" class="edge">
+<title>GameSceneController&#45;&gt;PlayerController</title>
+<g id="a_edge5"><a xlink:title="association | Assets/Demon/Scripts/Runtime/GameSceneController.cs:12">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M174.37,-321.42C206.75,-332.06 237,-342 237,-342 237,-342 241.48,-343.42 248.55,-345.66"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="256.65,-348.23 247.39,-349.3 253.86,-347.39 248.53,-345.71 248.55,-345.66 248.56,-345.61 253.89,-347.3 249.7,-342.01 256.65,-348.23"/>
+</a>
+</g>
+</g>
+<!-- GameSceneController&#45;&gt;GameHud -->
+<g id="edge6" class="edge">
+<title>GameSceneController&#45;&gt;GameHud</title>
+<g id="a_edge6"><a xlink:title="association | Assets/Demon/Scripts/Runtime/GameSceneController.cs:15">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M192.25,-296C211.72,-296 232.11,-296 251.27,-296"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="259.52,-296 251.02,-299.83 256.61,-296.05 251.02,-296.05 251.02,-296 251.02,-295.95 256.61,-295.95 251.02,-292.18 259.52,-296"/>
+</a>
+</g>
+</g>
+<!-- GameSceneController&#45;&gt;WorldPresentation -->
+<g id="edge7" class="edge">
+<title>GameSceneController&#45;&gt;WorldPresentation</title>
+<g id="a_edge7"><a xlink:title="association | Assets/Demon/Scripts/Runtime/GameSceneController.cs:14">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M192.25,-272.68C203.77,-269.86 215.62,-266.96 227.34,-264.09"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="235.4,-262.12 228.06,-267.85 232.59,-262.86 227.16,-264.19 227.15,-264.14 227.14,-264.09 232.57,-262.76 226.24,-260.42 235.4,-262.12"/>
+</a>
+</g>
+</g>
+<!-- GameSceneController&#45;&gt;IPlayerSession -->
+<g id="edge9" class="edge">
+<title>GameSceneController&#45;&gt;IPlayerSession</title>
+<g id="a_edge9"><a xlink:title="realisation | Assets/Demon/Scripts/Runtime/GameSceneController.cs:8">
+<path fill="none" stroke="#586777" stroke-width="1.1" stroke-dasharray="5,2" d="M137.12,-270.78C178.49,-244.78 237,-208 237,-208 237,-208 441,-208 441,-208 441,-208 473.93,-290.7 489.37,-316.91"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="486.85,-318.51 494.43,-323.37 491.54,-314.84 486.85,-318.51"/>
+</a>
+</g>
+</g>
+<!-- GameSceneController&#45;&gt;ITabletProgram -->
+<g id="edge16" class="edge">
+<title>GameSceneController&#45;&gt;ITabletProgram</title>
+<g id="a_edge16"><a xlink:title="realisation | Assets/Demon/Scripts/Runtime/GameSceneController.cs:8">
+<path fill="none" stroke="#586777" stroke-width="1.1" stroke-dasharray="5,2" d="M192.32,-316.43C217.11,-321.74 237,-326 237,-326 237,-326 441,-326 441,-326 441,-326 465.63,-318.43 494.23,-309.65"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="494.79,-312.59 502.04,-307.25 493.04,-306.9 494.79,-312.59"/>
+</a>
+</g>
+</g>
+<!-- GameSceneController&#45;&gt;CompletePlaythrough -->
+<g id="edge19" class="edge">
+<title>GameSceneController&#45;&gt;CompletePlaythrough</title>
+<g id="a_edge19"><a xlink:title="association | Assets/Demon/Scripts/Runtime/GameSceneController.cs:26">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M109.42,-321.29C143.69,-391.04 237,-581 237,-581 237,-581 374.8,-581.4 475.96,-581.69"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="484.29,-581.72 475.78,-585.52 481.38,-581.76 475.79,-581.74 475.79,-581.69 475.79,-581.64 481.38,-581.66 475.8,-577.87 484.29,-581.72"/>
+</a>
+</g>
+</g>
+<!-- GameSession&#45;&gt;GameClock -->
+<g id="edge2" class="edge">
+<title>GameSession&#45;&gt;GameClock</title>
+<g id="a_edge2"><a xlink:title="association | Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:170">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M435.25,-100C448.59,-100 462.36,-100 475.87,-100"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="484.31,-100 475.81,-103.83 481.4,-100.05 475.81,-100.05 475.81,-100 475.81,-99.95 481.4,-99.95 475.81,-96.18 484.31,-100"/>
+</a>
+</g>
+</g>
+<!-- GameSession&#45;&gt;RuneBoardModel -->
+<g id="edge3" class="edge">
+<title>GameSession&#45;&gt;RuneBoardModel</title>
+<g id="a_edge3"><a xlink:title="association | Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:171">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M435.25,-123.32C450.87,-127.14 467.08,-131.11 482.77,-134.95"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="490.63,-136.88 481.47,-138.57 487.79,-136.23 482.36,-134.9 482.38,-134.86 482.39,-134.81 487.82,-136.14 483.29,-131.14 490.63,-136.88"/>
+</a>
+</g>
+</g>
+<!-- GameSession&#45;&gt;AttributeOperations -->
+<g id="edge4" class="edge">
+<title>GameSession&#45;&gt;AttributeOperations</title>
+<g id="a_edge4"><a xlink:title="dependency | Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:226">
+<path fill="none" stroke="#586777" stroke-width="1.1" stroke-dasharray="5,2" d="M431.46,-74.57C446.12,-70.5 461.4,-66.25 476.34,-62.1"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="484.31,-59.88 477.14,-65.84 481.52,-60.71 476.13,-62.21 476.12,-62.16 476.1,-62.11 481.49,-60.61 475.09,-58.47 484.31,-59.88"/>
+</a>
+</g>
+</g>
+<!-- PlayerController&#45;&gt;IPlayerSession -->
+<g id="edge8" class="edge">
+<title>PlayerController&#45;&gt;IPlayerSession</title>
+<g id="a_edge8"><a xlink:title="association | Assets/Demon/Scripts/Runtime/PlayerController.cs:15">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M423.28,-368.47C442.13,-367.22 462.33,-365.88 481.78,-364.59"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="490.22,-364.03 481.99,-368.41 487.32,-364.27 481.74,-364.64 481.73,-364.59 481.73,-364.54 487.31,-364.17 481.48,-360.77 490.22,-364.03"/>
+</a>
+</g>
+</g>
+<!-- PlayerController&#45;&gt;ICloseViewInteraction -->
+<g id="edge14" class="edge">
+<title>PlayerController&#45;&gt;ICloseViewInteraction</title>
+<g id="a_edge14"><a xlink:title="association | Assets/Demon/Scripts/Runtime/PlayerController.cs:26">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M423.28,-394.39C440.42,-398.58 458.69,-403.06 476.47,-407.41"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="484.42,-409.36 475.26,-411.05 481.59,-408.71 476.16,-407.38 476.17,-407.34 476.18,-407.29 481.61,-408.62 477.08,-403.62 484.42,-409.36"/>
+</a>
+</g>
+</g>
+<!-- RuneTablet&#45;&gt;Interactable -->
+<g id="edge10" class="edge">
+<title>RuneTablet&#45;&gt;Interactable</title>
+<g id="a_edge10"><a xlink:title="inheritance | Assets/Demon/Scripts/Runtime/RuneTablet.cs:7">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M417.32,-455.97C431.01,-460.03 441,-463 441,-463 441,-463 455.96,-467.81 476.1,-474.28"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="475.09,-477.08 484.1,-476.85 476.91,-471.42 475.09,-477.08"/>
+</a>
+</g>
+</g>
+<!-- RuneTablet&#45;&gt;ICloseViewInteraction -->
+<g id="edge12" class="edge">
+<title>RuneTablet&#45;&gt;ICloseViewInteraction</title>
+<g id="a_edge12"><a xlink:title="realisation | Assets/Demon/Scripts/Runtime/RuneTablet.cs:7">
+<path fill="none" stroke="#586777" stroke-width="1.1" stroke-dasharray="5,2" d="M417.25,-433C435.86,-433 456.05,-433 475.7,-433"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="475.44,-435.98 483.94,-433 475.44,-430.03 475.44,-435.98"/>
+</a>
+</g>
+</g>
+<!-- RuneTablet&#45;&gt;ITabletProgram -->
+<g id="edge15" class="edge">
+<title>RuneTablet&#45;&gt;ITabletProgram</title>
+<g id="a_edge15"><a xlink:title="association | Assets/Demon/Scripts/Runtime/RuneTablet.cs:16">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M417.32,-410.8C431.01,-406.87 441,-404 441,-404 441,-404 486,-321 486,-321 486,-321 489.45,-319.62 495.04,-317.38"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="502.62,-314.35 496.15,-321.06 499.94,-315.48 494.75,-317.55 494.73,-317.51 494.71,-317.46 499.9,-315.38 493.31,-313.96 502.62,-314.35"/>
+</a>
+</g>
+</g>
+<!-- CipherBox&#45;&gt;Interactable -->
+<g id="edge11" class="edge">
+<title>CipherBox&#45;&gt;Interactable</title>
+<g id="a_edge11"><a xlink:title="inheritance | Assets/Demon/Scripts/Runtime/CheckpointState.cs:17">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M441.16,-498.72C452.62,-499.48 464.31,-500.25 475.82,-501.02"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="475.53,-503.98 484.21,-501.57 475.93,-498.04 475.53,-503.98"/>
+</a>
+</g>
+</g>
+<!-- CipherBox&#45;&gt;ICloseViewInteraction -->
+<g id="edge13" class="edge">
+<title>CipherBox&#45;&gt;ICloseViewInteraction</title>
+<g id="a_edge13"><a xlink:title="realisation | Assets/Demon/Scripts/Runtime/CheckpointState.cs:17">
+<path fill="none" stroke="#586777" stroke-width="1.1" stroke-dasharray="5,2" d="M441.16,-467.24C452.73,-464.4 464.55,-461.51 476.17,-458.66"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="476.71,-461.6 484.26,-456.68 475.29,-455.82 476.71,-461.6"/>
+</a>
+</g>
+</g>
+<!-- ListeningTool&#45;&gt;RuneBoardModel -->
+<g id="edge18" class="edge">
+<title>ListeningTool&#45;&gt;RuneBoardModel</title>
+<g id="a_edge18"><a xlink:title="association | Assets/Demon/Scripts/Runtime/ListeningTool.cs:16">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M419.25,-159C439.26,-159 461,-159 481.86,-159"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="490.36,-159 481.86,-162.83 487.45,-159.05 481.86,-159.05 481.86,-159 481.86,-158.95 487.45,-158.95 481.86,-155.18 490.36,-159"/>
+</a>
+</g>
+</g>
+<!-- ListeningTool&#45;&gt;ITabletProgram -->
+<g id="edge17" class="edge">
+<title>ListeningTool&#45;&gt;ITabletProgram</title>
+<g id="a_edge17"><a xlink:title="realisation | Assets/Demon/Scripts/Runtime/ListeningTool.cs:7">
+<path fill="none" stroke="#586777" stroke-width="1.1" stroke-dasharray="5,2" d="M419.08,-184.06C431.86,-188.1 441,-191 441,-191 441,-191 484.02,-219.27 522.36,-244.47"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="520.33,-246.69 529.07,-248.87 523.6,-241.72 520.33,-246.69"/>
+</a>
+</g>
+</g>
+<!-- CompletePlaythrough&#45;&gt;DailyProgress -->
+<g id="edge20" class="edge">
+<title>CompletePlaythrough&#45;&gt;DailyProgress</title>
+<g id="a_edge20"><a xlink:title="association | Assets/Demon/Scripts/Runtime/CompletePlaythrough.cs:37">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M613.03,-607.31C654.17,-641.99 723,-700 723,-700 723,-700 723.87,-700.27 725.44,-700.75"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="733.37,-703.16 724.12,-704.34 730.57,-702.36 725.22,-700.73 725.24,-700.68 725.25,-700.64 730.6,-702.27 726.35,-697.02 733.37,-703.16"/>
+</a>
+</g>
+</g>
+<!-- CompletePlaythrough&#45;&gt;RecordCollection -->
+<g id="edge21" class="edge">
+<title>CompletePlaythrough&#45;&gt;RecordCollection</title>
+<g id="a_edge21"><a xlink:title="association | Assets/Demon/Scripts/Runtime/CompletePlaythrough.cs:38">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M643.19,-607.36C681.13,-623.35 723,-641 723,-641 723,-641 723.87,-641.27 725.44,-641.75"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="733.37,-644.16 724.12,-645.34 730.57,-643.36 725.22,-641.73 725.24,-641.68 725.25,-641.64 730.6,-643.27 726.35,-638.02 733.37,-644.16"/>
+</a>
+</g>
+</g>
+<!-- CompletePlaythrough&#45;&gt;DayCheckpoint -->
+<g id="edge22" class="edge">
+<title>CompletePlaythrough&#45;&gt;DayCheckpoint</title>
+<g id="a_edge22"><a xlink:title="association | Assets/Demon/Scripts/Runtime/CompletePlaythrough.cs:30">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M678.24,-593.75C691.66,-595.41 705.47,-597.11 718.95,-598.78"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="727.37,-599.82 718.46,-602.57 724.47,-599.51 718.93,-598.82 718.93,-598.77 718.94,-598.72 724.49,-599.41 719.4,-594.98 727.37,-599.82"/>
+</a>
+</g>
+</g>
+<!-- CompletePlaythrough&#45;&gt;JournalInventory -->
+<g id="edge24" class="edge">
+<title>CompletePlaythrough&#45;&gt;JournalInventory</title>
+<g id="a_edge24"><a xlink:title="association | Assets/Demon/Scripts/Runtime/CompletePlaythrough.cs:18">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M678.24,-569.84C689.68,-568.38 701.4,-566.89 712.96,-565.41"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="721.29,-564.35 713.34,-569.22 718.41,-564.76 712.86,-565.47 712.86,-565.42 712.85,-565.37 718.4,-564.66 712.37,-561.63 721.29,-564.35"/>
+</a>
+</g>
+</g>
+<!-- CompletePlaythrough&#45;&gt;PlaythroughDefinition -->
+<g id="edge26" class="edge">
+<title>CompletePlaythrough&#45;&gt;PlaythroughDefinition</title>
+<g id="a_edge26"><a xlink:title="association | Assets/Demon/Scripts/Runtime/CompletePlaythrough.cs:14">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M650.01,-556.61C665.73,-550.65 678,-546 678,-546 678,-546 723,-523 723,-523 723,-523 724.92,-522.39 728.22,-521.35"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="736.15,-518.85 729.2,-525.05 733.39,-519.77 728.06,-521.45 728.04,-521.41 728.03,-521.36 733.36,-519.68 726.89,-517.76 736.15,-518.85"/>
+</a>
+</g>
+</g>
+<!-- CompletePlaythrough&#45;&gt;FinaleSequence -->
+<g id="edge29" class="edge">
+<title>CompletePlaythrough&#45;&gt;FinaleSequence</title>
+<g id="a_edge29"><a xlink:title="dependency | Assets/Demon/Scripts/Runtime/CompletePlaythrough.cs:103">
+<path fill="none" stroke="#586777" stroke-width="1.1" stroke-dasharray="5,2" d="M650.01,-556.61C665.73,-550.65 678,-546 678,-546 678,-546 723,-464 723,-464 723,-464 724.92,-463.39 728.22,-462.35"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="736.15,-459.85 729.2,-466.05 733.39,-460.77 728.06,-462.45 728.04,-462.41 728.03,-462.36 733.36,-460.68 726.89,-458.76 736.15,-459.85"/>
+</a>
+</g>
+</g>
+<!-- DayCheckpoint&#45;&gt;GameSession.Snapshot -->
+<g id="edge23" class="edge">
+<title>DayCheckpoint&#45;&gt;GameSession.Snapshot</title>
+<g id="a_edge23"><a xlink:title="association | Assets/Demon/Scripts/Runtime/CheckpointState.cs:84">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M909.19,-611C922.53,-611 936.35,-611 949.88,-611"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="958.33,-611 949.83,-614.83 955.42,-611.05 949.83,-611.05 949.83,-611 949.83,-610.95 955.42,-610.95 949.83,-607.18 958.33,-611"/>
+</a>
+</g>
+</g>
+<!-- JournalInventory&#45;&gt;JournalSlot -->
+<g id="edge25" class="edge">
+<title>JournalInventory&#45;&gt;JournalSlot</title>
+<g id="a_edge25"><a xlink:title="association | Assets/Demon/Scripts/Runtime/JournalInventory.cs:18">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M915.13,-552C930.7,-552 946.76,-552 962.12,-552"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="970.24,-552 961.74,-555.83 967.33,-552.05 961.74,-552.05 961.74,-552 961.74,-551.95 967.33,-551.95 961.74,-548.18 970.24,-552"/>
+</a>
+</g>
+</g>
+<!-- StoryPickup&#45;&gt;Interactable -->
+<g id="edge28" class="edge">
+<title>StoryPickup&#45;&gt;Interactable</title>
+<g id="a_edge28"><a xlink:title="inheritance | Assets/Demon/Scripts/Runtime/StoryPickup.cs:6">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M435.25,-534.01C448.59,-531.63 462.36,-529.17 475.87,-526.76"/>
+<polygon fill="none" stroke="#586777" stroke-width="1.1" points="476.17,-529.73 484.01,-525.3 475.12,-523.87 476.17,-529.73"/>
+</a>
+</g>
+</g>
+<!-- StoryPickup&#45;&gt;CompletePlaythrough -->
+<g id="edge27" class="edge">
+<title>StoryPickup&#45;&gt;CompletePlaythrough</title>
+<g id="a_edge27"><a xlink:title="association | Assets/Demon/Scripts/Runtime/StoryPickup.cs:8">
+<path fill="none" stroke="#586777" stroke-width="1.1" d="M435.25,-563.25C448.72,-564.98 462.63,-566.77 476.27,-568.53"/>
+<polygon fill="#586777" stroke="#586777" stroke-width="1.1" points="484.32,-569.56 475.41,-572.27 481.43,-569.24 475.89,-568.53 475.89,-568.48 475.9,-568.43 481.44,-569.14 476.38,-564.69 484.32,-569.56"/>
+</a>
+</g>
+</g>
+<!-- GameSceneController -->
+<g id="node1" class="node">
+<title>GameSceneController</title>
+<g id="a_node1"><a xlink:title="Assets/Demon/Scripts/Runtime/GameSceneController.cs:8">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="192,-321 0,-321 0,-271 192,-271 192,-321"/>
+<text xml:space="preserve" text-anchor="middle" x="96" y="-299.6" font-family="Microsoft YaHei" font-size="12.00">GameSceneController</text>
+<text xml:space="preserve" text-anchor="middle" x="96" y="-285.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 组装依赖与协调流程</text>
+</a>
+</g>
+</g>
+<!-- GameSession -->
+<g id="node2" class="node">
+<title>GameSession</title>
+<g id="a_node2"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:164">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="435,-125 243,-125 243,-75 435,-75 435,-125"/>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-103.6" font-family="Microsoft YaHei" font-size="12.00">GameSession</text>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-89.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 封印交换与会话规则</text>
+</a>
+</g>
+</g>
+<!-- GameClock -->
+<g id="node3" class="node">
+<title>GameClock</title>
+<g id="a_node3"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:35">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="678,-125 486,-125 486,-75 678,-75 678,-125"/>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-103.6" font-family="Microsoft YaHei" font-size="12.00">GameClock</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-89.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 游戏时钟与跨日通知</text>
+</a>
+</g>
+</g>
+<!-- RuneBoardModel -->
+<g id="node4" class="node">
+<title>RuneBoardModel</title>
+<g id="a_node4"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:79">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="672,-184 492,-184 492,-134 672,-134 672,-184"/>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-162.6" font-family="Microsoft YaHei" font-size="12.00">RuneBoardModel</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-148.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 符文盘与固化快照</text>
+</a>
+</g>
+</g>
+<!-- AttributeOperations -->
+<g id="node5" class="node">
+<title>AttributeOperations</title>
+<g id="a_node5"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/GameRules.cs:10">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="678,-66 486,-66 486,0 678,0 678,-66"/>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-43.8" font-family="Microsoft YaHei" font-size="12.00">«static»</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-29.4" font-family="Microsoft YaHei" font-size="12.00">AttributeOperations</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-15" font-family="Microsoft YaHei" font-size="12.00">延续 · 属性交换与转移算法</text>
+</a>
+</g>
+</g>
+<!-- PlayerController -->
+<g id="node6" class="node">
+<title>PlayerController</title>
+<g id="a_node6"><a xlink:title="Assets/Demon/Scripts/Runtime/CheckpointState.cs:6">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="423,-399 255,-399 255,-349 423,-349 423,-399"/>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-377.6" font-family="Microsoft YaHei" font-size="12.00">PlayerController</text>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-363.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 玩家输入与视角</text>
+</a>
+</g>
+</g>
+<!-- GameHud -->
+<g id="node7" class="node">
+<title>GameHud</title>
+<g id="a_node7"><a xlink:title="Assets/Demon/Scripts/Runtime/GameHud.cs:7">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="417,-321 261,-321 261,-271 417,-271 417,-321"/>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-299.6" font-family="Microsoft YaHei" font-size="12.00">GameHud</text>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-285.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 游戏状态显示</text>
+</a>
+</g>
+</g>
+<!-- WorldPresentation -->
+<g id="node8" class="node">
+<title>WorldPresentation</title>
+<g id="a_node8"><a xlink:title="Assets/Demon/Scripts/Runtime/CheckpointState.cs:61">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="441,-262 237,-262 237,-212 441,-212 441,-262"/>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-240.6" font-family="Microsoft YaHei" font-size="12.00">WorldPresentation</text>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-226.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 箱盖、封印与环境表现</text>
+</a>
+</g>
+</g>
+<!-- IPlayerSession -->
+<g id="node9" class="node">
+<title>IPlayerSession</title>
+<g id="a_node9"><a xlink:title="Assets/Demon/Scripts/Runtime/SceneContracts.cs:13">
+<polygon fill="#e8f1fb" stroke="#b5bdc7" stroke-width="0.9" points="672,-391 492,-391 492,-325 672,-325 672,-391"/>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-368.8" font-family="Microsoft YaHei" font-size="12.00">«interface»</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-354.4" font-family="Microsoft YaHei" font-size="12.00">IPlayerSession</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-340" font-family="Microsoft YaHei" font-size="12.00">延续 · 玩家所需会话接口</text>
+</a>
+</g>
+</g>
+<!-- RuneTablet -->
+<g id="node10" class="node">
+<title>RuneTablet</title>
+<g id="a_node10"><a xlink:title="Assets/Demon/Scripts/Runtime/RuneTablet.cs:7">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="417,-458 261,-458 261,-408 417,-408 417,-458"/>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-436.6" font-family="Microsoft YaHei" font-size="12.00">RuneTablet</text>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-422.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 符文石板近景</text>
+</a>
+</g>
+</g>
+<!-- Interactable -->
+<g id="node11" class="node">
+<title>Interactable</title>
+<g id="a_node11"><a xlink:title="Assets/Demon/Scripts/Runtime/Interactable.cs:6">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="678,-541 486,-541 486,-475 678,-475 678,-541"/>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-518.8" font-family="Microsoft YaHei" font-size="12.00">«abstract»</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-504.4" font-family="Microsoft YaHei" font-size="12.00">Interactable</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-490" font-family="Microsoft YaHei" font-size="12.00">延续 · 可交互物体抽象基类</text>
+</a>
+</g>
+</g>
+<!-- CipherBox -->
+<g id="node12" class="node">
+<title>CipherBox</title>
+<g id="a_node12"><a xlink:title="Assets/Demon/Scripts/Runtime/CheckpointState.cs:17">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="441,-517 237,-517 237,-467 441,-467 441,-517"/>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-495.6" font-family="Microsoft YaHei" font-size="12.00">CipherBox</text>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-481.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 方位密码箱与工具取得</text>
+</a>
+</g>
+</g>
+<!-- ICloseViewInteraction -->
+<g id="node13" class="node">
+<title>ICloseViewInteraction</title>
+<g id="a_node13"><a xlink:title="Assets/Demon/Scripts/Runtime/SceneContracts.cs:37">
+<polygon fill="#e8f1fb" stroke="#b5bdc7" stroke-width="0.9" points="678,-466 486,-466 486,-400 678,-400 678,-466"/>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-443.8" font-family="Microsoft YaHei" font-size="12.00">«interface»</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-429.4" font-family="Microsoft YaHei" font-size="12.00">ICloseViewInteraction</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-415" font-family="Microsoft YaHei" font-size="12.00">延续 · 近景确认与点击接口</text>
+</a>
+</g>
+</g>
+<!-- ITabletProgram -->
+<g id="node14" class="node">
+<title>ITabletProgram</title>
+<g id="a_node14"><a xlink:title="Assets/Demon/Scripts/Runtime/SceneContracts.cs:29">
+<polygon fill="#e8f1fb" stroke="#b5bdc7" stroke-width="0.9" points="660,-316 504,-316 504,-250 660,-250 660,-316"/>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-293.8" font-family="Microsoft YaHei" font-size="12.00">«interface»</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-279.4" font-family="Microsoft YaHei" font-size="12.00">ITabletProgram</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-265" font-family="Microsoft YaHei" font-size="12.00">延续 · 石板程序接口</text>
+</a>
+</g>
+</g>
+<!-- ListeningTool -->
+<g id="node15" class="node">
+<title>ListeningTool</title>
+<g id="a_node15"><a xlink:title="Assets/Demon/Scripts/Runtime/ListeningTool.cs:7">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="419,-184 259,-184 259,-134 419,-134 419,-184"/>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-162.6" font-family="Microsoft YaHei" font-size="12.00">ListeningTool</text>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-148.2" font-family="Microsoft YaHei" font-size="12.00">延续 · T05 监听程序</text>
+</a>
+</g>
+</g>
+<!-- CompletePlaythrough -->
+<g id="node16" class="node">
+<title>CompletePlaythrough</title>
+<g id="a_node16"><a xlink:title="Assets/Demon/Scripts/Runtime/CompletePlaythrough.cs:12">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="678,-607 486,-607 486,-557 678,-557 678,-607"/>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-585.6" font-family="Microsoft YaHei" font-size="12.00">CompletePlaythrough</text>
+<text xml:space="preserve" text-anchor="middle" x="582" y="-571.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 主线任务与重试协调</text>
+</a>
+</g>
+</g>
+<!-- DailyProgress -->
+<g id="node17" class="node">
+<title>DailyProgress</title>
+<g id="a_node17"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/DailyProgress.cs:6">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="915,-754 723,-754 723,-704 915,-704 915,-754"/>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-732.6" font-family="Microsoft YaHei" font-size="12.00">DailyProgress</text>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-718.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 每日事项与睡眠门槛</text>
+</a>
+</g>
+</g>
+<!-- RecordCollection -->
+<g id="node18" class="node">
+<title>RecordCollection</title>
+<g id="a_node18"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/DailyProgress.cs:35">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="909,-695 729,-695 729,-645 909,-645 909,-695"/>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-673.6" font-family="Microsoft YaHei" font-size="12.00">RecordCollection</text>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-659.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 已收录记录的集合</text>
+</a>
+</g>
+</g>
+<!-- DayCheckpoint -->
+<g id="node19" class="node">
+<title>DayCheckpoint</title>
+<g id="a_node19"><a xlink:title="Assets/Demon/Scripts/Runtime/CheckpointState.cs:82">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="909,-636 729,-636 729,-586 909,-586 909,-636"/>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-614.6" font-family="Microsoft YaHei" font-size="12.00">DayCheckpoint</text>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-600.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 实际当日起点快照</text>
+</a>
+</g>
+</g>
+<!-- GameSession.Snapshot -->
+<g id="node20" class="node">
+<title>GameSession.Snapshot</title>
+<g id="a_node20"><a xlink:title="Assets/Demon/Scripts/Runtime/Domain/RuleSnapshots.cs:29">
+<polygon fill="#eaf4eb" stroke="#b5bdc7" stroke-width="0.9" points="1140,-636 960,-636 960,-586 1140,-586 1140,-636"/>
+<text xml:space="preserve" text-anchor="middle" x="1050" y="-614.6" font-family="Microsoft YaHei" font-size="12.00">GameSession.Snapshot</text>
+<text xml:space="preserve" text-anchor="middle" x="1050" y="-600.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 可恢复的会话数据</text>
+</a>
+</g>
+</g>
+<!-- JournalInventory -->
+<g id="node21" class="node">
+<title>JournalInventory</title>
+<g id="a_node21"><a xlink:title="Assets/Demon/Scripts/Runtime/JournalInventory.cs:9">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="915,-577 723,-577 723,-527 915,-527 915,-577"/>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-555.6" font-family="Microsoft YaHei" font-size="12.00">JournalInventory</text>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-541.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 格子背包与正文展示</text>
+</a>
+</g>
+</g>
+<!-- JournalSlot -->
+<g id="node22" class="node">
+<title>JournalSlot</title>
+<g id="a_node22"><a xlink:title="Assets/Demon/Scripts/Runtime/JournalSlot.cs:7">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="1128,-577 972,-577 972,-527 1128,-527 1128,-577"/>
+<text xml:space="preserve" text-anchor="middle" x="1050" y="-555.6" font-family="Microsoft YaHei" font-size="12.00">JournalSlot</text>
+<text xml:space="preserve" text-anchor="middle" x="1050" y="-541.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 单个背包格子</text>
+</a>
+</g>
+</g>
+<!-- PlaythroughDefinition -->
+<g id="node23" class="node">
+<title>PlaythroughDefinition</title>
+<g id="a_node23"><a xlink:title="Assets/Demon/Scripts/Runtime/PlaythroughDefinition.cs:16">
+<polygon fill="#fff1d8" stroke="#b5bdc7" stroke-width="0.9" points="915,-518 723,-518 723,-468 915,-468 915,-518"/>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-496.6" font-family="Microsoft YaHei" font-size="12.00">PlaythroughDefinition</text>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-482.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 每日任务与主线配置</text>
+</a>
+</g>
+</g>
+<!-- StoryPickup -->
+<g id="node24" class="node">
+<title>StoryPickup</title>
+<g id="a_node24"><a xlink:title="Assets/Demon/Scripts/Runtime/StoryPickup.cs:6">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="435,-576 243,-576 243,-526 435,-526 435,-576"/>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-554.6" font-family="Microsoft YaHei" font-size="12.00">StoryPickup</text>
+<text xml:space="preserve" text-anchor="middle" x="339" y="-540.2" font-family="Microsoft YaHei" font-size="12.00">新增 · 纸条和手电拾取入口</text>
+</a>
+</g>
+</g>
+<!-- FinaleSequence -->
+<g id="node25" class="node">
+<title>FinaleSequence</title>
+<g id="a_node25"><a xlink:title="Assets/Demon/Scripts/Runtime/FinaleSequence.cs:9">
+<polygon fill="#f1f3f6" stroke="#b5bdc7" stroke-width="0.9" points="915,-459 723,-459 723,-409 915,-409 915,-459"/>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-437.6" font-family="Microsoft YaHei" font-size="12.00">FinaleSequence</text>
+<text xml:space="preserve" text-anchor="middle" x="819" y="-423.2" font-family="Microsoft YaHei" font-size="12.00">修改 · 午夜镜头与结局编排</text>
+</a>
+</g>
+</g>
+</g>
+</g><text x="44" y="1408" font-size="17" fill="#536476">“延续”表示归一化类声明一致；“修改”包含状态接口等局部改动。 2026-11-12 依据源码制作。</text></g></svg>

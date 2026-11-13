@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "counts": {
+    "threadsFound": 8,
+    "threadsIncluded": 6,
+    "entries": 620,
+    "userMessages": 96,
+    "assistantMessages": 388,
+    "interactiveQuestions": 16,
+    "displayedImageEntries": 120,
+    "uniqueAttachmentFiles": 130,
+    "missingAttachmentReferences": 2
+  },
+  "cutoffExclusiveUTC": "2026-11-10T16:00:00.000Z",
+  "allMessagesBeforeCutoff": true,
+  "messageIdsUnique": true,
+  "assistantOriginalTextCrossChecks": 388,
+  "allAssistantCrossChecksExact": true,
+  "credentialPatternHits": [],
+  "firstIncludedUTC": "2026-10-22T14:57:11.458Z",
+  "lastIncludedUTC": "2026-11-10T15:59:36.394Z",
+  "warnings": [],
+  "missingAttachments": [
+    {
+      "originalPath": "C:/Users/11628/Downloads/策划案.pdf",
+      "status": "missing",
+      "origin": "file mentioned as user attachment; current local file copy",
+      "sourceMessageId": "01a1641d-b71e-7381-8ae7-2924ebcf6ddb"
+    },
+    {
+      "originalPath": "C:/Users/11628/Downloads/恶魔语言系统 v0.2.pdf",
+      "status": "missing",
+      "origin": "file mentioned as user attachment; current local file copy",
+      "sourceMessageId": "01a1641d-b71e-7381-8ae7-2924ebcf6ddb"
+    }
+  ]
+}

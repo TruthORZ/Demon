@@ -1,0 +1,58 @@
+classDiagram
+    GameSceneController --> GameSession
+    GameSession --> GameClock
+    GameSession --> RuneBoardModel
+    GameSession ..> AttributeOperations
+    GameSceneController --> PlayerController
+    GameSceneController --> GameHud
+    GameSceneController --> WorldPresentation
+    PlayerController --> IPlayerSession
+    GameSceneController ..|> IPlayerSession
+    RuneTablet --|> Interactable
+    CipherBox --|> Interactable
+    RuneTablet ..|> ICloseViewInteraction
+    CipherBox ..|> ICloseViewInteraction
+    PlayerController --> ICloseViewInteraction
+    RuneTablet --> ITabletProgram
+    GameSceneController ..|> ITabletProgram
+    ListeningTool ..|> ITabletProgram
+    ListeningTool --> RuneBoardModel
+    GameSceneController --> CompletePlaythrough
+    CompletePlaythrough --> DailyProgress
+    CompletePlaythrough --> RecordCollection
+    CompletePlaythrough --> DayCheckpoint
+    DayCheckpoint --> GameSession_Snapshot
+    CompletePlaythrough --> JournalInventory
+    JournalInventory --> JournalSlot
+    CompletePlaythrough --> PlaythroughDefinition
+    StoryPickup --> CompletePlaythrough
+    StoryPickup --|> Interactable
+    CompletePlaythrough ..> FinaleSequence
+    class GameSceneController["GameSceneController"]
+    class GameSession["GameSession"]
+    class GameClock["GameClock"]
+    class RuneBoardModel["RuneBoardModel"]
+    class AttributeOperations["AttributeOperations"]
+    class PlayerController["PlayerController"]
+    class GameHud["GameHud"]
+    class WorldPresentation["WorldPresentation"]
+    class IPlayerSession["IPlayerSession"]
+    <<interface>> IPlayerSession
+    class RuneTablet["RuneTablet"]
+    class Interactable["Interactable"]
+    class CipherBox["CipherBox"]
+    class ICloseViewInteraction["ICloseViewInteraction"]
+    <<interface>> ICloseViewInteraction
+    class ITabletProgram["ITabletProgram"]
+    <<interface>> ITabletProgram
+    class ListeningTool["ListeningTool"]
+    class CompletePlaythrough["CompletePlaythrough"]
+    class DailyProgress["DailyProgress"]
+    class RecordCollection["RecordCollection"]
+    class DayCheckpoint["DayCheckpoint"]
+    class GameSession_Snapshot["GameSession.Snapshot"]
+    class JournalInventory["JournalInventory"]
+    class JournalSlot["JournalSlot"]
+    class PlaythroughDefinition["PlaythroughDefinition"]
+    class StoryPickup["StoryPickup"]
+    class FinaleSequence["FinaleSequence"]

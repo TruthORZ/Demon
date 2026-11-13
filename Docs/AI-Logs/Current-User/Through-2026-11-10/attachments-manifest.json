@@ -1,0 +1,1348 @@
+{
+  "included": [
+    {
+      "originalPath": null,
+      "relativePath": "attachments/b208b0cd3d68-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "b208b0cd3d68a5708aa3f9112f0df84ce0ff981c9365bbccf9e8b301397e2067",
+      "bytes": 980318,
+      "sourceMtime": null,
+      "sourceMessageId": "call_560331783caf4037bd9f5d71db652f25"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/16af161de9e1-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "16af161de9e173c7451bdd61a6193cb3845b209d4b1acdf011e30a57572b0a5d",
+      "bytes": 943692,
+      "sourceMtime": null,
+      "sourceMessageId": "call_560331783caf4037bd9f5d71db652f25"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/2f89c67c53b3-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "2f89c67c53b3c60b46e497c262046182ec650986f2db191fc9aeff766ea1b938",
+      "bytes": 54679,
+      "sourceMtime": null,
+      "sourceMessageId": "call_7d13b2dcfe0c4cdc84fad987aef31831"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/398352b0d865-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "398352b0d86557f5fffb8d0e1e95dc434250f96e5ecc142ae9595b48037cccf1",
+      "bytes": 84987,
+      "sourceMtime": null,
+      "sourceMessageId": "call_7d13b2dcfe0c4cdc84fad987aef31831"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/19461aebfa79-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "19461aebfa7934a6195172dd9db3cf383d97568cdf2a3e02f31e8f542588406a",
+      "bytes": 63847,
+      "sourceMtime": null,
+      "sourceMessageId": "call_7d13b2dcfe0c4cdc84fad987aef31831"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/32307cc92cfb-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "32307cc92cfb63059c6a1ca51eff3eec6bbf565789a48a693aefaed028212dd3",
+      "bytes": 35683,
+      "sourceMtime": null,
+      "sourceMessageId": "call_3eb73de7a957417d8452662fcdec5510"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/12d347c76d7c-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "12d347c76d7ccbb9e4cfc2375c65472d7ff3b07711bba19f0f43d74b6c27963b",
+      "bytes": 40211,
+      "sourceMtime": null,
+      "sourceMessageId": "call_3eb73de7a957417d8452662fcdec5510"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/beaf4d9e75c7-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "beaf4d9e75c76c94a29c87a334d67e7af4e2ff8c85bc12f98ff94e77f0c11cae",
+      "bytes": 39334,
+      "sourceMtime": null,
+      "sourceMessageId": "call_3eb73de7a957417d8452662fcdec5510"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/9be7b7c6da97-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "9be7b7c6da977e91a285c111d26cf62f9fb4293830d7e29b4d9259e605245db7",
+      "bytes": 40114,
+      "sourceMtime": null,
+      "sourceMessageId": "call_3eb73de7a957417d8452662fcdec5510"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/27745fcdbb0c-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "27745fcdbb0c826a17888bfc17d4559f8679d7f6324464862a22d8fc12efd740",
+      "bytes": 59478,
+      "sourceMtime": null,
+      "sourceMessageId": "call_3eb73de7a957417d8452662fcdec5510"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/12534ee27f83-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "12534ee27f83b191631ef0e6c8d72e275c03012e2a47567a0268f21d776415e9",
+      "bytes": 35362,
+      "sourceMtime": null,
+      "sourceMessageId": "call_ac82eb35850e4cd5bf0be08764a5f6c6"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/ecca738fb01b-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "ecca738fb01bf60c0ec256873023534c133776f28d62892964af93c344ae254e",
+      "bytes": 39380,
+      "sourceMtime": null,
+      "sourceMessageId": "call_ac82eb35850e4cd5bf0be08764a5f6c6"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/aae96614a309-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "aae96614a30944a659abdbec2762a26502560cc13a81b4604bb6bfbc0c137f9c",
+      "bytes": 39621,
+      "sourceMtime": null,
+      "sourceMessageId": "call_ac82eb35850e4cd5bf0be08764a5f6c6"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/801ad27cc66b-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "801ad27cc66b0975f8ee44d6d0190ccc0a5adebb614979697a1b029f55723ac0",
+      "bytes": 38910,
+      "sourceMtime": null,
+      "sourceMessageId": "call_ac82eb35850e4cd5bf0be08764a5f6c6"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/2aec6ea9012c-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "2aec6ea9012c2dedda4d28260b6af7586b23e6e2d27e64519a631adbe61ee965",
+      "bytes": 42309,
+      "sourceMtime": null,
+      "sourceMessageId": "call_ac82eb35850e4cd5bf0be08764a5f6c6"
+    },
+    {
+      "originalPath": "file:///C:/Users/11628/Documents/Codex/2026-10-22/new-chat/work/docx-render/page-1.png",
+      "relativePath": "attachments/b3e87e0f05de-page-1.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "b3e87e0f05de2389caf2e09e29a192179b4a88ccdecfb0246dfd21e8409840f9",
+      "bytes": 35587,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-c955e3c4-3480-462f-b9fc-7d212124e4a9"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/63f3f41112f9-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "63f3f41112f9e74bd49060eedd2063b1dda2ca17bdd016e16794372938575780",
+      "bytes": 223865,
+      "sourceMtime": null,
+      "sourceMessageId": "call_f9159f2ea956480e990ee8eec1398107"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/a54ce2ded59a-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "a54ce2ded59a07ad5666daef15012de85472b953661f03e63bf81d42b9849428",
+      "bytes": 167603,
+      "sourceMtime": null,
+      "sourceMessageId": "call_f9159f2ea956480e990ee8eec1398107"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/165245a3a4e5-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "165245a3a4e5f5c895ca6bf9e6253f89e63664bfcc7cc8ec15c60ab63f2e120c",
+      "bytes": 369536,
+      "sourceMtime": null,
+      "sourceMessageId": "call_f9159f2ea956480e990ee8eec1398107"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/input-001-start.png",
+      "relativePath": "attachments/8368521e4d8f-input-001-start.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "8368521e4d8f28efec234a5e8cecbc525e2c8a2bf3fc6443517f1455c3c1d06a",
+      "bytes": 257636,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-0b07b5ab-b2ed-4e40-8cd6-8771f1a6ad3c"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/238b9b78f6a6-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "238b9b78f6a6739347139f3788f0421c0cb86f6f3e913c08b29d1fd6a0c0f11c",
+      "bytes": 405030,
+      "sourceMtime": null,
+      "sourceMessageId": "call_1b93f390b10949b3baa1f3d7c0a3d44b"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/84b41b5abf8e-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "84b41b5abf8e5b1f43494c0ecea3fafacaabf4d990e1b8af398d3409926606a7",
+      "bytes": 107175,
+      "sourceMtime": null,
+      "sourceMessageId": "call_1b93f390b10949b3baa1f3d7c0a3d44b"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/5c0ce13e5ecb-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "5c0ce13e5ecbaa354289a54074d5f9d9f19f29e325d265703727ac12e0de8bb8",
+      "bytes": 283357,
+      "sourceMtime": null,
+      "sourceMessageId": "call_fce59252e41f4571923b06d7ac02f7e5"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/2e6fa05a1c23-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "2e6fa05a1c2395ac14548fae2ce5fbf38a8076daf69d4a9688c804ee4aa16826",
+      "bytes": 383169,
+      "sourceMtime": null,
+      "sourceMessageId": "call_fce59252e41f4571923b06d7ac02f7e5"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/box-input-002-box-reading.png",
+      "relativePath": "attachments/39ba0e0f60e6-box-input-002-box-reading.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "39ba0e0f60e6e59eed847351a14164fe133c6faedb39dc7438606c5499e24832",
+      "bytes": 382387,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-fd5bf531-f1ea-4143-815f-8c80a0c605fa"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/b7c6d4a43e20-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "b7c6d4a43e203a461c4846015730dc191478369d5724e8a72be0704bcce0f45b",
+      "bytes": 245666,
+      "sourceMtime": null,
+      "sourceMessageId": "call_b224eac45c894507bce6b19c7214203f"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/666a0c8ba5b9-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "666a0c8ba5b98e57e3101d91159560f7150d55040413eda0fd0245ae5097237b",
+      "bytes": 112023,
+      "sourceMtime": null,
+      "sourceMessageId": "call_b224eac45c894507bce6b19c7214203f"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/5e43a7d0d764-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "5e43a7d0d764f2a0f380726bb0db812ffdc8bdd89600e46a22f6faae13bce605",
+      "bytes": 259197,
+      "sourceMtime": null,
+      "sourceMessageId": "call_5792ea43b3d9445d9d2307828dd5f933"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/1980566b64e1-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "1980566b64e1fe78d7fd922969a01091c899fa96b79b8e5f7fff9edac1869070",
+      "bytes": 255464,
+      "sourceMtime": null,
+      "sourceMessageId": "call_5792ea43b3d9445d9d2307828dd5f933"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/nine-tuning-tuned-record.png",
+      "relativePath": "attachments/ba82e5b9f3b2-nine-tuning-tuned-record.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "ba82e5b9f3b295dba2b5a31b27e58925da1190d6cb3aa7cd34429c69f6a03006",
+      "bytes": 217767,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-cb1133c4-bf23-4325-9588-1f7412269864"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/680ca76afa95-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "680ca76afa9514b3d8e1d6a0f533931f361fd30d1c5d2fb1dca31288f9a33c08",
+      "bytes": 282643,
+      "sourceMtime": null,
+      "sourceMessageId": "call_8daee551b675458f9d548f6ba139a39a"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/4c17eeb74959-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "4c17eeb74959e056580244e1bbf41057c8e24534f214689f912c015641d95f21",
+      "bytes": 352465,
+      "sourceMtime": null,
+      "sourceMessageId": "call_8daee551b675458f9d548f6ba139a39a"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/14d6a2d34423-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "14d6a2d34423105dc973f7ae9b397a07ad463d3d0a4875accd2005ad2e98915c",
+      "bytes": 255506,
+      "sourceMtime": null,
+      "sourceMessageId": "call_80d51d8f61b44578a1559efa1c0f17a1"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/5b3367972d5c-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "5b3367972d5cb4399aaf361ac7cd5f4c30c136b4339032567f0517623bf84f34",
+      "bytes": 124523,
+      "sourceMtime": null,
+      "sourceMessageId": "call_80d51d8f61b44578a1559efa1c0f17a1"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-4cc66d37-d584-453d-9891-4ae573bd6548.png",
+      "relativePath": "attachments/6074f6c03498-codex-clipboard-4cc66d37-d584-453d-9891-4ae573bd6548.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "6074f6c034981c535b3be60494db7d426c6a5740f573cfc3dbaedc5534f9c950",
+      "bytes": 93140,
+      "sourceMtime": null,
+      "sourceMessageId": "01a171e3-3cbc-75d1-956f-5696ce2a9ec7"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-55bb647b-a904-44f8-b846-fd41f85c1321.png",
+      "relativePath": "attachments/44731184b34b-codex-clipboard-55bb647b-a904-44f8-b846-fd41f85c1321.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "44731184b34bfd465bb34c1660c9ac56d93c0110cf34632954765d87c48629fd",
+      "bytes": 607108,
+      "sourceMtime": null,
+      "sourceMessageId": "01a172e1-f384-7270-bc57-565ebb7df1cc"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-32ec9ca4-1d9e-490e-990b-9b84ec5c2571.png",
+      "relativePath": "attachments/2b428459dcf9-codex-clipboard-32ec9ca4-1d9e-490e-990b-9b84ec5c2571.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "2b428459dcf9b28421f55dcb0baf10753f879daee67b5a5e40876338365e854e",
+      "bytes": 211827,
+      "sourceMtime": null,
+      "sourceMessageId": "01a17ce4-4a9c-75d0-bfd5-9ba80f21a569"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-9dcdbab9-0a9f-4cea-bba8-87647754c17c.png",
+      "relativePath": "attachments/ad14cde54157-codex-clipboard-9dcdbab9-0a9f-4cea-bba8-87647754c17c.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "ad14cde541579e75a3ae6643456da36f202df1523e6b435d76bf56f57cea9285",
+      "bytes": 228590,
+      "sourceMtime": null,
+      "sourceMessageId": "01a17e19-c93a-7d32-a143-2484d6af68f3"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/finale-input-001-start.png",
+      "relativePath": "attachments/bff2e05f738a-finale-input-001-start.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "bff2e05f738a91bc30e40edcfbd4637d4e2bf7d7e803df3bfd56083dd4a4a5d5",
+      "bytes": 239924,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-031428a0-beba-495f-b530-151d5dfe5b59"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/3b2f58cf067d-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "3b2f58cf067d98dc61403e9f59774b55909793c923df201b55b6cce69779aeec",
+      "bytes": 336269,
+      "sourceMtime": null,
+      "sourceMessageId": "call_09e2f4868c024616b47765d3e5259dbe"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/a20eba26ccdf-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "a20eba26ccdfa30d0764092269c1851defe105059f61b4f28ca8258d99327db1",
+      "bytes": 279681,
+      "sourceMtime": null,
+      "sourceMessageId": "call_09e2f4868c024616b47765d3e5259dbe"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/aa38d8355a7d-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "aa38d8355a7d063e9bbeffb25ea91960ba11d6ed4c69a151b5f73e335ec76241",
+      "bytes": 349394,
+      "sourceMtime": null,
+      "sourceMessageId": "call_09e2f4868c024616b47765d3e5259dbe"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/3b2f58cf067d-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "3b2f58cf067d98dc61403e9f59774b55909793c923df201b55b6cce69779aeec",
+      "bytes": 336269,
+      "sourceMtime": null,
+      "sourceMessageId": "call_6986d555d33e4d93a0f7fbe9a6bc8bc8"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/aa38d8355a7d-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "aa38d8355a7d063e9bbeffb25ea91960ba11d6ed4c69a151b5f73e335ec76241",
+      "bytes": 349394,
+      "sourceMtime": null,
+      "sourceMessageId": "call_6986d555d33e4d93a0f7fbe9a6bc8bc8"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/a20eba26ccdf-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "a20eba26ccdfa30d0764092269c1851defe105059f61b4f28ca8258d99327db1",
+      "bytes": 279681,
+      "sourceMtime": null,
+      "sourceMessageId": "call_6986d555d33e4d93a0f7fbe9a6bc8bc8"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/891f34fe46bb-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "891f34fe46bb2659f172ae9889a23eba4490bbe3e1b399204f25629d4e976f40",
+      "bytes": 377668,
+      "sourceMtime": null,
+      "sourceMessageId": "call_4f46ee570f4c4c18bf47dd6272445384"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/52e92218a216-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "52e92218a216f047ad8a5854fe2db77a4d543d8fa2a7376c6cab48c27b3dea11",
+      "bytes": 423526,
+      "sourceMtime": null,
+      "sourceMessageId": "call_4f46ee570f4c4c18bf47dd6272445384"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/19249d1c11cf-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "19249d1c11cfac2515c453f0a0d53d92be2f8b06782f674e160c9ef594155fe0",
+      "bytes": 162534,
+      "sourceMtime": null,
+      "sourceMessageId": "call_4f46ee570f4c4c18bf47dd6272445384"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/d323696d89bb-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "d323696d89bb4748e7c3ef61ef7116f4e9bd7c1f5abc6e5c59b909e4abb3f88c",
+      "bytes": 410627,
+      "sourceMtime": null,
+      "sourceMessageId": "call_eee734f81d0d408d8dee40a80c029e0b"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/5dc51c3f4d96-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "5dc51c3f4d96726eb3ea35a814ebf85c9753054cee1eea96b88335d755f24c0b",
+      "bytes": 581396,
+      "sourceMtime": null,
+      "sourceMessageId": "call_eee734f81d0d408d8dee40a80c029e0b"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/d9fe3b67c01a-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "d9fe3b67c01a05a0219a0c17e04870a6b2eb3306b45f22f66b074e8100e01eb0",
+      "bytes": 462544,
+      "sourceMtime": null,
+      "sourceMessageId": "call_eee734f81d0d408d8dee40a80c029e0b"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/d418d5caae9a-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "d418d5caae9ace12a93c406b5d1315c0d8cf5135c1ecaee2b073125599cb7c43",
+      "bytes": 398864,
+      "sourceMtime": null,
+      "sourceMessageId": "call_c935849751b44fb9a0f3f23947f280a7"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/e834b000e74f-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "e834b000e74f4920c95eb7e3f1084c6f1ed4648d972446a8074bbad6ab83682a",
+      "bytes": 430779,
+      "sourceMtime": null,
+      "sourceMessageId": "call_c935849751b44fb9a0f3f23947f280a7"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/eef3ece25176-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "eef3ece2517673caed04fa2b9d7ae5919e9daf41c980c4ce8547e52eb7713266",
+      "bytes": 366779,
+      "sourceMtime": null,
+      "sourceMessageId": "call_139831cd09a44370b6be308408911be8"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/c66444151535-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "c66444151535fe0a212f6682c21bfea89e5c265d6271c53210bcb00a31856b4f",
+      "bytes": 448284,
+      "sourceMtime": null,
+      "sourceMessageId": "call_139831cd09a44370b6be308408911be8"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/b2701be3b1fb-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "b2701be3b1fbfe420dc41e61825d393bad0fc92b654b9682c89d14d1fa7dc914",
+      "bytes": 262465,
+      "sourceMtime": null,
+      "sourceMessageId": "call_139831cd09a44370b6be308408911be8"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/b7c1fc8d6c65-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "b7c1fc8d6c650e643c343526c9625c79e711f1d2e15c0c5640bb20b5dca5ce41",
+      "bytes": 370133,
+      "sourceMtime": null,
+      "sourceMessageId": "call_74184dd8a71c426bb60f104e3d8c7abd"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/28b849700201-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "28b84970020148e10f340ad5da6cc5dc80a8ba0e5a7992c09720a51a9425dcae",
+      "bytes": 385052,
+      "sourceMtime": null,
+      "sourceMessageId": "call_74184dd8a71c426bb60f104e3d8c7abd"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/chase-smoke-frozen.png",
+      "relativePath": "attachments/84ed20a69924-chase-smoke-frozen.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "84ed20a69924e55914fcb32ecc53711395484402e5db4dc9e6422c3f8ede67e5",
+      "bytes": 427029,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-91c8147f-07d0-41f9-bde1-ebacd54ffc72"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/chase-smoke-frozen.png",
+      "relativePath": "attachments/a8521087a9d5-chase-smoke-frozen.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "a8521087a9d593f55468d96e98f5b1ef8060a15d992abf8bf098f690e7d69846",
+      "bytes": 302179,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-64c135ed-8ab1-46c6-93e8-91d1cf581157"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/430c63aa8add-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "430c63aa8add37da60470e975973742236b70c029909c20439e01ec57dafc1aa",
+      "bytes": 439125,
+      "sourceMtime": null,
+      "sourceMessageId": "call_4590e8f6ac1a4bb8b4c481088315b5f1"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/54b1e5457c8e-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "54b1e5457c8ecf13511081cc67b17836718df7664c74cc905884b7456d7c5fb7",
+      "bytes": 257383,
+      "sourceMtime": null,
+      "sourceMessageId": "call_4590e8f6ac1a4bb8b4c481088315b5f1"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/chase-smoke-collected.png",
+      "relativePath": "attachments/81f440fb525f-chase-smoke-collected.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "81f440fb525fbb611346a1368a4a00116dddc8f08fc5aa047625a4482a9d9164",
+      "bytes": 405064,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-0f9c0c39-7191-4943-a1a6-068ae930c4fd"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/8aa5403c4855-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "8aa5403c4855176ad5e92874203ae74cfb3c7c094062a8dd8ea8136bd5f6db0d",
+      "bytes": 367673,
+      "sourceMtime": null,
+      "sourceMessageId": "call_0cebdee14ba847f6a117c1c01c659558"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/258b824a2596-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "258b824a2596cb02c5c4dc5c627b9d7d6cf9477183ce55ffaff12ac0410c6ec9",
+      "bytes": 209901,
+      "sourceMtime": null,
+      "sourceMessageId": "call_0cebdee14ba847f6a117c1c01c659558"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/c7025060bb00-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "c7025060bb0041742fb9dfac85e8518633006d9600339235a5b8b52d8d99c34e",
+      "bytes": 340938,
+      "sourceMtime": null,
+      "sourceMessageId": "call_23e72b31931f4a549371dc2c2cf889a1"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/b60e954033b1-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "b60e954033b183c2934a88ac935fe0abb1d36d0846fb59bee98b95908fb53bbb",
+      "bytes": 356784,
+      "sourceMtime": null,
+      "sourceMessageId": "call_23e72b31931f4a549371dc2c2cf889a1"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/retrieval-late-placed.png",
+      "relativePath": "attachments/6afc3b146893-retrieval-late-placed.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "6afc3b146893079c1c14d0bdf098c24158db2a279fdebf3be647972fcd0b8eae",
+      "bytes": 388888,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-5c996c01-4bbe-40e9-b181-01ae02e56463"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/retrieval-late-placed.png",
+      "relativePath": "attachments/81e36c07ea0b-retrieval-late-placed.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "81e36c07ea0bacd8ab8790df0f65d1c9b25b82db206804d9101b0681354a5eb1",
+      "bytes": 396988,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-1abcd5c0-d4da-4bd0-9151-08d357dba2e6"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/8598760c6a70-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "8598760c6a7024e02cbb1184c8c5effb62b7645a0207b2c61af5ea39c66c4968",
+      "bytes": 246976,
+      "sourceMtime": null,
+      "sourceMessageId": "call_229d66ab4f7b4e5fab6d6a59e466ddce"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/738e43fd9da3-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "738e43fd9da3a9e29f99d46dc10dca332270b686ad0294e09f8cb87b825765c4",
+      "bytes": 237134,
+      "sourceMtime": null,
+      "sourceMessageId": "call_229d66ab4f7b4e5fab6d6a59e466ddce"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/consequences-tuning-day7-rim.png",
+      "relativePath": "attachments/1addc13150cb-consequences-tuning-day7-rim.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "1addc13150cb373dcada226f1244103b39697b4f30fe48b280bbc97019fa159e",
+      "bytes": 236355,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-0c82ec85-df9c-4345-970c-cc6cd4627499"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/exploration-smoke-observation-approach-0.png",
+      "relativePath": "attachments/5c029aa5db45-exploration-smoke-observation-approach-0.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "5c029aa5db454679ef0686e60c59b85bdd02a58b29567282c17a4b18398d9158",
+      "bytes": 403233,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-bc2548a0-1b1f-4cb3-b400-b8acca1eefc3"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/exploration-smoke-observation-0.png",
+      "relativePath": "attachments/b4d5dff10835-exploration-smoke-observation-0.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "b4d5dff1083556375932ba8af0f62498537c8c89e0ddbb5414b22f4d05842832",
+      "bytes": 256932,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-4f2c5edf-f91f-40fc-b6ce-0a86d97c6c38"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/36767dea66d6-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "36767dea66d630207120e9773b4e0715b6b3878e086d960c1ac61d042d988990",
+      "bytes": 320956,
+      "sourceMtime": null,
+      "sourceMessageId": "call_23167801f6e14255aad23c580c141e5e"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/f75d192c84ff-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "f75d192c84ff864609a22b57d58fb804a52698923a102f25d125ca6b6f547287",
+      "bytes": 283712,
+      "sourceMtime": null,
+      "sourceMessageId": "call_23167801f6e14255aad23c580c141e5e"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/283e5fb12c1e-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "283e5fb12c1e7a93e793245363388900bf53b12d065f05d5d30256cea77d58e4",
+      "bytes": 289992,
+      "sourceMtime": null,
+      "sourceMessageId": "call_23167801f6e14255aad23c580c141e5e"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/e95209e43dc0-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "e95209e43dc02ad01333da54dacb41e0a93fbff7b7924a7c17337b3bcc3b3077",
+      "bytes": 359311,
+      "sourceMtime": null,
+      "sourceMessageId": "call_c861a0de0fbc45c7a25a2c115f0b7e30"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/e76d95ae041b-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "e76d95ae041b134efc39bb1b041c92e6a1e91b2a79e238bd2377e6f2dfcc5e8e",
+      "bytes": 250332,
+      "sourceMtime": null,
+      "sourceMessageId": "call_c861a0de0fbc45c7a25a2c115f0b7e30"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/def2f658212e-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "def2f658212e9fa6812985fb93439233e3b20211e846775ab3a4e36a6ca188ad",
+      "bytes": 264699,
+      "sourceMtime": null,
+      "sourceMessageId": "call_c861a0de0fbc45c7a25a2c115f0b7e30"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/b1e9325e92fc-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "b1e9325e92fc8806ec5efeae3dd9dfdb3cdd41d380d3336594f8b1e1d13afcce",
+      "bytes": 254785,
+      "sourceMtime": null,
+      "sourceMessageId": "call_219ba7995ac244ef8e9795ac9109e473"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/2f498180e237-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "2f498180e237b4a2b165d09fadbe3ceab4b8616a15913aef15c0a0c162e97f2e",
+      "bytes": 246081,
+      "sourceMtime": null,
+      "sourceMessageId": "call_219ba7995ac244ef8e9795ac9109e473"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/b9ba86adc6d1-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "b9ba86adc6d11e5b9266f67a6108b83c0c353ff6317efeab2c42e85eaf29412e",
+      "bytes": 251845,
+      "sourceMtime": null,
+      "sourceMessageId": "call_219ba7995ac244ef8e9795ac9109e473"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/7cb95f819115-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "7cb95f819115172b30c9c511489f00bc5de5be25e097d0fc478fe776ab7d160c",
+      "bytes": 254494,
+      "sourceMtime": null,
+      "sourceMessageId": "call_158ca25114e544f0929c47f165620cbd"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/c7603c5afa7b-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "c7603c5afa7b3fbd76ca00fee4f09acedf094b31c6ed38c468d852d8a276adbc",
+      "bytes": 252365,
+      "sourceMtime": null,
+      "sourceMessageId": "call_158ca25114e544f0929c47f165620cbd"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/investigation-smoke-tablet-2-read-0.png",
+      "relativePath": "attachments/6ec0e959cd61-investigation-smoke-tablet-2-read-0.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "6ec0e959cd6140927d541fea7fbf645026fca4ec0b816b973c1a3c00aac75df3",
+      "bytes": 310802,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-1c5a419f-3cab-40ff-81dc-4fca661b1b8e"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/dbc0dbe9d2d3-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "dbc0dbe9d2d33fae29ba2ec9bb5d6d306622d9d4481a4ef497cd3b51c7207dd4",
+      "bytes": 299740,
+      "sourceMtime": null,
+      "sourceMessageId": "call_48c8fef1d7a74208a6b9ae374d46e0d6"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/291ce82dbf86-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "291ce82dbf8617e3d1699f0f2e967acf7785fe7e0bcf1662ec7ea8b1a0d31dd1",
+      "bytes": 300451,
+      "sourceMtime": null,
+      "sourceMessageId": "call_48c8fef1d7a74208a6b9ae374d46e0d6"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/9ddfa04550a7-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "9ddfa04550a7f553a8369006a3c7e995a3b7d49ef4ece5449dca9c7d6d189cf1",
+      "bytes": 301461,
+      "sourceMtime": null,
+      "sourceMessageId": "call_48c8fef1d7a74208a6b9ae374d46e0d6"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/db0add03c4c2-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "db0add03c4c285a875dab1e921d91a300169fc9b20415e80228555eb92ddaece",
+      "bytes": 238420,
+      "sourceMtime": null,
+      "sourceMessageId": "call_e8a32d54b2324eb3952c81df5e008e59"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/df825f9f532c-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "df825f9f532c7c0eb176ec95e1f8b131dfbe9f379819d9f0b5b1ccb78455d6d9",
+      "bytes": 299737,
+      "sourceMtime": null,
+      "sourceMessageId": "call_e8a32d54b2324eb3952c81df5e008e59"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/2b7b362c8d34-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "2b7b362c8d34215c53bc0c282a068304a0784a494fb92a06a420f21875f0e82b",
+      "bytes": 300146,
+      "sourceMtime": null,
+      "sourceMessageId": "call_e8a32d54b2324eb3952c81df5e008e59"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/32fbc7d3b4ae-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "32fbc7d3b4ae705885509d55b45ee722a88ac4c741374e8f6302a60a07c34322",
+      "bytes": 295835,
+      "sourceMtime": null,
+      "sourceMessageId": "call_57d0c2942d3544d2ba5f69066e002276"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/70b1e73855a6-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "70b1e73855a66135f1283cf0a374e32150d0633edafd2c7667f09cd34e15dcdc",
+      "bytes": 301223,
+      "sourceMtime": null,
+      "sourceMessageId": "call_57d0c2942d3544d2ba5f69066e002276"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/8a404bdc086b-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "8a404bdc086b0d2080562827e936054a61811c55a25d12e98cf91366afd70c12",
+      "bytes": 297801,
+      "sourceMtime": null,
+      "sourceMessageId": "call_57d0c2942d3544d2ba5f69066e002276"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/bd108be689da-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "bd108be689da9a30a115392e35f6439d41ac04e73906808225fa6a332edd0801",
+      "bytes": 301203,
+      "sourceMtime": null,
+      "sourceMessageId": "call_57d0c2942d3544d2ba5f69066e002276"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/1445f38ccbad-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "1445f38ccbadd34ffc526dd1d24ca89c1fe31bda8a68c1e35a8a10838ca42db1",
+      "bytes": 297727,
+      "sourceMtime": null,
+      "sourceMessageId": "call_0f50925aaeb24cefb6dd9edfc61d9be1"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/d5ab58419d45-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "d5ab58419d45bf003bb4162604e9bb3b521e0ad2c64ed320f5ebaa4e441bb687",
+      "bytes": 301000,
+      "sourceMtime": null,
+      "sourceMessageId": "call_0f50925aaeb24cefb6dd9edfc61d9be1"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/signal-smoke-lake-t04-0.png",
+      "relativePath": "attachments/d9594ef03d3a-signal-smoke-lake-t04-0.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "d9594ef03d3a486b8e226e8b6c3f12063fdc8c26ba1bfde0ea8f1384f3df874b",
+      "bytes": 280813,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-634807be-8464-475e-926b-cc3509d07949"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/signal-smoke-t05-complete-layout.png",
+      "relativePath": "attachments/3a5d36a9c2b0-signal-smoke-t05-complete-layout.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "3a5d36a9c2b096c049093bf7ffd2f4c4aff65b1a5b3669e2d09821fae7758482",
+      "bytes": 339298,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-ad9be4f6-5653-4d4c-9693-f337193d7e84"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonChecks/Task014/signal-chime002-signal-smoke/signal-smoke-occluded-real-entry.png",
+      "relativePath": "attachments/ef0878710331-signal-smoke-occluded-real-entry.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "ef087871033126e6d871add123f3e763ea8e0a60467e16796db9cf20ce80d39b",
+      "bytes": 477083,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-23fded9a-75ed-49f1-97a2-fa3505193413"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonChecks/Task014/signal-chime002-signal-smoke/signal-smoke-visible-snow-entry.png",
+      "relativePath": "attachments/fdf3ee63068e-signal-smoke-visible-snow-entry.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "fdf3ee63068e443d7749b3e2a37c5b437a7636e88e88c0df4c3f8a79bb011a3b",
+      "bytes": 441691,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-945e9b8b-62ff-40e0-b5a8-5a21c5439b9a"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-4cc1fd8d-aaaa-44dd-be4e-d6bd5565555e.png",
+      "relativePath": "attachments/f084ec156c7f-codex-clipboard-4cc1fd8d-aaaa-44dd-be4e-d6bd5565555e.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "f084ec156c7fc6e39bbf26321197d9805b3017ccc0a3f28d220c069900d1e1a1",
+      "bytes": 20006,
+      "sourceMtime": null,
+      "sourceMessageId": "01a18690-6529-7640-97af-99ac7cd46750"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-e87a1cc4-079a-405d-a208-de59695a4980.png",
+      "relativePath": "attachments/da7641a3b402-codex-clipboard-e87a1cc4-079a-405d-a208-de59695a4980.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "da7641a3b402e8bb3faec4a5dfdbfd7a99694a555498b77d07fff0f7915f77a0",
+      "bytes": 652026,
+      "sourceMtime": null,
+      "sourceMessageId": "01a18716-d903-7990-b738-1e10484daace"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/prep-smoke-solar-record.png",
+      "relativePath": "attachments/8ab57d6e3485-prep-smoke-solar-record.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "8ab57d6e3485a0c5f6f68bbee9602f690455c35f63079288162a9ff7197344fe",
+      "bytes": 254934,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-76660c89-7164-40fb-bad6-9781cb9f83ab"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/e4a3f254457c-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "e4a3f254457c453d04bbda3dba812d2bd2d425b7733aef049ccba5b6edec0abc",
+      "bytes": 222702,
+      "sourceMtime": null,
+      "sourceMessageId": "call_32c4a6e00a2548ecb73ef8eff452d0fb"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/abb5e3076cb4-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "abb5e3076cb427f5941f2b0d09b2540caf4be8351686292398a018b0c6f892f4",
+      "bytes": 322627,
+      "sourceMtime": null,
+      "sourceMessageId": "call_32c4a6e00a2548ecb73ef8eff452d0fb"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/21c05c6b7732-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "21c05c6b77323374c64fd1ceac04fb2f44a3c6532db59a887b425084af5e901b",
+      "bytes": 298959,
+      "sourceMtime": null,
+      "sourceMessageId": "call_1bfe7eb618274099b6f7670116b2a28b"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/a21e9b416e9d-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "a21e9b416e9df0f99ff5e4abcd048fe5290399d52a19093649aab37ddae90099",
+      "bytes": 229213,
+      "sourceMtime": null,
+      "sourceMessageId": "call_1bfe7eb618274099b6f7670116b2a28b"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonChecks/Task016/arch-full002-prep-old-search/investigation-smoke-tablet-2-read-0.png",
+      "relativePath": "attachments/384fd8e72a99-investigation-smoke-tablet-2-read-0.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "384fd8e72a9978e6fe1374dff656a1ef5bdddc8c89917c64ace826b5788456f1",
+      "bytes": 295676,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-d92aad72-8178-4b6d-b8bb-96e6ce4629e8"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonChecks/Task016/arch-full002-prep-smoke/prep-smoke-handover-record-0.png",
+      "relativePath": "attachments/17f249873083-prep-smoke-handover-record-0.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "17f249873083abb4e05486a313b78b1825953ff7b1b98deff1cc64ee6ac70a23",
+      "bytes": 226251,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-d873171f-1e75-4db5-b4b2-039d5eae2e82"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonChecks/Task018/runtime-classes-overview-preview.png",
+      "relativePath": "attachments/5b2d9a97ca85-runtime-classes-overview-preview.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "5b2d9a97ca851cf8a1545e839010ba0709cc69b05e168f7474f4ded7d8e3ae6b",
+      "bytes": 600669,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-cc7bcac4-8f41-4290-b1c5-82d8424bee37"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonChecks/Task018/runtime-classes-complete-preview.png",
+      "relativePath": "attachments/4a131cf9c4bb-runtime-classes-complete-preview.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "4a131cf9c4bbc45e2b510759c39d7c50a9d3c81c5d7f5aac571c913cf61eceda",
+      "bytes": 473613,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-07cd20d1-37be-4ab4-8dee-5e725a3757db"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonChecks/Task018/overview-interface-check.png",
+      "relativePath": "attachments/62ba03392fd9-overview-interface-check.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "62ba03392fd90a167b1cd17242d3f3f56ce3efcef486341671a7cd6173a60206",
+      "bytes": 47910,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-ea5ba2c9-a318-478f-9594-891df34380d1"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonChecks/Task019/uml-check.png",
+      "relativePath": "attachments/7a4b7ff6b1be-uml-check.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "7a4b7ff6b1be4f20fa96ca18db6c266d121e585e73b23037a0f55d9bc40eb6eb",
+      "bytes": 57222,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-03a73dc1-b109-46af-bc80-af2402d964e5"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\Downloads\\微信图片_20261103163446_215_45.png",
+      "relativePath": "attachments/bcd3d3820a13-微信图片_20261103163446_215_45.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "bcd3d3820a1342278ab0ca39b47074aba989969eb0e1c659e6ce7a12cb205cd5",
+      "bytes": 68524,
+      "sourceMtime": null,
+      "sourceMessageId": "01a1a090-f6da-7d63-824b-9bfa78de52bb"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-4dd22795-e59a-4cb6-8c5d-83675f7c5601.png",
+      "relativePath": "attachments/80f39b6fa926-codex-clipboard-4dd22795-e59a-4cb6-8c5d-83675f7c5601.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "80f39b6fa926959fa181363d40c4ce5aee0ebf772bcb98d8fa7349a229a9c72e",
+      "bytes": 807093,
+      "sourceMtime": null,
+      "sourceMessageId": "01a1c614-f977-78d0-b47a-5c428f5ba261"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonCheckpoints/task020-day3-day9-20261106/nine-normal-day7-record.png",
+      "relativePath": "attachments/fb3073fccfd6-nine-normal-day7-record.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "fb3073fccfd60fd37fae109a25083be5e1a68fba189034affcf273318b77fd1b",
+      "bytes": 198957,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-d572261f-4634-487a-a783-c744fccc9129"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonCheckpoints/task020-day3-day9-20261106/nine-normal-clock.png",
+      "relativePath": "attachments/f8dc88e0a324-nine-normal-clock.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "f8dc88e0a324d5f6da03853c97d8a9d77471db590de3c692d6360cfcaad9080e",
+      "bytes": 184844,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-c7bfedbc-2060-4a5e-a4d2-70a77f177c0f"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonCheckpoints/task020-day3-day9-20261106/nine-normal-ending.png",
+      "relativePath": "attachments/a0f366db7b3f-nine-normal-ending.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "a0f366db7b3f1cd745c4ee865c5e380e8c1527729a41f707ecfc766f2018bfc8",
+      "bytes": 22336,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-b84a0584-11c0-4fc5-bee9-271faa3c6da9"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonCheckpoints/task020-day3-day9-20261106/nine-normal-clock.png",
+      "relativePath": "attachments/e111a5c024f7-nine-normal-clock.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "e111a5c024f799f4fcab6cefe71aa27341f3e3e7eb656a0b8ff27a066f00c7eb",
+      "bytes": 639651,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-c07ac68b-6638-43fc-a11f-52f326165df3"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonCheckpoints/task020-day3-day9-20261106/nine-normal-ending.png",
+      "relativePath": "attachments/d4db3f85fbed-nine-normal-ending.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "d4db3f85fbeda64e792f3aeb1fbcb2ec851802f01dacb4bd6555d12ecc38f35f",
+      "bytes": 434329,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-c249d6c3-9759-4f4f-9d8e-adf076c65c75"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonCheckpoints/task020-day3-day9-20261106/nine-normal-clock.png",
+      "relativePath": "attachments/e5e20379d75f-nine-normal-clock.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "e5e20379d75fe8077c25c27460882fdd310bd5f9f1f42a515954f8ca9e4672b7",
+      "bytes": 640971,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-bb5c8dcd-5bb0-4e28-9a4a-4c3016bdb32b"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Logs/DemonCheckpoints/task020-day3-day9-20261106/nine-normal-clock.png",
+      "relativePath": "attachments/d75806b7dc4c-nine-normal-clock.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "d75806b7dc4c6016ae00fc35785e80cd362ac0f6492656ecc43d228b7239613a",
+      "bytes": 634502,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-f0dc4a40-d824-4781-8bc8-5656b41b3e58"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/day-jump-menu.png",
+      "relativePath": "attachments/af858c6f5e31-day-jump-menu.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "af858c6f5e31d79f7be585d499dc9ea77d548fd603b768cd9b128345beee4201",
+      "bytes": 583205,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-85a69221-d34c-4b0c-9ea0-473b454176c2"
+    },
+    {
+      "originalPath": "file:///D:/Unity/Projects/Demon/Temp/DemonSliceReports/day-jump-menu.png",
+      "relativePath": "attachments/c857d40ac385-day-jump-menu.png",
+      "status": "included",
+      "origin": "original embedded tool image; unambiguous one-image call",
+      "sha256": "c857d40ac38530fdc3ac62ae69e68b05309001959c2c6482f56b629c7ac3405d",
+      "bytes": 585890,
+      "sourceMtime": null,
+      "sourceMessageId": "exec-43f5ef84-6a98-4a73-a3a3-887bbff1f5ad"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-3e65ed8f-dbd8-4b2b-8d59-5b34596bcec6.png",
+      "relativePath": "attachments/6f378d872a1d-codex-clipboard-3e65ed8f-dbd8-4b2b-8d59-5b34596bcec6.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "6f378d872a1d60e5f250c6c2bbb96a66309b8929232f79a3fd36fe4927eac95b",
+      "bytes": 255272,
+      "sourceMtime": null,
+      "sourceMessageId": "01a1b039-47f8-7fe2-8672-89b9eeb4cb36"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-f970ced6-1e30-41bf-8673-110efb3a99c3.png",
+      "relativePath": "attachments/b73f2847dd5b-codex-clipboard-f970ced6-1e30-41bf-8673-110efb3a99c3.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "b73f2847dd5bb83248f8bb74e178b06bdbca4ef3a0d219667fcfc26d3a62a818",
+      "bytes": 173384,
+      "sourceMtime": null,
+      "sourceMessageId": "01a1b03d-699d-7e81-8a2c-fbd2d69d8476"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-a455931c-99d7-4084-b646-93f137a675d8.png",
+      "relativePath": "attachments/2f0cf440a177-codex-clipboard-a455931c-99d7-4084-b646-93f137a675d8.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "2f0cf440a1777e2e82f36bdab32da4519552cdb32d36f14de76567020d98741a",
+      "bytes": 612636,
+      "sourceMtime": null,
+      "sourceMessageId": "01a1b085-a27f-7dc0-b8bc-3e0b45946737"
+    },
+    {
+      "originalPath": "C:\\Users\\11628\\AppData\\Local\\Temp\\codex-clipboard-d44ddda1-2a20-4985-bc73-8e84a3ee52f4.png",
+      "relativePath": "attachments/1c27dab69592-codex-clipboard-d44ddda1-2a20-4985-bc73-8e84a3ee52f4.png",
+      "status": "included",
+      "origin": "original embedded user image",
+      "sha256": "1c27dab6959271f5d4514ee7b27721a39122f30a73712be02b5f9a96989005e8",
+      "bytes": 68656,
+      "sourceMtime": null,
+      "sourceMessageId": "01a1b08e-0232-7ac1-9a5d-fd8317d2997d"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/b6be6a481343-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "b6be6a4813433d5c87e25e325375b527ee04c6ba743bd8e48a22db10a2c76ed3",
+      "bytes": 846635,
+      "sourceMtime": null,
+      "sourceMessageId": "call_714fba8a28444cfd93a070208c2940af"
+    },
+    {
+      "originalPath": null,
+      "relativePath": "attachments/bae57f479dc2-embedded-image.png",
+      "status": "included",
+      "origin": "original embedded tool image batch; individual path mapping not inferred",
+      "sha256": "bae57f479dc2a2de3f413794c84a59217f48274c970b39c4fdd39d321ddfdc06",
+      "bytes": 1414958,
+      "sourceMtime": null,
+      "sourceMessageId": "call_714fba8a28444cfd93a070208c2940af"
+    },
+    {
+      "originalPath": "C:/Users/11628/Desktop/新建 Microsoft Word 文档.docx",
+      "relativePath": "attachments/0183b482be69-新建 Microsoft Word 文档.docx",
+      "status": "included",
+      "origin": "file mentioned as user attachment; current local file copy",
+      "sha256": "0183b482be69e74feb25c52bbfeeef431edc63a799035cd9ed9b5bf89f29284f",
+      "bytes": 20007,
+      "sourceMtime": "2026-11-10T13:10:40.605Z",
+      "sourceMessageId": "01a1c595-d563-7c42-86f3-c2a007b156ef"
+    }
+  ],
+  "missing": [
+    {
+      "originalPath": "C:/Users/11628/Downloads/策划案.pdf",
+      "status": "missing",
+      "origin": "file mentioned as user attachment; current local file copy",
+      "sourceMessageId": "01a1641d-b71e-7381-8ae7-2924ebcf6ddb"
+    },
+    {
+      "originalPath": "C:/Users/11628/Downloads/恶魔语言系统 v0.2.pdf",
+      "status": "missing",
+      "origin": "file mentioned as user attachment; current local file copy",
+      "sourceMessageId": "01a1641d-b71e-7381-8ae7-2924ebcf6ddb"
+    }
+  ]
+}

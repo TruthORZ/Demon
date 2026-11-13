@@ -1,0 +1,60 @@
+classDiagram
+    GameSceneController --> GameSession
+    GameSession --> GameClock
+    GameSession --> RuneBoardModel
+    GameSession ..> AttributeOperations
+    GameSceneController --> PlayerController
+    GameSceneController --> GameHud
+    GameSceneController --> WorldPresentation
+    PlayerController --> IPlayerSession
+    GameSceneController ..|> IPlayerSession
+    RuneTablet --|> Interactable
+    CipherBox --|> Interactable
+    RuneTablet ..|> ICloseViewInteraction
+    CipherBox ..|> ICloseViewInteraction
+    PlayerController --> ICloseViewInteraction
+    RuneTablet --> ITabletProgram
+    GameSceneController ..|> ITabletProgram
+    ListeningTool ..|> ITabletProgram
+    ListeningTool --> RuneBoardModel
+    GameSceneController --> ExplorationFlow
+    ExplorationFlow ..> ExplorationGuidance
+    ExplorationFlow --> ExplorationDefinition
+    GameSceneController --> ChaseController
+    ChaseController --> ClosePassGate
+    GameSceneController --> BeamTether
+    BeamTether --> StableBeamMotion
+    GameSceneController --> ListeningTool
+    ListeningTool --> ListeningChime
+    ListeningChime --> RegionEntryLatch
+    GameSceneController --> FinalTabletRetrieval
+    FinalTabletRetrieval --> FinalTabletProgress
+    class GameSceneController["GameSceneController"]
+    class GameSession["GameSession"]
+    class GameClock["GameClock"]
+    class RuneBoardModel["RuneBoardModel"]
+    class AttributeOperations["AttributeOperations"]
+    class PlayerController["PlayerController"]
+    class GameHud["GameHud"]
+    class WorldPresentation["WorldPresentation"]
+    class IPlayerSession["IPlayerSession"]
+    <<interface>> IPlayerSession
+    class RuneTablet["RuneTablet"]
+    class Interactable["Interactable"]
+    class CipherBox["CipherBox"]
+    class ICloseViewInteraction["ICloseViewInteraction"]
+    <<interface>> ICloseViewInteraction
+    class ITabletProgram["ITabletProgram"]
+    <<interface>> ITabletProgram
+    class ListeningTool["ListeningTool"]
+    class ExplorationFlow["ExplorationFlow"]
+    class ExplorationGuidance["ExplorationGuidance"]
+    class ExplorationDefinition["ExplorationDefinition"]
+    class ChaseController["ChaseController"]
+    class ClosePassGate["ClosePassGate"]
+    class BeamTether["BeamTether"]
+    class StableBeamMotion["StableBeamMotion"]
+    class ListeningChime["ListeningChime"]
+    class RegionEntryLatch["RegionEntryLatch"]
+    class FinalTabletRetrieval["FinalTabletRetrieval"]
+    class FinalTabletProgress["FinalTabletProgress"]
