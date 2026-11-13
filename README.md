@@ -9,7 +9,7 @@ Demon Principles is a first-person horror puzzle game set at an isolated winter 
 | Item | Value |
 | --- | --- |
 | Course | AP6412 |
-| Group identifier | **To be confirmed** |
+| Group identifier | **Group 7** |
 | Route | Route A, three stages, using Unity 3D with lecturer approval reported by the team |
 | Engine | Unity **6000.6.0f1**, revision `f7f8ed4d1e24` |
 | Language | C# |
@@ -19,14 +19,29 @@ Demon Principles is a first-person horror puzzle game set at an isolated winter 
 
 ### Group members and individual evidence
 
-The team will replace the following placeholders with its confirmed submission details. Git author names alone do not establish student identity or personal branch ownership.
+The following member details and responsibilities are taken from the team's supplied individual reflections. The GitHub-account fields in those reflections contain email addresses; they are recorded as supplied emails, not verified GitHub usernames. Branch names below use the repository's actual lowercase spelling.
 
-| Student name | Student ID | GitHub account | Personal branch and contribution links | AI record location |
+| Student name | Student ID | GitHub account email (as supplied) | Working branch and contribution references | AI record location |
 | --- | --- | --- | --- | --- |
-| To be confirmed: current user | To be confirmed | To be confirmed | To be confirmed | [Current user's records through the approved cutoff](Docs/AI-Logs/Current-User/Through-2026-11-10/index.html) |
-| To be confirmed: second member | To be confirmed | To be confirmed | To be confirmed | To be provided, or an explicit declaration of no AI use |
+| Xia Chaoran | `xiac005` | `chaoranxia30@gmail.com` | [main](https://github.com/TruthORZ/Demon/tree/main) · [history](https://github.com/TruthORZ/Demon/commits/main/) · [architecture](Docs/ARCHITECTURE.md) · [stage evidence](Docs/Diagrams/Stages/README.md) | [Original conversations through 10 Nov 2026](Docs/AI-Logs/Current-User/Through-2026-11-10/all-conversations.md) · [archive index](Docs/AI-Logs/Current-User/Through-2026-11-10/index.html) |
+| Peng Xinyi (PXY) | `xinyi035` | `nhaichen6@gmail.com` | [art](https://github.com/TruthORZ/Demon/tree/art) · [history](https://github.com/TruthORZ/Demon/commits/art/) · [footprint implementation](Assets/SnowSystem/FootPrint/README.md) · [art/main integration](Docs/Tasks/DEMON-ART-MERGE-20261112.md) | [PXY AI evidence](Docs/AI-Logs/PXY/) · [original footprint chat](Docs/AI-Logs/PXY/FootPrint_FullChat.md) · [key influence evidence](Docs/AI-Logs/PXY/FootPrint_KeyPart.md) |
 
-The group number, member identities and individual branch links remain pending by the user's instruction. Keep a separate, named reflection subsection and a separate generative-AI declaration for every member.
+`main` is also the shared integration branch, so its full history is not an exclusive authorship claim for Xia Chaoran. The existing archive folder `Current-User` is retained and mapped here to Xia Chaoran; `PXY` identifies Peng Xinyi. Contribution summaries below describe responsibilities and AI-assisted work, not a claim that every referenced line or third-party asset was independently authored by that student. Each student still supplies a separate signed generative-AI declaration.
+
+### Xia Chaoran — individual contribution and reflection
+
+- **Game design and gameplay:** refined the nine-day flow, daily objectives, puzzle progression and ending conditions; coordinated listening, cipher, beam, pursuit, inventory and daily-retry systems.
+- **Code architecture and extensibility:** guided AI-assisted refactoring to clarify class responsibilities and reduce dependencies; organised three-stage Class Maps and code comparisons.
+- **Testing and documentation:** defined regression requirements to preserve existing features and the nine-day flow; organised verification records, the English report, presentation materials, README and original AI communication evidence. Responsibility for preparing an item does not by itself establish that the final submission package is complete.
+- **AI assessment:** for familiar work, set requirements and steps, used AI to save time and checked results. For unfamiliar topics, used AI for explanations and a stepwise learning plan, then practised to assess understanding. See the linked conversations and dated verification records for the evidence available.
+
+### Peng Xinyi — individual contribution and reflection
+
+- **Models and scene:** organised and adjusted model assets; assembled the snow environment with plants, buildings and props. Reused third-party models remain credited to their original authors.
+- **Materials and atmosphere:** adjusted materials and snow effects, and configured lighting, sky and fog for the winter setting.
+- **Shader and gameplay coding:** explored surface-direction snow masks and material combination in Shader Graph/HLSL learning; directed and adjusted AI-assisted C# footprint triggering/control and its connection to the existing demon chase. Footprint color/normal shading creates a visual dent without deforming Terrain geometry. The [SnowEffect evidence](Docs/AI-Logs/PXY/SnowEffect_KeyPart.md) distinguishes the existing Graph from the HLSL exercise whose independent completion is not yet evidenced; the [FootPrint evidence](Docs/AI-Logs/PXY/FootPrint_KeyPart.md) identifies actual Demon changes and evaluation.
+- **Git integration:** organised version control, worked with branches and commits, and coordinated merging, conflict resolution and checks of combined features.
+- **AI assessment:** for familiar work, set requirements and steps, used AI to save time and checked results. For unfamiliar topics, used explanations and small exercises, then practised and sought corrections. AI-generated code or automated checks are identified in the evidence rather than presented as independent manual authorship or testing.
 
 ## Project and version status
 
@@ -166,14 +181,17 @@ The model separates plain C# rules from Unity scene/input/presentation component
 | Stage 2 to Stage 3 comparison | [b31abc5...b94f864](https://github.com/TruthORZ/Demon/compare/b31abc5c65524662a4448b4e0117d486da1d1fa7...b94f864388d0dd524bdc07cfe165b7b70746711f) |
 | Verified art/main integration | [Merge commit 8033386](https://github.com/TruthORZ/Demon/commit/8033386123f4c4269afc877cf41f7cbf988a56bc) |
 | Commit history | [Repository commits](https://github.com/TruthORZ/Demon/commits/main/) |
-| Personal branches and individual PRs | **To be confirmed for each member** |
+| Member working branches | Xia Chaoran: [main](https://github.com/TruthORZ/Demon/tree/main); Peng Xinyi: [art](https://github.com/TruthORZ/Demon/tree/art). See the named contribution/evidence sections above. |
+| PXY AI evidence merged into main | [Merge commit 153f24d](https://github.com/TruthORZ/Demon/commit/153f24dce80bee1c329c897397f3e99d6857c82d), adding ten Markdown files |
 | Stage tag URLs | **To be supplied after the required tags exist** |
 
-The existing `main` and `art` links document available branches. They do not replace identification of every student's own branch and contribution history. Preserve meaningful commits and merge/PR evidence. Ensure the assessor can access the repository and required LFS data.
+The branch mapping follows the team's supplied reflections. Use the named contribution references and AI records alongside Git history; commits on the shared `main` branch alone do not establish individual authorship. Preserve meaningful commits and merge/PR evidence. Ensure the assessor can access the repository and required LFS data.
 
-## Complete AI communication records
+## AI communication records
 
-The current user's complete available project conversations **through the explicitly approved cutoff of 10 November 2026, 24:00 Asia/Shanghai** are included in the project at:
+### Xia Chaoran — existing project archive
+
+Xia Chaoran's complete available project conversations **through the explicitly approved cutoff of 10 November 2026, 24:00 Asia/Shanghai** are included in the project at:
 
 **`Docs/AI-Logs/Current-User/Through-2026-11-10/`**
 
@@ -189,7 +207,23 @@ Two originally attached files, `策划案.pdf` and `恶魔语言系统 v0.2.pdf`
 
 The export preserves user-visible dialogue, interactive questions and available images. It excludes internal reasoning, system/developer instructions, automatically injected environment/context and internal command/output traces. The exported conversation is evidence of AI communication; actual implementation changes should also be traced through Git.
 
-This is complete **within the approved cutoff**, not through the later final submission date. Later work and the chats created after that cutoff are outside this bundle. If the assessed submission includes later AI-assisted work, add its complete chronological record as an explicitly dated addendum. The second member's AI record or no-use declaration, and the mapping of `Current-User` to a named student/personal branch, remain **to be confirmed**.
+This archive is complete **within its approved cutoff**, not through the later final submission date. Later work and chats created after that cutoff are outside this bundle. If the assessed submission includes later AI-assisted work by Xia Chaoran, add its chronological record as an explicitly dated addendum. The original directory name is preserved; its member mapping is given above.
+
+### Peng Xinyi (PXY) — selected-topic original chats and influence evidence
+
+The following five topic pairs were prepared on **13 November 2026** and are stored under **`Docs/AI-Logs/PXY/`**. Paths were checked against the actual repository files. Each KeyPart links original excerpts to requirements, design choices, code changes, human evaluation and available evidence.
+
+| Original chat / topic | Original chat text | Key influence evidence |
+| --- | --- | --- |
+| 12 — Snow plugin code analysis and changes | [FootPrint_FullChat.md](Docs/AI-Logs/PXY/FootPrint_FullChat.md) | [FootPrint_KeyPart.md](Docs/AI-Logs/PXY/FootPrint_KeyPart.md) |
+| 04 — Art and scene production | [ArtSceneProduce_FullChat.md](Docs/AI-Logs/PXY/ArtSceneProduce_FullChat.md) | [ArtSceneProduce_KeyPart.md](Docs/AI-Logs/PXY/ArtSceneProduce_KeyPart.md) |
+| 31 — Snow footprint interaction design | [FootPrintDesign_FullChat.md](Docs/AI-Logs/PXY/FootPrintDesign_FullChat.md) | [FootPrintDesign_KeyPart.md](Docs/AI-Logs/PXY/FootPrintDesign_KeyPart.md) |
+| Rock snow-effect tutorial | [SnowEffect_FullChat.md](Docs/AI-Logs/PXY/SnowEffect_FullChat.md) | [SnowEffect_KeyPart.md](Docs/AI-Logs/PXY/SnowEffect_KeyPart.md) |
+| 15 — Rendering-pipeline theory | [RenderPipeline_FullChat.md](Docs/AI-Logs/PXY/RenderPipeline_FullChat.md) | [RenderPipeline_KeyPart.md](Docs/AI-Logs/PXY/RenderPipeline_KeyPart.md) |
+
+These are the available original records for the five selected topics, not a declaration that every AI interaction for the entire project has been exported. **RenderPipeline has an explicit early-history gap:** only five turns from 4–5 November 2026 were recoverable. Its `FullChat` filename does not imply a complete history. No summary was used to invent missing dialogue.
+
+The PXY files document privacy redactions and preserve text/code with available image references, without embedding the original image binaries. They distinguish Snow learning and third-party GlobalSnow research from implemented Demon features, and separate AI actions from human evaluation. Both members should check that their evidence covers the work included in the final assessment and provide their own signed AI-use declaration.
 
 ## Build and verification
 
@@ -219,9 +253,10 @@ These are dated evidence for their own revisions. Preparing this README did not 
 
 The daily retry checkpoint is held in the running process. It is not a persistent save across application restarts. Some voice, audio or narrative presentation may remain explicitly identified placeholders. The formal game UI is in English. The AI records retain their original languages. Consult the [latest task handoff](Docs/SESSION_HANDOFF.md) for unresolved integration and human-verification items.
 
-Before one member submits `AP6412_GroupXX.zip` through NTULearn, the group must complete the following:
+Before one member submits `AP6412_Group7.zip` through NTULearn, the group must complete the following:
 
-- [ ] Replace `XX` and all member/name/ID/account/branch placeholders with confirmed details.
+- [x] Record Group 7, both student names/IDs, supplied account emails, working branches and available AI-record locations from the team's confirmed details.
+- [ ] Confirm the supplied account emails against the actual GitHub profile usernames if profile identification is required in the submission form.
 - [ ] Include the actual final runnable Unity source, scripts and essential assets with their `.meta` files. Preserve `Packages` and `ProjectSettings`.
 - [ ] Provide independently runnable Stage 1, Stage 2 and Stage 3 versions and the required frozen tag URLs. Identify any offline source folders here when packaging them.
 - [ ] Reconcile the historical stage evidence with the lecturer's actual requirement-release and freeze arrangements, and retain the lecturer's Unity 3D approval.
@@ -233,12 +268,12 @@ Before one member submits `AP6412_GroupXX.zip` through NTULearn, the group must 
 - [ ] Rebuild and test the final submitted game; rehearse normal play, invalid-action handling, daily retry and the defined ending.
 - [ ] Prepare the approximately 15-minute presentation and live game demonstration, with every member speaking about their own contribution. Open the actual repository evidence and at least one real AI prompt/response exchange.
 
-The submission deadline is the one shown on the AP6412 NTULearn assignment page. Replace `GroupXX` with the confirmed group identifier. Include this README, `Assets`, `Packages`, `ProjectSettings`, the relevant `Docs` evidence and required report/declarations in the submission. Unity caches such as `Library`, `Temp`, `obj` and machine-specific `UserSettings` are not required to open a correctly packaged source project. Keep essential source assets and `.meta` files intact.
+The submission deadline is the one shown on the AP6412 NTULearn assignment page. Use the confirmed Group 7 identifier consistently in the submission package and forms. Include this README, `Assets`, `Packages`, `ProjectSettings`, the relevant `Docs` evidence and required report/declarations in the submission. Unity caches such as `Library`, `Temp`, `obj` and machine-specific `UserSettings` are not required to open a correctly packaged source project. Keep essential source assets and `.meta` files intact.
 
 ## Project documentation
 
 - [Game specification](Docs/GAME_SPEC.md): intended gameplay and accepted decisions.
 - [Architecture](Docs/ARCHITECTURE.md): implemented modules, contracts, assets and historical verified procedures.
 - [Stage evidence](Docs/Diagrams/Stages/README.md): checkpoint maps and transition analyses.
-- [AI evidence index](Docs/AI-Logs/README.md): scope, ownership placeholders and reading paths.
+- [Original AI archive index](Docs/AI-Logs/README.md): original export scope and reading paths; the named member mapping and PXY addendum are recorded above.
 - [Submission README preparation record](Docs/Tasks/TASK-035-submission-readme-and-ai-records.md).
