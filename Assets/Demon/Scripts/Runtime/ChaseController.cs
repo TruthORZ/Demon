@@ -31,6 +31,11 @@ namespace Demon.Slice
         public bool Tracking => tracking;
         [Tooltip("One outdoor spawn per pursuit morning, starting on the first motion day.")]
         [SerializeField] Transform[] morningSpawns;
+        [Header("Return after prolonged absence (seconds and metres)")]
+        [SerializeField, Min(1)] float absenceSeconds = 90;
+        [SerializeField, Min(1)] float absenceDistance = 48;
+        [SerializeField] Vector2 returnRange = new Vector2(20, 32);
+        float absentFor;
         int lastSpawnDay;
         Vector3 authoredPosition;
         Quaternion authoredRotation;
@@ -63,7 +68,7 @@ namespace Demon.Slice
             replanAt = stepAt = missingNavSeconds = unseenSeconds = laughAt = 0; tracking = false; main = (messages as GameSceneController)?.Playthrough; retreating = false; Phase = ChasePhase.Dormant;
             if (misleadingVoice) misleadingVoice.Stop();
             if (proximityVoice) proximityVoice.Stop();
-            lastSpawnDay = 0; heardNearby = false; nextScream = 0;
+            absentFor = 0; lastSpawnDay = 0; heardNearby = false; nextScream = 0;
             session = rules; player = actor; tether = motion; feedback = messages; Gate = new ClosePassGate(definition.ClosePassMetres, definition.ClosePassCooldownSeconds);
             agent.speed = definition.MetresPerSecond; agent.acceleration = definition.AccelerationMetresPerSecondSquared; agent.angularSpeed = definition.AngularDegreesPerSecond;
             PursuitReset?.Invoke();
@@ -75,7 +80,7 @@ namespace Demon.Slice
             if (day == lastSpawnDay || index < 0 || morningSpawns == null || index >= morningSpawns.Length ||
                 session.Clock.MinuteOfDay < wakeHour * 60 || session.LakeSeal != 0) return;
 
-            lastSpawnDay = day;
+            absentFor = 0; lastSpawnDay = day;
             Transform marker = morningSpawns[index];
             if (!marker || !NavMesh.SamplePosition(marker.position, out var ground, 2f, agent.areaMask) || main.InsideCabin(ground.position))
                 throw new InvalidOperationException($"Day {day} needs an outdoor morning spawn on the enemy NavMesh.");
@@ -101,7 +106,7 @@ namespace Demon.Slice
             if (Gate == null || player.MenuOpen) return;
             Gate.Advance(Time.deltaTime);
             if (session.Descended) { Phase = ChasePhase.Ended; Stop(); return; }
-            if (!tether.ProxyCanTravel || session.LakeSeal != 0) { Phase = ChasePhase.Dormant; Stop(); return; }
+            if (!tether.ProxyCanTravel || session.LakeSeal != 0) { absentFor = 0; Phase = ChasePhase.Dormant; Stop(); return; }
             if (!agent.isActiveAndEnabled) return; // T06/date presentation enables the authored target root.
             if (!agent.isOnNavMesh)
             {
@@ -114,6 +119,7 @@ namespace Demon.Slice
                 }
             }
             missingNavSeconds = 0;
+            if (main) UpdateAbsence(Time.deltaTime);
             if (main && !UpdateDetection()) return;
             if (!tether.DemonCanMove) { Phase = ChasePhase.Frozen; Stop(); return; }
             agent.isStopped = false;
@@ -152,13 +158,49 @@ namespace Demon.Slice
                     else Stop();
                 }
             }
-            if (!agent.isStopped && agent.velocity.sqrMagnitude > .05f && Time.time >= stepAt)
+            bool moving = !agent.isStopped && agent.velocity.sqrMagnitude > .05f;
+            if (footstepSource.loop)
             {
-                footstepSource.PlayOneShot(footstepClip);
+                bool audible = moving && Phase == ChasePhase.Pursuing;
+                if (audible && !footstepSource.isPlaying) footstepSource.Play();
+                else if (!audible && footstepSource.isPlaying) footstepSource.Stop();
+            }
+            if (moving && Time.time >= stepAt)
+            {
+                if (!footstepSource.loop) footstepSource.PlayOneShot(footstepClip);
                 stepAt = Time.time + definition.FootstepSeconds;
                 Stepped?.Invoke(agent.transform.position, agent.velocity.normalized);
             }
         }
+        void UpdateAbsence(float dt)
+        {
+            var center = player.transform.position;
+            if (main.InsideCabin(center) || !tether.DemonCanMove || retreating || Gate.Remaining > 0 ||
+                Vector3.Distance(center, agent.transform.position) <= absenceDistance)
+            { absentFor = 0; return; }
+            if (main.BlocksClock || player.MenuOpen || !player.Exploring || dt <= 0) return;
+            absentFor += dt;
+            if (absentFor < absenceSeconds) return;
+            absentFor = Mathf.Max(0, absenceSeconds - 4); // Retry later if the player is near a navigation boundary.
+            float min = Mathf.Max(definition.ClosePassMetres + 2, returnRange.x), max = Mathf.Max(min, returnRange.y);
+            if (!NavMesh.SamplePosition(center, out var playerGround, 3, agent.areaMask)) return;
+            float bearing = UnityEngine.Random.Range(0f, 360f);
+            for (int i = 0; i < 24; i++)
+            {
+                var direction = Quaternion.Euler(0, bearing + i * 137.5f, 0) * Vector3.forward;
+                var candidate = center + direction * UnityEngine.Random.Range(min, max);
+                if (!NavMesh.SamplePosition(candidate, out var ground, 4, agent.areaMask) || main.InsideCabin(ground.position)) continue;
+                float range = Vector3.Distance(center, ground.position);
+                if (range < min || range > max ||
+                    !NavMesh.CalculatePath(ground.position, playerGround.position, agent.areaMask, candidatePath) ||
+                    candidatePath.status != NavMeshPathStatus.PathComplete || !agent.Warp(ground.position)) continue;
+                agent.ResetPath(); agent.velocity = Vector3.zero;
+                absentFor = replanAt = unseenSeconds = 0; tracking = heardNearby = false;
+                PursuitReset?.Invoke();
+                return;
+            }
+        }
+
         bool UpdateDetection()
         {
             var plan = main.Definition;

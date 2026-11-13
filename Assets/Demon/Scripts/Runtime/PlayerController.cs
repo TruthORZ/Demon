@@ -29,6 +29,7 @@ namespace Demon.Slice
         ICloseViewInteraction activeInteraction;
         ThreatPickup activePickup;
         public ThreatPickup CurrentPickup => activePickup;
+        internal bool Exploring => mode == ViewMode.Explore;
         public bool IsPickingUp => mode == ViewMode.Pickup;
         public bool InspectingLock => mode == ViewMode.Interaction && activeInteraction is CipherBox;
         public bool MenuOpen { get; private set; }
@@ -85,7 +86,7 @@ namespace Demon.Slice
                     world.Restart();
                 return;
             }
-            if (mode == ViewMode.Sequence) { FocusPrompt = ""; BlendCloseView(); return; }
+            if (mode == ViewMode.Sequence) { FocusPrompt = ""; if (!directSequencePose) BlendCloseView(); return; }
             if (mode == ViewMode.Explore)
                 Explore();
             else
@@ -172,7 +173,8 @@ namespace Demon.Slice
         }
         public void EnterInspectionView(Transform anchor) => BeginView(anchor, ViewMode.Inspect);
         public void EnterReadingView(Transform anchor) => BeginView(anchor, ViewMode.Reading);
-        public void EnterSequenceView(Transform anchor) => BeginView(anchor, ViewMode.Sequence);
+        bool directSequencePose;
+        public void EnterSequenceView(Transform anchor, bool direct = false) { directSequencePose = direct; BeginView(anchor, ViewMode.Sequence); }
         public void EnterEndingView(Transform anchor) => BeginView(anchor, ViewMode.Ending);
 
         void BeginView(Transform anchor, ViewMode next)

@@ -11,7 +11,7 @@ namespace Demon.Slice
         [SerializeField] int firstDay = 1;
         [SerializeField] bool hideAfterPickup;
         Renderer[] visuals; Collider[] targets;
-        void Awake() { visuals = GetComponentsInChildren<Renderer>(); targets = GetComponents<Collider>(); }
+        void Awake() { visuals = System.Array.FindAll(GetComponentsInChildren<Renderer>(), visual => visual.enabled); targets = GetComponents<Collider>(); }
         public string EntryId => entryId;
         public void Configure(CompletePlaythrough flow, string id, Transform view, int day = 1, bool hide = false)
         { owner = flow; entryId = id; readView = view; firstDay = day; hideAfterPickup = hide; }

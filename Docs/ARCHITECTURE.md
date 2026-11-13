@@ -443,3 +443,7 @@ TASK-038：正式场景 CompletePlaythrough 引用雪粒子和 Music - Second Mo
 TASK-041：DayJumpMenu 在打开时选择当前天，按钮的 Navigation 使用场景中显式保存的上下左右邻居。正式开场标题在 Opening_开场与等待/Title，产品名在 Player Settings。两者均为 Demon Principles。
 
 正式雪地场景的 ChaseController.morningSpawns 依运动生效日顺序绑定 Morning Spawns/Day 3 至 Day 8。调整位置时在 Scene 中移动对应空物体到可通行地面。主流程在时钟推进后按当日 WakeHour 放置 NavMeshAgent，并在检查点记录已经刷新的日期。
+
+正式场景使用 SpatialSnowSteps 循环播放脚步录音，追逐状态与实际移动共同控制播放。脚印仍跟随步进事件。BeamTether.switchSound 引用玩家相机下 Flashlight Switch Sound 的二维音源，只响应主动开关。
+
+正式场景 GameSystems_系统接线 的 Finale Sequence 引用 D09_DescentFigure_Editable 下的 Reveal Start 和 EndingView；镜头在两点之间插值，最后沿用 EndingView。Chase Controller 的 Absence Seconds、Absence Distance、Return Range 控制远离回归；落点检查完整导航路径，沿用同一个代理与脚印重置事件。

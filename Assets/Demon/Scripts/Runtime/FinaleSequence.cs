@@ -9,7 +9,7 @@ namespace Demon.Slice
     [MovedFrom(false, sourceClassName: "SliceFinaleSequence")]
     public sealed class FinaleSequence : MonoBehaviour
     {
-        enum Phase { Idle, Reserved, Reading, AfterReading, Clock, MidnightHold, Box, Complete }
+        enum Phase { Idle, Reserved, Reading, AfterReading, Clock, MidnightHold, Box, DemonReveal, Complete }
         [Header("Authored views and clock hands")]
         [SerializeField] Transform clockView;
         [SerializeField] Transform hourHand;
@@ -28,6 +28,11 @@ namespace Demon.Slice
         [SerializeField] AudioSource sequenceAudio;
         [SerializeField] AudioClip tickClip;
         [SerializeField] AudioClip slamClip;
+        [Header("Demon reveal")]
+        [SerializeField] Transform revealStart;
+        [SerializeField] Transform revealEnd;
+        [SerializeField, Min(.1f)] float revealTiltSeconds = 2.4f;
+        [SerializeField, Min(0)] float revealHoldSeconds = 1.4f;
         GameSceneController world;
         WorldPresentation presentation;
         FinaleTimeWindow window;
@@ -110,11 +115,29 @@ namespace Demon.Slice
             }
             else if (phase == Phase.Box && elapsed >= boxRevealSeconds)
             {
+                if (revealStart && revealEnd)
+                {
+                    phase = Phase.DemonReveal; elapsed = 0;
+                    world.Player.EnterSequenceView(revealEnd, true);
+                    SetRevealPose(0);
+                }
+                else { phase = Phase.Complete; world.PresentEnding(); }
+            }
+            else if (phase == Phase.DemonReveal)
+            {
+                SetRevealPose(Mathf.SmoothStep(0, 1, elapsed / Mathf.Max(.1f, revealTiltSeconds)));
+                if (elapsed < revealTiltSeconds + revealHoldSeconds) return true;
                 phase = Phase.Complete;
                 world.PresentEnding();
             }
             UpdateVisuals();
             return IsDirecting;
+        }
+
+        void SetRevealPose(float t)
+        {
+            world.Player.ViewCamera.transform.SetPositionAndRotation(Vector3.Lerp(revealStart.position, revealEnd.position, t),
+                Quaternion.Slerp(revealStart.rotation, revealEnd.rotation, t));
         }
 
         void UpdateVisuals()

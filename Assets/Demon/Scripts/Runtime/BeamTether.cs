@@ -11,6 +11,7 @@ namespace Demon.Slice
         [SerializeField] GameObject targetVisual;
         [SerializeField] Transform vaneBlade;
         [SerializeField] Light flashlight;
+        [SerializeField] AudioSource switchSound;
         [SerializeField] LineRenderer beamLine;
         [SerializeField] Transform scatteringVolume;
         [SerializeField] GameObject flashlightBody;
@@ -61,6 +62,7 @@ namespace Demon.Slice
             if (definition.RangeMetres <= 0 || definition.RegionRadiusMetres <= 0) throw new InvalidOperationException("Beam range and region radius must be positive.");
             Rule?.Release(); BeamOn = false; LampSwitchedOn = false; ClearAim = false;
             flashlightBody.SetActive(false); targetGlow.enabled = false;
+            if (switchSound) switchSound.Stop();
             session = rules; player = actor; cipher = tool; main = tool.World.Playthrough; motionDay = firstMotionDay; Rule = new StableBeamMotion(definition.StableSeconds); SetLight(false);
             targetVisual.SetActive(ProxyCanTravel);
         }
@@ -70,7 +72,10 @@ namespace Demon.Slice
             bool exploring = player.CanUseTools && !session.Descended;
             // The main route uses a latched switch. UI and close-view clicks cannot change it.
             if (main && HasLamp && exploring && Mouse.current?.leftButton.wasPressedThisFrame == true)
+            {
                 LampSwitchedOn = !LampSwitchedOn;
+                if (switchSound) switchSound.Play();
+            }
             BeamOn = HasLamp && exploring && (main ? LampSwitchedOn : Mouse.current != null && Mouse.current.rightButton.isPressed);
             ClearAim = ProxyCanTravel && CanSeeRegion();
             Rule.Advance(BeamOn && Equipped && ClearAim && MotionReady, Time.deltaTime);

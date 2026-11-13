@@ -1,3 +1,19 @@
+# D9 镜头与追逐怪物回归（2026-11-13）
+
+[TASK-047](Tasks/TASK-047-demon-reveal-and-return.md) 已在正式场景 Play Mode 验证。复看完整运镜请从 D8 最终解谜进入结局；F8 直接跳 D9 会快进。结尾字幕黑底已关闭；正式场景当前瞬移等待为 60 秒。下载目录现有构建仍为上版。
+
+# 石板旁纸条拾取（2026-11-13）
+
+正式场景 D2～D6 的 Record_note-t1 ～ Record_note-t5 已将 Box Collider 对准 Art_paper，StoryPickup 保留原本禁用的占位渲染器。每张纸条从四个方向均可命中；Unity Play Mode 逐日验证了命中后打开正文、收录及关闭后隐藏。未做完整九天手动游玩。
+
+# 电台与湖中的声音交换（2026-11-13）
+
+正式雪地场景的 WorldAttributeConsequences 已绑定用户提供的 NOAA 天气广播与 HG_sound_environment_scream。Play Mode 检查 D4 电台播报、D5 电台啸叫与湖中接续同一广播通过。长广播采用流式加载。本地尚未提交。
+
+# 正式场景音效（2026-11-13）
+
+[TASK-043](Tasks/TASK-043-chase-and-flashlight-audio.md) 已接入玩家提供的脚步声和开关声，Play Mode 触发验证通过。当前修改在本地工作区。
+
 # 追逐怪物清晨刷新点（2026-11-13）
 
 [TASK-042](Tasks/TASK-042-morning-spawns.md) 已在正式雪地场景保存 D3–D8 每天独立的 Morning Spawns 点位，按当日起床时间生效。main@b94f864，工作区包含前序修改。
